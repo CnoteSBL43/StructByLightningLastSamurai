@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{73425856-c5ac-4ddb-b36d-2c9054df64bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Entities">
+      <UniqueIdentifier>{a0f01c9f-177f-4b3e-8388-b366eac2e431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects">
+      <UniqueIdentifier>{6edbe6f7-aac8-41b5-b1c0-a39dd8ac992f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game States">
+      <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Particles">
+      <UniqueIdentifier>{b00d15c8-67ca-439c-9005-d026b0cecbeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SGD Wrappers">
+      <UniqueIdentifier>{2d4e5a98-4e0a-40c9-8fa1-45cb37868b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SGD Wrappers\Core">
+      <UniqueIdentifier>{c855e572-32a9-4d65-bacc-637df13e4541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SGD Wrappers\Events &amp; Messages">
+      <UniqueIdentifier>{db775fdd-9773-45e8-913f-d0653b02c565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SGD Wrappers\Utilities">
+      <UniqueIdentifier>{91c45a07-9aad-4a98-9c87-356d1833020b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Animations">
+      <UniqueIdentifier>{76bfd3e5-f10d-4e60-b90c-a49dca560024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Tile/Level System">
+      <UniqueIdentifier>{ef0e569d-2b9f-4d32-b109-211e49ff733e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Swordsman.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_GraphicsManager.cpp">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_AudioManager.cpp">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_InputManager.cpp">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_Event.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_EventManager.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_IListener.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_Message.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_MessageManager.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_Geometry.cpp">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SGD Wrappers\SGD_Utilities.cpp">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="InstructionsState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModeSelectState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="Emitter.cpp">
+      <Filter>Source\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleFlyweight.cpp">
+      <Filter>Source\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Source\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSystem.cpp">
+      <Filter>Source\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationTimestamp.cpp">
+      <Filter>Source\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSystem.cpp">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>Source\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveGameState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadGameState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameplayState.cpp">
+      <Filter>Source\Game States</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Swordsman.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Declarations.h">
+      <Filter>Source\SGD Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_GraphicsManager.h">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_AudioManager.h">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_InputManager.h">
+      <Filter>Source\SGD Wrappers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Event.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_EventManager.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_IListener.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Message.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_MessageManager.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Color.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Geometry.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Handle.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_HandleManager.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_HandleManager.hpp">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Key.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_String.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SGD Wrappers\SGD_Utilities.h">
+      <Filter>Source\SGD Wrappers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="InstructionsState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="GameModeSelectState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter.h">
+      <Filter>Source\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Source\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleFlyweight.h">
+      <Filter>Source\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Source\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Source\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTimestamp.h">
+      <Filter>Source\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSystem.h">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Source\Tile/Level System</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>Source\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveGameState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadGameState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameplayState.h">
+      <Filter>Source\Game States</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Last Samurai.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
