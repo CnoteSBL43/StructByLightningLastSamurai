@@ -6,8 +6,11 @@ class IGameState;
 class Game
 {
 private:
+	// A Static Instance of a Game pointer m_Instance to make a singleton
 	static Game* m_Instance;
+	// Game() Is a Defualt Constructor
 	Game() = default;
+	// This is Games Destructor and it is set to default
 	~Game() = default;
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;
