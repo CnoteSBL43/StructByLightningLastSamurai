@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\resource\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\resource\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\resource\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\resource\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="..\SGD Wrappers\SGD_AudioManager.cpp" />
     <ClCompile Include="..\SGD Wrappers\SGD_Event.cpp" />
     <ClCompile Include="..\SGD Wrappers\SGD_EventManager.cpp" />
@@ -25,8 +29,11 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="AnimationTimestamp.cpp" />
+    <ClCompile Include="CreateDart.cpp" />
     <ClCompile Include="CreditState.cpp" />
     <ClCompile Include="Emitter.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Father.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameModeSelectState.cpp" />
@@ -45,12 +52,15 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SaveGameState.cpp" />
+    <ClCompile Include="Son.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="Swordsman.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\resource\TinyXML\tinystr.h" />
+    <ClInclude Include="..\resource\TinyXML\tinyxml.h" />
     <ClInclude Include="..\SGD Wrappers\SGD_AudioManager.h" />
     <ClInclude Include="..\SGD Wrappers\SGD_Color.h" />
     <ClInclude Include="..\SGD Wrappers\SGD_Declarations.h" />
@@ -72,19 +82,24 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AnimationTimestamp.h" />
+    <ClInclude Include="CreateDart.h" />
     <ClInclude Include="CreditState.h" />
     <ClInclude Include="Emitter.h" />
+    <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Father.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameModeSelectState.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="GameplayState.h" />
+    <ClInclude Include="IEntity.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="InstructionsState.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LoadGameState.h" />
     <ClInclude Include="LoadState.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="Message.h" />
     <ClInclude Include="OptionState.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleFlyweight.h" />
@@ -93,6 +108,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SaveGameState.h" />
+    <ClInclude Include="Son.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="Swordsman.h" />
     <ClInclude Include="Tile.h" />

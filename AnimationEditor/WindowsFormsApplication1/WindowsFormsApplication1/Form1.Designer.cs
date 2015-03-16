@@ -357,7 +357,7 @@
             this.ToolBox.Controls.Add(this.FrameRectButton);
             this.ToolBox.Location = new System.Drawing.Point(526, 31);
             this.ToolBox.Name = "ToolBox";
-            this.ToolBox.Size = new System.Drawing.Size(145, 285);
+            this.ToolBox.Size = new System.Drawing.Size(145, 236);
             this.ToolBox.TabIndex = 2;
             this.ToolBox.TabStop = false;
             this.ToolBox.Text = "Tools";
@@ -755,7 +755,7 @@
             this.AnimationBox.Controls.Add(this.AnimationPanel);
             this.AnimationBox.Location = new System.Drawing.Point(12, 322);
             this.AnimationBox.Name = "AnimationBox";
-            this.AnimationBox.Size = new System.Drawing.Size(749, 285);
+            this.AnimationBox.Size = new System.Drawing.Size(503, 285);
             this.AnimationBox.TabIndex = 2;
             this.AnimationBox.TabStop = false;
             this.AnimationBox.Text = "Animation";
@@ -767,7 +767,7 @@
             this.AnimationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AnimationPanel.Location = new System.Drawing.Point(3, 18);
             this.AnimationPanel.Name = "AnimationPanel";
-            this.AnimationPanel.Size = new System.Drawing.Size(743, 264);
+            this.AnimationPanel.Size = new System.Drawing.Size(497, 264);
             this.AnimationPanel.TabIndex = 0;
             // 
             // AnimSettBox
@@ -784,16 +784,16 @@
             this.AnimSettBox.Controls.Add(this.AnimationNameTextBox);
             this.AnimSettBox.Controls.Add(this.label7);
             this.AnimSettBox.Controls.Add(this.panel3);
-            this.AnimSettBox.Location = new System.Drawing.Point(767, 252);
+            this.AnimSettBox.Location = new System.Drawing.Point(532, 266);
             this.AnimSettBox.Name = "AnimSettBox";
-            this.AnimSettBox.Size = new System.Drawing.Size(467, 355);
+            this.AnimSettBox.Size = new System.Drawing.Size(702, 341);
             this.AnimSettBox.TabIndex = 3;
             this.AnimSettBox.TabStop = false;
             this.AnimSettBox.Text = "Animation Settings";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 279);
+            this.textBox1.Location = new System.Drawing.Point(145, 236);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(168, 22);
             this.textBox1.TabIndex = 11;
@@ -801,7 +801,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(4, 259);
+            this.label12.Location = new System.Drawing.Point(139, 216);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 17);
             this.label12.TabIndex = 10;
@@ -810,7 +810,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 232);
+            this.comboBox1.Location = new System.Drawing.Point(142, 189);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 9;
@@ -818,7 +818,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 211);
+            this.label11.Location = new System.Drawing.Point(139, 168);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 17);
             this.label11.TabIndex = 8;
@@ -826,7 +826,7 @@
             // 
             // FrameDurationUpDown
             // 
-            this.FrameDurationUpDown.Location = new System.Drawing.Point(7, 186);
+            this.FrameDurationUpDown.Location = new System.Drawing.Point(142, 143);
             this.FrameDurationUpDown.Name = "FrameDurationUpDown";
             this.FrameDurationUpDown.Size = new System.Drawing.Size(120, 22);
             this.FrameDurationUpDown.TabIndex = 7;
@@ -835,7 +835,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 166);
+            this.label10.Location = new System.Drawing.Point(139, 123);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 17);
             this.label10.TabIndex = 6;
@@ -844,7 +844,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(258, 41);
+            this.label9.Location = new System.Drawing.Point(26, 30);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 17);
             this.label9.TabIndex = 5;
@@ -853,7 +853,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 121);
+            this.label8.Location = new System.Drawing.Point(139, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(115, 17);
             this.label8.TabIndex = 4;
@@ -861,7 +861,7 @@
             // 
             // AnimationSpeedUpDown
             // 
-            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(10, 141);
+            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(145, 98);
             this.AnimationSpeedUpDown.Name = "AnimationSpeedUpDown";
             this.AnimationSpeedUpDown.Size = new System.Drawing.Size(120, 22);
             this.AnimationSpeedUpDown.TabIndex = 3;
@@ -869,7 +869,7 @@
             // 
             // AnimationNameTextBox
             // 
-            this.AnimationNameTextBox.Location = new System.Drawing.Point(7, 96);
+            this.AnimationNameTextBox.Location = new System.Drawing.Point(142, 53);
             this.AnimationNameTextBox.Name = "AnimationNameTextBox";
             this.AnimationNameTextBox.Size = new System.Drawing.Size(168, 22);
             this.AnimationNameTextBox.TabIndex = 2;
@@ -877,7 +877,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 77);
+            this.label7.Location = new System.Drawing.Point(139, 34);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(111, 17);
             this.label7.TabIndex = 1;
@@ -887,9 +887,9 @@
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.FrameListBox);
-            this.panel3.Location = new System.Drawing.Point(184, 70);
+            this.panel3.Location = new System.Drawing.Point(8, 56);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(277, 279);
+            this.panel3.Size = new System.Drawing.Size(124, 279);
             this.panel3.TabIndex = 0;
             // 
             // FrameListBox
@@ -899,7 +899,7 @@
             this.FrameListBox.ItemHeight = 16;
             this.FrameListBox.Location = new System.Drawing.Point(0, 0);
             this.FrameListBox.Name = "FrameListBox";
-            this.FrameListBox.Size = new System.Drawing.Size(273, 275);
+            this.FrameListBox.Size = new System.Drawing.Size(120, 275);
             this.FrameListBox.TabIndex = 1;
             this.FrameListBox.SelectedIndexChanged += new System.EventHandler(this.FrameListBox_SelectedIndexChanged);
             // 
