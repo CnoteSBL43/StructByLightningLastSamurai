@@ -1,22 +1,30 @@
 #pragma once
-
+#include "../SGD Wrappers/SGD_Handle.h"
 #include"../SGD Wrappers/SGD_Geometry.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_InputManager.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
+#include "../SGD Wrappers/SGD_Utilities.h"
+#define WINDOW_WIDTH		((int)800)									// window width
+#define WINDOW_HEIGHT		((int)600)									// window height
+#include "SplashState.h"
+
 class IGameState;
 
 class Game
 {
 private:
-	// A Static Instance of a Game pointer m_Instance to make a singleton
 	static Game* m_Instance;
-	// Game() Is a Defualt Constructor
 	Game() = default;
-	// This is Games Destructor and it is set to default
 	~Game() = default;
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;
-	SGD::Size m_ScreenSize = SGD::Size{ 1024, 768 };
+
 	IGameState* m_CurrentState = nullptr;
 	unsigned long m_GameTime = 0;
+	bool m_PlaySound = true;
+
+
 public:
 	//Singleton
 	static Game* GetInstance();
@@ -30,7 +38,28 @@ public:
 	//State Mutator
 	void ChangeState(IGameState* _NextState);
 
-	SGD::Size GetScreenSize() const{ return m_ScreenSize; }
+	float GetScreenWidth() const
+	{
+		return m_fScreenWidth;
+	}
 
+	float GetScreenHeight() const
+	{
+		return m_fScreenHeight;
+	}
+
+	bool GetPlaySound()
+	{
+		return m_PlaySound;
+	}
+	void SetPlaySound(bool _PlaySound)
+	{
+		m_PlaySound = _PlaySound;
+	}
+
+
+private:
+	float					m_fScreenWidth = 1.0f;
+	float					m_fScreenHeight = 1.0f;
 };
 

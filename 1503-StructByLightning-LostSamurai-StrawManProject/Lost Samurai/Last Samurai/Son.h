@@ -1,16 +1,15 @@
 #pragma once
 #include "Player.h"
-class Swordsman :
+class Son :
 	public Player
 {
 public:
-	Swordsman();
-	~Swordsman();
-
+	Son();
+	~Son();
 
 	void	Update(float elapsedTime);
 	void	Render(void);
-	int		GetType(void)	const				{ return ENT_SWORDSMAN; }
+	int		GetType(void)	const				{ return ENT_SON; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision(const IEntity* pOther);
 };

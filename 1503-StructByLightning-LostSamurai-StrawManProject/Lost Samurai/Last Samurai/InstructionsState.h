@@ -1,5 +1,12 @@
 #pragma once
 #include "IGameState.h"
+#include "Game.h"
+#include <Windows.h>
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_InputManager.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
+#include "MainMenuState.h"
+
 class InstructionsState :
 	public IGameState
 {
