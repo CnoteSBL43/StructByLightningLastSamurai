@@ -1,5 +1,10 @@
 #pragma once
 #include "IGameState.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include"../SGD Wrappers/SGD_InputManager.h"
+#include"MainMenuState.h"
+#include"Game.h"
+
 class CreditState :
 	public IGameState
 {

@@ -1,18 +1,11 @@
 #include "Game.h"
-
-#include "../SGD Wrappers/SGD_GraphicsManager.h"
-#include "../SGD Wrappers/SGD_InputManager.h"
-#include "../SGD Wrappers/SGD_AudioManager.h"
-#include "../SGD Wrappers/SGD_Utilities.h"
 #include "IGameState.h"
-#include "SplashState.h"
-
 #include <ctime>
 #include <cstdlib>
 #include <cassert>
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-
+#include "../SGD Wrappers/SGD_AudioManager.h"
 Game* Game::m_Instance = nullptr;
 
 Game* Game::GetInstance()
@@ -44,12 +37,17 @@ void Game::ChangeState(IGameState* _NextState)
 
 bool Game::Initialize()
 {
+
+	m_fScreenWidth = WINDOW_WIDTH;
+	m_fScreenHeight = WINDOW_HEIGHT;
+	SGD::Size m_ScreenSize = SGD::Size(m_fScreenWidth,m_fScreenHeight);
 	srand((unsigned int)time(nullptr));
 
 	if (SGD::GraphicsManager::GetInstance()->Initialize(L"Lost Samurai", m_ScreenSize, false) == false || 
 		   SGD::InputManager::GetInstance()->Initialize() == false || 
 		   SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
+
 #if !defined( DEBUG ) && !defined( _DEBUG )
 	SGD::GraphicsManager::GetInstance()->ShowConsoleWindow(false);
 #endif
@@ -59,6 +57,8 @@ bool Game::Initialize()
 	return true;
 }
 
+
+
 int Game::Update()
 {
 	if (SGD::GraphicsManager::GetInstance()->Update() == false ||
@@ -66,13 +66,15 @@ int Game::Update()
 		SGD::AudioManager::GetInstance()->Update() == false)
 		return 1;
 	unsigned long CurrentTime = GetTickCount();
-	float ElapsedTime = (CurrentTime - m_GameTime) / 1000.0f;
-	m_GameTime = CurrentTime;
 
+	float ElapsedTime = (CurrentTime - m_GameTime) / 1000.0f;
+	
+	m_GameTime = CurrentTime;
 	if (m_CurrentState->Update(ElapsedTime)== false)
 	{
-	return 1;
+		return 1;
 	}
+	
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
