@@ -18,7 +18,6 @@ private:
 	SGD::HAudio m_Music = SGD::INVALID_HANDLE;
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	int MasterVol=100,MusicVol = 100, SFXVol = 100;
-
 	int m_CursorPos = 0;
 
 public:

@@ -16,11 +16,13 @@ private:
 	GameplayState& operator= (const GameplayState&) = delete;
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
-	//*****************************************************************//
-	// Game Entities
+	SGD::HTexture m_BgImage = SGD::INVALID_HANDLE;
+
+
 	EntityManager*	m_pEntities = nullptr;
-	Actor* m_player = nullptr;
-	//************************************
+	Actor* father = nullptr;
+	Actor* son = nullptr;
+	
 
 public:
 	static GameplayState* GetInstance();
@@ -30,6 +32,7 @@ public:
 	bool	Update(float _ElapsedTime);
 	void	Render(float _ElapsedTime);
 	Actor*  CreateFather(void);
+	Actor*	CreateSon(void);
 
 
 };

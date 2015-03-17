@@ -18,6 +18,15 @@ public:
 	SGD::Rectangle GetRect(void)	const			;
 	void	HandleCollision(const IEntity* pOther)	;
 
+	//void SetCamVector(SGD::Vector _vec){ pos = _vec; }
+	//SGD::Vector GetCameraVector(void)const { return pos; }
+
+	bool GetCurrCharacter(){ return isCurrentCharacter; }
+	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
+	int GetDirection(){
+		return direction;
+	}
+
 private:
 	struct Frame
 	{
@@ -29,10 +38,9 @@ private:
 
 	int direction = 0;
 	float frameswitch = 0.0f;
-
-	int GetDirection(){
-		return direction;
-	}
-
+	bool m_FacingtoRight = true;//to change the scale for the father(direction)
+	bool isCurrentCharacter = true;
+//	SGD::Vector pos;
+	
 };
 

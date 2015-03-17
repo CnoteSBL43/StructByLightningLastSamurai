@@ -1,9 +1,8 @@
 #include "Father.h"
-
+#include "Game.h"
 
 Father::Father()
 {
-	SetPosition(SGD::Point{100.0f,200.0f});
 	CreateFrames();
 }
 
@@ -28,30 +27,66 @@ void Father::BackPack()
 
 void	 Father::Update(float elapsedTime)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
+	if (GetCurrCharacter() )
 	{
-		if (frameswitch >= 0.07f)
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
 		{
-			direction++;
-			frameswitch = 0.0f;
-		}
-		m_vtVelocity.x =64.0f;
-		Actor::Update(elapsedTime);
+			m_FacingtoRight = true;
+			SetVelocity(SGD::Vector(+64.0f, 0.0f));
 
+			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
+			if (frameswitch >= 0.07f)
+			{
+				direction++;
+				frameswitch = 0.0f;
+			}
+
+		}
+
+		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow))
+		{
+			m_FacingtoRight = false;
+			SetVelocity(SGD::Vector(-64.0f, 0.0f));
+			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
+
+			if (frameswitch >= 0.07f)
+			{
+				direction++;
+				frameswitch = 0.0f;
+			}
+
+		}
+		else
+			SetVelocity(SGD::Vector(0.0f, 0.0f));
+
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::J))
+			Player::SetCurrCharacter(1);
+
+		if (direction > 4)
+			direction = 0;
+		frameswitch += elapsedTime;
+		Actor::Update(elapsedTime);
 	}
-	if (direction > 4)
-		direction = 0;
-	frameswitch += elapsedTime;
 
 
 }
 void	 Father::Render(void)
 {
+	
 	SGD::Rectangle frame = frames[direction].rFrame;
 
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
-	{ m_ptPosition.x, m_ptPosition.y },
-	frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
+	if (m_FacingtoRight)
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
+		{ m_ptPosition.x- Game::GetInstance()->GetCameraPosition().x, m_ptPosition.y-Game::GetInstance()->GetCameraPosition().y },
+		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
+	}
+	else
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
+		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x-64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
+		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -GetSize().width, GetSize().height });
+	}
 }
 
 SGD::Rectangle  Father::GetRect(void)	const

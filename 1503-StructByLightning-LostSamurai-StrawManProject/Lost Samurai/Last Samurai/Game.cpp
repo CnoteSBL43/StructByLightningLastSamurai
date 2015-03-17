@@ -37,7 +37,6 @@ void Game::ChangeState(IGameState* _NextState)
 
 bool Game::Initialize()
 {
-
 	m_fScreenWidth = WINDOW_WIDTH;
 	m_fScreenHeight = WINDOW_HEIGHT;
 	SGD::Size m_ScreenSize = SGD::Size(m_fScreenWidth,m_fScreenHeight);
@@ -54,6 +53,7 @@ bool Game::Initialize()
 	ChangeState(SplashState::GetInstance());
 
 	m_GameTime = GetTickCount();
+
 	return true;
 }
 
@@ -74,7 +74,16 @@ int Game::Update()
 	{
 		return 1;
 	}
-	
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Alt))
+	{
+		if (!m_FullScreen)
+			m_FullScreen = true;
+		else
+			m_FullScreen = false;
+		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !m_FullScreen);
+
+	}
+
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }

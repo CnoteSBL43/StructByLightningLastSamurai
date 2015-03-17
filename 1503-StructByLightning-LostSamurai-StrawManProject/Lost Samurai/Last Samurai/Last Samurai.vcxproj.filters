@@ -42,6 +42,9 @@
     <Filter Include="Source\Tile/Level System">
       <UniqueIdentifier>{ef0e569d-2b9f-4d32-b109-211e49ff733e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\TinyXML">
+      <UniqueIdentifier>{274f3336-5d24-4bce-add4-e0d110c0b62a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -158,6 +161,30 @@
     <ClCompile Include="GameplayState.cpp">
       <Filter>Source\Game States</Filter>
     </ClCompile>
+    <ClCompile Include="Son.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Father.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\resource\TinyXML\tinystr.cpp">
+      <Filter>Source\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\resource\TinyXML\tinyxml.cpp">
+      <Filter>Source\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\resource\TinyXML\tinyxmlerror.cpp">
+      <Filter>Source\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\resource\TinyXML\tinyxmlparser.cpp">
+      <Filter>Source\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateDart.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -250,7 +277,6 @@
     <ClInclude Include="PauseState.h">
       <Filter>Source\Game States</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="GameModeSelectState.h">
       <Filter>Source\Game States</Filter>
     </ClInclude>
@@ -296,10 +322,39 @@
     <ClInclude Include="GameplayState.h">
       <Filter>Source\Game States</Filter>
     </ClInclude>
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="Son.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntity.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Father.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource\TinyXML\tinystr.h">
+      <Filter>Source\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource\TinyXML\tinyxml.h">
+      <Filter>Source\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateDart.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Options" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Options.txt" />
   </ItemGroup>
 </Project>

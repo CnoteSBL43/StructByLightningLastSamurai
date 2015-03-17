@@ -23,6 +23,7 @@ private:
 	IGameState* m_CurrentState = nullptr;
 	unsigned long m_GameTime = 0;
 	bool m_PlaySound = true;
+	bool m_FullScreen = false;
 
 
 public:
@@ -30,10 +31,23 @@ public:
 	static Game* GetInstance();
 	static void DeleteInstance();
 
+	SGD::Size	GetScreenSize(void) const		{ return m_szScreenSize; }
+	SGD::Point	GetCameraPosition(void)const	{ return m_CameraPosition; }
+	SGD::Size	GetWorldSize(void)const			{ return m_szWorldSize; }
+	void SetCameraPosition(SGD::Point _pos){ m_CameraPosition = _pos; }
+	/*void SetCamVector(SGD::Vector _vec){ m_CamVector = _vec;}
+	SGD::Vector GetCameraVector(void)const { return m_CamVector; }*/
+	bool GetFullScreen(){ return m_FullScreen; }
+	void SetFullScreen(bool _screen){ m_FullScreen = _screen; }
 	//Setup,Play,Cleanup
 	bool Initialize();
 	int Update();
 	void Terminate();
+
+	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600 };
+	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 1024};
+	SGD::Point		m_CameraPosition;
+	SGD::Vector m_CamVector;
 
 	//State Mutator
 	void ChangeState(IGameState* _NextState);
