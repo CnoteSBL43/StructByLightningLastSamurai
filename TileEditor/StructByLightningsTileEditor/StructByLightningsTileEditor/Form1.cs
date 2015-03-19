@@ -25,8 +25,8 @@ namespace StructByLightningsTileEditor
 
 
         // Seting Up the Grid Size by making a Size Variable and Setting IT to 10 by 10 By Defualt
-        Size m_GridSize = new Size(10, 10);
-
+        //ize m_GridSize = new Size(10, 10);
+        Size m_ImageGrid = new Size(10, 10);
 
         Size m_Picture = new Size(10, 10);
         // Setting UP the Pixal Size by making a Size Variabl and Settin it to 32 by 32 by defualt;
@@ -55,16 +55,18 @@ namespace StructByLightningsTileEditor
 
         // This is an Interger for The TileImage so that it can have an id in the Texture Manager
         int TileImage = -1;
+        string m_filename;
 
         public Form1()
         {
             InitializeComponent();
             this.Focus();
-             GridPanel.AutoScroll = true;
+            GridPanel.AutoScroll = true;
             this.DoubleBuffered = true;
-            GridPanel.AutoScrollMinSize = new Size(m_Picture.Width * m_PixalSize.Width,m_Picture.Height * m_PixalSize.Height);
-             TilePanel.AutoScrollMinSize = TilePanel.Size;
-             TilePanel.AutoScroll = true;
+            GridPanel.AutoScrollMinSize = new Size(m_Picture.Width * m_PixalSize.Width, m_Picture.Height * m_PixalSize.Height);
+
+            //TilePanel.AutoScrollMinSize = new Size(m_Picture.Width * m_PixalTileSize.Width, m_Picture.Height * m_PixalTileSize.Height);
+            TilePanel.AutoScroll = true;
 
         }
         // This is a Public Bool Function IsLooping. What this will do is set the and get the boolean 
@@ -98,7 +100,8 @@ namespace StructByLightningsTileEditor
             m_DirectXDraw.Initialize(TilePanel, false);
             m_DirectXDraw.AddRenderTarget(TilePanel);
 
-
+            m_DirectXDraw.Initialize(panel1, false);
+            m_DirectXDraw.AddRenderTarget(panel1);
             // Setting the Gridsize to the Numeric UPDown WIdth and Height
             GridWidth.Value = m_Picture.Width;
             GridHeight.Value = m_Picture.Height;
@@ -106,6 +109,8 @@ namespace StructByLightningsTileEditor
             // Seting the PixalSize to the Numeric UpDown Width and Height
             PixalWidth.Value = m_PixalSize.Width;
             PixalHeight.Value = m_PixalSize.Height;
+            ImagePixalHeight.Value = m_PixalTileSize.Height;
+            ImagePixalWidth.Value = m_PixalTileSize.Width;
 
         }
 
@@ -123,6 +128,7 @@ namespace StructByLightningsTileEditor
         {
 
             GridPanelRender();
+            MiniMap();
             if (TileImage != -1)
             {
                 TilePanelRender();
@@ -152,12 +158,12 @@ namespace StructByLightningsTileEditor
                         // This is your DestinationRectangle That you will use to Render to the Screen
                         Rectangle DestinationRectangle = Rectangle.Empty;
                         // you are going to Multiply to get the Width of the Pixal size inside of the rectangle
-                        DestinationRectangle.X = (X * m_PixalSize.Width) + OffsetScroll.X ;
+                        DestinationRectangle.X = (X * m_PixalSize.Width) + OffsetScroll.X;
                         // you are going to Multiply to get the Height of the Pixal size inside of the rectangle
                         DestinationRectangle.Y = (Y * m_PixalSize.Height) + OffsetScroll.Y;
                         // you are going to Set the whole m_Pixalsize to the whole rectangle
                         DestinationRectangle.Size = m_PixalSize;
-                       // DestinationRectangle.Offset(GridPanel.AutoScrollPosition);
+                        // DestinationRectangle.Offset(GridPanel.AutoScrollPosition);
                         if (TileMap[X, Y] != null)
                         {
                             Rectangle SourceRectangle = Rectangle.Empty;
@@ -169,7 +175,7 @@ namespace StructByLightningsTileEditor
 
 
                         }
-                        m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
+                         m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
 
 
                         #region Collision Rectangle ForLoop
@@ -181,7 +187,7 @@ namespace StructByLightningsTileEditor
                             for (int i = 0; i < CollisionRectangles.Count; i++)
                             {
                                 Rectangle Collison = Rectangle.Empty;
-                                Collison.X = (CollisionRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X; 
+                                Collison.X = (CollisionRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
                                 Collison.Y = (CollisionRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
                                 Collison.Size = m_PixalSize;
 
@@ -205,8 +211,8 @@ namespace StructByLightningsTileEditor
                             for (int i = 0; i < RespawnRectangles.Count; i++)
                             {
                                 Rectangle Collison = Rectangle.Empty;
-                                Collison.X = RespawnRectangles[i].X * m_PixalSize.Width;
-                                Collison.Y = RespawnRectangles[i].Y * m_PixalSize.Height;
+                                Collison.X = (RespawnRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (RespawnRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
                                 Collison.Size = m_PixalSize;
 
                                 m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
@@ -231,8 +237,8 @@ namespace StructByLightningsTileEditor
                             for (int i = 0; i < CheckPointRectangle.Count; i++)
                             {
                                 Rectangle Collison = Rectangle.Empty;
-                                Collison.X = CheckPointRectangle[i].X * m_PixalSize.Width;
-                                Collison.Y = CheckPointRectangle[i].Y * m_PixalSize.Height;
+                                Collison.X = (CheckPointRectangle[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (CheckPointRectangle[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
                                 Collison.Size = m_PixalSize;
 
                                 m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
@@ -244,6 +250,27 @@ namespace StructByLightningsTileEditor
                         #endregion
 
 
+
+                        #region AI Rectangle ForLoop
+
+                        if (AIRectangles != null)
+                        {
+
+
+                            for (int i = 0; i < AIRectangles.Count; i++)
+                            {
+                                Rectangle Collison = Rectangle.Empty;
+                                Collison.X = (AIRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (AIRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
+                                Collison.Size = m_PixalSize;
+
+                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                                m_DirectXDraw.DrawText("AI", Collison.X, Collison.Y, Color.Yellow);
+                            }
+                        }
+
+
+                        #endregion
 
                     }
 
@@ -267,7 +294,7 @@ namespace StructByLightningsTileEditor
 
         public void TilePanelRender()
         {
-
+            m_DirectXDraw.Resize(TilePanel, TilePanel.ClientRectangle.Width, TilePanel.ClientRectangle.Height, true);
             Color NewColor;
             // What this is doing is Clearin the screen Eachtime and Making the Screen Black
             m_DirectXDraw.Clear(TilePanel, Color.FromArgb(255, 0, 0, 0));
@@ -276,37 +303,46 @@ namespace StructByLightningsTileEditor
             // you are starting to Draw with the Direct X Wrappers
             m_DirectXDraw.SpriteBegin();
             {
+                //size of grid
+                int width = m_Texture.GetTextureWidth(TileImage);
+                int height = m_Texture.GetTextureHeight(TileImage);
+                Size sz = new Size(width / m_PixalSize.Width,
+                     height / m_PixalSize.Height);
+
                 Point offset = new Point(0, 0);
                 offset.X += TilePanel.AutoScrollPosition.X;
                 offset.Y += TilePanel.AutoScrollPosition.Y;
                 m_Texture.Draw(TileImage, offset.X, offset.Y);
-                for (int X = 0; X < m_Picture.Width; X++)
+                for (int X = 0; X < sz.Width; X++)
                 {
-                    for (int Y = 0; Y < m_Picture.Height; Y++)
+                    for (int Y = 0; Y < sz.Height; Y++)
                     {
                         // This is your DestinationRectangle That you will use to Render to the Screen
                         Rectangle DestinationRectangle = Rectangle.Empty;
                         // you are going to Multiply to get the Width of the Pixal size inside of the rectangle
-                        DestinationRectangle.X = X * m_PixalSize.Width;
+                        DestinationRectangle.X = (X * m_PixalSize.Width) + offset.X;
                         // you are going to Multiply to get the Height of the Pixal size inside of the rectangle
-                        DestinationRectangle.Y = Y * m_PixalSize.Height;
+                        DestinationRectangle.Y = (Y * m_PixalSize.Height) + offset.Y;
                         // you are going to Set the whole m_Pixalsize to the whole rectangle
                         DestinationRectangle.Size = m_PixalSize;
 
                         // You are going to Draw a Row of Ten Rectangles ten times by defualt can Changed inside Editor
                         m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.AntiqueWhite, 1);
-                        if (IsSelected)
+                        if (CurrentSelectedTile != null && CurrentSelectedTile.PositionX == X && CurrentSelectedTile.PositionY == Y)
                         {
                             NewColor = System.Drawing.Color.Yellow;
                         }
                         else
                         {
                             NewColor = System.Drawing.Color.Black;
+
                         }
-                        if (CurrentSelectedTile != null)
-                        {
-                            m_DirectXDraw.DrawHollowRect(new Rectangle(CurrentSelectedTile.PositionX * m_PixalSize.Width, CurrentSelectedTile.PositionY * m_PixalSize.Height, m_PixalSize.Width, m_PixalSize.Height), NewColor, 2);
-                        }
+                        m_DirectXDraw.DrawHollowRect(DestinationRectangle, NewColor, 2);
+
+                        //if (CurrentSelectedTile != null)
+                        //{
+                        //    
+                        //}
 
                     }
                 }
@@ -320,6 +356,171 @@ namespace StructByLightningsTileEditor
 
         }
 
+        public void MiniMap()
+        {
+            m_DirectXDraw.Resize(GridPanel, panel1.ClientRectangle.Width, panel1.ClientRectangle.Height, true);
+            // What this is doing is Clearin the screen Eachtime and Making the Screen Black
+            m_DirectXDraw.Clear(panel1, Color.FromArgb(255, 0, 0, 0));
+            // you are starting to Draw with the Direct X Wrappers
+            m_DirectXDraw.DeviceBegin();
+            // you are starting to Draw with the Direct X Wrappers
+            m_DirectXDraw.SpriteBegin();
+            {
+                Point OffsetScroll = new Point(0, 0);
+                OffsetScroll.X -= panel1.AutoScrollPosition.X;
+                OffsetScroll.Y -= panel1.AutoScrollPosition.Y;
+                //This Nested For loop is for Rendering the Grid to the GridPanel/
+                // You are going to Draw a Row of Ten Rectangles ten times by defualt can Changed inside Editor
+                for (int X = 0; X < m_Picture.Width; X++)
+                {
+                    for (int Y = 0; Y < m_Picture.Height; Y++)
+                    {
+                        // This is your DestinationRectangle That you will use to Render to the Screen
+                        Rectangle DestinationRectangle = Rectangle.Empty;
+                        // you are going to Multiply to get the Width of the Pixal size inside of the rectangle
+                        DestinationRectangle.X = ((X * m_PixalSize.Width) + OffsetScroll.X);
+                        // you are going to Multiply to get the Height of the Pixal size inside of the rectangle
+                        DestinationRectangle.Y = ((Y * m_PixalSize.Height) + OffsetScroll.Y);
+                        // you are going to Set the whole m_Pixalsize to the whole rectangle
+
+
+                        //Need to Fix
+                        DestinationRectangle.Size = m_PixalSize;
+
+
+
+
+                        // DestinationRectangle.Offset(GridPanel.AutoScrollPosition);
+                        if (TileMap[X, Y] != null)
+                        {
+                            Rectangle SourceRectangle = Rectangle.Empty;
+                            SourceRectangle.X = TileMap[X, Y].PositionX * m_PixalSize.Width;
+                            SourceRectangle.Y = TileMap[X, Y].PositionY * m_PixalSize.Height;
+                            Size Temp = new Size(m_PixalSize.Width / 2, m_PixalSize.Height / 2);
+                            SourceRectangle.Size = Temp;
+                            m_Texture.Draw(TileImage, DestinationRectangle.X, DestinationRectangle.Y, 1, 1, SourceRectangle);
+
+
+
+                        }
+                        m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
+
+
+                        #region Collision Rectangle ForLoop
+
+                        if (CollisionRectangles != null)
+                        {
+
+
+                            for (int i = 0; i < CollisionRectangles.Count; i++)
+                            {
+                                Rectangle Collison = Rectangle.Empty;
+                                Collison.X = (CollisionRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (CollisionRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
+                                Collison.Size = m_PixalSize;
+
+                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                                m_DirectXDraw.DrawText("C", Collison.X, Collison.Y, Color.Blue);
+                            }
+                        }
+
+
+                        #endregion
+
+
+
+
+                        #region Respawn Rectangle For Loop
+
+                        if (RespawnRectangles != null)
+                        {
+
+
+                            for (int i = 0; i < RespawnRectangles.Count; i++)
+                            {
+                                Rectangle Collison = Rectangle.Empty;
+                                Collison.X = (RespawnRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (RespawnRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
+                                Collison.Size = m_PixalSize;
+
+                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                                m_DirectXDraw.DrawText("R", Collison.X, Collison.Y, Color.Orange);
+                            }
+                        }
+
+
+
+
+
+                        #endregion
+
+
+
+                        #region CheckPoint Rectangle ForLoop
+
+                        if (CheckPointRectangle != null)
+                        {
+
+
+                            for (int i = 0; i < CheckPointRectangle.Count; i++)
+                            {
+                                Rectangle Collison = Rectangle.Empty;
+                                Collison.X = (CheckPointRectangle[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (CheckPointRectangle[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
+                                Collison.Size = m_PixalSize;
+
+                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                                m_DirectXDraw.DrawText("CP", Collison.X, Collison.Y, Color.Green);
+                            }
+                        }
+
+
+                        #endregion
+
+
+
+                        #region AI Rectangle ForLoop
+
+                        if (AIRectangles != null)
+                        {
+
+
+                            for (int i = 0; i < AIRectangles.Count; i++)
+                            {
+                                Rectangle Collison = Rectangle.Empty;
+                                Collison.X = (AIRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
+                                Collison.Y = (AIRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
+                                Collison.Size = m_PixalSize;
+
+                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                                m_DirectXDraw.DrawText("AI", Collison.X, Collison.Y, Color.Yellow);
+                            }
+                        }
+
+
+                        #endregion
+
+                    }
+
+
+
+
+                }
+
+
+
+
+
+
+            }
+            m_DirectXDraw.SpriteEnd();
+            m_DirectXDraw.DeviceEnd();
+
+            m_DirectXDraw.Present();
+
+
+
+        }
 
         //  This is a NumericUpdown Button Function And it is Dealing With the GridWidth of the Tile Grid
         private void GridWidth_ValueChanged(object sender, EventArgs e)
@@ -386,36 +587,36 @@ namespace StructByLightningsTileEditor
                 {
                     tileMapTemp[X, Y] = TileMap[X, Y];
                 }
-             
+
             }
 
             // Setting the NumericUpDown Values to the the Grid Size Height
-            m_Picture.Height = (int)GridHeight.Value; 
-            
+            m_Picture.Height = (int)GridHeight.Value;
+
             TileMap = new TIleClass[(int)m_Picture.Width, (int)m_Picture.Height];
-          if(Temp.Height<m_Picture.Height)
-          {
-           for (int X = 0; X < Temp.Width; X++)
+            if (Temp.Height < m_Picture.Height)
             {
-                for (int Y = 0; Y < Temp.Height; Y++)
+                for (int X = 0; X < Temp.Width; X++)
                 {
-                    TileMap[X, Y] = tileMapTemp[X, Y];
+                    for (int Y = 0; Y < Temp.Height; Y++)
+                    {
+                        TileMap[X, Y] = tileMapTemp[X, Y];
+                    }
+
                 }
-
             }
-          }
-            else if(Temp.Height>m_Picture.Height)
-          {
-              for (int X = 0; X < m_Picture.Width; X++)
-              {
-                  for (int Y = 0; Y < m_Picture.Height; Y++)
-                  {
-                      TileMap[X, Y] = tileMapTemp[X, Y];
-                  }
+            else if (Temp.Height > m_Picture.Height)
+            {
+                for (int X = 0; X < m_Picture.Width; X++)
+                {
+                    for (int Y = 0; Y < m_Picture.Height; Y++)
+                    {
+                        TileMap[X, Y] = tileMapTemp[X, Y];
+                    }
 
-              }
+                }
             }
-          GridPanel.AutoScrollMinSize = new Size(m_Picture.Width * m_PixalSize.Width, m_Picture.Height * m_PixalSize.Height);
+            GridPanel.AutoScrollMinSize = new Size(m_Picture.Width * m_PixalSize.Width, m_Picture.Height * m_PixalSize.Height);
         }
 
         //  This is a NumericUpdown Button Function And it is Dealing With the PixalWidth of the Pixal size of the Tiles
@@ -451,6 +652,12 @@ namespace StructByLightningsTileEditor
             {
 
                 TileImage = m_Texture.LoadTexture(Load.FileName);
+                m_filename = Load.SafeFileName;
+                int width = m_Texture.GetTextureWidth(TileImage);
+                int height = m_Texture.GetTextureHeight(TileImage);
+                Size m_panelSize = new Size(width, height);
+                TilePanel.AutoScrollMinSize = m_panelSize;
+
 
             }
 
@@ -461,7 +668,7 @@ namespace StructByLightningsTileEditor
 
             if (TileImage != -1)
             {
-                CurrentSelectedTile = new TIleClass(e.Location.X / m_PixalSize.Width, e.Location.Y / m_PixalSize.Height);
+                CurrentSelectedTile = new TIleClass((e.Location.X - TilePanel.AutoScrollPosition.X) / m_PixalSize.Width, (e.Location.Y - TilePanel.AutoScrollPosition.Y) / m_PixalSize.Height);
 
                 IsSelected = true;
             }
@@ -473,8 +680,8 @@ namespace StructByLightningsTileEditor
             #region this is a Check for the Left Mosue CLick so that you can Grab a Tile
             if (e.Button == MouseButtons.Left)
             {
-                int X = (e.Location.X + GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
-                int Y = (e.Location.Y + GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
+                int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
                 if (X >= m_Picture.Width || Y >= m_Picture.Height || X < 0 || Y < 0)
                 {
                     return;
@@ -502,8 +709,8 @@ namespace StructByLightningsTileEditor
             #region this is a Check for the Right mouse Click and Radio Button Respawn
             if (e.Button == MouseButtons.Right && RespawnRectangleButton.Checked == true)
             {
-                int X = e.Location.X / m_PixalSize.Width;
-                int Y = e.Location.Y / m_PixalSize.Height;
+                int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
                 CollisonRect = new Rectangle(X, Y, 32, 32);
                 RespawnRectangles.Add(CollisonRect);
@@ -515,8 +722,8 @@ namespace StructByLightningsTileEditor
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
             if (e.Button == MouseButtons.Right && CheckPointRectangleButton.Checked == true)
             {
-                int X = e.Location.X / m_PixalSize.Width;
-                int Y = e.Location.Y / m_PixalSize.Height;
+                int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
                 CollisonRect = new Rectangle(X, Y, 32, 32);
                 CheckPointRectangle.Add(CollisonRect);
@@ -527,10 +734,10 @@ namespace StructByLightningsTileEditor
 
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
 
-            if (e.Button == MouseButtons.Right && RespawnRectangleButton.Checked == true)
+            if (e.Button == MouseButtons.Right && AIRectangleButton.Checked == true)
             {
-                int X = e.Location.X / m_PixalSize.Width;
-                int Y = e.Location.Y / m_PixalSize.Height;
+                int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
                 CollisonRect = new Rectangle(X, Y, 32, 32);
 
@@ -538,6 +745,10 @@ namespace StructByLightningsTileEditor
 
             }
             #endregion
+
+
+
+
 
             this.Invalidate();
         }
@@ -547,7 +758,7 @@ namespace StructByLightningsTileEditor
             if (e.Button == MouseButtons.Left)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
-                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y ) / m_PixalSize.Height;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
                 if (X >= m_Picture.Width || Y >= m_Picture.Height || Y < 0)
                 {
                     return;
@@ -566,6 +777,89 @@ namespace StructByLightningsTileEditor
 
 
 
+        }
+
+        private void ImageWidth_ValueChanged(object sender, EventArgs e)
+        {
+            m_ImageGrid.Width = (int)ImageWidth.Value;
+            TilePanel.AutoScrollMinSize = new Size(m_ImageGrid.Width * m_PixalSize.Width, m_ImageGrid.Height * m_PixalSize.Height);
+        }
+
+        private void ImageHeight_ValueChanged(object sender, EventArgs e)
+        {
+            m_ImageGrid.Width = (int)ImageWidth.Value;
+            TilePanel.AutoScrollMinSize = new Size(m_ImageGrid.Width * m_PixalSize.Width, m_ImageGrid.Height * m_PixalSize.Height);
+        }
+
+        private void saveXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog Save = new SaveFileDialog();
+            Save.Filter = "All Files|*.*|Xml Files|*.xml";
+            Save.FilterIndex = 2;
+            Save.DefaultExt = ".xml";
+            // Load.Filter = "All Files(*.*)|*.*|My Files(*.myf)|*.myf";
+            if (DialogResult.OK == Save.ShowDialog())
+            {
+                XDocument Doc = new XDocument();
+                int width = m_Texture.GetTextureWidth(TileImage);
+                int height = m_Texture.GetTextureHeight(TileImage);
+                Size sz = new Size(width / m_PixalSize.Width,
+                     height / m_PixalSize.Height);
+                XElement m_Element = new XElement("Map");
+                XAttribute m_Name = new XAttribute("Image", m_filename);
+                XAttribute m_MapHeight = new XAttribute("MapHeight", m_Picture.Height);
+                XAttribute m_MapWidth = new XAttribute("MapWidth", m_Picture.Width);
+                XAttribute m_PixalHeight = new XAttribute("TileHeight", m_PixalSize.Height);
+                XAttribute m_PixalWidth = new XAttribute("TileWidth", m_PixalSize.Width);
+                XAttribute m_ImageHeight = new XAttribute("ImageHeight", m_Texture.GetTextureHeight(TileImage));
+                XAttribute m_ImageWidth = new XAttribute("ImageWidth", m_Texture.GetTextureWidth(TileImage));
+                m_Element.Add(m_Name);
+                m_Element.Add(m_MapHeight);
+                m_Element.Add(m_MapWidth);
+                m_Element.Add(m_PixalHeight);
+                m_Element.Add(m_PixalWidth);
+                m_Element.Add(m_ImageHeight);
+                m_Element.Add(m_ImageWidth);
+
+                int y = 0;
+                for (int X = 0; X < m_Picture.Width; X++)
+                {
+                    for (int Y = 0; Y < m_Picture.Height; Y++)
+                    {
+                        XElement Tile_Element = new XElement("Tile");
+                        XAttribute m_PositionX = new XAttribute("PositionX", X);
+                        XAttribute m_PositionY = new XAttribute("PositionY", Y);
+
+                        y = (TileMap[X, Y].PositionY * sz.Width) + TileMap[X, Y].PositionX;
+
+                        XAttribute m_ID = new XAttribute("TileID", y);
+                        Tile_Element.Add(m_PositionX);
+                        Tile_Element.Add(m_PositionY);
+                        Tile_Element.Add(m_ID);
+                        m_Element.Add(Tile_Element);
+                       
+
+                    }
+                }
+
+                Doc.Add(m_Element);
+                Doc.Save(Save.FileName);
+
+
+            }
+
+        }
+
+        private void ImagePixalHeight_ValueChanged(object sender, EventArgs e)
+        {
+
+            m_PixalTileSize.Height = (int)ImagePixalHeight.Value;
+        }
+
+        private void ImagePixalWidth_ValueChanged(object sender, EventArgs e)
+        {
+            m_PixalTileSize.Width = (int)ImagePixalWidth.Value;
         }
 
 

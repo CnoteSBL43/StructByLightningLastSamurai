@@ -1,8 +1,9 @@
 #pragma once
 
 #include"../SGD Wrappers/SGD_Geometry.h"
-class IGameState;
 
+class IGameState;
+class TileSystem;
 class Game
 {
 private:
@@ -14,8 +15,13 @@ private:
 	~Game() = default;
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;
-	SGD::Size m_ScreenSize = SGD::Size{ 1024, 768 };
+	SGD::Size m_ScreenSize = SGD::Size{ 1024, 800 };
 	IGameState* m_CurrentState = nullptr;
+
+
+	// Practice TileSystem Xml
+
+	TileSystem* TIleXMl;
 	unsigned long m_GameTime = 0;
 public:
 	//Singleton

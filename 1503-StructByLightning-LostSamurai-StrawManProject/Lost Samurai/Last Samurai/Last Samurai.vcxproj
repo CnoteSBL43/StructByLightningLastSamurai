@@ -21,6 +21,10 @@
     <ClCompile Include="..\SGD Wrappers\SGD_Message.cpp" />
     <ClCompile Include="..\SGD Wrappers\SGD_MessageManager.cpp" />
     <ClCompile Include="..\SGD Wrappers\SGD_Utilities.cpp" />
+    <ClCompile Include="..\TinyXML\tinystr.cpp" />
+    <ClCompile Include="..\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\TinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
@@ -68,6 +72,8 @@
     <ClInclude Include="..\SGD Wrappers\SGD_MessageManager.h" />
     <ClInclude Include="..\SGD Wrappers\SGD_String.h" />
     <ClInclude Include="..\SGD Wrappers\SGD_Utilities.h" />
+    <ClInclude Include="..\TinyXML\tinystr.h" />
+    <ClInclude Include="..\TinyXML\tinyxml.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationSystem.h" />

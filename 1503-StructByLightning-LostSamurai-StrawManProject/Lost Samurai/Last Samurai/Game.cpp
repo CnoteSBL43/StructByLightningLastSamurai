@@ -4,6 +4,7 @@
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include "../SGD Wrappers/SGD_Utilities.h"
+#include "../Last Samurai/TileSystem.h"
 #include "IGameState.h"
 #include "SplashState.h"
 
@@ -12,7 +13,7 @@
 #include <cassert>
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-
+#include "GameplayState.h"
 Game* Game::m_Instance = nullptr;
 
 Game* Game::GetInstance()
@@ -38,6 +39,7 @@ void Game::ChangeState(IGameState* _NextState)
 
 	if (m_CurrentState != nullptr)
 	{
+		
 		m_CurrentState->Enter();
 	}
 }
@@ -56,6 +58,7 @@ bool Game::Initialize()
 	ChangeState(SplashState::GetInstance());
 
 	m_GameTime = GetTickCount();
+	Game::GetInstance()->ChangeState(GameplayState::GetInstance());
 	return true;
 }
 
@@ -68,6 +71,9 @@ int Game::Update()
 	unsigned long CurrentTime = GetTickCount();
 	float ElapsedTime = (CurrentTime - m_GameTime) / 1000.0f;
 	m_GameTime = CurrentTime;
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+		return 1;
 
 	if (m_CurrentState->Update(ElapsedTime)== false)
 	{

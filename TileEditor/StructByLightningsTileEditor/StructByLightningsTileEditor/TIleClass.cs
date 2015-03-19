@@ -11,6 +11,9 @@ namespace StructByLightningsTileEditor
 
         int m_PositionX;
         int m_PositionY;
+        int ID = 0;
+
+       
 
         public int PositionX
         {
@@ -24,6 +27,11 @@ namespace StructByLightningsTileEditor
             set { m_PositionY = value; }
         }
 
+        public int m_ID
+        {
+            get { return ID; }
+            set { ID = value; }
+        }
         public TIleClass(int x, int y)
         {
             this.m_PositionX = x;

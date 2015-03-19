@@ -34,6 +34,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTileSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,11 +67,19 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TilePanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ImagePixalWidth = new System.Windows.Forms.NumericUpDown();
+            this.ImagePixalHeight = new System.Windows.Forms.NumericUpDown();
+            this.ImagePixal = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.PixalHeight = new System.Windows.Forms.NumericUpDown();
             this.PixalWidth = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ImageHeight = new System.Windows.Forms.NumericUpDown();
+            this.ImageWidth = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.GridHeight = new System.Windows.Forms.NumericUpDown();
@@ -81,6 +90,8 @@
             this.RespawnRectangleButton = new System.Windows.Forms.RadioButton();
             this.CollisionRectangleButton = new System.Windows.Forms.RadioButton();
             this.GridPanel = new System.Windows.Forms.Panel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -89,12 +100,17 @@
             this.GridSizing.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalWidth)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridWidth)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -125,6 +141,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.saveXMLToolStripMenuItem,
             this.loadTileSetToolStripMenuItem,
             this.toolStripSeparator,
             this.saveToolStripMenuItem,
@@ -155,6 +172,13 @@
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.openToolStripMenuItem.Text = "&Open";
+            // 
+            // saveXMLToolStripMenuItem
+            // 
+            this.saveXMLToolStripMenuItem.Name = "saveXMLToolStripMenuItem";
+            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.saveXMLToolStripMenuItem.Text = "Save XML";
+            this.saveXMLToolStripMenuItem.Click += new System.EventHandler(this.saveXMLToolStripMenuItem_Click);
             // 
             // loadTileSetToolStripMenuItem
             // 
@@ -372,6 +396,7 @@
             // GridSizing
             // 
             this.GridSizing.Controls.Add(this.tabPage1);
+            this.GridSizing.Controls.Add(this.tabPage3);
             this.GridSizing.Controls.Add(this.tabPage2);
             this.GridSizing.Location = new System.Drawing.Point(0, 0);
             this.GridSizing.Name = "GridSizing";
@@ -404,6 +429,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ImagePixalWidth);
+            this.groupBox2.Controls.Add(this.ImagePixalHeight);
+            this.groupBox2.Controls.Add(this.ImagePixal);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.PixalHeight);
@@ -415,10 +444,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size of Pixals";
             // 
+            // ImagePixalWidth
+            // 
+            this.ImagePixalWidth.Location = new System.Drawing.Point(123, 133);
+            this.ImagePixalWidth.Name = "ImagePixalWidth";
+            this.ImagePixalWidth.Size = new System.Drawing.Size(71, 22);
+            this.ImagePixalWidth.TabIndex = 9;
+            this.ImagePixalWidth.ValueChanged += new System.EventHandler(this.ImagePixalWidth_ValueChanged);
+            // 
+            // ImagePixalHeight
+            // 
+            this.ImagePixalHeight.Location = new System.Drawing.Point(123, 104);
+            this.ImagePixalHeight.Name = "ImagePixalHeight";
+            this.ImagePixalHeight.Size = new System.Drawing.Size(71, 22);
+            this.ImagePixalHeight.TabIndex = 8;
+            this.ImagePixalHeight.ValueChanged += new System.EventHandler(this.ImagePixalHeight_ValueChanged);
+            // 
+            // ImagePixal
+            // 
+            this.ImagePixal.AutoSize = true;
+            this.ImagePixal.Location = new System.Drawing.Point(1, 138);
+            this.ImagePixal.Name = "ImagePixal";
+            this.ImagePixal.Size = new System.Drawing.Size(119, 17);
+            this.ImagePixal.TabIndex = 7;
+            this.ImagePixal.Text = "Image Pixal Width";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1, 106);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(124, 17);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Image Pixal Height";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 102);
+            this.label4.Location = new System.Drawing.Point(6, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 17);
             this.label4.TabIndex = 5;
@@ -427,7 +490,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 74);
+            this.label3.Location = new System.Drawing.Point(6, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 17);
             this.label3.TabIndex = 4;
@@ -435,7 +498,7 @@
             // 
             // PixalHeight
             // 
-            this.PixalHeight.Location = new System.Drawing.Point(123, 97);
+            this.PixalHeight.Location = new System.Drawing.Point(123, 62);
             this.PixalHeight.Name = "PixalHeight";
             this.PixalHeight.Size = new System.Drawing.Size(71, 22);
             this.PixalHeight.TabIndex = 2;
@@ -443,7 +506,7 @@
             // 
             // PixalWidth
             // 
-            this.PixalWidth.Location = new System.Drawing.Point(123, 69);
+            this.PixalWidth.Location = new System.Drawing.Point(123, 31);
             this.PixalWidth.Name = "PixalWidth";
             this.PixalWidth.Size = new System.Drawing.Size(71, 22);
             this.PixalWidth.TabIndex = 1;
@@ -451,6 +514,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ImageHeight);
+            this.groupBox1.Controls.Add(this.ImageWidth);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.GridHeight);
@@ -462,10 +529,54 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Size of Grid";
             // 
+            // ImageHeight
+            // 
+            this.ImageHeight.Location = new System.Drawing.Point(123, 117);
+            this.ImageHeight.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.ImageHeight.Name = "ImageHeight";
+            this.ImageHeight.Size = new System.Drawing.Size(71, 22);
+            this.ImageHeight.TabIndex = 7;
+            this.ImageHeight.ValueChanged += new System.EventHandler(this.ImageHeight_ValueChanged);
+            // 
+            // ImageWidth
+            // 
+            this.ImageWidth.Location = new System.Drawing.Point(123, 88);
+            this.ImageWidth.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.ImageWidth.Name = "ImageWidth";
+            this.ImageWidth.Size = new System.Drawing.Size(71, 22);
+            this.ImageWidth.TabIndex = 6;
+            this.ImageWidth.ValueChanged += new System.EventHandler(this.ImageWidth_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 117);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 17);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Image Height";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Image Width";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 102);
+            this.label2.Location = new System.Drawing.Point(3, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 17);
             this.label2.TabIndex = 3;
@@ -474,7 +585,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 69);
+            this.label1.Location = new System.Drawing.Point(3, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 17);
             this.label1.TabIndex = 2;
@@ -482,7 +593,7 @@
             // 
             // GridHeight
             // 
-            this.GridHeight.Location = new System.Drawing.Point(129, 97);
+            this.GridHeight.Location = new System.Drawing.Point(123, 57);
             this.GridHeight.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -495,7 +606,7 @@
             // 
             // GridWidth
             // 
-            this.GridWidth.Location = new System.Drawing.Point(129, 69);
+            this.GridWidth.Location = new System.Drawing.Point(123, 29);
             this.GridWidth.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -576,6 +687,24 @@
             this.GridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseClick);
             this.GridPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseMove);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(451, 540);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(3, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(442, 443);
+            this.panel1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -599,14 +728,19 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalWidth)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridWidth)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -666,6 +800,17 @@
         private System.Windows.Forms.RadioButton AIRectangleButton;
         private System.Windows.Forms.RadioButton CheckPointRectangleButton;
         private System.Windows.Forms.RadioButton RespawnRectangleButton;
+        private System.Windows.Forms.NumericUpDown ImageHeight;
+        private System.Windows.Forms.NumericUpDown ImageWidth;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem saveXMLToolStripMenuItem;
+        private System.Windows.Forms.Label ImagePixal;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown ImagePixalWidth;
+        private System.Windows.Forms.NumericUpDown ImagePixalHeight;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
