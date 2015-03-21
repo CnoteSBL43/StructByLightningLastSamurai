@@ -31,6 +31,9 @@ namespace WindowsFormsApplication1
             set { framerect = value; }
         }
 
-
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

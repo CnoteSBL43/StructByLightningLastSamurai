@@ -33,13 +33,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenAnimationFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoadSpriteSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsAnimation = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +59,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolBox = new System.Windows.Forms.GroupBox();
+            this.RemoveFrameButton = new System.Windows.Forms.Button();
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.AnchorButton = new System.Windows.Forms.Button();
             this.CollisionRectButton = new System.Windows.Forms.Button();
@@ -71,6 +70,16 @@
             this.AnchorXUpDown = new System.Windows.Forms.NumericUpDown();
             this.AnchorYUpDown = new System.Windows.Forms.NumericUpDown();
             this.RectBox = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.CollisionRectHeightUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CollisionRectWidthUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CollisionRectYUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CollisionRectXUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -81,6 +90,8 @@
             this.FrameRectXUpDown = new System.Windows.Forms.NumericUpDown();
             this.SpriteSheetBox = new System.Windows.Forms.GroupBox();
             this.SpritePanel = new System.Windows.Forms.Panel();
+            this.SpritePanelVScrollBar = new System.Windows.Forms.VScrollBar();
+            this.SpritePanelHScrollBar = new System.Windows.Forms.HScrollBar();
             this.AnimationBox = new System.Windows.Forms.GroupBox();
             this.AnimationPanel = new System.Windows.Forms.Panel();
             this.AnimSettBox = new System.Windows.Forms.GroupBox();
@@ -88,47 +99,37 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.FrameDurationUpDown = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.AnimationSpeedUpDown = new System.Windows.Forms.NumericUpDown();
             this.AnimationNameTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.FrameListBox = new System.Windows.Forms.ListBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.CollisionRectHeightUpDown = new System.Windows.Forms.NumericUpDown();
-            this.CollisionRectWidthUpDown = new System.Windows.Forms.NumericUpDown();
-            this.CollisionRectYUpDown = new System.Windows.Forms.NumericUpDown();
-            this.CollisionRectXUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.RemoveFrameButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.ToolBox.SuspendLayout();
             this.AnchorBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorYUpDown)).BeginInit();
             this.RectBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectHeightUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectWidthUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectYUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectHeightUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectWidthUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectYUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectXUpDown)).BeginInit();
             this.SpriteSheetBox.SuspendLayout();
+            this.SpritePanel.SuspendLayout();
             this.AnimationBox.SuspendLayout();
             this.AnimSettBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectHeightUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectWidthUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectYUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectXUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -149,13 +150,11 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
+            this.OpenAnimationFile,
+            this.LoadSpriteSheet,
             this.toolStripSeparator,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
+            this.SaveAsAnimation,
             this.toolStripSeparator1,
-            this.printToolStripMenuItem,
-            this.printPreviewToolStripMenuItem,
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -168,70 +167,52 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
             this.newToolStripMenuItem.Text = "&New";
             // 
-            // openToolStripMenuItem
+            // OpenAnimationFile
             // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.openToolStripMenuItem.Text = "&Open";
+            this.OpenAnimationFile.Image = ((System.Drawing.Image)(resources.GetObject("OpenAnimationFile.Image")));
+            this.OpenAnimationFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.OpenAnimationFile.Name = "OpenAnimationFile";
+            this.OpenAnimationFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.OpenAnimationFile.Size = new System.Drawing.Size(244, 26);
+            this.OpenAnimationFile.Text = "Open Animation";
+            // 
+            // LoadSpriteSheet
+            // 
+            this.LoadSpriteSheet.Name = "LoadSpriteSheet";
+            this.LoadSpriteSheet.Size = new System.Drawing.Size(244, 26);
+            this.LoadSpriteSheet.Text = "Load Sprite";
+            this.LoadSpriteSheet.Click += new System.EventHandler(this.LoadSpriteSheet_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(241, 6);
             // 
-            // saveToolStripMenuItem
+            // SaveAsAnimation
             // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.saveToolStripMenuItem.Text = "&Save";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.SaveAsAnimation.Name = "SaveAsAnimation";
+            this.SaveAsAnimation.Size = new System.Drawing.Size(244, 26);
+            this.SaveAsAnimation.Text = "Save &As";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
-            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.printToolStripMenuItem.Text = "&Print";
-            // 
-            // printPreviewToolStripMenuItem
-            // 
-            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
-            this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -376,16 +357,31 @@
             this.ToolBox.Controls.Add(this.FrameRectButton);
             this.ToolBox.Location = new System.Drawing.Point(526, 31);
             this.ToolBox.Name = "ToolBox";
-            this.ToolBox.Size = new System.Drawing.Size(145, 215);
+            this.ToolBox.Size = new System.Drawing.Size(145, 236);
             this.ToolBox.TabIndex = 2;
             this.ToolBox.TabStop = false;
             this.ToolBox.Text = "Tools";
             // 
+            // RemoveFrameButton
+            // 
+            this.RemoveFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveFrameButton.Location = new System.Drawing.Point(6, 202);
+            this.RemoveFrameButton.Name = "RemoveFrameButton";
+            this.RemoveFrameButton.Size = new System.Drawing.Size(132, 26);
+            this.RemoveFrameButton.TabIndex = 4;
+            this.RemoveFrameButton.Text = "Remove Frame";
+            this.toolTip1.SetToolTip(this.RemoveFrameButton, "Click to add the frame to the frame list.\r\nNOTE: You can only add a frame to the " +
+        "\r\nframe list once you have drawn a Frame \r\nRectangle, a Collision Rectangle, \r\na" +
+        "nd an Anchor Point.");
+            this.RemoveFrameButton.UseVisualStyleBackColor = true;
+            this.RemoveFrameButton.Click += new System.EventHandler(this.RemoveFrameButton_Click);
+            // 
             // AddFrameButton
             // 
-            this.AddFrameButton.Location = new System.Drawing.Point(7, 134);
+            this.AddFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddFrameButton.Location = new System.Drawing.Point(6, 157);
             this.AddFrameButton.Name = "AddFrameButton";
-            this.AddFrameButton.Size = new System.Drawing.Size(132, 23);
+            this.AddFrameButton.Size = new System.Drawing.Size(132, 39);
             this.AddFrameButton.TabIndex = 3;
             this.AddFrameButton.Text = "Add Frame";
             this.toolTip1.SetToolTip(this.AddFrameButton, "Click to add the frame to the frame list.\r\nNOTE: You can only add a frame to the " +
@@ -396,9 +392,10 @@
             // 
             // AnchorButton
             // 
-            this.AnchorButton.Location = new System.Drawing.Point(7, 105);
+            this.AnchorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AnchorButton.Location = new System.Drawing.Point(6, 110);
             this.AnchorButton.Name = "AnchorButton";
-            this.AnchorButton.Size = new System.Drawing.Size(132, 23);
+            this.AnchorButton.Size = new System.Drawing.Size(132, 43);
             this.AnchorButton.TabIndex = 2;
             this.AnchorButton.Text = "Anchor Point";
             this.toolTip1.SetToolTip(this.AnchorButton, "Tool for setting the anchor point.");
@@ -407,7 +404,8 @@
             // 
             // CollisionRectButton
             // 
-            this.CollisionRectButton.Location = new System.Drawing.Point(6, 52);
+            this.CollisionRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CollisionRectButton.Location = new System.Drawing.Point(6, 57);
             this.CollisionRectButton.Name = "CollisionRectButton";
             this.CollisionRectButton.Size = new System.Drawing.Size(132, 47);
             this.CollisionRectButton.TabIndex = 1;
@@ -418,9 +416,10 @@
             // 
             // FrameRectButton
             // 
-            this.FrameRectButton.Location = new System.Drawing.Point(7, 21);
+            this.FrameRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FrameRectButton.Location = new System.Drawing.Point(6, 17);
             this.FrameRectButton.Name = "FrameRectButton";
-            this.FrameRectButton.Size = new System.Drawing.Size(132, 23);
+            this.FrameRectButton.Size = new System.Drawing.Size(132, 34);
             this.FrameRectButton.TabIndex = 0;
             this.FrameRectButton.Text = "Frame Rectangle";
             this.toolTip1.SetToolTip(this.FrameRectButton, "Tool for drawing the rendering rectangle.");
@@ -469,7 +468,7 @@
             this.AnchorXUpDown.Name = "AnchorXUpDown";
             this.AnchorXUpDown.Size = new System.Drawing.Size(120, 22);
             this.AnchorXUpDown.TabIndex = 1;
-            this.AnchorXUpDown.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            this.AnchorXUpDown.ValueChanged += new System.EventHandler(this.AnchorXUpDown_ValueChanged);
             // 
             // AnchorYUpDown
             // 
@@ -482,7 +481,7 @@
             this.AnchorYUpDown.Name = "AnchorYUpDown";
             this.AnchorYUpDown.Size = new System.Drawing.Size(120, 22);
             this.AnchorYUpDown.TabIndex = 0;
-            this.AnchorYUpDown.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.AnchorYUpDown.ValueChanged += new System.EventHandler(this.AnchorYUpDown_ValueChanged);
             // 
             // RectBox
             // 
@@ -511,268 +510,23 @@
             this.RectBox.TabStop = false;
             this.RectBox.Text = "Rectangle Properties";
             // 
-            // label6
+            // label18
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(78, 110);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 17);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Height";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(48, 34);
+            this.label18.TabIndex = 21;
+            this.label18.Text = "Frame\r\nRect";
             // 
-            // label5
+            // label17
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 82);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 17);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Width";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(78, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Y";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(78, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 17);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "X";
-            // 
-            // FrameRectHeightUpDown
-            // 
-            this.FrameRectHeightUpDown.Location = new System.Drawing.Point(148, 105);
-            this.FrameRectHeightUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.FrameRectHeightUpDown.Name = "FrameRectHeightUpDown";
-            this.FrameRectHeightUpDown.Size = new System.Drawing.Size(120, 22);
-            this.FrameRectHeightUpDown.TabIndex = 7;
-            // 
-            // FrameRectWidthUpDown
-            // 
-            this.FrameRectWidthUpDown.Location = new System.Drawing.Point(148, 77);
-            this.FrameRectWidthUpDown.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.FrameRectWidthUpDown.Name = "FrameRectWidthUpDown";
-            this.FrameRectWidthUpDown.Size = new System.Drawing.Size(120, 22);
-            this.FrameRectWidthUpDown.TabIndex = 6;
-            // 
-            // FrameRectYUpDown
-            // 
-            this.FrameRectYUpDown.Location = new System.Drawing.Point(148, 49);
-            this.FrameRectYUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.FrameRectYUpDown.Name = "FrameRectYUpDown";
-            this.FrameRectYUpDown.Size = new System.Drawing.Size(120, 22);
-            this.FrameRectYUpDown.TabIndex = 5;
-            // 
-            // FrameRectXUpDown
-            // 
-            this.FrameRectXUpDown.Location = new System.Drawing.Point(148, 21);
-            this.FrameRectXUpDown.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.FrameRectXUpDown.Name = "FrameRectXUpDown";
-            this.FrameRectXUpDown.Size = new System.Drawing.Size(120, 22);
-            this.FrameRectXUpDown.TabIndex = 4;
-            // 
-            // SpriteSheetBox
-            // 
-            this.SpriteSheetBox.Controls.Add(this.SpritePanel);
-            this.SpriteSheetBox.Location = new System.Drawing.Point(12, 31);
-            this.SpriteSheetBox.Name = "SpriteSheetBox";
-            this.SpriteSheetBox.Size = new System.Drawing.Size(508, 285);
-            this.SpriteSheetBox.TabIndex = 1;
-            this.SpriteSheetBox.TabStop = false;
-            this.SpriteSheetBox.Text = "Sprite Sheet";
-            // 
-            // SpritePanel
-            // 
-            this.SpritePanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SpritePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.SpritePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SpritePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SpritePanel.Location = new System.Drawing.Point(3, 18);
-            this.SpritePanel.Name = "SpritePanel";
-            this.SpritePanel.Size = new System.Drawing.Size(502, 264);
-            this.SpritePanel.TabIndex = 0;
-            this.SpritePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseDown);
-            this.SpritePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseMove);
-            this.SpritePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseUp);
-            // 
-            // AnimationBox
-            // 
-            this.AnimationBox.Controls.Add(this.AnimationPanel);
-            this.AnimationBox.Location = new System.Drawing.Point(12, 322);
-            this.AnimationBox.Name = "AnimationBox";
-            this.AnimationBox.Size = new System.Drawing.Size(749, 285);
-            this.AnimationBox.TabIndex = 2;
-            this.AnimationBox.TabStop = false;
-            this.AnimationBox.Text = "Animation";
-            // 
-            // AnimationPanel
-            // 
-            this.AnimationPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.AnimationPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.AnimationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AnimationPanel.Location = new System.Drawing.Point(3, 18);
-            this.AnimationPanel.Name = "AnimationPanel";
-            this.AnimationPanel.Size = new System.Drawing.Size(743, 264);
-            this.AnimationPanel.TabIndex = 0;
-            // 
-            // AnimSettBox
-            // 
-            this.AnimSettBox.Controls.Add(this.textBox1);
-            this.AnimSettBox.Controls.Add(this.label12);
-            this.AnimSettBox.Controls.Add(this.comboBox1);
-            this.AnimSettBox.Controls.Add(this.label11);
-            this.AnimSettBox.Controls.Add(this.numericUpDown2);
-            this.AnimSettBox.Controls.Add(this.label10);
-            this.AnimSettBox.Controls.Add(this.label9);
-            this.AnimSettBox.Controls.Add(this.label8);
-            this.AnimSettBox.Controls.Add(this.numericUpDown1);
-            this.AnimSettBox.Controls.Add(this.AnimationNameTextBox);
-            this.AnimSettBox.Controls.Add(this.label7);
-            this.AnimSettBox.Controls.Add(this.panel3);
-            this.AnimSettBox.Location = new System.Drawing.Point(767, 252);
-            this.AnimSettBox.Name = "AnimSettBox";
-            this.AnimSettBox.Size = new System.Drawing.Size(467, 355);
-            this.AnimSettBox.TabIndex = 3;
-            this.AnimSettBox.TabStop = false;
-            this.AnimSettBox.Text = "Animation Settings";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(10, 279);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 22);
-            this.textBox1.TabIndex = 11;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(4, 259);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(54, 17);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Trigger";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 232);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 211);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 17);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Trigger Type";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(7, 186);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown2.TabIndex = 7;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 166);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 17);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Frame Duration";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(258, 41);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(74, 17);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Frame List";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 121);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 17);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Animation Speed";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(7, 141);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 3;
-            // 
-            // AnimationNameTextBox
-            // 
-            this.AnimationNameTextBox.Location = new System.Drawing.Point(7, 96);
-            this.AnimationNameTextBox.Name = "AnimationNameTextBox";
-            this.AnimationNameTextBox.Size = new System.Drawing.Size(168, 22);
-            this.AnimationNameTextBox.TabIndex = 2;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 17);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Animation Name";
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.FrameListBox);
-            this.panel3.Location = new System.Drawing.Point(184, 70);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(277, 279);
-            this.panel3.TabIndex = 0;
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.IsBalloon = true;
-            // 
-            // FrameListBox
-            // 
-            this.FrameListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FrameListBox.FormattingEnabled = true;
-            this.FrameListBox.ItemHeight = 16;
-            this.FrameListBox.Location = new System.Drawing.Point(0, 0);
-            this.FrameListBox.Name = "FrameListBox";
-            this.FrameListBox.Size = new System.Drawing.Size(273, 275);
-            this.FrameListBox.TabIndex = 1;
-            this.FrameListBox.SelectedIndexChanged += new System.EventHandler(this.FrameListBox_SelectedIndexChanged);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(289, 21);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(64, 34);
+            this.label17.TabIndex = 20;
+            this.label17.Text = "Collision \r\nRect";
             // 
             // label13
             // 
@@ -821,6 +575,7 @@
             this.CollisionRectHeightUpDown.Name = "CollisionRectHeightUpDown";
             this.CollisionRectHeightUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectHeightUpDown.TabIndex = 15;
+            this.CollisionRectHeightUpDown.ValueChanged += new System.EventHandler(this.CollisionRectHeightUpDown_ValueChanged);
             // 
             // CollisionRectWidthUpDown
             // 
@@ -833,6 +588,7 @@
             this.CollisionRectWidthUpDown.Name = "CollisionRectWidthUpDown";
             this.CollisionRectWidthUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectWidthUpDown.TabIndex = 14;
+            this.CollisionRectWidthUpDown.ValueChanged += new System.EventHandler(this.CollisionRectWidthUpDown_ValueChanged);
             // 
             // CollisionRectYUpDown
             // 
@@ -845,6 +601,7 @@
             this.CollisionRectYUpDown.Name = "CollisionRectYUpDown";
             this.CollisionRectYUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectYUpDown.TabIndex = 13;
+            this.CollisionRectYUpDown.ValueChanged += new System.EventHandler(this.CollisionRectYUpDown_ValueChanged);
             // 
             // CollisionRectXUpDown
             // 
@@ -857,41 +614,304 @@
             this.CollisionRectXUpDown.Name = "CollisionRectXUpDown";
             this.CollisionRectXUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectXUpDown.TabIndex = 12;
+            this.CollisionRectXUpDown.ValueChanged += new System.EventHandler(this.CollisionRectXUpDown_ValueChanged);
             // 
-            // label17
+            // label6
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(289, 21);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 34);
-            this.label17.TabIndex = 20;
-            this.label17.Text = "Collision \r\nRect";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(78, 110);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 17);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Height";
             // 
-            // label18
+            // label5
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 23);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(48, 34);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "Frame\r\nRect";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(78, 82);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 17);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Width";
             // 
-            // RemoveFrameButton
+            // label4
             // 
-            this.RemoveFrameButton.Location = new System.Drawing.Point(6, 163);
-            this.RemoveFrameButton.Name = "RemoveFrameButton";
-            this.RemoveFrameButton.Size = new System.Drawing.Size(132, 23);
-            this.RemoveFrameButton.TabIndex = 4;
-            this.RemoveFrameButton.Text = "Remove Frame";
-            this.toolTip1.SetToolTip(this.RemoveFrameButton, "Click to add the frame to the frame list.\r\nNOTE: You can only add a frame to the " +
-        "\r\nframe list once you have drawn a Frame \r\nRectangle, a Collision Rectangle, \r\na" +
-        "nd an Anchor Point.");
-            this.RemoveFrameButton.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(78, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Y";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(78, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "X";
+            // 
+            // FrameRectHeightUpDown
+            // 
+            this.FrameRectHeightUpDown.Location = new System.Drawing.Point(148, 105);
+            this.FrameRectHeightUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.FrameRectHeightUpDown.Name = "FrameRectHeightUpDown";
+            this.FrameRectHeightUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameRectHeightUpDown.TabIndex = 7;
+            this.FrameRectHeightUpDown.ValueChanged += new System.EventHandler(this.FrameRectHeightUpDown_ValueChanged);
+            // 
+            // FrameRectWidthUpDown
+            // 
+            this.FrameRectWidthUpDown.Location = new System.Drawing.Point(148, 77);
+            this.FrameRectWidthUpDown.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.FrameRectWidthUpDown.Name = "FrameRectWidthUpDown";
+            this.FrameRectWidthUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameRectWidthUpDown.TabIndex = 6;
+            this.FrameRectWidthUpDown.ValueChanged += new System.EventHandler(this.FrameRectWidthUpDown_ValueChanged);
+            // 
+            // FrameRectYUpDown
+            // 
+            this.FrameRectYUpDown.Location = new System.Drawing.Point(148, 49);
+            this.FrameRectYUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.FrameRectYUpDown.Name = "FrameRectYUpDown";
+            this.FrameRectYUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameRectYUpDown.TabIndex = 5;
+            this.FrameRectYUpDown.ValueChanged += new System.EventHandler(this.FrameRectYUpDown_ValueChanged);
+            // 
+            // FrameRectXUpDown
+            // 
+            this.FrameRectXUpDown.Location = new System.Drawing.Point(148, 21);
+            this.FrameRectXUpDown.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.FrameRectXUpDown.Name = "FrameRectXUpDown";
+            this.FrameRectXUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameRectXUpDown.TabIndex = 4;
+            this.FrameRectXUpDown.ValueChanged += new System.EventHandler(this.FrameRectXUpDown_ValueChanged);
+            // 
+            // SpriteSheetBox
+            // 
+            this.SpriteSheetBox.Controls.Add(this.SpritePanel);
+            this.SpriteSheetBox.Location = new System.Drawing.Point(12, 31);
+            this.SpriteSheetBox.Name = "SpriteSheetBox";
+            this.SpriteSheetBox.Size = new System.Drawing.Size(508, 285);
+            this.SpriteSheetBox.TabIndex = 1;
+            this.SpriteSheetBox.TabStop = false;
+            this.SpriteSheetBox.Text = "Sprite Sheet";
+            // 
+            // SpritePanel
+            // 
+            this.SpritePanel.BackColor = System.Drawing.SystemColors.Window;
+            this.SpritePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.SpritePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SpritePanel.Controls.Add(this.SpritePanelVScrollBar);
+            this.SpritePanel.Controls.Add(this.SpritePanelHScrollBar);
+            this.SpritePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SpritePanel.Location = new System.Drawing.Point(3, 18);
+            this.SpritePanel.Name = "SpritePanel";
+            this.SpritePanel.Size = new System.Drawing.Size(502, 264);
+            this.SpritePanel.TabIndex = 0;
+            this.SpritePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseDown);
+            this.SpritePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseMove);
+            this.SpritePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SpritePanel_MouseUp);
+            // 
+            // SpritePanelVScrollBar
+            // 
+            this.SpritePanelVScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.SpritePanelVScrollBar.Location = new System.Drawing.Point(477, 0);
+            this.SpritePanelVScrollBar.Name = "SpritePanelVScrollBar";
+            this.SpritePanelVScrollBar.Size = new System.Drawing.Size(21, 239);
+            this.SpritePanelVScrollBar.TabIndex = 1;
+            this.SpritePanelVScrollBar.Visible = false;
+            this.SpritePanelVScrollBar.ValueChanged += new System.EventHandler(this.SpritePanelVScrollBar_ValueChanged);
+            // 
+            // SpritePanelHScrollBar
+            // 
+            this.SpritePanelHScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SpritePanelHScrollBar.Location = new System.Drawing.Point(0, 239);
+            this.SpritePanelHScrollBar.Name = "SpritePanelHScrollBar";
+            this.SpritePanelHScrollBar.Size = new System.Drawing.Size(498, 21);
+            this.SpritePanelHScrollBar.TabIndex = 0;
+            this.SpritePanelHScrollBar.Visible = false;
+            this.SpritePanelHScrollBar.ValueChanged += new System.EventHandler(this.SpritePanelHScrollBar_ValueChanged);
+            // 
+            // AnimationBox
+            // 
+            this.AnimationBox.Controls.Add(this.AnimationPanel);
+            this.AnimationBox.Location = new System.Drawing.Point(12, 322);
+            this.AnimationBox.Name = "AnimationBox";
+            this.AnimationBox.Size = new System.Drawing.Size(503, 285);
+            this.AnimationBox.TabIndex = 2;
+            this.AnimationBox.TabStop = false;
+            this.AnimationBox.Text = "Animation";
+            // 
+            // AnimationPanel
+            // 
+            this.AnimationPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.AnimationPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AnimationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AnimationPanel.Location = new System.Drawing.Point(3, 18);
+            this.AnimationPanel.Name = "AnimationPanel";
+            this.AnimationPanel.Size = new System.Drawing.Size(497, 264);
+            this.AnimationPanel.TabIndex = 0;
+            // 
+            // AnimSettBox
+            // 
+            this.AnimSettBox.Controls.Add(this.textBox1);
+            this.AnimSettBox.Controls.Add(this.label12);
+            this.AnimSettBox.Controls.Add(this.comboBox1);
+            this.AnimSettBox.Controls.Add(this.label11);
+            this.AnimSettBox.Controls.Add(this.FrameDurationUpDown);
+            this.AnimSettBox.Controls.Add(this.label10);
+            this.AnimSettBox.Controls.Add(this.label9);
+            this.AnimSettBox.Controls.Add(this.label8);
+            this.AnimSettBox.Controls.Add(this.AnimationSpeedUpDown);
+            this.AnimSettBox.Controls.Add(this.AnimationNameTextBox);
+            this.AnimSettBox.Controls.Add(this.label7);
+            this.AnimSettBox.Controls.Add(this.panel3);
+            this.AnimSettBox.Location = new System.Drawing.Point(532, 266);
+            this.AnimSettBox.Name = "AnimSettBox";
+            this.AnimSettBox.Size = new System.Drawing.Size(702, 341);
+            this.AnimSettBox.TabIndex = 3;
+            this.AnimSettBox.TabStop = false;
+            this.AnimSettBox.Text = "Animation Settings";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(145, 236);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(168, 22);
+            this.textBox1.TabIndex = 11;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(139, 216);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 17);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Trigger";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(142, 189);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 9;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(139, 168);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 17);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Trigger Type";
+            // 
+            // FrameDurationUpDown
+            // 
+            this.FrameDurationUpDown.Location = new System.Drawing.Point(142, 143);
+            this.FrameDurationUpDown.Name = "FrameDurationUpDown";
+            this.FrameDurationUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameDurationUpDown.TabIndex = 7;
+            this.FrameDurationUpDown.ValueChanged += new System.EventHandler(this.FrameDurationUpDown_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(139, 123);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 17);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Frame Duration";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(26, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(74, 17);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Frame List";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(139, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(115, 17);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Animation Speed";
+            // 
+            // AnimationSpeedUpDown
+            // 
+            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(145, 98);
+            this.AnimationSpeedUpDown.Name = "AnimationSpeedUpDown";
+            this.AnimationSpeedUpDown.Size = new System.Drawing.Size(120, 22);
+            this.AnimationSpeedUpDown.TabIndex = 3;
+            this.AnimationSpeedUpDown.ValueChanged += new System.EventHandler(this.AnimationSpeedUpDown_ValueChanged);
+            // 
+            // AnimationNameTextBox
+            // 
+            this.AnimationNameTextBox.Location = new System.Drawing.Point(142, 53);
+            this.AnimationNameTextBox.Name = "AnimationNameTextBox";
+            this.AnimationNameTextBox.Size = new System.Drawing.Size(168, 22);
+            this.AnimationNameTextBox.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(139, 34);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(111, 17);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Animation Name";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.FrameListBox);
+            this.panel3.Location = new System.Drawing.Point(8, 56);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(124, 279);
+            this.panel3.TabIndex = 0;
+            // 
+            // FrameListBox
+            // 
+            this.FrameListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FrameListBox.FormattingEnabled = true;
+            this.FrameListBox.ItemHeight = 16;
+            this.FrameListBox.Location = new System.Drawing.Point(0, 0);
+            this.FrameListBox.Name = "FrameListBox";
+            this.FrameListBox.Size = new System.Drawing.Size(120, 275);
+            this.FrameListBox.TabIndex = 1;
+            this.FrameListBox.SelectedIndexChanged += new System.EventHandler(this.FrameListBox_SelectedIndexChanged);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1253, 617);
             this.Controls.Add(this.AnimSettBox);
             this.Controls.Add(this.AnimationBox);
@@ -915,21 +935,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.AnchorYUpDown)).EndInit();
             this.RectBox.ResumeLayout(false);
             this.RectBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectHeightUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectWidthUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectYUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectXUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectHeightUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectWidthUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectYUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FrameRectXUpDown)).EndInit();
             this.SpriteSheetBox.ResumeLayout(false);
+            this.SpritePanel.ResumeLayout(false);
             this.AnimationBox.ResumeLayout(false);
             this.AnimSettBox.ResumeLayout(false);
             this.AnimSettBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).EndInit();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectHeightUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectWidthUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectYUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionRectXUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -940,13 +961,9 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveAsAnimation;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
@@ -993,11 +1010,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox AnimationNameTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown FrameDurationUpDown;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown AnimationSpeedUpDown;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -1016,6 +1033,10 @@
         private System.Windows.Forms.NumericUpDown CollisionRectYUpDown;
         private System.Windows.Forms.NumericUpDown CollisionRectXUpDown;
         private System.Windows.Forms.Button RemoveFrameButton;
+        private System.Windows.Forms.ToolStripMenuItem OpenAnimationFile;
+        private System.Windows.Forms.ToolStripMenuItem LoadSpriteSheet;
+        private System.Windows.Forms.VScrollBar SpritePanelVScrollBar;
+        private System.Windows.Forms.HScrollBar SpritePanelHScrollBar;
     }
 }
 

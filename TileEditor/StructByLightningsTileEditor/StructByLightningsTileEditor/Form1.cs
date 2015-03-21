@@ -175,7 +175,7 @@ namespace StructByLightningsTileEditor
 
 
                         }
-                         m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
+                        m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
 
 
                         #region Collision Rectangle ForLoop
@@ -838,7 +838,7 @@ namespace StructByLightningsTileEditor
                         Tile_Element.Add(m_PositionY);
                         Tile_Element.Add(m_ID);
                         m_Element.Add(Tile_Element);
-                       
+
 
                     }
                 }
@@ -862,6 +862,83 @@ namespace StructByLightningsTileEditor
             m_PixalTileSize.Width = (int)ImagePixalWidth.Value;
         }
 
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog Load = new OpenFileDialog();
+            Load.Filter = "All Files|*.*|Xml Files|*.xml";
+            Load.FilterIndex = 2;
+            Load.DefaultExt = ".xml";
+            // Load.Filter = "All Files(*.*)|*.*|My Files(*.myf)|*.myf";
+            if (DialogResult.OK == Load.ShowDialog())
+            {
+                XDocument Doc = XDocument.Load(Load.FileName);
+                XElement m_Element = Doc.Element("Map");
+                XAttribute m_Attribute = m_Element.Attribute("Image");
+                m_filename = m_Attribute.Value;
+                TileImage = m_Texture.LoadTexture(m_filename);
+                m_Attribute = m_Element.Attribute("MapHeight");
+                m_Picture.Height = int.Parse(m_Attribute.Value);
+                m_Attribute = m_Element.Attribute("MapWidth");
+                m_Picture.Width = int.Parse(m_Attribute.Value);
+                m_Attribute = m_Element.Attribute("TileHeight");
+                m_PixalSize.Height = int.Parse(m_Attribute.Value);
+                m_Attribute = m_Element.Attribute("TileWidth");
+                m_PixalSize.Width = int.Parse(m_Attribute.Value);
+                m_Attribute = m_Element.Attribute("ImageHeight");
+                TileMap = new TIleClass[m_Picture.Width, m_Picture.Height];
+                XElement m_element = m_Element.Element("Tile");
 
+
+                //TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
+                //TIleClass[,] tileMapTemp = new TIleClass[m_Picture.Width, m_Picture.Height];
+                int X = 0;
+                int Y = 0;
+                foreach (XElement m_XElement in m_Element.Elements())
+                {
+                    TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
+                    m_Attribute = m_XElement.Attribute("PositionX");
+                    m_Tiles.PositionX = int.Parse(m_Attribute.Value);
+                   // m_Tiles.PositionX *= m_PixalSize.Height;
+                    m_Attribute = m_XElement.Attribute("PositionY");
+                    m_Tiles.PositionY = int.Parse(m_Attribute.Value);
+                    //m_Tiles.PositionY *= m_PixalSize.Width;
+                    m_Attribute = m_XElement.Attribute("TileID");
+                    m_Tiles.m_ID = int.Parse(m_Attribute.Value);
+                    m_Tiles.m_ID = (m_Tiles.m_ID * m_Tiles.PositionX) /  m_PixalSize.Width;
+                    TileMap[X, Y] = m_Tiles;
+                    Y++;
+                    if (Y >= m_Picture.Height)
+                    {
+                        X++;
+                        Y = 0;
+                    }
+
+
+
+                    if (X > m_Picture.Width)
+                        return;
+
+                }
+
+
+
+
+
+
+
+
+            }
+
+
+            //Doc.Add();
+            //m_element.
+
+
+
+
+        }
     }
+
+
+
 }

@@ -29,7 +29,9 @@ TileSystem::~TileSystem()
 	delete[] Map;
 
 #pragma endregion
-
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_TileImage);
+	delete m_Grid;
+	m_Grid = NULL;
 }
 
 void TileSystem::LoadTileXml()
@@ -40,9 +42,10 @@ void TileSystem::LoadTileXml()
 	//Map = new Tile;
 	const char* Test;
 	int Test1;
+	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../TestXml.xml") == false)
+	if (Doc.LoadFile("../TestLevel.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
