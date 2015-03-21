@@ -37,12 +37,9 @@ void Game::ChangeState(IGameState* _NextState)
 
 bool Game::Initialize()
 {
-	m_fScreenWidth = WINDOW_WIDTH;
-	m_fScreenHeight = WINDOW_HEIGHT;
-	SGD::Size m_ScreenSize = SGD::Size(m_fScreenWidth,m_fScreenHeight);
 	srand((unsigned int)time(nullptr));
 
-	if (SGD::GraphicsManager::GetInstance()->Initialize(L"Lost Samurai", m_ScreenSize, false) == false || 
+	if (SGD::GraphicsManager::GetInstance()->Initialize(L"Lost Samurai", m_szScreenSize, false) == false || 
 		   SGD::InputManager::GetInstance()->Initialize() == false || 
 		   SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
@@ -54,6 +51,38 @@ bool Game::Initialize()
 
 	m_GameTime = GetTickCount();
 
+	//Reading the options file
+
+	TiXmlDocument m_Document;
+	if (m_Document.LoadFile("Options") == false)
+	{
+		TiXmlDocument m_Document;
+		TiXmlDeclaration* m_Declare = new TiXmlDeclaration{ "1.0", "utf - 8", "" };
+		m_Document.LinkEndChild(m_Declare);
+		TiXmlElement* m_Element = new TiXmlElement{ "Options.xml" };
+		m_Document.LinkEndChild(m_Element);
+		m_Element->SetDoubleAttribute("MusicVolume", m_MusicVol);
+		m_Element->SetDoubleAttribute("SFXVolume", m_SFXVol);
+		m_Element->SetDoubleAttribute("FullScreen",m_FullScreen);
+		m_Document.SaveFile("Options");
+	}
+	else
+	{
+		int fullscreen = (int)m_FullScreen;
+		TiXmlElement* m_Element = m_Document.RootElement();
+		m_Element->Attribute("MusicVolume", &m_MusicVol);
+		m_Element->Attribute("SFXVolume", &m_SFXVol);
+		m_Element->Attribute("FullScreen", &fullscreen);
+		if (fullscreen == 0)
+			m_FullScreen = false;
+		else 
+			m_FullScreen = true;
+	}
+	
+	SetFullScreen(m_FullScreen);
+	SetMusicVolume(m_MusicVol);
+	SetSFXVolume(m_SFXVol);
+	
 	return true;
 }
 
@@ -74,13 +103,17 @@ int Game::Update()
 	{
 		return 1;
 	}
+
+	//Fullscreen or not
+	if (GetFullScreen())
+		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !GetFullScreen());
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Alt))
 	{
-		if (!m_FullScreen)
-			m_FullScreen = true;
+		if (!GetFullScreen())
+			SetFullScreen(true);
 		else
-			m_FullScreen = false;
-		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !m_FullScreen);
+			SetFullScreen(false);
+		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !GetFullScreen());
 
 	}
 

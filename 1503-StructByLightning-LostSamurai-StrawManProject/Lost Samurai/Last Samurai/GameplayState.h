@@ -2,6 +2,7 @@
 #include "IGameState.h"
 #include"../SGD Wrappers/SGD_Handle.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
+#include "../SGD Wrappers/SGD_Declarations.h"
 #include <vector>
 class Actor;
 class EntityManager;
@@ -22,6 +23,8 @@ private:
 	EntityManager*	m_pEntities = nullptr;
 	Actor* father = nullptr;
 	Actor* son = nullptr;
+
+	static void MessageProc(const SGD::Message* pMsg);
 	
 
 public:

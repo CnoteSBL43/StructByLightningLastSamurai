@@ -15,10 +15,13 @@ public:
 	void	Render(void);
 	int		GetType(void)	const				{ return ENT_SON; }
 	SGD::Rectangle GetRect(void)	const;
-	void	HandleCollision(const IEntity* pOther);
+	void	HandleCollision( IEntity* pOther);
 	int GetDirection(){		return direction;}
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
+	bool GetFacing(){ return m_FacingtoRight; }
+	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
+
 
 private:
 	struct Frame

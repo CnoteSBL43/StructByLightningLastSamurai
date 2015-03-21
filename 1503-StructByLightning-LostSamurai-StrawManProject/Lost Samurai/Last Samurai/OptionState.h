@@ -17,7 +17,9 @@ private:
 	OptionState& operator= (const OptionState&) = delete;
 	SGD::HAudio m_Music = SGD::INVALID_HANDLE;
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
-	int MasterVol=100,MusicVol = 100, SFXVol = 100;
+	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
+	int MusicVol, SFXVol;
+	bool fullscreen;
 	int m_CursorPos = 0;
 
 public:
@@ -30,11 +32,9 @@ public:
 
 	int		GetMusicVol() const { return MusicVol; }
 	int		GetSFXVol() const { return SFXVol; }
-	int		GetMasterVol() const { return MasterVol; }
 
 	void	SetMusicVol(int _musicvolume) { MusicVol = _musicvolume; }
 	void	SetSFXVol(int _sfxvolume) { SFXVol = _sfxvolume; }
-	void	SetMasterVol(int _mastervolume) { MasterVol = _mastervolume; }
 
 
 };

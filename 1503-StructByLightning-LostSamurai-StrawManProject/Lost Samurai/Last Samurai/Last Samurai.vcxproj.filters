@@ -183,7 +183,7 @@
       <Filter>Source\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="CreateDart.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,7 +344,9 @@
     <ClInclude Include="..\resource\TinyXML\tinyxml.h">
       <Filter>Source\TinyXML</Filter>
     </ClInclude>
-    <ClInclude Include="CreateDart.h" />
+    <ClInclude Include="CreateDart.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">
