@@ -185,18 +185,6 @@
     <ClCompile Include="..\resource\TinyXML\tinyxmlparser.cpp">
       <Filter>Source\TinyXML</Filter>
     </ClCompile>
-    <ClCompile Include="..\TinyXML\tinystr.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TinyXML\tinyxml.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TinyXML\tinyxmlerror.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TinyXML\tinyxmlparser.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -359,8 +347,6 @@
     <ClInclude Include="..\resource\TinyXML\tinyxml.h">
       <Filter>Source\TinyXML</Filter>
     </ClInclude>
-    <ClInclude Include="..\TinyXML\tinystr.h" />
-    <ClInclude Include="..\TinyXML\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">

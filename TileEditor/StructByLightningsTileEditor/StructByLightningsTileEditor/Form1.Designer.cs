@@ -64,11 +64,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.AIRectangleButton = new System.Windows.Forms.RadioButton();
-            this.CheckPointRectangleButton = new System.Windows.Forms.RadioButton();
-            this.RespawnRectangleButton = new System.Windows.Forms.RadioButton();
-            this.CollisionRectangleButton = new System.Windows.Forms.RadioButton();
+            this.m_Collision = new System.Windows.Forms.CheckBox();
             this.GridPanel = new System.Windows.Forms.Panel();
+            this.m_Spawn = new System.Windows.Forms.CheckBox();
+            this.m_CheckPoint = new System.Windows.Forms.CheckBox();
+            this.m_AI = new System.Windows.Forms.CheckBox();
+            this.m_TriggerEvents = new System.Windows.Forms.CheckBox();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -130,7 +131,7 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -139,38 +140,38 @@
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveXMLToolStripMenuItem
             // 
             this.saveXMLToolStripMenuItem.Name = "saveXMLToolStripMenuItem";
-            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.saveXMLToolStripMenuItem.Text = "Save XML";
             this.saveXMLToolStripMenuItem.Click += new System.EventHandler(this.saveXMLToolStripMenuItem_Click);
             // 
             // loadTileSetToolStripMenuItem
             // 
             this.loadTileSetToolStripMenuItem.Name = "loadTileSetToolStripMenuItem";
-            this.loadTileSetToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.loadTileSetToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.loadTileSetToolStripMenuItem.Text = "LoadTileSet";
             this.loadTileSetToolStripMenuItem.Click += new System.EventHandler(this.loadTileSetToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(168, 6);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
             // 
             // splitContainer1
             // 
@@ -435,10 +436,11 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.AIRectangleButton);
-            this.tabPage2.Controls.Add(this.CheckPointRectangleButton);
-            this.tabPage2.Controls.Add(this.RespawnRectangleButton);
-            this.tabPage2.Controls.Add(this.CollisionRectangleButton);
+            this.tabPage2.Controls.Add(this.m_TriggerEvents);
+            this.tabPage2.Controls.Add(this.m_AI);
+            this.tabPage2.Controls.Add(this.m_CheckPoint);
+            this.tabPage2.Controls.Add(this.m_Spawn);
+            this.tabPage2.Controls.Add(this.m_Collision);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -447,49 +449,15 @@
             this.tabPage2.Text = "Collision";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // AIRectangleButton
+            // m_Collision
             // 
-            this.AIRectangleButton.AutoSize = true;
-            this.AIRectangleButton.Location = new System.Drawing.Point(3, 140);
-            this.AIRectangleButton.Name = "AIRectangleButton";
-            this.AIRectangleButton.Size = new System.Drawing.Size(109, 21);
-            this.AIRectangleButton.TabIndex = 7;
-            this.AIRectangleButton.TabStop = true;
-            this.AIRectangleButton.Text = "AI Rectangle";
-            this.AIRectangleButton.UseVisualStyleBackColor = true;
-            // 
-            // CheckPointRectangleButton
-            // 
-            this.CheckPointRectangleButton.AutoSize = true;
-            this.CheckPointRectangleButton.Location = new System.Drawing.Point(3, 99);
-            this.CheckPointRectangleButton.Name = "CheckPointRectangleButton";
-            this.CheckPointRectangleButton.Size = new System.Drawing.Size(168, 21);
-            this.CheckPointRectangleButton.TabIndex = 6;
-            this.CheckPointRectangleButton.TabStop = true;
-            this.CheckPointRectangleButton.Text = "CheckPoint Rectangle";
-            this.CheckPointRectangleButton.UseVisualStyleBackColor = true;
-            // 
-            // RespawnRectangleButton
-            // 
-            this.RespawnRectangleButton.AutoSize = true;
-            this.RespawnRectangleButton.Location = new System.Drawing.Point(3, 57);
-            this.RespawnRectangleButton.Name = "RespawnRectangleButton";
-            this.RespawnRectangleButton.Size = new System.Drawing.Size(155, 21);
-            this.RespawnRectangleButton.TabIndex = 5;
-            this.RespawnRectangleButton.TabStop = true;
-            this.RespawnRectangleButton.Text = "Respawn Rectangle";
-            this.RespawnRectangleButton.UseVisualStyleBackColor = true;
-            // 
-            // CollisionRectangleButton
-            // 
-            this.CollisionRectangleButton.AutoSize = true;
-            this.CollisionRectangleButton.Location = new System.Drawing.Point(3, 21);
-            this.CollisionRectangleButton.Name = "CollisionRectangleButton";
-            this.CollisionRectangleButton.Size = new System.Drawing.Size(149, 21);
-            this.CollisionRectangleButton.TabIndex = 4;
-            this.CollisionRectangleButton.TabStop = true;
-            this.CollisionRectangleButton.Text = "Collision Rectangle";
-            this.CollisionRectangleButton.UseVisualStyleBackColor = true;
+            this.m_Collision.AutoSize = true;
+            this.m_Collision.Location = new System.Drawing.Point(8, 20);
+            this.m_Collision.Name = "m_Collision";
+            this.m_Collision.Size = new System.Drawing.Size(82, 21);
+            this.m_Collision.TabIndex = 8;
+            this.m_Collision.Text = "Collision";
+            this.m_Collision.UseVisualStyleBackColor = true;
             // 
             // GridPanel
             // 
@@ -502,6 +470,46 @@
             this.GridPanel.Scroll += new System.Windows.Forms.ScrollEventHandler(this.GridPanel_Scroll);
             this.GridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseClick);
             this.GridPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseMove);
+            // 
+            // m_Spawn
+            // 
+            this.m_Spawn.AutoSize = true;
+            this.m_Spawn.Location = new System.Drawing.Point(8, 61);
+            this.m_Spawn.Name = "m_Spawn";
+            this.m_Spawn.Size = new System.Drawing.Size(134, 21);
+            this.m_Spawn.TabIndex = 9;
+            this.m_Spawn.Text = "Spawn/Respawn";
+            this.m_Spawn.UseVisualStyleBackColor = true;
+            // 
+            // m_CheckPoint
+            // 
+            this.m_CheckPoint.AutoSize = true;
+            this.m_CheckPoint.Location = new System.Drawing.Point(8, 98);
+            this.m_CheckPoint.Name = "m_CheckPoint";
+            this.m_CheckPoint.Size = new System.Drawing.Size(101, 21);
+            this.m_CheckPoint.TabIndex = 10;
+            this.m_CheckPoint.Text = "CheckPoint";
+            this.m_CheckPoint.UseVisualStyleBackColor = true;
+            // 
+            // m_AI
+            // 
+            this.m_AI.AutoSize = true;
+            this.m_AI.Location = new System.Drawing.Point(8, 136);
+            this.m_AI.Name = "m_AI";
+            this.m_AI.Size = new System.Drawing.Size(42, 21);
+            this.m_AI.TabIndex = 11;
+            this.m_AI.Text = "AI";
+            this.m_AI.UseVisualStyleBackColor = true;
+            // 
+            // m_TriggerEvents
+            // 
+            this.m_TriggerEvents.AutoSize = true;
+            this.m_TriggerEvents.Location = new System.Drawing.Point(8, 180);
+            this.m_TriggerEvents.Name = "m_TriggerEvents";
+            this.m_TriggerEvents.Size = new System.Drawing.Size(123, 21);
+            this.m_TriggerEvents.TabIndex = 12;
+            this.m_TriggerEvents.Text = "Trigger Events";
+            this.m_TriggerEvents.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -571,10 +579,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel TilePanel;
         private System.Windows.Forms.ToolStripMenuItem loadTileSetToolStripMenuItem;
-        private System.Windows.Forms.RadioButton CollisionRectangleButton;
-        private System.Windows.Forms.RadioButton AIRectangleButton;
-        private System.Windows.Forms.RadioButton CheckPointRectangleButton;
-        private System.Windows.Forms.RadioButton RespawnRectangleButton;
         private System.Windows.Forms.NumericUpDown ImageHeight;
         private System.Windows.Forms.NumericUpDown ImageWidth;
         private System.Windows.Forms.Label label6;
@@ -586,6 +590,11 @@
         private System.Windows.Forms.NumericUpDown ImagePixalHeight;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox m_Collision;
+        private System.Windows.Forms.CheckBox m_AI;
+        private System.Windows.Forms.CheckBox m_CheckPoint;
+        private System.Windows.Forms.CheckBox m_Spawn;
+        private System.Windows.Forms.CheckBox m_TriggerEvents;
     }
 }
 

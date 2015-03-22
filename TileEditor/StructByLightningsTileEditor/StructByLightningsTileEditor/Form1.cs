@@ -694,12 +694,21 @@ namespace StructByLightningsTileEditor
 
             #region This is a Check for the Right mous click and Radiobutton Collison
 
-            if (e.Button == MouseButtons.Right && CollisionRectangleButton.Checked == true)
+            if (e.Button == MouseButtons.Left && m_Collision.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
-                CollisonRect = new Rectangle(X, Y, 32, 32);
-                CollisionRectangles.Add(CollisonRect);
+
+                TileMap[X, Y].Collision = true;
+
+            }
+            else
+            {
+                int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
+                int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
+
+                TileMap[X, Y].Collision = false;
+
 
             }
 
@@ -707,41 +716,47 @@ namespace StructByLightningsTileEditor
 
 
             #region this is a Check for the Right mouse Click and Radio Button Respawn
-            if (e.Button == MouseButtons.Right && RespawnRectangleButton.Checked == true)
+            if (e.Button == MouseButtons.Right && m_Spawn.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                CollisonRect = new Rectangle(X, Y, 32, 32);
-                RespawnRectangles.Add(CollisonRect);
+                TileMap[X, Y].SpawnX = X;
+                TileMap[X, Y].SpawnY = Y;
+
+            }
+            else
+            {
+                return;
 
             }
             #endregion
 
 
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
-            if (e.Button == MouseButtons.Right && CheckPointRectangleButton.Checked == true)
+            if (e.Button == MouseButtons.Right && m_CheckPoint.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                CollisonRect = new Rectangle(X, Y, 32, 32);
-                CheckPointRectangle.Add(CollisonRect);
+                TileMap[X, Y].CheckPointX = X;
+                TileMap[X, Y].CheckPointX = Y;
 
             }
+            else
+                return;
             #endregion
 
 
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
 
-            if (e.Button == MouseButtons.Right && AIRectangleButton.Checked == true)
+            if (e.Button == MouseButtons.Right && m_AI.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                CollisonRect = new Rectangle(X, Y, 32, 32);
 
-                AIRectangles.Add(CollisonRect);
+               
 
             }
             #endregion
@@ -834,9 +849,11 @@ namespace StructByLightningsTileEditor
                         y = (TileMap[X, Y].PositionY * sz.Width) + TileMap[X, Y].PositionX;
 
                         XAttribute m_ID = new XAttribute("TileID", y);
+                        XAttribute m_Collision = new XAttribute("TileCollision", TileMap[X, Y].Collision);
                         Tile_Element.Add(m_PositionX);
                         Tile_Element.Add(m_PositionY);
                         Tile_Element.Add(m_ID);
+                        Tile_Element.Add(m_Collision);
                         m_Element.Add(Tile_Element);
 
 
@@ -898,13 +915,13 @@ namespace StructByLightningsTileEditor
                     TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
                     m_Attribute = m_XElement.Attribute("PositionX");
                     m_Tiles.PositionX = int.Parse(m_Attribute.Value);
-                   // m_Tiles.PositionX *= m_PixalSize.Height;
+                    // m_Tiles.PositionX *= m_PixalSize.Height;
                     m_Attribute = m_XElement.Attribute("PositionY");
                     m_Tiles.PositionY = int.Parse(m_Attribute.Value);
                     //m_Tiles.PositionY *= m_PixalSize.Width;
                     m_Attribute = m_XElement.Attribute("TileID");
                     m_Tiles.m_ID = int.Parse(m_Attribute.Value);
-                    m_Tiles.m_ID = (m_Tiles.m_ID * m_Tiles.PositionX) /  m_PixalSize.Width;
+                    m_Tiles.m_ID = (m_Tiles.m_ID * m_Tiles.PositionX) / m_PixalSize.Width;
                     TileMap[X, Y] = m_Tiles;
                     Y++;
                     if (Y >= m_Picture.Height)

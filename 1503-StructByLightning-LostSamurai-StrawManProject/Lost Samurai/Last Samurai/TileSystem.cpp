@@ -45,7 +45,7 @@ void TileSystem::LoadTileXml()
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../TestLevel.xml") == false)
+	if (Doc.LoadFile("../TestXml.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
