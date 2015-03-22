@@ -15,15 +15,14 @@ void MainMenuState::Enter()
 	m_Options = SGD::GraphicsManager::GetInstance()->LoadTexture(L"../resource/graphics/Options.png");
 	m_Exit = SGD::GraphicsManager::GetInstance()->LoadTexture(L"../resource/graphics/Exit.png");
 	m_GameMusic = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/Game_Music.xwm");
-	Game::GetInstance()->SetPlaySound(false);
-	if (Game::GetInstance()->GetPlaySound())
-	{
-		SGD::AudioManager::GetInstance()->PlayAudio(m_GameMusic, true);
-	}
+	int MusicVol = Game::GetInstance()->GetMusicVolume();
+	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
+	SGD::AudioManager::GetInstance()->PlayAudio(m_GameMusic);
 }
 
 void MainMenuState::Exit()
 {
+	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_MainMenu);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_Instructions);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_Credits);

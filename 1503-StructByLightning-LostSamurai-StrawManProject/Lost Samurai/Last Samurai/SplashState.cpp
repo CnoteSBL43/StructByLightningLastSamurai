@@ -17,8 +17,8 @@ void SplashState::Exit()
 
 bool SplashState::Update(float _ElapsedTime)
 {
-	time += _ElapsedTime/8;
-	if(SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || time/2>=1000.0f)
+	time += _ElapsedTime;
+	if(SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || time>=8.0f)
 	{
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;
@@ -31,5 +31,5 @@ bool SplashState::Update(float _ElapsedTime)
 void SplashState::Render(float _ElapsedTime)
 {
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_TeamLogo, SGD::Point(160.0f, 150.0f));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Press Esc to Skip", SGD::Point(Game::GetInstance()->GetScreenWidth() / 2-70 , 375), SGD::Color(0, 2, 150));
+	SGD::GraphicsManager::GetInstance()->DrawString(L"Press Esc to Skip", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 70, 375), SGD::Color(0, 2, 150));
 }

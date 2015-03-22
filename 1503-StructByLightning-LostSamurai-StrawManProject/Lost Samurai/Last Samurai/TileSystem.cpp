@@ -10,13 +10,13 @@ TileSystem::TileSystem()
 TileSystem::~TileSystem()
 {
 #pragma region
-	for (unsigned int i = 0; i < m_Grid->m_GridWidth; i++)
+	for ( int i = 0; i < m_Grid->m_GridWidth; i++)
 	{
 
 		std::vector<Tile*>& Vec = Map[i];
 		int m_catch = Vec.size();
 
-		for (unsigned int j = 0; j < m_Grid->m_GridHeight; j++)
+		for ( int j = 0; j < m_Grid->m_GridHeight; j++)
 		{
 
 			delete Map[i][j];
@@ -41,11 +41,10 @@ void TileSystem::LoadTileXml()
 	m_Grid = new Grid();
 	//Map = new Tile;
 	const char* Test;
-	int Test1;
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../TestXml.xml") == false)
+	if (Doc.LoadFile("../Kumar.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
@@ -56,7 +55,7 @@ void TileSystem::LoadTileXml()
 	// an Array of vectors 
 	Map = new std::vector<Tile*>[m_Grid->m_GridWidth];
 
-	for (unsigned int i = 0; i < m_Grid->m_GridWidth; i++)
+	for ( int i = 0; i < m_Grid->m_GridWidth; i++)
 	{
 
 		Map[i].resize(m_Grid->m_GridHeight);
@@ -78,8 +77,8 @@ void TileSystem::LoadTileXml()
 		m_Tile->m_TileHeight = height;
 		m_Tile->m_TileWidth = width;
 
-		m_Tile->m_Image.height = IHeight;
-		m_Tile->m_Image.width = IWidth;
+		m_Tile->m_Image.height = (float)IHeight;
+		m_Tile->m_Image.width = (float)IWidth;
 
 		tile->Attribute("PositionX", &m_Tile->PositionX);
 		tile->Attribute("PositionY", &m_Tile->PositionY);
@@ -96,7 +95,7 @@ void TileSystem::LoadTileXml()
 
 	std::string Attach;
 	Attach = "../";
-	for (int i = 0; i < Attach.size(); i++)
+	for (unsigned int i = 0; i < Attach.size(); i++)
 	{
 		if (i != 2)
 		{

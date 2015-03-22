@@ -1,9 +1,9 @@
 #include "Father.h"
-
-
+#include "Game.h"
+#include "Son.h"
+#include <sstream>
 Father::Father()
 {
-	SetPosition(SGD::Point{100.0f,200.0f});
 	CreateFrames();
 }
 
@@ -21,44 +21,111 @@ void Father::CreateFrames()
 	frames.push_back({ { 163, 22, 215, 95 }, { 22, 90 } });
 }
 
-void Father::BackPack()
-{
 
-}
 
 void	 Father::Update(float elapsedTime)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
+	if (GetCurrCharacter() )
 	{
-		if (frameswitch >= 0.07f)
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
 		{
-			direction++;
-			frameswitch = 0.0f;
-		}
-		m_vtVelocity.x =64.0f;
-		Actor::Update(elapsedTime);
+			m_FacingtoRight = true;
+			SetVelocity(SGD::Vector(+64.0f, 0.0f));
 
+			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
+			if (frameswitch >= 0.07f)
+			{
+				direction++;
+				frameswitch = 0.0f;
+			}
+
+		}
+
+		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow))
+		{
+			m_FacingtoRight = false;
+			SetVelocity(SGD::Vector(-64.0f, 0.0f));
+			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
+
+			if (frameswitch >= 0.07f)
+			{
+				direction++;
+				frameswitch = 0.0f;
+			}
+
+		}
+		else
+			SetVelocity(SGD::Vector(0.0f, 0.0f));
+
+		//Jump
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::UpArrow))
+		{
+			if (GetOnGround())
+			{
+				SetOnGround(false);
+				m_ptPosition.y -= 2.0f;
+
+			}
+		}
+		if (!GetOnGround())
+		{
+			m_ptPosition.y -= jumpVelocity*elapsedTime;
+			jumpVelocity -= gravity;
+		}
+		if (m_ptPosition.y >= 480)
+		{
+			m_ptPosition.y = 480;
+			jumpVelocity = 256.0f;
+			SetOnGround(true);
+		}
+		if (direction > 4)
+			direction = 0;
+		frameswitch += elapsedTime;
+		Actor::Update(elapsedTime);
 	}
-	if (direction > 4)
-		direction = 0;
-	frameswitch += elapsedTime;
 
 
 }
 void	 Father::Render(void)
 {
 	SGD::Rectangle frame = frames[direction].rFrame;
+	SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
 
-	SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
-	{ m_ptPosition.x, m_ptPosition.y },
-	frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
+	if (m_FacingtoRight)
+	{
+		SGD::Point p = m_ptPosition;
+	
+		p.x -= Game::GetInstance()->GetCameraPosition().x;
+		p.y -= Game::GetInstance()->GetCameraPosition().y;
+
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,p,
+		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
+	}
+	else
+	{
+		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
+		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x-64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
+		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -GetSize().width, GetSize().height });
+	}
+	/*std::wostringstream s1,s2;
+	s1 << GetRect().top;
+	s2 << GetRect().bottom;
+	SGD::GraphicsManager::GetInstance()->DrawString(s1.str().c_str(), SGD::Point{ 20, 20 });
+	SGD::GraphicsManager::GetInstance()->DrawString(s2.str().c_str(), SGD::Point{ 50, 20 });
+*/
+
 }
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return SGD::Rectangle{ 10.0f, 0.0f, 0.0f, 0.0f };
+	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x-54.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y+6.0f }, SGD::Size{ 45, 99 });
 }
-void	 Father::HandleCollision(const IEntity* pOther)
+void Father::HandleCollision( IEntity* pOther)
 {
-
+	if (pOther->GetType() == ENT_SON)
+	{
+		dynamic_cast<Father*>(this)->SetCurrCharacter(true);
+		dynamic_cast<Father*>(this)->SetBackPack(true);
+		dynamic_cast<Son*>(pOther)->SetBackPack(true);
+	}
 }

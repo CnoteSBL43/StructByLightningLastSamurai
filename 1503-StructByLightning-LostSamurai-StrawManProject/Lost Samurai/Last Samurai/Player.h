@@ -20,15 +20,24 @@ public:
 
 	int		GetType(void)	const			override	{ return ENT_BASE; }
 	SGD::Rectangle GetRect(void)	const			=0;
-	void	HandleCollision(const IEntity* pOther)	=0;
+	void	HandleCollision( IEntity* pOther)	=0;
+	bool GetBackPack(){ return m_BackPack; }
+	void SetBackPack(bool _back){ m_BackPack = _back; }
+
+
+
+	bool GetOnGround(){ return m_OnGround; }
+	void SetOnGround(bool _onground){ m_OnGround = _onground; }
+
+
+
 
 private:
 	int m_Stamina;
 	int m_JumpHeight;
 	bool m_Hanging;
-	bool m_BackPack;
-	bool m_OnGround;
-	int m_CurrentCharacter;
+	bool m_BackPack = false;
+	bool m_OnGround=true;
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
 
 	

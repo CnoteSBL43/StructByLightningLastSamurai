@@ -3,10 +3,9 @@
 #include"../SGD Wrappers/SGD_Handle.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
 #include <vector>
+#include "../SGD Wrappers/SGD_Declarations.h"
 class Actor;
 class EntityManager;
-
-#include "../SGD Wrappers/SGD_Geometry.h"
 class TileSystem;
 class GameplayState :
 	public IGameState
@@ -20,21 +19,22 @@ private:
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 	// Game Entities
-	EntityManager*	m_pEntities = nullptr;
-	Actor* m_player = nullptr;
+	EntityManager* m_pEntities = nullptr;
+	Actor* father = nullptr;
+	Actor* son = nullptr;
 	//************************************
 	TileSystem* Load;
-SGD::Point m_start = { 0, 0 };
+	SGD::Point m_start = { 0, 0 };
+	
 
+	static void MessageProc(const SGD::Message* pMsg);
 public:
 	static GameplayState* GetInstance();
-	void	Enter(void);
-	void	Exit(void);
+	void Enter(void);
+	void Exit(void);
 
-	bool	Update(float _ElapsedTime);
-	void	Render(float _ElapsedTime);
+	bool Update(float _ElapsedTime);
+	void Render(float _ElapsedTime);
 	Actor*  CreateFather(void);
-
-
+	Actor* CreateSon(void);
 };
-
