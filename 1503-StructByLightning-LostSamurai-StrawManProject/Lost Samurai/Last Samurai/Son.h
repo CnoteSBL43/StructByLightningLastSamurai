@@ -33,7 +33,7 @@ private:
 	void CreateFrames();
 
 	int direction = 0;
-	float frameswitch = 0.0f;
+	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter=false;
 

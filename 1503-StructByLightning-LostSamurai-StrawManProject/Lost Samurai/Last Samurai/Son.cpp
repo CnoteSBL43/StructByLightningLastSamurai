@@ -54,9 +54,27 @@ void	 Son::Update(float elapsedTime)
 		}
 		else
 			SetVelocity(SGD::Vector(0.0f, 0.0f));
-	/*	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::J))
-			Player::SetCurrCharacter(0);*/
+		//Jump
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::UpArrow))
+		{
+			if (GetOnGround())
+			{
+				SetOnGround(false);
+				m_ptPosition.y -= 2.0f;
 
+			}
+		}
+		if (!GetOnGround())
+		{
+			m_ptPosition.y -= jumpVelocity*elapsedTime;
+			jumpVelocity -= gravity;
+		}
+		if (m_ptPosition.y >= 540)
+		{
+			m_ptPosition.y = 540;
+			jumpVelocity = 256.0f;
+			SetOnGround(true);
+		}
 		if (direction > 4)
 			direction = 0;
 		frameswitch += elapsedTime;

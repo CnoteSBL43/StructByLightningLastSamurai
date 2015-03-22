@@ -1,0 +1,104 @@
+<?xml version = "1.0" encoding ="utf-8"?>
+<Map Image ="mR6mi.png" MapHeight ="10" MapWidth =" 10" TileHeight ="64" TileWidth ="64">
+    <Tile PositionX ="0" PositionY ="0" TileID ="60">                            </Tile>
+    <Tile PositionX ="0" PositionY ="1" TileID ="60">                          </Tile>
+    <Tile PositionX ="0" PositionY ="2" TileID ="60">                        </Tile>
+    <Tile PositionX ="0" PositionY ="3" TileID ="60">                      </Tile>
+    <Tile PositionX ="0" PositionY ="4" TileID ="60">                       </Tile>
+    <Tile PositionX ="0" PositionY ="5" TileID ="60">                            </Tile>
+    <Tile PositionX ="0" PositionY ="6" TileID ="60">                          </Tile>
+    <Tile PositionX ="0" PositionY ="7" TileID ="60">                        </Tile>
+    <Tile PositionX ="0" PositionY ="8" TileID ="60">                      </Tile>
+    <Tile PositionX ="0" PositionY ="9" TileID ="60">                        </Tile>
+    <Tile PositionX ="1" PositionY ="0" TileID ="60">                  </Tile>
+    <Tile PositionX ="1" PositionY ="1" TileID ="40">                </Tile>
+    <Tile PositionX ="1" PositionY ="2" TileID ="40">              </Tile>
+    <Tile PositionX ="1" PositionY ="3" TileID ="9">            </Tile>
+    <Tile PositionX ="1" PositionY ="4" TileID ="40">                  </Tile>
+    <Tile PositionX ="1" PositionY ="5" TileID ="40">                </Tile>
+    <Tile PositionX ="1" PositionY ="6" TileID ="40">              </Tile>
+    <Tile PositionX ="1" PositionY ="7" TileID ="40">            </Tile>
+    <Tile PositionX ="1" PositionY ="8" TileID ="40">              </Tile>
+    <Tile PositionX ="1" PositionY ="9" TileID ="40">            </Tile>
+    <Tile PositionX ="2" PositionY ="0" TileID ="60">          </Tile>
+    <Tile PositionX ="2" PositionY ="1" TileID ="40">        </Tile>
+    <Tile PositionX ="2" PositionY ="2" TileID ="40">      </Tile>
+    <Tile PositionX ="2" PositionY ="3" TileID ="40">          </Tile>
+    <Tile PositionX ="2" PositionY ="4" TileID ="40">        </Tile>
+    <Tile PositionX ="2" PositionY ="5" TileID ="40">      </Tile>
+    <Tile PositionX ="2" PositionY ="6" TileID ="40">          </Tile>
+    <Tile PositionX ="2" PositionY ="7" TileID ="40">        </Tile>
+    <Tile PositionX ="2" PositionY ="8" TileID ="40">      </Tile>
+    <Tile PositionX ="2" PositionY ="9" TileID ="40">      </Tile>
+    <Tile PositionX ="3" PositionY ="0" TileID ="60">    </Tile>
+    <Tile PositionX ="3" PositionY ="1" TileID ="30">  </Tile>
+    <Tile PositionX ="3" PositionY ="2" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="3" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="4" TileID ="40">    </Tile>
+    <Tile PositionX ="3" PositionY ="5" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="6" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="7" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="8" TileID ="40">  </Tile>
+    <Tile PositionX ="3" PositionY ="9" TileID ="40">  </Tile>
+    <Tile PositionX ="4" PositionY ="0" TileID ="60">                            </Tile>
+    <Tile PositionX ="4" PositionY ="1" TileID ="41">                          </Tile>
+    <Tile PositionX ="4" PositionY ="2" TileID ="41">                        </Tile>
+    <Tile PositionX ="4" PositionY ="3" TileID ="40">                      </Tile>
+    <Tile PositionX ="4" PositionY ="4" TileID ="40">                    </Tile>
+    <Tile PositionX ="4" PositionY ="5" TileID ="40">                            </Tile>
+    <Tile PositionX ="4" PositionY ="6" TileID ="41">                          </Tile>
+    <Tile PositionX ="4" PositionY ="7" TileID ="41">                        </Tile>
+    <Tile PositionX ="4" PositionY ="8" TileID ="40">                      </Tile>
+    <Tile PositionX ="4" PositionY ="9" TileID ="40">                    </Tile>
+    <Tile PositionX ="5" PositionY ="0" TileID ="60">                  </Tile>
+    <Tile PositionX ="5" PositionY ="1" TileID ="40">                </Tile>
+    <Tile PositionX ="5" PositionY ="2" TileID ="40">              </Tile>
+    <Tile PositionX ="5" PositionY ="3" TileID ="40">            </Tile>
+    <Tile PositionX ="5" PositionY ="4" TileID ="40">                  </Tile>
+    <Tile PositionX ="5" PositionY ="5" TileID ="40">                </Tile>
+    <Tile PositionX ="5" PositionY ="6" TileID ="40">              </Tile>
+    <Tile PositionX ="5" PositionY ="7" TileID ="40">            </Tile>
+    <Tile PositionX ="5" PositionY ="8" TileID ="40">              </Tile>
+    <Tile PositionX ="5" PositionY ="9" TileID ="40">            </Tile>
+    <Tile PositionX ="6" PositionY ="0" TileID ="60">          </Tile>
+    <Tile PositionX ="6" PositionY ="1" TileID ="40">        </Tile>
+    <Tile PositionX ="6" PositionY ="2" TileID ="40">      </Tile>
+    <Tile PositionX ="6" PositionY ="3" TileID ="40">    </Tile>
+    <Tile PositionX ="6" PositionY ="4" TileID ="40">          </Tile>
+    <Tile PositionX ="6" PositionY ="5" TileID ="40">        </Tile>
+    <Tile PositionX ="6" PositionY ="6" TileID ="40">      </Tile>
+    <Tile PositionX ="6" PositionY ="7" TileID ="40">    </Tile>
+    <Tile PositionX ="6" PositionY ="8" TileID ="40">      </Tile>
+    <Tile PositionX ="6" PositionY ="9" TileID ="40">    </Tile>
+    <Tile PositionX ="7" PositionY ="0" TileID ="60">  </Tile> 
+    <Tile PositionX ="7" PositionY ="1" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="2" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="3" TileID ="40">  </Tile>
+    <Tile PositionX ="7" PositionY ="4" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="5" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="6" TileID ="40">  </Tile>
+    <Tile PositionX ="7" PositionY ="7" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="8" TileID ="40"></Tile>
+    <Tile PositionX ="7" PositionY ="9" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="0" TileID ="60">  </Tile>
+    <Tile PositionX ="8" PositionY ="1" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="2" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="3" TileID ="40">  </Tile>
+    <Tile PositionX ="8" PositionY ="4" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="5" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="6" TileID ="40">  </Tile>
+    <Tile PositionX ="8" PositionY ="7" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="8" TileID ="40"></Tile>
+    <Tile PositionX ="8" PositionY ="9" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="0" TileID ="60">  </Tile>
+    <Tile PositionX ="9" PositionY ="1" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="2" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="3" TileID ="40">  </Tile>
+    <Tile PositionX ="9" PositionY ="4" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="5" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="6" TileID ="40">  </Tile>
+    <Tile PositionX ="9" PositionY ="7" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="8" TileID ="40"></Tile>
+    <Tile PositionX ="9" PositionY ="9" TileID ="40"></Tile>
+  
+</Map>

@@ -9,6 +9,9 @@
 #include"MainMenuState.h"
 #include "Message.h"
 #include "EntityManager.h"
+#include"../Last Samurai/TileSystem.h"
+#include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_Geometry.h"
 GameplayState* GameplayState::GetInstance()
 {
 	static GameplayState m_Instance;
@@ -38,7 +41,6 @@ Actor* GameplayState::CreateSon(void)
 }
 void GameplayState::Enter()
 {
-	m_BgImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bg.jpg");
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
 	m_pEntities = new EntityManager;
 	father = CreateFather();
@@ -46,12 +48,13 @@ void GameplayState::Enter()
 	son = CreateSon();
 	m_pEntities->AddEntity(son, 1);
 //	Game::GetInstance()->SetCameraPosition({ father->GetPosition().x, father->GetPosition().y });
+	Load = new TileSystem();
+	Load->LoadTileXml();
 }
 
 
 void GameplayState::Exit()
 {
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BgImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherImage);
 	father->Release();
 	father = nullptr;
@@ -62,6 +65,7 @@ void GameplayState::Exit()
 		m_pEntities->RemoveAll();
 		delete m_pEntities;
 		m_pEntities = nullptr;
+		delete Load;
 	}
 }
 
@@ -81,7 +85,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		{
 			if (dynamic_cast<Son*>(son)->GetBackPack())
 			{
-				dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x, dynamic_cast<Father*>(father)->GetPosition().y +60});//+60 because son's y position is father's y+60 when creating5 
+				dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x-16.0f, dynamic_cast<Father*>(father)->GetPosition().y-16.0f });
 				dynamic_cast<Son*>(son)->SetBackPack(false);
 				dynamic_cast<Father*>(father)->SetBackPack(false);
 			}
@@ -92,6 +96,11 @@ bool GameplayState::Update(float _ElapsedTime)
 		{
 			dynamic_cast<Father*>(father)->SetCurrCharacter(true);
 			dynamic_cast<Son*>(son)->SetCurrCharacter(false);
+			if (dynamic_cast<Son*>(son)->GetPosition().y!=540)
+			{
+				dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x-16.0f, 540 });//16.0 because while backack i had to reset the x
+			}
+			
 		}
 	}
 	
@@ -99,7 +108,9 @@ bool GameplayState::Update(float _ElapsedTime)
 	{
 		m_pEntities->CheckCollisions(0, 1);
 	}
+
 	m_pEntities->UpdateAll(_ElapsedTime);
+
 	if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 	{
 		Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
@@ -110,6 +121,8 @@ bool GameplayState::Update(float _ElapsedTime)
 		Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
 	}
+
+	//reset son after backpacing is activated
 	if (dynamic_cast<Father*>(father)->GetBackPack())
 	{
 		dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
@@ -122,8 +135,32 @@ bool GameplayState::Update(float _ElapsedTime)
 
 void GameplayState::Render(float _ElapsedTime)
 {
-	SGD::GraphicsManager::GetInstance()->DrawTexture(m_BgImage,
-		SGD::Point{ 0 - Game::GetInstance()->GetCameraPosition().x, 0 - Game::GetInstance()->GetCameraPosition().y });
+
+
+	for (int X = 0; X < Load->m_Grid->m_GridWidth; X++)
+	{
+		for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)
+		{
+			SGD::Rectangle DestinationRectangle;
+			DestinationRectangle.top = X * Load->m_Tile->m_TileWidth;
+			DestinationRectangle.left = Y * Load->m_Tile->m_TileHeight;
+			DestinationRectangle.right = DestinationRectangle.left + Load->m_Grid->m_GridWidth;
+			DestinationRectangle.bottom = DestinationRectangle.top + Load->m_Grid->m_GridHeight;
+			//SGD::GraphicsManager::GetInstance()->DrawRectangle(DestinationRectangle, SGD::Color{ 255, 0, 255, 255 }, SGD::Color{ 255, 255, 0, 0 }, 5);
+
+			SGD::Rectangle SourceRectangle;
+			SourceRectangle.left = Load->Map[X][Y]->m_TileID % (int)(Load->Map[X][Y]->m_Image.width / Load->Map[X][Y]->m_TileWidth) * Load->Map[X][Y]->m_TileWidth;
+			SourceRectangle.top = Load->Map[X][Y]->m_TileID / (int)(Load->Map[X][Y]->m_Image.height / Load->Map[X][Y]->m_TileHeight) * Load->Map[X][Y]->m_TileHeight;
+
+
+			SourceRectangle.right = SourceRectangle.left + Load->Map[X][Y]->m_TileHeight;
+			SourceRectangle.bottom = SourceRectangle.top + Load->Map[X][Y]->m_TileWidth;
+			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight  - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+			//SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ 0, 0}, SGD::Rectangle(Load->Map[X][Y]->m_TileID % (512 / Load->m_Tile->m_TileWidth), Load->Map[X][Y]->m_TileID % (512 / Load->m_Tile->m_TileWidth), 32, 32));
+
+
+		}
+	}
 	m_pEntities->RenderAll();
 }
 void GameplayState::MessageProc(const SGD::Message* pMsg)

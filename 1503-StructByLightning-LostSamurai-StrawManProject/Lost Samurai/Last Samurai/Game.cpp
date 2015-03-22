@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../Last Samurai/TileSystem.h"
 #include "IGameState.h"
 #include <ctime>
 #include <cstdlib>
@@ -6,6 +7,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include "../SGD Wrappers/SGD_AudioManager.h"
+#include "GameplayState.h"
 Game* Game::m_Instance = nullptr;
 
 Game* Game::GetInstance()
@@ -99,6 +101,8 @@ int Game::Update()
 	float ElapsedTime = (CurrentTime - m_GameTime) / 1000.0f;
 	
 	m_GameTime = CurrentTime;
+
+
 	if (m_CurrentState->Update(ElapsedTime)== false)
 	{
 		return 1;

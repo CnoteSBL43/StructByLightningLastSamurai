@@ -26,8 +26,6 @@ public:
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 
 
-
-
 private:
 	struct Frame
 	{
@@ -38,9 +36,8 @@ private:
 	void CreateFrames();
 
 	int direction = 0;
-	float frameswitch = 0.0f;
+	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the father(direction)
-	bool isCurrentCharacter = true;
-	
+	bool isCurrentCharacter = true; //to check if he is the current character. Starts as the father always 	
 };
 

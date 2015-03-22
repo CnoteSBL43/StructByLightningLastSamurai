@@ -24,16 +24,20 @@ public:
 	bool GetBackPack(){ return m_BackPack; }
 	void SetBackPack(bool _back){ m_BackPack = _back; }
 
-	int GetCurrCharacter(){ return m_CurrentCharacter; }
-	void SetCurrCharacter(int _CurrentCharacter){ m_CurrentCharacter = _CurrentCharacter; }
+
+
+	bool GetOnGround(){ return m_OnGround; }
+	void SetOnGround(bool _onground){ m_OnGround = _onground; }
+
+
+
 
 private:
 	int m_Stamina;
 	int m_JumpHeight;
 	bool m_Hanging;
 	bool m_BackPack = false;
-	bool m_OnGround;
-	int m_CurrentCharacter=1;
+	bool m_OnGround=true;
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
 
 	

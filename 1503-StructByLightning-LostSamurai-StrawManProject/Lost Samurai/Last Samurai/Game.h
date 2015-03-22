@@ -7,8 +7,9 @@
 #include "../SGD Wrappers/SGD_Utilities.h"
 #include "SplashState.h"
 
-class IGameState;
 
+class IGameState;
+class TileSystem;
 class Game
 {
 private:
@@ -51,8 +52,8 @@ public:
 	int Update();
 	void Terminate();
 
-	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600 };
-	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 1024};
+	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600};
+	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 800};
 	SGD::Point		m_CameraPosition;
 
 	//State Mutator

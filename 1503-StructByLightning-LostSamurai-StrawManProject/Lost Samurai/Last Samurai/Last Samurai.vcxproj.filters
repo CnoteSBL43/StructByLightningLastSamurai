@@ -43,7 +43,7 @@
       <UniqueIdentifier>{ef0e569d-2b9f-4d32-b109-211e49ff733e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\TinyXML">
-      <UniqueIdentifier>{274f3336-5d24-4bce-add4-e0d110c0b62a}</UniqueIdentifier>
+      <UniqueIdentifier>{73a1b841-c23d-420e-8625-12f69d930b31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

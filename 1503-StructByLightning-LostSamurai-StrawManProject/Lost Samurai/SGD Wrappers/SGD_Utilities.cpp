@@ -13,7 +13,7 @@
 \***********************************************************************/
 
 #include "SGD_Utilities.h"
-		
+
 
 // Uses MessageBox & OutputDebugString
 #define WIN32_LEAN_AND_MEAN
@@ -21,31 +21,31 @@
 
 
 namespace SGD
-{	
+{
 	//*****************************************************************//
 	// ALERT
-	void Alert( const char* message )
+	void Alert(const char* message)
 	{
 		// Print message to Output window
-		SGD::Print( message );
-		SGD::Print( "\n" );
-		
+		SGD::Print(message);
+		SGD::Print("\n");
+
 		// Display a message box (using the active window & its title)
-		char title[ 128 ];
-		::GetWindowTextA( ::GetActiveWindow(), title, 128 ); 
-		::MessageBoxA( ::GetActiveWindow(), message, title, MB_OK | MB_ICONEXCLAMATION );
+		char title[128];
+		::GetWindowTextA(::GetActiveWindow(), title, 128);
+		::MessageBoxA(::GetActiveWindow(), message, title, MB_OK | MB_ICONEXCLAMATION);
 	}
 
-	void Alert( const wchar_t* message )
+	void Alert(const wchar_t* message)
 	{
 		// Print message to Output window
-		SGD::Print( message );
-		SGD::Print( "\n" );
+		SGD::Print(message);
+		SGD::Print("\n");
 
 		// Display a message box (using the active window & its title)
-		wchar_t title[ 128 ];
-		::GetWindowTextW( ::GetActiveWindow(), title, 128 ); 
-		::MessageBoxW( ::GetActiveWindow(), message, title, MB_OK | MB_ICONEXCLAMATION );
+		wchar_t title[128];
+		::GetWindowTextW(::GetActiveWindow(), title, 128);
+		::MessageBoxW(::GetActiveWindow(), message, title, MB_OK | MB_ICONEXCLAMATION);
 	}
 	//*****************************************************************//
 
@@ -53,47 +53,47 @@ namespace SGD
 
 	//*****************************************************************//
 	// ASSERT
-	void Assert( bool expression, const char* message )
+	void Assert(bool expression, const char* message)
 	{
 		// Did the expression fail?
-		if( expression == false )
+		if (expression == false)
 		{
 			// Display a message box
-			SGD::Alert( message );
+			SGD::Alert(message);
 
 			// Trigger a breakpoint
 			__debugbreak();				// USE THE CALLSTACK TO DEBUG!
 		}
 	}
 
-	void Assert( bool expression, const wchar_t* message )
+	void Assert(bool expression, const wchar_t* message)
 	{
 		// Did the expression fail?
-		if( expression == false )
+		if (expression == false)
 		{
 			// Display a message box
-			SGD::Alert( message );
+			SGD::Alert(message);
 
 			// Trigger a breakpoint
 			__debugbreak();				// USE THE CALLSTACK TO DEBUG!
 		}
 	}
 	//*****************************************************************//
-	
+
 
 
 	//*****************************************************************//
 	// PRINT
-	void Print( const char* message )
+	void Print(const char* message)
 	{
 		// Print message to Output window
-		::OutputDebugStringA( message );
+		::OutputDebugStringA(message);
 	}
 
-	void Print( const wchar_t* message )
+	void Print(const wchar_t* message)
 	{
 		// Print message to Output window
-		::OutputDebugStringW( message );
+		::OutputDebugStringW(message);
 	}
 	//*****************************************************************//
 

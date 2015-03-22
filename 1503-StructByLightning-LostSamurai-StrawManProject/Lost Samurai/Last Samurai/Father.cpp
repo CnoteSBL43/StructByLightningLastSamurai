@@ -57,9 +57,27 @@ void	 Father::Update(float elapsedTime)
 		else
 			SetVelocity(SGD::Vector(0.0f, 0.0f));
 
-		/*if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::J))
-			Player::SetCurrCharacter(1);*/
+		//Jump
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::UpArrow))
+		{
+			if (GetOnGround())
+			{
+				SetOnGround(false);
+				m_ptPosition.y -= 2.0f;
 
+			}
+		}
+		if (!GetOnGround())
+		{
+			m_ptPosition.y -= jumpVelocity*elapsedTime;
+			jumpVelocity -= gravity;
+		}
+		if (m_ptPosition.y >= 480)
+		{
+			m_ptPosition.y = 480;
+			jumpVelocity = 256.0f;
+			SetOnGround(true);
+		}
 		if (direction > 4)
 			direction = 0;
 		frameswitch += elapsedTime;
@@ -78,8 +96,7 @@ void	 Father::Render(void)
 		SGD::Point p = m_ptPosition;
 	
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
-		p.y -=Game::GetInstance()->GetCameraPosition().y;
-
+		p.y -= Game::GetInstance()->GetCameraPosition().y;
 
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,p,
 		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
