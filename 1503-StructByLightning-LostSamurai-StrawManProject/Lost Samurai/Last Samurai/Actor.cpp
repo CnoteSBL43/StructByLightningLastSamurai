@@ -52,7 +52,7 @@
 //*********************************************************************//
 // HandleCollision
 //	- respond to collision between entities
-/*virtual*/ void Actor::HandleCollision(const IEntity* pOther)	/*override*/
+/*virtual*/ void Actor::HandleCollision( IEntity* pOther)	/*override*/
 {
 	/* DO NOTHING */
 	(void)pOther;		// unused parameter

@@ -21,7 +21,7 @@ public:
 	
 	virtual int		GetType			( void )	const			= 0;
 	virtual SGD::Rectangle GetRect	( void )	const			= 0;
-	virtual void	HandleCollision	( const IEntity* pOther )	= 0;
+	virtual void	HandleCollision	(  IEntity* pOther )	= 0;
 
 	//*****************************************************************//
 	// Reference Counting:

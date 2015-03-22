@@ -23,7 +23,7 @@ namespace Particle_Editor
             particleEditor.Initialize();
             particleEditor.Show();
 
-            while(particleEditor.running)
+            while(particleEditor.Running)
             {
                 particleEditor.Update();
                 particleEditor.Render();

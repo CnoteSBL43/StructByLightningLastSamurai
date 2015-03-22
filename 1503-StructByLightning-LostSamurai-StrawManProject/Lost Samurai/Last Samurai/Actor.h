@@ -36,7 +36,7 @@ public:
 
 	virtual int		GetType			( void )	const			override	{	return ENT_BASE;	}
 	virtual SGD::Rectangle GetRect	( void )	const			override;
-	virtual void	HandleCollision	( const IEntity* pOther )	override;
+	virtual void	HandleCollision	(  IEntity* pOther )	override;
 	
 
 	//*****************************************************************//
