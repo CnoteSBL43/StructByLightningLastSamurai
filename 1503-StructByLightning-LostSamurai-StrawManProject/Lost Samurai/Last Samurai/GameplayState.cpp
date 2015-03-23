@@ -21,7 +21,7 @@ GameplayState* GameplayState::GetInstance()
 Actor* GameplayState::CreateFather(void)
 {
 		Player* father = new Father;
-		father->SetPosition(SGD::Point{ 100.0f, 480.0f });
+		father->SetPosition(SGD::Point{ 500.0f, 480.0f });
 		father->SetAlive(true);
 		father->SetImage(m_FatherImage);
 		father->SetSize(SGD::Size{ -1.5f,1.5f });
@@ -32,7 +32,7 @@ Actor* GameplayState::CreateFather(void)
 Actor* GameplayState::CreateSon(void)
 {
 	Player* son = new Son;
-	son->SetPosition(SGD::Point{ 700.0f, 540.0f });
+	son->SetPosition(SGD::Point{ 600.0f, 540.0f });
 	son->SetAlive(true);
 	son->SetImage(m_FatherImage);
 	son->SetSize(SGD::Size{ -0.75f, 0.75f });
@@ -71,7 +71,6 @@ void GameplayState::Exit()
 
 bool GameplayState::Update(float _ElapsedTime)
 {
-	
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
 	{
@@ -83,24 +82,13 @@ bool GameplayState::Update(float _ElapsedTime)
 	{
 		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 		{
-			if (dynamic_cast<Son*>(son)->GetBackPack())
-			{
-				dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x-16.0f, dynamic_cast<Father*>(father)->GetPosition().y-16.0f });
-				dynamic_cast<Son*>(son)->SetBackPack(false);
-				dynamic_cast<Father*>(father)->SetBackPack(false);
-			}
 			dynamic_cast<Father*>(father)->SetCurrCharacter(false);
 			dynamic_cast<Son*>(son)->SetCurrCharacter(true);
 		}
 		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
 		{
 			dynamic_cast<Father*>(father)->SetCurrCharacter(true);
-			dynamic_cast<Son*>(son)->SetCurrCharacter(false);
-			if (dynamic_cast<Son*>(son)->GetPosition().y!=540)
-			{
-				dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x-16.0f, 540 });//16.0 because while backack i had to reset the x
-			}
-			
+			dynamic_cast<Son*>(son)->SetCurrCharacter(false);		
 		}
 	}
 	
@@ -109,7 +97,6 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(0, 1);
 	}
 
-	m_pEntities->UpdateAll(_ElapsedTime);
 
 	if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 	{
@@ -121,22 +108,22 @@ bool GameplayState::Update(float _ElapsedTime)
 		Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
 	}
-
-	//reset son after backpacing is activated
-	if (dynamic_cast<Father*>(father)->GetBackPack())
+	
+	//replace son after backpacing is activated
+	if (dynamic_cast<Son*>(son)->GetBackPack())
 	{
 		dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
 		dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x - 16.0f, dynamic_cast<Father*>(father)->GetPosition().y - 16.0f });
 	}
-		
+
+	m_pEntities->UpdateAll(_ElapsedTime);
+
 	return true;
 }
 
 
 void GameplayState::Render(float _ElapsedTime)
 {
-
-
 	for (int X = 0; X < Load->m_Grid->m_GridWidth; X++)
 	{
 		for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)

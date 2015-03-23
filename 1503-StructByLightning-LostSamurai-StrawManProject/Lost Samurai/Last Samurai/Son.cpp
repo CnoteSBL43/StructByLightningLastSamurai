@@ -25,27 +25,26 @@ void Son::CreateFrames()
 
 void	 Son::Update(float elapsedTime)
 {
-	if (GetCurrCharacter())
+	if (GetCurrCharacter() )
 	{
 		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
 		{
 			m_FacingtoRight = true;
-			SetVelocity(SGD::Vector(+64.0f, 0.0f));
-
-			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
+			m_vtVelocity.x = 64.0f;
+			if (GetBackPack())
+				lrArrow = true;
 			if (frameswitch >= 0.07f)
 			{
 				direction++;
 				frameswitch = 0.0f;
 			}
 		}
-
 		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow))
 		{
 			m_FacingtoRight = false;
-			SetVelocity(SGD::Vector(-64.0f, 0.0f));
-			m_ptPosition.x += m_vtVelocity.x * elapsedTime;
-
+			m_vtVelocity.x = -64.0f;
+			if (GetBackPack())
+				lrArrow = true;
 			if (frameswitch >= 0.07f)
 			{
 				direction++;
@@ -53,35 +52,67 @@ void	 Son::Update(float elapsedTime)
 			}
 		}
 		else
-			SetVelocity(SGD::Vector(0.0f, 0.0f));
+			m_vtVelocity.x = 0.0f;
 		//Jump
-		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::UpArrow))
+		if (lrArrow)
 		{
+			SetBackPack(false);
+			m_vtVelocity.y += GetGravity();
+		}
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow))
+		{	
 			if (GetOnGround())
 			{
 				SetOnGround(false);
-				m_ptPosition.y -= 2.0f;
-
+			}
+			m_vtVelocity.y = -256.0f; 
+			if (GetBackPack())
+			{
+				SetBackPack(false);
+				upArrow = true;
 			}
 		}
-		if (!GetOnGround())
+		if (m_ptPosition.y<=440 && upArrow==false)//ground level -100
 		{
-			m_ptPosition.y -= jumpVelocity*elapsedTime;
-			jumpVelocity -= gravity;
+			m_vtVelocity.y += GetGravity();
 		}
-		if (m_ptPosition.y >= 540)
+		else if (m_ptPosition.y <= 364 && upArrow)//ground level -100
+		{
+			m_vtVelocity.y += GetGravity();
+		}
+		if (m_ptPosition.y>540 && !GetOnGround())
 		{
 			m_ptPosition.y = 540;
-			jumpVelocity = 256.0f;
+			m_vtVelocity.y = 0;
 			SetOnGround(true);
+			lrArrow = false;
+			upArrow = false;
+			if (GetBackPack())
+				SetBackPack(false);
 		}
 		if (direction > 4)
 			direction = 0;
 		frameswitch += elapsedTime;
+
 		Actor::Update(elapsedTime);
 	}
+	else if (!GetCurrCharacter() && !GetBackPack() && !GetOnGround())
+	{
+		m_vtVelocity.x = 0.0f;
+		Actor::Update(elapsedTime);
+		if (m_ptPosition.y <= 440)//ground level -100
+		{
+			m_vtVelocity.y += GetGravity();
 
-
+		}
+		if (m_ptPosition.y>540 && !GetOnGround())
+		{
+			m_ptPosition.y = 540;
+			m_vtVelocity.y = 0;
+			SetOnGround(true);
+		}
+	}
+	
 }
 void	 Son::Render(void)
 {
@@ -111,10 +142,11 @@ SGD::Rectangle  Son::GetRect(void)	const
 {
 	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x -26.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y + 4.0f }, SGD::Size{ 45/2, 99/2 });
 }
-void	 Son::HandleCollision( IEntity* pOther)
+void Son::HandleCollision( IEntity* pOther)
 {
 	if (pOther->GetType() == ENT_FATHER && dynamic_cast<Son*>(this)->GetBackPack())
 	{	
+		dynamic_cast<Son*>(this)->SetOnGround(false);
 		dynamic_cast<Son*>(this)->SetCurrCharacter(false);
 	}
 

@@ -23,6 +23,7 @@ public:
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 
 
+
 private:
 	struct Frame
 	{
@@ -33,10 +34,9 @@ private:
 	void CreateFrames();
 
 	int direction = 0;
-	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
+	float frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter=false;
-
-
+	bool lrArrow = false, upArrow = false; // using this so that when backpacked i move left or right the son falls down to ground //same reason for up
 };
 

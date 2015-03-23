@@ -29,12 +29,14 @@ public:
 	bool GetOnGround(){ return m_OnGround; }
 	void SetOnGround(bool _onground){ m_OnGround = _onground; }
 
-
+	float GetGravity(){ return gravity; }
+	float GetJumpVelocity(){ return jumpVelocity; }
+	void SetJumpVelocity(float _jumpVelocity){ jumpVelocity = _jumpVelocity; }
 
 
 private:
 	int m_Stamina;
-	int m_JumpHeight;
+	float jumpVelocity = 256.0f, gravity = 4.9f;
 	bool m_Hanging;
 	bool m_BackPack = false;
 	bool m_OnGround=true;
