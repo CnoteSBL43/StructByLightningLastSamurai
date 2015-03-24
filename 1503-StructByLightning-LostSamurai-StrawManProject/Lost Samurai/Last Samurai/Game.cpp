@@ -8,6 +8,8 @@
 #include <Windows.h>
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include "GameplayState.h"
+#include "AnimationSystem.h"
+
 Game* Game::m_Instance = nullptr;
 
 Game* Game::GetInstance()
@@ -53,6 +55,8 @@ bool Game::Initialize()
 
 	m_GameTime = GetTickCount();
 
+	//Read Character info
+	AnimationSystem::GetInstance()->Load();
 	//Reading the options file
 
 	TiXmlDocument m_Document;

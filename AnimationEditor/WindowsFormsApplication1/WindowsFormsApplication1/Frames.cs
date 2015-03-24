@@ -9,9 +9,10 @@ namespace WindowsFormsApplication1
     class Frames
     {
         public string name;
-        Rectangle framerect;
-        Rectangle collisionrect;
-        Rectangle anchorpt;
+        public Rectangle framerect;
+        public Rectangle collisionrect;
+        public Rectangle anchorpt;
+        public Rectangle particlept;
 
         public Rectangle Anchorpt
         {

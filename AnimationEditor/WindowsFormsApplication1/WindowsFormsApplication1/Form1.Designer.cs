@@ -40,31 +40,20 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolBox = new System.Windows.Forms.GroupBox();
+            this.ParticlePtButton = new System.Windows.Forms.Button();
             this.RemoveFrameButton = new System.Windows.Forms.Button();
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.AnchorButton = new System.Windows.Forms.Button();
             this.CollisionRectButton = new System.Windows.Forms.Button();
             this.FrameRectButton = new System.Windows.Forms.Button();
             this.AnchorBox = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.ParticlePtYUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ParticlePtXUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.AnchorXUpDown = new System.Windows.Forms.NumericUpDown();
@@ -94,10 +83,20 @@
             this.SpritePanelHScrollBar = new System.Windows.Forms.HScrollBar();
             this.AnimationBox = new System.Windows.Forms.GroupBox();
             this.AnimationPanel = new System.Windows.Forms.Panel();
+            this.AnimationPanelHScrollBar = new System.Windows.Forms.HScrollBar();
+            this.AnimationPanelVScrollBar = new System.Windows.Forms.VScrollBar();
             this.AnimSettBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.DeselectButton = new System.Windows.Forms.Button();
+            this.LoopingCheckBox = new System.Windows.Forms.CheckBox();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.PreviousFrameButton = new System.Windows.Forms.Button();
+            this.NextFrameButton = new System.Windows.Forms.Button();
+            this.RestartButton = new System.Windows.Forms.Button();
+            this.PauseButton = new System.Windows.Forms.Button();
+            this.PlayButton = new System.Windows.Forms.Button();
+            this.TriggerNameBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.TriggerTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.FrameDurationUpDown = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
@@ -109,9 +108,16 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.FrameListBox = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AnimationListBox = new System.Windows.Forms.ListBox();
+            this.AddAnimationButton = new System.Windows.Forms.Button();
+            this.RemoveAnimButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.ToolBox.SuspendLayout();
             this.AnchorBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlePtYUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlePtXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorYUpDown)).BeginInit();
             this.RectBox.SuspendLayout();
@@ -126,23 +132,22 @@
             this.SpriteSheetBox.SuspendLayout();
             this.SpritePanel.SuspendLayout();
             this.AnimationBox.SuspendLayout();
+            this.AnimationPanel.SuspendLayout();
             this.AnimSettBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).BeginInit();
             this.panel3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1253, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1463, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -160,6 +165,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // newToolStripMenuItem
             // 
@@ -169,6 +175,7 @@
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(244, 26);
             this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // OpenAnimationFile
             // 
@@ -214,142 +221,9 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.cutToolStripMenuItem,
-            this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.selectAllToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.editToolStripMenuItem.Text = "&Edit";
-            // 
-            // undoToolStripMenuItem
-            // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.undoToolStripMenuItem.Text = "&Undo";
-            // 
-            // redoToolStripMenuItem
-            // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.redoToolStripMenuItem.Text = "&Redo";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(166, 6);
-            // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripMenuItem.Image")));
-            this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.cutToolStripMenuItem.Text = "Cu&t";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
-            this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.copyToolStripMenuItem.Text = "&Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripMenuItem.Image")));
-            this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.pasteToolStripMenuItem.Text = "&Paste";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(166, 6);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.selectAllToolStripMenuItem.Text = "Select &All";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customizeToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // customizeToolStripMenuItem
-            // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.customizeToolStripMenuItem.Text = "&Customize";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.optionsToolStripMenuItem.Text = "&Options";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contentsToolStripMenuItem,
-            this.indexToolStripMenuItem,
-            this.searchToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // contentsToolStripMenuItem
-            // 
-            this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(136, 24);
-            this.contentsToolStripMenuItem.Text = "&Contents";
-            // 
-            // indexToolStripMenuItem
-            // 
-            this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(136, 24);
-            this.indexToolStripMenuItem.Text = "&Index";
-            // 
-            // searchToolStripMenuItem
-            // 
-            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(136, 24);
-            this.searchToolStripMenuItem.Text = "&Search";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(133, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 24);
-            this.aboutToolStripMenuItem.Text = "&About...";
-            // 
             // ToolBox
             // 
+            this.ToolBox.Controls.Add(this.ParticlePtButton);
             this.ToolBox.Controls.Add(this.RemoveFrameButton);
             this.ToolBox.Controls.Add(this.AddFrameButton);
             this.ToolBox.Controls.Add(this.AnchorButton);
@@ -357,15 +231,27 @@
             this.ToolBox.Controls.Add(this.FrameRectButton);
             this.ToolBox.Location = new System.Drawing.Point(526, 31);
             this.ToolBox.Name = "ToolBox";
-            this.ToolBox.Size = new System.Drawing.Size(145, 236);
+            this.ToolBox.Size = new System.Drawing.Size(145, 285);
             this.ToolBox.TabIndex = 2;
             this.ToolBox.TabStop = false;
             this.ToolBox.Text = "Tools";
             // 
+            // ParticlePtButton
+            // 
+            this.ParticlePtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ParticlePtButton.Location = new System.Drawing.Point(4, 159);
+            this.ParticlePtButton.Name = "ParticlePtButton";
+            this.ParticlePtButton.Size = new System.Drawing.Size(132, 43);
+            this.ParticlePtButton.TabIndex = 5;
+            this.ParticlePtButton.Text = "Particle Point";
+            this.toolTip1.SetToolTip(this.ParticlePtButton, "Tool for setting the anchor point.");
+            this.ParticlePtButton.UseVisualStyleBackColor = true;
+            this.ParticlePtButton.Click += new System.EventHandler(this.ParticlePtButton_Click);
+            // 
             // RemoveFrameButton
             // 
             this.RemoveFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveFrameButton.Location = new System.Drawing.Point(6, 202);
+            this.RemoveFrameButton.Location = new System.Drawing.Point(4, 253);
             this.RemoveFrameButton.Name = "RemoveFrameButton";
             this.RemoveFrameButton.Size = new System.Drawing.Size(132, 26);
             this.RemoveFrameButton.TabIndex = 4;
@@ -379,7 +265,7 @@
             // AddFrameButton
             // 
             this.AddFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddFrameButton.Location = new System.Drawing.Point(6, 157);
+            this.AddFrameButton.Location = new System.Drawing.Point(4, 208);
             this.AddFrameButton.Name = "AddFrameButton";
             this.AddFrameButton.Size = new System.Drawing.Size(132, 39);
             this.AddFrameButton.TabIndex = 3;
@@ -393,7 +279,7 @@
             // AnchorButton
             // 
             this.AnchorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AnchorButton.Location = new System.Drawing.Point(6, 110);
+            this.AnchorButton.Location = new System.Drawing.Point(4, 115);
             this.AnchorButton.Name = "AnchorButton";
             this.AnchorButton.Size = new System.Drawing.Size(132, 43);
             this.AnchorButton.TabIndex = 2;
@@ -405,7 +291,7 @@
             // CollisionRectButton
             // 
             this.CollisionRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CollisionRectButton.Location = new System.Drawing.Point(6, 57);
+            this.CollisionRectButton.Location = new System.Drawing.Point(6, 62);
             this.CollisionRectButton.Name = "CollisionRectButton";
             this.CollisionRectButton.Size = new System.Drawing.Size(132, 47);
             this.CollisionRectButton.TabIndex = 1;
@@ -417,7 +303,7 @@
             // FrameRectButton
             // 
             this.FrameRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FrameRectButton.Location = new System.Drawing.Point(6, 17);
+            this.FrameRectButton.Location = new System.Drawing.Point(4, 22);
             this.FrameRectButton.Name = "FrameRectButton";
             this.FrameRectButton.Size = new System.Drawing.Size(132, 34);
             this.FrameRectButton.TabIndex = 0;
@@ -428,6 +314,12 @@
             // 
             // AnchorBox
             // 
+            this.AnchorBox.Controls.Add(this.label22);
+            this.AnchorBox.Controls.Add(this.ParticlePtYUpDown);
+            this.AnchorBox.Controls.Add(this.ParticlePtXUpDown);
+            this.AnchorBox.Controls.Add(this.label21);
+            this.AnchorBox.Controls.Add(this.label20);
+            this.AnchorBox.Controls.Add(this.label19);
             this.AnchorBox.Controls.Add(this.label2);
             this.AnchorBox.Controls.Add(this.label1);
             this.AnchorBox.Controls.Add(this.AnchorXUpDown);
@@ -437,12 +329,74 @@
             this.AnchorBox.Size = new System.Drawing.Size(557, 75);
             this.AnchorBox.TabIndex = 3;
             this.AnchorBox.TabStop = false;
-            this.AnchorBox.Text = "Anchor Point";
+            this.AnchorBox.Text = "Point Properties";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(305, 16);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(55, 34);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Particle\r\nPoint";
+            // 
+            // ParticlePtYUpDown
+            // 
+            this.ParticlePtYUpDown.Location = new System.Drawing.Point(429, 47);
+            this.ParticlePtYUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.ParticlePtYUpDown.Name = "ParticlePtYUpDown";
+            this.ParticlePtYUpDown.Size = new System.Drawing.Size(120, 22);
+            this.ParticlePtYUpDown.TabIndex = 8;
+            this.ParticlePtYUpDown.ValueChanged += new System.EventHandler(this.ParticlePtYUpDown_ValueChanged);
+            // 
+            // ParticlePtXUpDown
+            // 
+            this.ParticlePtXUpDown.Location = new System.Drawing.Point(429, 16);
+            this.ParticlePtXUpDown.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.ParticlePtXUpDown.Name = "ParticlePtXUpDown";
+            this.ParticlePtXUpDown.Size = new System.Drawing.Size(120, 22);
+            this.ParticlePtXUpDown.TabIndex = 7;
+            this.ParticlePtXUpDown.ValueChanged += new System.EventHandler(this.ParticlePtXUpDown_ValueChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 18);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(89, 17);
+            this.label21.TabIndex = 6;
+            this.label21.Text = "Anchor Point";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(359, 48);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(71, 17);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Y Position";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(359, 20);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(71, 17);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "X Position";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 52);
+            this.label2.Location = new System.Drawing.Point(102, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 17);
             this.label2.TabIndex = 3;
@@ -451,7 +405,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 22);
+            this.label1.Location = new System.Drawing.Point(102, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 17);
             this.label1.TabIndex = 2;
@@ -459,7 +413,7 @@
             // 
             // AnchorXUpDown
             // 
-            this.AnchorXUpDown.Location = new System.Drawing.Point(190, 21);
+            this.AnchorXUpDown.Location = new System.Drawing.Point(179, 18);
             this.AnchorXUpDown.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -472,7 +426,7 @@
             // 
             // AnchorYUpDown
             // 
-            this.AnchorYUpDown.Location = new System.Drawing.Point(190, 49);
+            this.AnchorYUpDown.Location = new System.Drawing.Point(179, 46);
             this.AnchorYUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -764,17 +718,49 @@
             // 
             this.AnimationPanel.BackColor = System.Drawing.SystemColors.Window;
             this.AnimationPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AnimationPanel.Controls.Add(this.AnimationPanelHScrollBar);
+            this.AnimationPanel.Controls.Add(this.AnimationPanelVScrollBar);
             this.AnimationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AnimationPanel.Location = new System.Drawing.Point(3, 18);
             this.AnimationPanel.Name = "AnimationPanel";
             this.AnimationPanel.Size = new System.Drawing.Size(497, 264);
             this.AnimationPanel.TabIndex = 0;
             // 
+            // AnimationPanelHScrollBar
+            // 
+            this.AnimationPanelHScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.AnimationPanelHScrollBar.Location = new System.Drawing.Point(0, 239);
+            this.AnimationPanelHScrollBar.Name = "AnimationPanelHScrollBar";
+            this.AnimationPanelHScrollBar.Size = new System.Drawing.Size(472, 21);
+            this.AnimationPanelHScrollBar.TabIndex = 3;
+            this.AnimationPanelHScrollBar.Visible = false;
+            this.AnimationPanelHScrollBar.ValueChanged += new System.EventHandler(this.AnimationPanelHScrollBar_ValueChanged);
+            // 
+            // AnimationPanelVScrollBar
+            // 
+            this.AnimationPanelVScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.AnimationPanelVScrollBar.Location = new System.Drawing.Point(472, 0);
+            this.AnimationPanelVScrollBar.Name = "AnimationPanelVScrollBar";
+            this.AnimationPanelVScrollBar.Size = new System.Drawing.Size(21, 260);
+            this.AnimationPanelVScrollBar.TabIndex = 2;
+            this.AnimationPanelVScrollBar.Visible = false;
+            this.AnimationPanelVScrollBar.ValueChanged += new System.EventHandler(this.AnimationPanelVScrollBar_ValueChanged);
+            // 
             // AnimSettBox
             // 
-            this.AnimSettBox.Controls.Add(this.textBox1);
+            this.AnimSettBox.Controls.Add(this.RemoveAnimButton);
+            this.AnimSettBox.Controls.Add(this.AddAnimationButton);
+            this.AnimSettBox.Controls.Add(this.DeselectButton);
+            this.AnimSettBox.Controls.Add(this.LoopingCheckBox);
+            this.AnimSettBox.Controls.Add(this.RemoveButton);
+            this.AnimSettBox.Controls.Add(this.PreviousFrameButton);
+            this.AnimSettBox.Controls.Add(this.NextFrameButton);
+            this.AnimSettBox.Controls.Add(this.RestartButton);
+            this.AnimSettBox.Controls.Add(this.PauseButton);
+            this.AnimSettBox.Controls.Add(this.PlayButton);
+            this.AnimSettBox.Controls.Add(this.TriggerNameBox);
             this.AnimSettBox.Controls.Add(this.label12);
-            this.AnimSettBox.Controls.Add(this.comboBox1);
+            this.AnimSettBox.Controls.Add(this.TriggerTypeComboBox);
             this.AnimSettBox.Controls.Add(this.label11);
             this.AnimSettBox.Controls.Add(this.FrameDurationUpDown);
             this.AnimSettBox.Controls.Add(this.label10);
@@ -784,41 +770,139 @@
             this.AnimSettBox.Controls.Add(this.AnimationNameTextBox);
             this.AnimSettBox.Controls.Add(this.label7);
             this.AnimSettBox.Controls.Add(this.panel3);
-            this.AnimSettBox.Location = new System.Drawing.Point(532, 266);
+            this.AnimSettBox.Location = new System.Drawing.Point(532, 335);
             this.AnimSettBox.Name = "AnimSettBox";
-            this.AnimSettBox.Size = new System.Drawing.Size(702, 341);
+            this.AnimSettBox.Size = new System.Drawing.Size(702, 272);
             this.AnimSettBox.TabIndex = 3;
             this.AnimSettBox.TabStop = false;
             this.AnimSettBox.Text = "Animation Settings";
             // 
-            // textBox1
+            // DeselectButton
             // 
-            this.textBox1.Location = new System.Drawing.Point(145, 236);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 22);
-            this.textBox1.TabIndex = 11;
+            this.DeselectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeselectButton.Location = new System.Drawing.Point(141, 224);
+            this.DeselectButton.Name = "DeselectButton";
+            this.DeselectButton.Size = new System.Drawing.Size(131, 30);
+            this.DeselectButton.TabIndex = 19;
+            this.DeselectButton.Text = "Deselect Frame";
+            this.toolTip1.SetToolTip(this.DeselectButton, "Deselects currently selected frame so that you can fine tune the frame not added " +
+        "to the list.");
+            this.DeselectButton.UseVisualStyleBackColor = true;
+            this.DeselectButton.Click += new System.EventHandler(this.DeselectButton_Click);
+            // 
+            // LoopingCheckBox
+            // 
+            this.LoopingCheckBox.AutoSize = true;
+            this.LoopingCheckBox.Checked = true;
+            this.LoopingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LoopingCheckBox.Location = new System.Drawing.Point(278, 20);
+            this.LoopingCheckBox.Name = "LoopingCheckBox";
+            this.LoopingCheckBox.Size = new System.Drawing.Size(95, 21);
+            this.LoopingCheckBox.TabIndex = 18;
+            this.LoopingCheckBox.Text = "Is Looping";
+            this.toolTip1.SetToolTip(this.LoopingCheckBox, "Makes animation loop or not loop.");
+            this.LoopingCheckBox.UseVisualStyleBackColor = true;
+            this.LoopingCheckBox.CheckedChanged += new System.EventHandler(this.LoopingCheckBox_CheckedChanged);
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveButton.Location = new System.Drawing.Point(141, 188);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(131, 30);
+            this.RemoveButton.TabIndex = 17;
+            this.RemoveButton.Text = "Remove";
+            this.toolTip1.SetToolTip(this.RemoveButton, "Removes the currently selected frame.");
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
+            // PreviousFrameButton
+            // 
+            this.PreviousFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PreviousFrameButton.Location = new System.Drawing.Point(141, 149);
+            this.PreviousFrameButton.Name = "PreviousFrameButton";
+            this.PreviousFrameButton.Size = new System.Drawing.Size(131, 33);
+            this.PreviousFrameButton.TabIndex = 16;
+            this.PreviousFrameButton.Text = "Previous";
+            this.toolTip1.SetToolTip(this.PreviousFrameButton, "Moves to the previous frame.");
+            this.PreviousFrameButton.UseVisualStyleBackColor = true;
+            this.PreviousFrameButton.Click += new System.EventHandler(this.PreviousFrameButton_Click);
+            // 
+            // NextFrameButton
+            // 
+            this.NextFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NextFrameButton.Location = new System.Drawing.Point(141, 116);
+            this.NextFrameButton.Name = "NextFrameButton";
+            this.NextFrameButton.Size = new System.Drawing.Size(131, 27);
+            this.NextFrameButton.TabIndex = 15;
+            this.NextFrameButton.Text = "Next";
+            this.toolTip1.SetToolTip(this.NextFrameButton, "Moves to the next frame.");
+            this.NextFrameButton.UseVisualStyleBackColor = true;
+            this.NextFrameButton.Click += new System.EventHandler(this.NextFrameButton_Click);
+            // 
+            // RestartButton
+            // 
+            this.RestartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RestartButton.Location = new System.Drawing.Point(141, 86);
+            this.RestartButton.Name = "RestartButton";
+            this.RestartButton.Size = new System.Drawing.Size(131, 24);
+            this.RestartButton.TabIndex = 14;
+            this.RestartButton.Text = "Restart";
+            this.toolTip1.SetToolTip(this.RestartButton, "Restarts from the first frame of the animation.");
+            this.RestartButton.UseVisualStyleBackColor = true;
+            // 
+            // PauseButton
+            // 
+            this.PauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PauseButton.Location = new System.Drawing.Point(141, 54);
+            this.PauseButton.Name = "PauseButton";
+            this.PauseButton.Size = new System.Drawing.Size(131, 26);
+            this.PauseButton.TabIndex = 13;
+            this.PauseButton.Text = "Pause";
+            this.toolTip1.SetToolTip(this.PauseButton, "Pauses the Animation if Playing.");
+            this.PauseButton.UseVisualStyleBackColor = true;
+            this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
+            // 
+            // PlayButton
+            // 
+            this.PlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PlayButton.Location = new System.Drawing.Point(141, 21);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(131, 27);
+            this.PlayButton.TabIndex = 12;
+            this.PlayButton.Text = "Play";
+            this.toolTip1.SetToolTip(this.PlayButton, "Play the Animation if Paused.");
+            this.PlayButton.UseVisualStyleBackColor = true;
+            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+            // 
+            // TriggerNameBox
+            // 
+            this.TriggerNameBox.Location = new System.Drawing.Point(488, 139);
+            this.TriggerNameBox.Name = "TriggerNameBox";
+            this.TriggerNameBox.Size = new System.Drawing.Size(168, 22);
+            this.TriggerNameBox.TabIndex = 11;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(139, 216);
+            this.label12.Location = new System.Drawing.Point(485, 119);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 17);
             this.label12.TabIndex = 10;
             this.label12.Text = "Trigger";
             // 
-            // comboBox1
+            // TriggerTypeComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(142, 189);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 9;
+            this.TriggerTypeComboBox.FormattingEnabled = true;
+            this.TriggerTypeComboBox.Location = new System.Drawing.Point(488, 92);
+            this.TriggerTypeComboBox.Name = "TriggerTypeComboBox";
+            this.TriggerTypeComboBox.Size = new System.Drawing.Size(168, 24);
+            this.TriggerTypeComboBox.TabIndex = 9;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(139, 168);
+            this.label11.Location = new System.Drawing.Point(485, 72);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 17);
             this.label11.TabIndex = 8;
@@ -826,16 +910,27 @@
             // 
             // FrameDurationUpDown
             // 
-            this.FrameDurationUpDown.Location = new System.Drawing.Point(142, 143);
+            this.FrameDurationUpDown.DecimalPlaces = 3;
+            this.FrameDurationUpDown.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.FrameDurationUpDown.Location = new System.Drawing.Point(276, 117);
             this.FrameDurationUpDown.Name = "FrameDurationUpDown";
-            this.FrameDurationUpDown.Size = new System.Drawing.Size(120, 22);
+            this.FrameDurationUpDown.Size = new System.Drawing.Size(168, 22);
             this.FrameDurationUpDown.TabIndex = 7;
+            this.FrameDurationUpDown.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            65536});
             this.FrameDurationUpDown.ValueChanged += new System.EventHandler(this.FrameDurationUpDown_ValueChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(139, 123);
+            this.label10.Location = new System.Drawing.Point(273, 97);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 17);
             this.label10.TabIndex = 6;
@@ -853,7 +948,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(139, 78);
+            this.label8.Location = new System.Drawing.Point(273, 52);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(115, 17);
             this.label8.TabIndex = 4;
@@ -861,15 +956,15 @@
             // 
             // AnimationSpeedUpDown
             // 
-            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(145, 98);
+            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(276, 72);
             this.AnimationSpeedUpDown.Name = "AnimationSpeedUpDown";
-            this.AnimationSpeedUpDown.Size = new System.Drawing.Size(120, 22);
+            this.AnimationSpeedUpDown.Size = new System.Drawing.Size(168, 22);
             this.AnimationSpeedUpDown.TabIndex = 3;
             this.AnimationSpeedUpDown.ValueChanged += new System.EventHandler(this.AnimationSpeedUpDown_ValueChanged);
             // 
             // AnimationNameTextBox
             // 
-            this.AnimationNameTextBox.Location = new System.Drawing.Point(142, 53);
+            this.AnimationNameTextBox.Location = new System.Drawing.Point(488, 47);
             this.AnimationNameTextBox.Name = "AnimationNameTextBox";
             this.AnimationNameTextBox.Size = new System.Drawing.Size(168, 22);
             this.AnimationNameTextBox.TabIndex = 2;
@@ -877,7 +972,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(139, 34);
+            this.label7.Location = new System.Drawing.Point(485, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(111, 17);
             this.label7.TabIndex = 1;
@@ -889,7 +984,7 @@
             this.panel3.Controls.Add(this.FrameListBox);
             this.panel3.Location = new System.Drawing.Point(8, 56);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(124, 279);
+            this.panel3.Size = new System.Drawing.Size(124, 210);
             this.panel3.TabIndex = 0;
             // 
             // FrameListBox
@@ -899,20 +994,69 @@
             this.FrameListBox.ItemHeight = 16;
             this.FrameListBox.Location = new System.Drawing.Point(0, 0);
             this.FrameListBox.Name = "FrameListBox";
-            this.FrameListBox.Size = new System.Drawing.Size(120, 275);
-            this.FrameListBox.TabIndex = 1;
+            this.FrameListBox.Size = new System.Drawing.Size(120, 206);
+            this.FrameListBox.TabIndex = 3;
             this.FrameListBox.SelectedIndexChanged += new System.EventHandler(this.FrameListBox_SelectedIndexChanged);
             // 
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.AnimationListBox);
+            this.groupBox1.Location = new System.Drawing.Point(1240, 31);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(211, 576);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Animation List";
+            // 
+            // AnimationListBox
+            // 
+            this.AnimationListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AnimationListBox.FormattingEnabled = true;
+            this.AnimationListBox.ItemHeight = 16;
+            this.AnimationListBox.Location = new System.Drawing.Point(3, 18);
+            this.AnimationListBox.Name = "AnimationListBox";
+            this.AnimationListBox.Size = new System.Drawing.Size(205, 555);
+            this.AnimationListBox.TabIndex = 0;
+            // 
+            // AddAnimationButton
+            // 
+            this.AddAnimationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddAnimationButton.Location = new System.Drawing.Point(488, 167);
+            this.AddAnimationButton.Name = "AddAnimationButton";
+            this.AddAnimationButton.Size = new System.Drawing.Size(131, 27);
+            this.AddAnimationButton.TabIndex = 20;
+            this.AddAnimationButton.Text = "Add Animation";
+            this.toolTip1.SetToolTip(this.AddAnimationButton, "Add animation to the list.");
+            this.AddAnimationButton.UseVisualStyleBackColor = true;
+            this.AddAnimationButton.Click += new System.EventHandler(this.AddAnimationButton_Click);
+            // 
+            // RemoveAnimButton
+            // 
+            this.RemoveAnimButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveAnimButton.Location = new System.Drawing.Point(488, 200);
+            this.RemoveAnimButton.Name = "RemoveAnimButton";
+            this.RemoveAnimButton.Size = new System.Drawing.Size(131, 27);
+            this.RemoveAnimButton.TabIndex = 21;
+            this.RemoveAnimButton.Text = "Remove Animation";
+            this.toolTip1.SetToolTip(this.RemoveAnimButton, "Remove the Currently selected animation.");
+            this.RemoveAnimButton.UseVisualStyleBackColor = true;
+            this.RemoveAnimButton.Click += new System.EventHandler(this.RemoveAnimButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1253, 617);
+            this.ClientSize = new System.Drawing.Size(1463, 617);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.AnimSettBox);
             this.Controls.Add(this.AnimationBox);
             this.Controls.Add(this.RectBox);
@@ -921,16 +1065,18 @@
             this.Controls.Add(this.SpriteSheetBox);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Animation Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ToolBox.ResumeLayout(false);
             this.AnchorBox.ResumeLayout(false);
             this.AnchorBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlePtYUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlePtXUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorXUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchorYUpDown)).EndInit();
             this.RectBox.ResumeLayout(false);
@@ -946,11 +1092,13 @@
             this.SpriteSheetBox.ResumeLayout(false);
             this.SpritePanel.ResumeLayout(false);
             this.AnimationBox.ResumeLayout(false);
+            this.AnimationPanel.ResumeLayout(false);
             this.AnimSettBox.ResumeLayout(false);
             this.AnimSettBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -966,24 +1114,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.GroupBox ToolBox;
         private System.Windows.Forms.GroupBox AnchorBox;
         private System.Windows.Forms.GroupBox RectBox;
@@ -1015,13 +1145,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown AnimationSpeedUpDown;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TriggerNameBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox TriggerTypeComboBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button AddFrameButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ListBox FrameListBox;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label13;
@@ -1037,6 +1166,29 @@
         private System.Windows.Forms.ToolStripMenuItem LoadSpriteSheet;
         private System.Windows.Forms.VScrollBar SpritePanelVScrollBar;
         private System.Windows.Forms.HScrollBar SpritePanelHScrollBar;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button RemoveButton;
+        private System.Windows.Forms.Button PreviousFrameButton;
+        private System.Windows.Forms.Button NextFrameButton;
+        private System.Windows.Forms.Button RestartButton;
+        private System.Windows.Forms.Button PauseButton;
+        private System.Windows.Forms.Button PlayButton;
+        private System.Windows.Forms.CheckBox LoopingCheckBox;
+        private System.Windows.Forms.Button DeselectButton;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.NumericUpDown ParticlePtYUpDown;
+        private System.Windows.Forms.NumericUpDown ParticlePtXUpDown;
+        private System.Windows.Forms.Button ParticlePtButton;
+        private System.Windows.Forms.ListBox FrameListBox;
+        private System.Windows.Forms.HScrollBar AnimationPanelHScrollBar;
+        private System.Windows.Forms.VScrollBar AnimationPanelVScrollBar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox AnimationListBox;
+        private System.Windows.Forms.Button RemoveAnimButton;
+        private System.Windows.Forms.Button AddAnimationButton;
     }
 }
 

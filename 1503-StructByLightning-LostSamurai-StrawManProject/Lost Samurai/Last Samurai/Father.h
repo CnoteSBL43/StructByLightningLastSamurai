@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
+#include "AnimationTimestamp.h"
 #include <vector>
 class Father :
 	public Player
@@ -16,6 +17,7 @@ public:
 	SGD::Rectangle GetRect(void)	const			;
 	void	HandleCollision( IEntity* pOther)	;
 
+	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
 	//void SetCamVector(SGD::Vector _vec){ pos = _vec; }
 	//SGD::Vector GetCameraVector(void)const { return pos; }
 
@@ -32,9 +34,7 @@ private:
 		SGD::Rectangle		rFrame;		// source rectangle
 		SGD::Point			ptAnchor;	// relative position within source
 	};
-	std::vector<Frame> frames;
-	void CreateFrames();
-
+	AnimationTimestamp m_Timestamp;
 	int direction = 0;
 	float frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the father(direction)
