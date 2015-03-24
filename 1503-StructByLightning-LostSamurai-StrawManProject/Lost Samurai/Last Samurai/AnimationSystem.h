@@ -26,7 +26,8 @@ public:
 	void Update(int _elapsedtime, AnimationTimestamp _info);
 	void Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
 	void Load();
-	
+	void Exit();
+
 
 };
 
