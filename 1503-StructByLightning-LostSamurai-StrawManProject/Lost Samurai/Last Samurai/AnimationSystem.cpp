@@ -82,3 +82,7 @@ void AnimationSystem::Load()
 	m_Img = GM->LoadTexture(str.c_str());
 }
 
+void AnimationSystem::Exit()
+{
+	GM->UnloadTexture(m_Img);
+}

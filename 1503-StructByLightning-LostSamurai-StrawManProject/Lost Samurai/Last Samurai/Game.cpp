@@ -131,6 +131,7 @@ int Game::Update()
 
 void Game::Terminate()
 {
+	AnimationSystem::GetInstance()->Exit();
 	ChangeState(nullptr);
 	SGD::AudioManager::GetInstance()->Terminate();
 	SGD::AudioManager::GetInstance()->DeleteInstance();
