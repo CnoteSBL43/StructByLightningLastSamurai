@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "../SGD Wrappers/SGD_Handle.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_Geometry.h"
 class AnimationSystem
 {
 private:
@@ -11,21 +12,27 @@ private:
 	SGD::HTexture m_Img = SGD::INVALID_HANDLE;
 	std::string m_ImgString, m_AnimationName;
 	std::map<std::string, Animation> m_Loaded;
+	SGD::Rectangle m_FatherRect, m_SonRect;
+	std::vector<SGD::HTexture> m_Imgs;
 	//Ctor and Dtor
 	AnimationSystem() = default;
 	~AnimationSystem() = default;
 	AnimationSystem(const AnimationSystem&) = delete;
 	AnimationSystem& operator=(const AnimationSystem&) = delete;
+	int count = 0;
 public:
 	//Singleton
 	static AnimationSystem* GetInstance();
 	
-
+	//Accessor
+	std::map<std::string, Animation> GetLoaded() { return m_Loaded; }
+	SGD::Rectangle GetFatherRect() { return m_FatherRect; }
+	SGD::Rectangle GetSonRect() { return m_SonRect; }
 	//Methods
 
 	void Update(int _elapsedtime, AnimationTimestamp _info);
 	void Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
-	void Load();
+	void Load(const char* _filename);
 	void Exit();
 
 

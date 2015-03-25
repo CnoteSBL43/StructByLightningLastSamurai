@@ -12,6 +12,7 @@
 #include"../Last Samurai/TileSystem.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
+#include "AnimationSystem.h"
 GameplayState* GameplayState::GetInstance()
 {
 	static GameplayState m_Instance;
@@ -21,9 +22,9 @@ GameplayState* GameplayState::GetInstance()
 Actor* GameplayState::CreateFather(void)
 {
 		Player* father = new Father;
-		father->SetPosition(SGD::Point{ 500.0f, 480.0f });
+		//father->SetPosition(SGD::Point{ 500.0f, 480.0f });
 		father->SetAlive(true);
-		father->SetImage(m_FatherImage);
+		//father->SetImage(m_FatherImage);
 		father->SetSize(SGD::Size{ -1.5f,1.5f });
 		father->SetVelocity({ 0.0f, 0.0f });
 		return father;
@@ -43,7 +44,10 @@ void GameplayState::Enter()
 {
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
 	m_pEntities = new EntityManager;
+	AnimationSystem::GetInstance()->Load("../anim.xml");
+	AnimationSystem::GetInstance()->Load("../anim2.xml");
 	father = CreateFather();
+	father->SetPosition(AnimationSystem::GetInstance()->GetLoaded()["Idle"].GetFrames()[0].GetAnchorPt());
 	m_pEntities->AddEntity(father, 0);
 	son = CreateSon();
 	m_pEntities->AddEntity(son, 1);
@@ -55,6 +59,7 @@ void GameplayState::Enter()
 
 void GameplayState::Exit()
 {
+	AnimationSystem::GetInstance()->Exit();
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherImage);
 	father->Release();
 	father = nullptr;
@@ -129,15 +134,15 @@ void GameplayState::Render(float _ElapsedTime)
 		for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)
 		{
 			SGD::Rectangle DestinationRectangle;
-			DestinationRectangle.top = X * Load->m_Tile->m_TileWidth;
-			DestinationRectangle.left = Y * Load->m_Tile->m_TileHeight;
-			DestinationRectangle.right = DestinationRectangle.left + Load->m_Grid->m_GridWidth;
-			DestinationRectangle.bottom = DestinationRectangle.top + Load->m_Grid->m_GridHeight;
+			DestinationRectangle.top = (float)X * Load->m_Tile->m_TileWidth;
+			DestinationRectangle.left = (float)Y * Load->m_Tile->m_TileHeight;
+			DestinationRectangle.right = (float)DestinationRectangle.left + Load->m_Grid->m_GridWidth;
+			DestinationRectangle.bottom = (float)DestinationRectangle.top + Load->m_Grid->m_GridHeight;
 			//SGD::GraphicsManager::GetInstance()->DrawRectangle(DestinationRectangle, SGD::Color{ 255, 0, 255, 255 }, SGD::Color{ 255, 255, 0, 0 }, 5);
 
 			SGD::Rectangle SourceRectangle;
-			SourceRectangle.left = Load->Map[X][Y]->m_TileID % (int)(Load->Map[X][Y]->m_Image.width / Load->Map[X][Y]->m_TileWidth) * Load->Map[X][Y]->m_TileWidth;
-			SourceRectangle.top = Load->Map[X][Y]->m_TileID / (int)(Load->Map[X][Y]->m_Image.height / Load->Map[X][Y]->m_TileHeight) * Load->Map[X][Y]->m_TileHeight;
+			SourceRectangle.left = (float)(Load->Map[X][Y]->m_TileID % (int)(Load->Map[X][Y]->m_Image.width / Load->Map[X][Y]->m_TileWidth) * Load->Map[X][Y]->m_TileWidth);
+			SourceRectangle.top = (float)(Load->Map[X][Y]->m_TileID / (int)(Load->Map[X][Y]->m_Image.height / Load->Map[X][Y]->m_TileHeight) * Load->Map[X][Y]->m_TileHeight);
 
 
 			SourceRectangle.right = SourceRectangle.left + Load->Map[X][Y]->m_TileHeight;

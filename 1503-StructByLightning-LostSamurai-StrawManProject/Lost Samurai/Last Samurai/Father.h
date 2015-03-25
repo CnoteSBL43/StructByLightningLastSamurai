@@ -11,11 +11,11 @@ public:
 	Father();
 	~Father();
 
-	void	Update(float elapsedTime)	;
-	void	Render(void)				;
+	void	Update(float elapsedTime);
+	void	Render(void);
 	int		GetType(void)	const				{ return ENT_FATHER; }
-	SGD::Rectangle GetRect(void)	const			;
-	void	HandleCollision( IEntity* pOther)	;
+	SGD::Rectangle GetRect(void)	const;
+	void	HandleCollision(IEntity* pOther);
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
 	//void SetCamVector(SGD::Vector _vec){ pos = _vec; }
@@ -23,10 +23,10 @@ public:
 
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
-	int GetDirection(){	return direction;	}
+	int GetDirection(){ return direction; }
 	bool GetFacing(){ return m_FacingtoRight; }
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
-
+	void SetDirection(int _direction) { direction = _direction; }
 
 private:
 	struct Frame

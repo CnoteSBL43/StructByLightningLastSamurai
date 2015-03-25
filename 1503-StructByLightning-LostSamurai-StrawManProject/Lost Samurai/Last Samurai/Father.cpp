@@ -5,10 +5,11 @@
 #include <sstream>
 Father::Father()
 {
+	m_Timestamp.SetOwner(this);
 	m_Timestamp.SetCurrAnim("Idle");
 	m_Timestamp.SetCurrFrame(0);
 	m_Timestamp.SetElapsedTime(0);
-	//CreateFrames();
+
 }
 
 
@@ -93,6 +94,10 @@ void	 Father::Update(float elapsedTime)
 	else if (!GetCurrCharacter())
 	{
 		m_vtVelocity.x = 0.0f;
+		direction = 0;
+		m_Timestamp.SetCurrAnim("Idle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
 		Actor::Update(elapsedTime);
 		if (m_ptPosition.y <= 380)//ground level -100
 		{
@@ -107,12 +112,12 @@ void	 Father::Update(float elapsedTime)
 		}
 	}
 
-
+	AnimationSystem::GetInstance()->Update(elapsedTime, m_Timestamp);
 }
 void	 Father::Render(void)
 {
 	//SGD::Rectangle frame = frames[direction].rFrame;
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
 
 	if (m_FacingtoRight)
 	{
@@ -146,7 +151,7 @@ void	 Father::Render(void)
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 54.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y + 6.0f }, SGD::Size{ 45, 99 });
+	return AnimationSystem::GetInstance()->GetFatherRect();
 }
 void Father::HandleCollision(IEntity* pOther)
 {

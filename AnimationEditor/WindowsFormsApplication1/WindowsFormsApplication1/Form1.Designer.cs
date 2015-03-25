@@ -86,6 +86,9 @@
             this.AnimationPanelHScrollBar = new System.Windows.Forms.HScrollBar();
             this.AnimationPanelVScrollBar = new System.Windows.Forms.VScrollBar();
             this.AnimSettBox = new System.Windows.Forms.GroupBox();
+            this.FrameInfoCheckBox = new System.Windows.Forms.CheckBox();
+            this.RemoveAnimButton = new System.Windows.Forms.Button();
+            this.AddAnimationButton = new System.Windows.Forms.Button();
             this.DeselectButton = new System.Windows.Forms.Button();
             this.LoopingCheckBox = new System.Windows.Forms.CheckBox();
             this.RemoveButton = new System.Windows.Forms.Button();
@@ -101,8 +104,6 @@
             this.FrameDurationUpDown = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.AnimationSpeedUpDown = new System.Windows.Forms.NumericUpDown();
             this.AnimationNameTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -110,9 +111,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AnimFrames = new System.Windows.Forms.ListBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.AnimationListBox = new System.Windows.Forms.ListBox();
-            this.AddAnimationButton = new System.Windows.Forms.Button();
-            this.RemoveAnimButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.ToolBox.SuspendLayout();
             this.AnchorBox.SuspendLayout();
@@ -135,7 +136,6 @@
             this.AnimationPanel.SuspendLayout();
             this.AnimSettBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).BeginInit();
             this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -185,6 +185,7 @@
             this.OpenAnimationFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.OpenAnimationFile.Size = new System.Drawing.Size(244, 26);
             this.OpenAnimationFile.Text = "Open Animation";
+            this.OpenAnimationFile.Click += new System.EventHandler(this.OpenAnimationFile_Click);
             // 
             // LoadSpriteSheet
             // 
@@ -203,6 +204,7 @@
             this.SaveAsAnimation.Name = "SaveAsAnimation";
             this.SaveAsAnimation.Size = new System.Drawing.Size(244, 26);
             this.SaveAsAnimation.Text = "Save &As";
+            this.SaveAsAnimation.Click += new System.EventHandler(this.SaveAsAnimation_Click);
             // 
             // toolStripSeparator1
             // 
@@ -748,6 +750,7 @@
             // 
             // AnimSettBox
             // 
+            this.AnimSettBox.Controls.Add(this.FrameInfoCheckBox);
             this.AnimSettBox.Controls.Add(this.RemoveAnimButton);
             this.AnimSettBox.Controls.Add(this.AddAnimationButton);
             this.AnimSettBox.Controls.Add(this.DeselectButton);
@@ -765,8 +768,6 @@
             this.AnimSettBox.Controls.Add(this.FrameDurationUpDown);
             this.AnimSettBox.Controls.Add(this.label10);
             this.AnimSettBox.Controls.Add(this.label9);
-            this.AnimSettBox.Controls.Add(this.label8);
-            this.AnimSettBox.Controls.Add(this.AnimationSpeedUpDown);
             this.AnimSettBox.Controls.Add(this.AnimationNameTextBox);
             this.AnimSettBox.Controls.Add(this.label7);
             this.AnimSettBox.Controls.Add(this.panel3);
@@ -776,6 +777,44 @@
             this.AnimSettBox.TabIndex = 3;
             this.AnimSettBox.TabStop = false;
             this.AnimSettBox.Text = "Animation Settings";
+            // 
+            // FrameInfoCheckBox
+            // 
+            this.FrameInfoCheckBox.AutoSize = true;
+            this.FrameInfoCheckBox.Checked = true;
+            this.FrameInfoCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.FrameInfoCheckBox.Location = new System.Drawing.Point(278, 47);
+            this.FrameInfoCheckBox.Name = "FrameInfoCheckBox";
+            this.FrameInfoCheckBox.Size = new System.Drawing.Size(192, 21);
+            this.FrameInfoCheckBox.TabIndex = 22;
+            this.FrameInfoCheckBox.Text = "Toggle Frame Information";
+            this.toolTip1.SetToolTip(this.FrameInfoCheckBox, "Check to display frame information.");
+            this.FrameInfoCheckBox.UseVisualStyleBackColor = true;
+            this.FrameInfoCheckBox.CheckedChanged += new System.EventHandler(this.FrameInfoCheckBox_CheckedChanged);
+            // 
+            // RemoveAnimButton
+            // 
+            this.RemoveAnimButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveAnimButton.Location = new System.Drawing.Point(488, 200);
+            this.RemoveAnimButton.Name = "RemoveAnimButton";
+            this.RemoveAnimButton.Size = new System.Drawing.Size(131, 27);
+            this.RemoveAnimButton.TabIndex = 21;
+            this.RemoveAnimButton.Text = "Remove Animation";
+            this.toolTip1.SetToolTip(this.RemoveAnimButton, "Remove the Currently selected animation.");
+            this.RemoveAnimButton.UseVisualStyleBackColor = true;
+            this.RemoveAnimButton.Click += new System.EventHandler(this.RemoveAnimButton_Click);
+            // 
+            // AddAnimationButton
+            // 
+            this.AddAnimationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddAnimationButton.Location = new System.Drawing.Point(488, 167);
+            this.AddAnimationButton.Name = "AddAnimationButton";
+            this.AddAnimationButton.Size = new System.Drawing.Size(131, 27);
+            this.AddAnimationButton.TabIndex = 20;
+            this.AddAnimationButton.Text = "Add Animation";
+            this.toolTip1.SetToolTip(this.AddAnimationButton, "Add animation to the list.");
+            this.AddAnimationButton.UseVisualStyleBackColor = true;
+            this.AddAnimationButton.Click += new System.EventHandler(this.AddAnimationButton_Click);
             // 
             // DeselectButton
             // 
@@ -850,6 +889,7 @@
             this.RestartButton.Text = "Restart";
             this.toolTip1.SetToolTip(this.RestartButton, "Restarts from the first frame of the animation.");
             this.RestartButton.UseVisualStyleBackColor = true;
+            this.RestartButton.Click += new System.EventHandler(this.RestartButton_Click);
             // 
             // PauseButton
             // 
@@ -916,9 +956,9 @@
             0,
             0,
             65536});
-            this.FrameDurationUpDown.Location = new System.Drawing.Point(276, 117);
+            this.FrameDurationUpDown.Location = new System.Drawing.Point(278, 92);
             this.FrameDurationUpDown.Name = "FrameDurationUpDown";
-            this.FrameDurationUpDown.Size = new System.Drawing.Size(168, 22);
+            this.FrameDurationUpDown.Size = new System.Drawing.Size(95, 22);
             this.FrameDurationUpDown.TabIndex = 7;
             this.FrameDurationUpDown.Value = new decimal(new int[] {
             7,
@@ -930,7 +970,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(273, 97);
+            this.label10.Location = new System.Drawing.Point(275, 72);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 17);
             this.label10.TabIndex = 6;
@@ -944,23 +984,6 @@
             this.label9.Size = new System.Drawing.Size(74, 17);
             this.label9.TabIndex = 5;
             this.label9.Text = "Frame List";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(273, 52);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 17);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Animation Speed";
-            // 
-            // AnimationSpeedUpDown
-            // 
-            this.AnimationSpeedUpDown.Location = new System.Drawing.Point(276, 72);
-            this.AnimationSpeedUpDown.Name = "AnimationSpeedUpDown";
-            this.AnimationSpeedUpDown.Size = new System.Drawing.Size(168, 22);
-            this.AnimationSpeedUpDown.TabIndex = 3;
-            this.AnimationSpeedUpDown.ValueChanged += new System.EventHandler(this.AnimationSpeedUpDown_ValueChanged);
             // 
             // AnimationNameTextBox
             // 
@@ -1008,6 +1031,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.AnimFrames);
+            this.groupBox1.Controls.Add(this.label23);
             this.groupBox1.Controls.Add(this.AnimationListBox);
             this.groupBox1.Location = new System.Drawing.Point(1240, 31);
             this.groupBox1.Name = "groupBox1";
@@ -1016,39 +1041,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animation List";
             // 
+            // AnimFrames
+            // 
+            this.AnimFrames.FormattingEnabled = true;
+            this.AnimFrames.ItemHeight = 16;
+            this.AnimFrames.Location = new System.Drawing.Point(3, 329);
+            this.AnimFrames.Name = "AnimFrames";
+            this.AnimFrames.Size = new System.Drawing.Size(205, 244);
+            this.AnimFrames.TabIndex = 3;
+            this.AnimFrames.SelectedIndexChanged += new System.EventHandler(this.AnimFrames_SelectedIndexChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 281);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(131, 34);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Currently Selected \r\nAnimation\'s Frames";
+            // 
             // AnimationListBox
             // 
-            this.AnimationListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AnimationListBox.FormattingEnabled = true;
             this.AnimationListBox.ItemHeight = 16;
             this.AnimationListBox.Location = new System.Drawing.Point(3, 18);
             this.AnimationListBox.Name = "AnimationListBox";
-            this.AnimationListBox.Size = new System.Drawing.Size(205, 555);
+            this.AnimationListBox.Size = new System.Drawing.Size(205, 260);
             this.AnimationListBox.TabIndex = 0;
-            // 
-            // AddAnimationButton
-            // 
-            this.AddAnimationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddAnimationButton.Location = new System.Drawing.Point(488, 167);
-            this.AddAnimationButton.Name = "AddAnimationButton";
-            this.AddAnimationButton.Size = new System.Drawing.Size(131, 27);
-            this.AddAnimationButton.TabIndex = 20;
-            this.AddAnimationButton.Text = "Add Animation";
-            this.toolTip1.SetToolTip(this.AddAnimationButton, "Add animation to the list.");
-            this.AddAnimationButton.UseVisualStyleBackColor = true;
-            this.AddAnimationButton.Click += new System.EventHandler(this.AddAnimationButton_Click);
-            // 
-            // RemoveAnimButton
-            // 
-            this.RemoveAnimButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveAnimButton.Location = new System.Drawing.Point(488, 200);
-            this.RemoveAnimButton.Name = "RemoveAnimButton";
-            this.RemoveAnimButton.Size = new System.Drawing.Size(131, 27);
-            this.RemoveAnimButton.TabIndex = 21;
-            this.RemoveAnimButton.Text = "Remove Animation";
-            this.toolTip1.SetToolTip(this.RemoveAnimButton, "Remove the Currently selected animation.");
-            this.RemoveAnimButton.UseVisualStyleBackColor = true;
-            this.RemoveAnimButton.Click += new System.EventHandler(this.RemoveAnimButton_Click);
+            this.AnimationListBox.SelectedIndexChanged += new System.EventHandler(this.AnimationListBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -1096,9 +1116,9 @@
             this.AnimSettBox.ResumeLayout(false);
             this.AnimSettBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FrameDurationUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimationSpeedUpDown)).EndInit();
             this.panel3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1143,8 +1163,6 @@
         private System.Windows.Forms.NumericUpDown FrameDurationUpDown;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown AnimationSpeedUpDown;
         private System.Windows.Forms.TextBox TriggerNameBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox TriggerTypeComboBox;
@@ -1186,9 +1204,12 @@
         private System.Windows.Forms.HScrollBar AnimationPanelHScrollBar;
         private System.Windows.Forms.VScrollBar AnimationPanelVScrollBar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox AnimationListBox;
         private System.Windows.Forms.Button RemoveAnimButton;
         private System.Windows.Forms.Button AddAnimationButton;
+        private System.Windows.Forms.ListBox AnimFrames;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ListBox AnimationListBox;
+        private System.Windows.Forms.CheckBox FrameInfoCheckBox;
     }
 }
 

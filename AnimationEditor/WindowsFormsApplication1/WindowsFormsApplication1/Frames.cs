@@ -13,7 +13,9 @@ namespace WindowsFormsApplication1
         public Rectangle collisionrect;
         public Rectangle anchorpt;
         public Rectangle particlept;
-
+        public string triggertype;
+        public string triggername;
+        public float timer;
         public Rectangle Anchorpt
         {
             get { return anchorpt; }

@@ -3,6 +3,7 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include <vector>
+#include "AnimationSystem.h"
 class Son :
 	public Player
 {
@@ -25,14 +26,7 @@ public:
 
 
 private:
-	struct Frame
-	{
-		SGD::Rectangle		rFrame;		// source rectangle
-		SGD::Point			ptAnchor;	// relative position within source
-	};
-	std::vector<Frame> frames;
-	void CreateFrames();
-
+	AnimationTimestamp m_Timestamp;
 	int direction = 0;
 	float frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
