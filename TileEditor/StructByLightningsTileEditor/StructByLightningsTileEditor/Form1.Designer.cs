@@ -44,19 +44,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TilePanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ImagePixalWidth = new System.Windows.Forms.NumericUpDown();
-            this.ImagePixalHeight = new System.Windows.Forms.NumericUpDown();
-            this.ImagePixal = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.PixalHeight = new System.Windows.Forms.NumericUpDown();
             this.PixalWidth = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ImageHeight = new System.Windows.Forms.NumericUpDown();
-            this.ImageWidth = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.GridHeight = new System.Windows.Forms.NumericUpDown();
@@ -64,12 +55,13 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.m_TriggerEvents = new System.Windows.Forms.CheckBox();
+            this.m_AI = new System.Windows.Forms.CheckBox();
+            this.m_CheckPoint = new System.Windows.Forms.CheckBox();
+            this.m_Spawn = new System.Windows.Forms.CheckBox();
             this.m_Collision = new System.Windows.Forms.CheckBox();
             this.GridPanel = new System.Windows.Forms.Panel();
-            this.m_Spawn = new System.Windows.Forms.CheckBox();
-            this.m_CheckPoint = new System.Windows.Forms.CheckBox();
-            this.m_AI = new System.Windows.Forms.CheckBox();
-            this.m_TriggerEvents = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -78,13 +70,9 @@
             this.GridSizing.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalWidth)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridWidth)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -228,10 +216,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.ImagePixalWidth);
-            this.groupBox2.Controls.Add(this.ImagePixalHeight);
-            this.groupBox2.Controls.Add(this.ImagePixal);
-            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.PixalHeight);
@@ -242,49 +226,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Size of Pixals";
-            // 
-            // ImagePixalWidth
-            // 
-            this.ImagePixalWidth.Location = new System.Drawing.Point(123, 133);
-            this.ImagePixalWidth.Name = "ImagePixalWidth";
-            this.ImagePixalWidth.Size = new System.Drawing.Size(71, 22);
-            this.ImagePixalWidth.TabIndex = 9;
-            this.ImagePixalWidth.ValueChanged += new System.EventHandler(this.ImagePixalWidth_ValueChanged);
-            // 
-            // ImagePixalHeight
-            // 
-            this.ImagePixalHeight.Location = new System.Drawing.Point(123, 104);
-            this.ImagePixalHeight.Name = "ImagePixalHeight";
-            this.ImagePixalHeight.Size = new System.Drawing.Size(71, 22);
-            this.ImagePixalHeight.TabIndex = 8;
-            this.ImagePixalHeight.ValueChanged += new System.EventHandler(this.ImagePixalHeight_ValueChanged);
-            // 
-            // ImagePixal
-            // 
-            this.ImagePixal.AutoSize = true;
-            this.ImagePixal.Location = new System.Drawing.Point(1, 138);
-            this.ImagePixal.Name = "ImagePixal";
-            this.ImagePixal.Size = new System.Drawing.Size(119, 17);
-            this.ImagePixal.TabIndex = 7;
-            this.ImagePixal.Text = "Image Pixal Width";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1, 106);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 17);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Image Pixal Height";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Pixal Height";
             // 
             // label3
             // 
@@ -313,10 +254,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.ImageHeight);
-            this.groupBox1.Controls.Add(this.ImageWidth);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.GridHeight);
@@ -327,50 +264,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Size of Grid";
-            // 
-            // ImageHeight
-            // 
-            this.ImageHeight.Location = new System.Drawing.Point(123, 117);
-            this.ImageHeight.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.ImageHeight.Name = "ImageHeight";
-            this.ImageHeight.Size = new System.Drawing.Size(71, 22);
-            this.ImageHeight.TabIndex = 7;
-            this.ImageHeight.ValueChanged += new System.EventHandler(this.ImageHeight_ValueChanged);
-            // 
-            // ImageWidth
-            // 
-            this.ImageWidth.Location = new System.Drawing.Point(123, 88);
-            this.ImageWidth.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.ImageWidth.Name = "ImageWidth";
-            this.ImageWidth.Size = new System.Drawing.Size(71, 22);
-            this.ImageWidth.TabIndex = 6;
-            this.ImageWidth.ValueChanged += new System.EventHandler(this.ImageWidth_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 117);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 17);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Image Height";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 17);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Image Width";
             // 
             // label2
             // 
@@ -449,6 +342,46 @@
             this.tabPage2.Text = "Collision";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // m_TriggerEvents
+            // 
+            this.m_TriggerEvents.AutoSize = true;
+            this.m_TriggerEvents.Location = new System.Drawing.Point(8, 180);
+            this.m_TriggerEvents.Name = "m_TriggerEvents";
+            this.m_TriggerEvents.Size = new System.Drawing.Size(123, 21);
+            this.m_TriggerEvents.TabIndex = 12;
+            this.m_TriggerEvents.Text = "Trigger Events";
+            this.m_TriggerEvents.UseVisualStyleBackColor = true;
+            // 
+            // m_AI
+            // 
+            this.m_AI.AutoSize = true;
+            this.m_AI.Location = new System.Drawing.Point(8, 136);
+            this.m_AI.Name = "m_AI";
+            this.m_AI.Size = new System.Drawing.Size(42, 21);
+            this.m_AI.TabIndex = 11;
+            this.m_AI.Text = "AI";
+            this.m_AI.UseVisualStyleBackColor = true;
+            // 
+            // m_CheckPoint
+            // 
+            this.m_CheckPoint.AutoSize = true;
+            this.m_CheckPoint.Location = new System.Drawing.Point(8, 98);
+            this.m_CheckPoint.Name = "m_CheckPoint";
+            this.m_CheckPoint.Size = new System.Drawing.Size(101, 21);
+            this.m_CheckPoint.TabIndex = 10;
+            this.m_CheckPoint.Text = "CheckPoint";
+            this.m_CheckPoint.UseVisualStyleBackColor = true;
+            // 
+            // m_Spawn
+            // 
+            this.m_Spawn.AutoSize = true;
+            this.m_Spawn.Location = new System.Drawing.Point(8, 61);
+            this.m_Spawn.Name = "m_Spawn";
+            this.m_Spawn.Size = new System.Drawing.Size(134, 21);
+            this.m_Spawn.TabIndex = 9;
+            this.m_Spawn.Text = "Spawn/Respawn";
+            this.m_Spawn.UseVisualStyleBackColor = true;
+            // 
             // m_Collision
             // 
             this.m_Collision.AutoSize = true;
@@ -471,45 +404,14 @@
             this.GridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseClick);
             this.GridPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GridPanel_MouseMove);
             // 
-            // m_Spawn
+            // label4
             // 
-            this.m_Spawn.AutoSize = true;
-            this.m_Spawn.Location = new System.Drawing.Point(8, 61);
-            this.m_Spawn.Name = "m_Spawn";
-            this.m_Spawn.Size = new System.Drawing.Size(134, 21);
-            this.m_Spawn.TabIndex = 9;
-            this.m_Spawn.Text = "Spawn/Respawn";
-            this.m_Spawn.UseVisualStyleBackColor = true;
-            // 
-            // m_CheckPoint
-            // 
-            this.m_CheckPoint.AutoSize = true;
-            this.m_CheckPoint.Location = new System.Drawing.Point(8, 98);
-            this.m_CheckPoint.Name = "m_CheckPoint";
-            this.m_CheckPoint.Size = new System.Drawing.Size(101, 21);
-            this.m_CheckPoint.TabIndex = 10;
-            this.m_CheckPoint.Text = "CheckPoint";
-            this.m_CheckPoint.UseVisualStyleBackColor = true;
-            // 
-            // m_AI
-            // 
-            this.m_AI.AutoSize = true;
-            this.m_AI.Location = new System.Drawing.Point(8, 136);
-            this.m_AI.Name = "m_AI";
-            this.m_AI.Size = new System.Drawing.Size(42, 21);
-            this.m_AI.TabIndex = 11;
-            this.m_AI.Text = "AI";
-            this.m_AI.UseVisualStyleBackColor = true;
-            // 
-            // m_TriggerEvents
-            // 
-            this.m_TriggerEvents.AutoSize = true;
-            this.m_TriggerEvents.Location = new System.Drawing.Point(8, 180);
-            this.m_TriggerEvents.Name = "m_TriggerEvents";
-            this.m_TriggerEvents.Size = new System.Drawing.Size(123, 21);
-            this.m_TriggerEvents.TabIndex = 12;
-            this.m_TriggerEvents.Text = "Trigger Events";
-            this.m_TriggerEvents.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 17);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Pixal Height";
             // 
             // Form1
             // 
@@ -534,14 +436,10 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImagePixalHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixalWidth)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridWidth)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -575,19 +473,10 @@
         private System.Windows.Forms.Panel GridPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel TilePanel;
         private System.Windows.Forms.ToolStripMenuItem loadTileSetToolStripMenuItem;
-        private System.Windows.Forms.NumericUpDown ImageHeight;
-        private System.Windows.Forms.NumericUpDown ImageWidth;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem saveXMLToolStripMenuItem;
-        private System.Windows.Forms.Label ImagePixal;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown ImagePixalWidth;
-        private System.Windows.Forms.NumericUpDown ImagePixalHeight;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox m_Collision;
@@ -595,6 +484,7 @@
         private System.Windows.Forms.CheckBox m_CheckPoint;
         private System.Windows.Forms.CheckBox m_Spawn;
         private System.Windows.Forms.CheckBox m_TriggerEvents;
+        private System.Windows.Forms.Label label4;
     }
 }
 

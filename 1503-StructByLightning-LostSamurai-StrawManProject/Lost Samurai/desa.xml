@@ -1,103 +1,643 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Map Image="5z1KX.png" MapHeight="10" MapWidth="10" TileHeight="32" TileWidth="32" ImageHeight="1024" ImageWidth="1024">
-  <Tile PositionX="0" PositionY="0" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="1" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="2" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="3" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="4" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="5" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="6" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="7" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="0" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="1" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="1" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="1" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="2" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="2" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="2" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="3" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="3" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="3" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="4" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="4" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="4" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="5" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="5" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="5" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="6" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="6" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="6" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="7" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="7" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="7" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="8" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="8" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="8" PositionY="9" TileID="36" TileCollision="true" />
-  <Tile PositionX="9" PositionY="0" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="1" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="2" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="3" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="4" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="5" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="6" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="7" TileID="1" TileCollision="false" />
-  <Tile PositionX="9" PositionY="8" TileID="36" TileCollision="true" />
-  <Tile PositionX="9" PositionY="9" TileID="36" TileCollision="true" />
+<Map Image="5z1KX.png" MapHeight="20" MapWidth="32" TileHeight="32" TileWidth="32" ImageHeight="1024" ImageWidth="1024">
+  <Tile PositionX="0" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="1" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="2" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="3" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="4" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="5" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="6" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="7" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="8" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="9" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="10" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="11" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="12" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="13" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="14" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="15" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="16" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="17" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="0" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="1" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="1" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="1" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="1" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="2" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="2" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="2" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="2" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="3" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="3" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="3" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="3" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="4" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="4" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="4" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="4" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="5" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="5" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="14" TileID="296" TileCollision="0" SpawnX="368" SpawnY="173" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="5" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="5" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="6" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="6" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="15" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="16" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="6" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="6" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="7" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="7" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="15" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="7" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="7" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="8" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="8" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="15" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="16" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="8" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="8" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="9" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="9" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="15" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="16" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="9" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="9" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="10" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="10" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="15" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="16" TileID="296" TileCollision="0" SpawnX="401" SpawnY="255" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="10" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="10" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="11" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="11" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="11" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="11" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="12" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="12" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="12" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="12" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="13" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="13" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="13" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="13" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="14" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="14" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="14" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="14" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="15" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="15" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="15" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="15" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="15" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="16" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="16" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="16" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="16" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="16" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="17" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="17" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="17" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="17" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="17" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="17" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="18" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="18" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="18" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="18" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="18" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="18" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="19" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="19" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="19" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="19" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="19" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="19" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="20" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="20" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="20" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="20" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="20" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="20" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="21" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="21" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="21" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="21" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="21" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="21" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="22" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="22" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="9" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="22" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="15" TileID="36" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="4" TilePositionY="1" />
+  <Tile PositionX="22" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="22" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="22" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="23" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="23" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="23" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="23" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="24" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="24" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="24" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="24" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="25" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="25" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="25" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="25" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="26" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="26" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="26" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="26" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="27" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="27" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="27" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="27" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="28" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="28" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="28" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="28" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="29" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="29" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="29" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="29" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="30" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="30" PositionY="1" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="2" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="3" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="4" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="5" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="6" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="7" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="8" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="9" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="10" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="11" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="12" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="13" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="14" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="15" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="16" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="17" TileID="296" TileCollision="0" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="8" TilePositionY="9" />
+  <Tile PositionX="30" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="30" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="0" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="1" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="2" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="3" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="4" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="5" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="6" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="7" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="8" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="9" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="10" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="11" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="12" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="13" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="14" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="15" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="16" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="17" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="18" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
+  <Tile PositionX="31" PositionY="19" TileID="37" TileCollision="1" SpawnX="0" SpawnY="0" CheckPointX="0" CheckPointY="0" TilePositionX="5" TilePositionY="1" />
 </Map>

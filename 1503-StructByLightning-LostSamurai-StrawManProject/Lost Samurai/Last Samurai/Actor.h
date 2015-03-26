@@ -22,7 +22,7 @@ protected:	virtual ~Actor( void )	= default;		// protected to force reference co
 public:
 	//*****************************************************************//
 	// Entity Types:
-	enum EntityType {ENT_BASE, ENT_PLAYER, ENT_FATHER,ENT_SON,ENT_ENEMY };
+	enum EntityType {ENT_BASE, ENT_PLAYER, ENT_FATHER,ENT_SON,ENT_ENEMY,ENT_TILES };
 
 	//*****************************************************************//
 	// Facing Direction

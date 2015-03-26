@@ -12,7 +12,7 @@ namespace StructByLightningsTileEditor
         int m_PositionX;
         int m_PositionY;
         int ID = 0;
-        bool m_Collision = false;
+        int m_Collision;
 
         int m_SpawnX;
         int m_SpawnY;
@@ -59,7 +59,7 @@ namespace StructByLightningsTileEditor
         }
 
         // this a Collision Getter and setter 
-        public bool Collision
+        public int Collision
         {
             get { return m_Collision; }
             set { m_Collision = value; }

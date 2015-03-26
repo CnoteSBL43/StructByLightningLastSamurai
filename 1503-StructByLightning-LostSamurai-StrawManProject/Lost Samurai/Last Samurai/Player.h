@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 	// Entity Types:
-	enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
+	//enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
 
 
 
@@ -18,7 +18,7 @@ public:
 	void	Update(float elapsedTime)	=0;
 	void	Render(void)				=0;
 
-	int		GetType(void)	const			override	{ return ENT_BASE; }
+	int		GetType(void)	const			override	{ return ENT_PLAYER; }
 	SGD::Rectangle GetRect(void)	const			=0;
 	void	HandleCollision( IEntity* pOther)	=0;
 	bool GetBackPack(){ return m_BackPack; }

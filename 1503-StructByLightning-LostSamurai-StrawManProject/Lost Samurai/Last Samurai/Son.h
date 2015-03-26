@@ -36,7 +36,7 @@ private:
 	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter=false;
-
+	bool lrArrow = false, upArrow = false;
 
 };
 

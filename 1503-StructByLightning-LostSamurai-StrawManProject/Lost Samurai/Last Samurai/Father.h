@@ -24,7 +24,10 @@ public:
 	int GetDirection(){	return direction;	}
 	bool GetFacing(){ return m_FacingtoRight; }
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
+	void SetJumpVelocity(float vel)	{ jumpVelocity = vel; }
 
+	bool GetCollisionRect(){ return collisionrect; }
+	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
 
 private:
 	struct Frame
@@ -39,5 +42,9 @@ private:
 	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the father(direction)
 	bool isCurrentCharacter = true; //to check if he is the current character. Starts as the father always 	
+	bool Debug = false;
+
+	bool collisionrect = false;//collision rectangle  fix ?
+	float previousPosY;
 };
 

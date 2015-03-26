@@ -37,6 +37,7 @@
 	SGD::GraphicsManager::GetInstance()->DrawTexture( 
 		m_hImage, m_ptPosition,
 		m_fRotation, m_szSize / 2 );
+
 }
 
 

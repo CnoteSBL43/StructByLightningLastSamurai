@@ -109,13 +109,20 @@ namespace StructByLightningsTileEditor
             // Seting the PixalSize to the Numeric UpDown Width and Height
             PixalWidth.Value = m_PixalSize.Width;
             PixalHeight.Value = m_PixalSize.Height;
-            ImagePixalHeight.Value = m_PixalTileSize.Height;
-            ImagePixalWidth.Value = m_PixalTileSize.Width;
-
         }
 
-        // This is A Public Void fuction Called Terminate. What this will do is destroy everything you have at the end of your Program
-        // So that you will not have any memeory leaks or crashes 
+        //    for (int X = 0; X < m_Picture.Width; X++)
+        //    {
+        //        for (int Y = 0; Y < m_Picture.Height; Y++)
+        //        {
+        //            CurrentSelectedTile = new TIleClass(0, 32);
+        //            TileMap[X, Y] = CurrentSelectedTile;
+
+        //        }
+        //    }
+        //}
+
+
         public void Terminate()
         {
 
@@ -172,29 +179,29 @@ namespace StructByLightningsTileEditor
                             SourceRectangle.Size = m_PixalSize;
                             m_Texture.Draw(TileImage, DestinationRectangle.X, DestinationRectangle.Y, 1, 1, SourceRectangle);
 
+                            if (TileMap[X, Y].Collision == 1)
+                                m_DirectXDraw.DrawText("C", DestinationRectangle.X, DestinationRectangle.Y, Color.Black);
 
-
+                            if (TileMap[X, Y].SpawnX != 0 && TileMap[X, Y].SpawnY != 0)
+                                m_DirectXDraw.DrawText("R", DestinationRectangle.X, DestinationRectangle.Y, Color.Black);
                         }
                         m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
 
 
                         #region Collision Rectangle ForLoop
 
-                        if (CollisionRectangles != null)
-                        {
+                        //if (TileMap[X,Y].Collision != null)
+                        //{
 
+                        //        Rectangle Collison = Rectangle.Empty;
+                        //        Collison.X = (X * m_PixalSize.Width) + OffsetScroll.X;
+                        //        Collison.Y = (Y * m_PixalSize.Height) + OffsetScroll.Y;
+                        //        Collison.Size = m_PixalSize;
 
-                            for (int i = 0; i < CollisionRectangles.Count; i++)
-                            {
-                                Rectangle Collison = Rectangle.Empty;
-                                Collison.X = (CollisionRectangles[i].X * m_PixalSize.Width) + OffsetScroll.X;
-                                Collison.Y = (CollisionRectangles[i].Y * m_PixalSize.Height) + OffsetScroll.Y;
-                                Collison.Size = m_PixalSize;
+                        //        m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
+                        //        m_DirectXDraw.DrawText("C", Collison.X, Collison.Y, Color.Blue);
 
-                                m_DirectXDraw.DrawHollowRect(Collison, Color.Red, 1);
-                                m_DirectXDraw.DrawText("C", Collison.X, Collison.Y, Color.Blue);
-                            }
-                        }
+                        //}
 
 
                         #endregion
@@ -396,7 +403,7 @@ namespace StructByLightningsTileEditor
                             Rectangle SourceRectangle = Rectangle.Empty;
                             SourceRectangle.X = TileMap[X, Y].PositionX * m_PixalSize.Width;
                             SourceRectangle.Y = TileMap[X, Y].PositionY * m_PixalSize.Height;
-                            Size Temp = new Size(m_PixalSize.Width / 2, m_PixalSize.Height / 2);
+                            Size Temp = new Size(m_PixalSize.Width, m_PixalSize.Height);
                             SourceRectangle.Size = Temp;
                             m_Texture.Draw(TileImage, DestinationRectangle.X, DestinationRectangle.Y, 1, 1, SourceRectangle);
 
@@ -699,7 +706,7 @@ namespace StructByLightningsTileEditor
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].Collision = true;
+                TileMap[X, Y].Collision = 1;
 
             }
             else
@@ -707,7 +714,7 @@ namespace StructByLightningsTileEditor
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].Collision = false;
+                TileMap[X, Y].Collision = 0;
 
 
             }
@@ -716,13 +723,13 @@ namespace StructByLightningsTileEditor
 
 
             #region this is a Check for the Right mouse Click and Radio Button Respawn
-            if (e.Button == MouseButtons.Right && m_Spawn.Checked == true)
+            if (e.Button == MouseButtons.Left && m_Spawn.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].SpawnX = X;
-                TileMap[X, Y].SpawnY = Y;
+                TileMap[X, Y].SpawnX = e.Location.Y;
+                TileMap[X, Y].SpawnY = e.Location.X;
 
             }
             else
@@ -739,8 +746,8 @@ namespace StructByLightningsTileEditor
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].CheckPointX = X;
                 TileMap[X, Y].CheckPointX = Y;
+                TileMap[X, Y].CheckPointY = X;
 
             }
             else
@@ -756,7 +763,7 @@ namespace StructByLightningsTileEditor
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
 
-               
+
 
             }
             #endregion
@@ -796,19 +803,16 @@ namespace StructByLightningsTileEditor
 
         private void ImageWidth_ValueChanged(object sender, EventArgs e)
         {
-            m_ImageGrid.Width = (int)ImageWidth.Value;
-            TilePanel.AutoScrollMinSize = new Size(m_ImageGrid.Width * m_PixalSize.Width, m_ImageGrid.Height * m_PixalSize.Height);
         }
 
         private void ImageHeight_ValueChanged(object sender, EventArgs e)
         {
-            m_ImageGrid.Width = (int)ImageWidth.Value;
-            TilePanel.AutoScrollMinSize = new Size(m_ImageGrid.Width * m_PixalSize.Width, m_ImageGrid.Height * m_PixalSize.Height);
+
         }
 
         private void saveXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
             SaveFileDialog Save = new SaveFileDialog();
             Save.Filter = "All Files|*.*|Xml Files|*.xml";
             Save.FilterIndex = 2;
@@ -850,10 +854,29 @@ namespace StructByLightningsTileEditor
 
                         XAttribute m_ID = new XAttribute("TileID", y);
                         XAttribute m_Collision = new XAttribute("TileCollision", TileMap[X, Y].Collision);
+                        XAttribute m_SpawnX = new XAttribute("SpawnX", TileMap[X, Y].SpawnX);
+                        XAttribute m_SpawnY = new XAttribute("SpawnY", TileMap[X, Y].SpawnY);
+                        XAttribute m_CheckPointX = new XAttribute("CheckPointX", TileMap[X, Y].CheckPointX);
+                        XAttribute m_CheckPointY = new XAttribute("CheckPointY", TileMap[X, Y].CheckPointY);
+                        if (TileMap[X, Y].Triggerevent != null)
+                        {
+                            XAttribute m_Trigger = new XAttribute("TriggerEvents", TileMap[X, Y].Triggerevent);
+                            Tile_Element.Add(m_Trigger);
+                        }
+
+                        XAttribute Tilem_PositionX = new XAttribute("TilePositionX", TileMap[X, Y].PositionX);
+                        XAttribute Tilem_PositionY = new XAttribute("TilePositionY", TileMap[X, Y].PositionY);
+
                         Tile_Element.Add(m_PositionX);
                         Tile_Element.Add(m_PositionY);
                         Tile_Element.Add(m_ID);
                         Tile_Element.Add(m_Collision);
+                        Tile_Element.Add(m_SpawnX);
+                        Tile_Element.Add(m_SpawnY);
+                        Tile_Element.Add(m_CheckPointX);
+                        Tile_Element.Add(m_CheckPointY);
+                        Tile_Element.Add(Tilem_PositionX);
+                        Tile_Element.Add(Tilem_PositionY);
                         m_Element.Add(Tile_Element);
 
 
@@ -870,13 +893,11 @@ namespace StructByLightningsTileEditor
 
         private void ImagePixalHeight_ValueChanged(object sender, EventArgs e)
         {
-
-            m_PixalTileSize.Height = (int)ImagePixalHeight.Value;
         }
 
         private void ImagePixalWidth_ValueChanged(object sender, EventArgs e)
         {
-            m_PixalTileSize.Width = (int)ImagePixalWidth.Value;
+
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -885,6 +906,7 @@ namespace StructByLightningsTileEditor
             Load.Filter = "All Files|*.*|Xml Files|*.xml";
             Load.FilterIndex = 2;
             Load.DefaultExt = ".xml";
+
             // Load.Filter = "All Files(*.*)|*.*|My Files(*.myf)|*.myf";
             if (DialogResult.OK == Load.ShowDialog())
             {
@@ -904,8 +926,12 @@ namespace StructByLightningsTileEditor
                 m_Attribute = m_Element.Attribute("ImageHeight");
                 TileMap = new TIleClass[m_Picture.Width, m_Picture.Height];
                 XElement m_element = m_Element.Element("Tile");
-
-
+                int width = m_Texture.GetTextureWidth(TileImage);
+                int height = m_Texture.GetTextureHeight(TileImage);
+                Size sz = new Size(width / m_PixalSize.Width,
+                     height / m_PixalSize.Height);
+                TilePanel.AutoScrollMinSize = sz;
+                GridPanel.AutoScrollMinSize = m_Picture;
                 //TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
                 //TIleClass[,] tileMapTemp = new TIleClass[m_Picture.Width, m_Picture.Height];
                 int X = 0;
@@ -913,15 +939,32 @@ namespace StructByLightningsTileEditor
                 foreach (XElement m_XElement in m_Element.Elements())
                 {
                     TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
-                    m_Attribute = m_XElement.Attribute("PositionX");
+                    m_Attribute = m_XElement.Attribute("TilePositionX");
                     m_Tiles.PositionX = int.Parse(m_Attribute.Value);
                     // m_Tiles.PositionX *= m_PixalSize.Height;
-                    m_Attribute = m_XElement.Attribute("PositionY");
+                    m_Attribute = m_XElement.Attribute("TilePositionY");
                     m_Tiles.PositionY = int.Parse(m_Attribute.Value);
                     //m_Tiles.PositionY *= m_PixalSize.Width;
                     m_Attribute = m_XElement.Attribute("TileID");
                     m_Tiles.m_ID = int.Parse(m_Attribute.Value);
-                    m_Tiles.m_ID = (m_Tiles.m_ID * m_Tiles.PositionX) / m_PixalSize.Width;
+
+                    m_Attribute = m_XElement.Attribute("TileCollision");
+                    m_Tiles.Collision = int.Parse(m_Attribute.Value);
+
+                    m_Attribute = m_XElement.Attribute("SpawnX");
+                    m_Tiles.SpawnX = int.Parse(m_Attribute.Value);
+
+                    m_Attribute = m_XElement.Attribute("SpawnY");
+                    m_Tiles.SpawnY = int.Parse(m_Attribute.Value);
+
+
+                    m_Attribute = m_XElement.Attribute("CheckPointX");
+                    m_Tiles.CheckPointX = int.Parse(m_Attribute.Value);
+
+                    m_Attribute = m_XElement.Attribute("CheckPointY");
+                    m_Tiles.CheckPointY = int.Parse(m_Attribute.Value);
+
+
                     TileMap[X, Y] = m_Tiles;
                     Y++;
                     if (Y >= m_Picture.Height)
