@@ -1090,6 +1090,7 @@ namespace WindowsFormsApplication1
                     XElement Ani = new XElement("Animation");
                     Animation tempani = (Animation)AnimationListBox.Items[i];
                     att = new XAttribute("Name", tempani.name);
+                    Ani.Add(att);
                     for (int j = 0; j < tempani.m_Frames.Count; j++)
                     {
                         XElement tempfr = new XElement("Frame");

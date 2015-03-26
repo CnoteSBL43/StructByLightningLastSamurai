@@ -12,7 +12,7 @@ private:
 	SGD::HTexture m_Img = SGD::INVALID_HANDLE;
 	std::string m_ImgString, m_AnimationName;
 	std::map<std::string, Animation> m_Loaded;
-	SGD::Rectangle m_FatherRect, m_SonRect;
+	//SGD::Rectangle m_Rect;
 	std::vector<SGD::HTexture> m_Imgs;
 	//Ctor and Dtor
 	AnimationSystem() = default;
@@ -26,8 +26,8 @@ public:
 	
 	//Accessor
 	std::map<std::string, Animation> GetLoaded() { return m_Loaded; }
-	SGD::Rectangle GetFatherRect() { return m_FatherRect; }
-	SGD::Rectangle GetSonRect() { return m_SonRect; }
+	SGD::Rectangle GetRect(AnimationTimestamp _info, int _PosX, int _PosY);
+	//SGD::Rectangle GetSonRect() { return m_SonRect; }
 	//Methods
 
 	void Update(int _elapsedtime, AnimationTimestamp _info);

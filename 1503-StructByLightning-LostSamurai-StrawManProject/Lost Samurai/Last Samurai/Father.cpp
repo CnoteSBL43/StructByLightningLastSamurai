@@ -126,16 +126,16 @@ void	 Father::Render(void)
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
 
-		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, GetSize());
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -1, 1 });
 		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage, p,
 		//	frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
 	}
 	else
 	{
 		SGD::Point p = m_ptPosition;
-		p.x -= Game::GetInstance()->GetCameraPosition().x + 64.0f;
+		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
-		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -GetSize().width, GetSize().height });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 1, 1 });
 		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
 		//{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
 		//frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -GetSize().width, GetSize().height });
@@ -151,13 +151,13 @@ void	 Father::Render(void)
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return AnimationSystem::GetInstance()->GetFatherRect();
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
 }
 void Father::HandleCollision(IEntity* pOther)
 {
 	if (pOther->GetType() == ENT_SON)
 	{
-		dynamic_cast<Father*>(this)->SetCurrCharacter(true);
+		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
 }

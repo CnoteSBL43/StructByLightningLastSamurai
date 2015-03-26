@@ -21,13 +21,13 @@ GameplayState* GameplayState::GetInstance()
 
 Actor* GameplayState::CreateFather(void)
 {
-		Player* father = new Father;
-		//father->SetPosition(SGD::Point{ 500.0f, 480.0f });
-		father->SetAlive(true);
-		//father->SetImage(m_FatherImage);
-		father->SetSize(SGD::Size{ -1.5f,1.5f });
-		father->SetVelocity({ 0.0f, 0.0f });
-		return father;
+	Player* father = new Father;
+	//father->SetPosition(SGD::Point{ 500.0f, 480.0f });
+	father->SetAlive(true);
+	//father->SetImage(m_FatherImage);
+	father->SetSize(SGD::Size{ 64.0f, 64.0f });
+	father->SetVelocity({ 0.0f, 0.0f });
+	return father;
 }
 
 Actor* GameplayState::CreateSon(void)
@@ -36,7 +36,7 @@ Actor* GameplayState::CreateSon(void)
 	son->SetPosition(SGD::Point{ 600.0f, 540.0f });
 	son->SetAlive(true);
 	son->SetImage(m_FatherImage);
-	son->SetSize(SGD::Size{ -0.75f, 0.75f });
+	son->SetSize(SGD::Size{ 32.0f, 32.0f });
 	son->SetVelocity({ 0.0f, 0.0f });
 	return son;
 }
@@ -45,13 +45,13 @@ void GameplayState::Enter()
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
 	m_pEntities = new EntityManager;
 	AnimationSystem::GetInstance()->Load("../anim.xml");
-	AnimationSystem::GetInstance()->Load("../anim2.xml");
+	//AnimationSystem::GetInstance()->Load("../anim2.xml");
 	father = CreateFather();
-	father->SetPosition(AnimationSystem::GetInstance()->GetLoaded()["Idle"].GetFrames()[0].GetAnchorPt());
+	father->SetPosition({ 200, 540 });
 	m_pEntities->AddEntity(father, 0);
 	son = CreateSon();
 	m_pEntities->AddEntity(son, 1);
-//	Game::GetInstance()->SetCameraPosition({ father->GetPosition().x, father->GetPosition().y });
+	//	Game::GetInstance()->SetCameraPosition({ father->GetPosition().x, father->GetPosition().y });
 	Load = new TileSystem();
 	Load->LoadTileXml();
 }
@@ -82,7 +82,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;
 	}
-	
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J))
 	{
 		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
@@ -93,10 +93,10 @@ bool GameplayState::Update(float _ElapsedTime)
 		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
 		{
 			dynamic_cast<Father*>(father)->SetCurrCharacter(true);
-			dynamic_cast<Son*>(son)->SetCurrCharacter(false);		
+			dynamic_cast<Son*>(son)->SetCurrCharacter(false);
 		}
 	}
-	
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
 	{
 		m_pEntities->CheckCollisions(0, 1);
@@ -113,7 +113,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
 	}
-	
+
 	//replace son after backpacing is activated
 	if (dynamic_cast<Son*>(son)->GetBackPack())
 	{
@@ -147,7 +147,7 @@ void GameplayState::Render(float _ElapsedTime)
 
 			SourceRectangle.right = SourceRectangle.left + Load->Map[X][Y]->m_TileHeight;
 			SourceRectangle.bottom = SourceRectangle.top + Load->Map[X][Y]->m_TileWidth;
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight  - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
 			//SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ 0, 0}, SGD::Rectangle(Load->Map[X][Y]->m_TileID % (512 / Load->m_Tile->m_TileWidth), Load->Map[X][Y]->m_TileID % (512 / Load->m_Tile->m_TileWidth), 32, 32));
 
 

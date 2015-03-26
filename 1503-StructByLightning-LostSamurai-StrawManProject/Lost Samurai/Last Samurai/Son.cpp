@@ -114,30 +114,19 @@ void	 Son::Update(float elapsedTime)
 			m_vtVelocity.x = 64.0f;
 			if (GetBackPack())
 				lrArrow = true;
-			if (AnimationSystem::GetInstance()->GetLoaded()["Running"].CheckIfLooping())
-			{
-				if (frameswitch > 0.1f)
-				{
-					direction++;
-					frameswitch = 0.0f;
-				}
-				if (direction >= 5)
-					direction = 4;
-			}
-			else
-			{
-				if (frameswitch >= 0.10f)
-				{
-					direction++;
-					frameswitch = 0.0f;
-				}
-				if (direction >= 5)
-					direction = 0;
 
-				m_Timestamp.SetCurrAnim("Running");
-				m_Timestamp.SetCurrFrame(direction);
-				m_Timestamp.SetElapsedTime(elapsedTime);
+			if (frameswitch >= 0.10f)
+			{
+				direction++;
+				frameswitch = 0.0f;
 			}
+			if (direction >= 5)
+				direction = 0;
+
+			m_Timestamp.SetCurrAnim("Running");
+			m_Timestamp.SetCurrFrame(direction);
+			m_Timestamp.SetElapsedTime(elapsedTime);
+
 		}
 		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow))
 		{
@@ -145,10 +134,6 @@ void	 Son::Update(float elapsedTime)
 			m_vtVelocity.x = -64.0f;
 			if (GetBackPack())
 				lrArrow = true;
-			if (AnimationSystem::GetInstance()->GetLoaded()["Running"].CheckIfLooping())
-			{
-
-			}
 			else
 			{
 				if (frameswitch >= 0.10f)
@@ -253,21 +238,21 @@ void	 Son::Render(void)
 		SGD::Point p = m_ptPosition;
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, GetSize());
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
 
 	}
 	else
 	{
 		SGD::Point p = m_ptPosition;
-		p.x -= Game::GetInstance()->GetCameraPosition().x + 64.0f;
+		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -GetSize().width, GetSize().height });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
 	}
 }
 
 SGD::Rectangle  Son::GetRect(void)	const
 {
-	return AnimationSystem::GetInstance()->GetSonRect();
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
 }
 void Son::HandleCollision(IEntity* pOther)
 {

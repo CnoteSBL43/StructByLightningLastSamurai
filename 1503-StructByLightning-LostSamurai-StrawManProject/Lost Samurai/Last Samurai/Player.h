@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 	// Entity Types:
-	enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
+	
 
 
 
