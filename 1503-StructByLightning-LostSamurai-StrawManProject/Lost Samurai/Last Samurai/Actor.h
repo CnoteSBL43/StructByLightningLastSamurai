@@ -22,7 +22,7 @@ protected:	virtual ~Actor( void )	= default;		// protected to force reference co
 public:
 	//*****************************************************************//
 	// Entity Types:
-	enum EntityType {ENT_BASE, ENT_PLAYER, ENT_FATHER,ENT_SON,ENT_ENEMY };
+	enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
 
 	//*****************************************************************//
 	// Facing Direction
@@ -52,6 +52,7 @@ public:
 	SGD::Vector		GetVelocity	( void ) const			{	return m_vtVelocity;	}
 	SGD::Size		GetSize		( void ) const			{	return m_szSize;		}
 	float			GetRotation	( void ) const			{	return m_fRotation;		}
+	bool			GetAlive	( void ) const			{	return m_Alive;			}
 	
 	// Mutators:
 	void			SetImage	( SGD::HTexture	img  )	{	m_hImage		= img;	}

@@ -3,6 +3,9 @@
 #include"../SGD Wrappers/SGD_GraphicsManager.h"
 #include"../SGD Wrappers/SGD_Handle.h"
 #include "../SGD Wrappers/SGD_Utilities.h"
+#include "../SGD Wrappers/SGD_Event.h"
+#include "../SGD Wrappers/SGD_IListener.h"
+
 class Player :
 	public Actor
 {
@@ -10,7 +13,7 @@ public:
 	Player();
 	~Player();
 	// Entity Types:
-	enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
+//	enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
 
 
 

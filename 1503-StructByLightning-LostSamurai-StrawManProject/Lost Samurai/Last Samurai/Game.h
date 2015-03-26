@@ -20,6 +20,9 @@ private:
 	Game& operator=(const Game&) = delete;
 
 	IGameState* m_CurrentState = nullptr;
+	IGameState* m_PreviousState = nullptr;
+	IGameState* pCurrentState = nullptr; //for pause menu
+	
 	unsigned long m_GameTime = 0;
 
 	int m_MusicVol = 100, m_SFXVol = 100;
@@ -31,6 +34,7 @@ public:
 	//Singleton
 	static Game* GetInstance();
 	static void DeleteInstance();
+
 
 	SGD::Size	GetScreenSize(void) const		{ return m_szScreenSize; }
 	SGD::Point	GetCameraPosition(void)const	{ return m_CameraPosition; }
@@ -51,6 +55,8 @@ public:
 	bool Initialize();
 	int Update();
 	void Terminate();
+	void Pause(IGameState* n_NextState);
+	bool CheckPrevious();
 
 	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600};
 	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 800};

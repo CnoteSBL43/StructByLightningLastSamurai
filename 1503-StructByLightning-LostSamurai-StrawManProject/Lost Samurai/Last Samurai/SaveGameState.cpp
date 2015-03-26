@@ -18,6 +18,11 @@ void SaveGameState::Exit()
 
 bool SaveGameState::Update(float _ElapsedTime)
 {
+	
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) )
+	{
+		Game::GetInstance()->Pause(GameplayState::GetInstance());
+	}
 	return true;
 }
 
