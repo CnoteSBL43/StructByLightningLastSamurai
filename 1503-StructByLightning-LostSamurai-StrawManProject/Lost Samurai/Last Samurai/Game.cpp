@@ -10,6 +10,8 @@
 #include "GameplayState.h"
 #include "AnimationSystem.h"
 
+#include "../SGD Wrappers/SGD_EventManager.h"
+#include "../SGD Wrappers/SGD_MessageManager.h"
 Game* Game::m_Instance = nullptr;
 
 Game* Game::GetInstance()
@@ -47,6 +49,10 @@ bool Game::Initialize()
 		   SGD::InputManager::GetInstance()->Initialize() == false || 
 		   SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
+
+	// Initialize the Event & Message Managers
+	SGD::EventManager::GetInstance()->Initialize();
+	//SGD::MessageManager::GetInstance()->Initialize(&Game::MessageProc);
 
 #if !defined( DEBUG ) && !defined( _DEBUG )
 	SGD::GraphicsManager::GetInstance()->ShowConsoleWindow(false);
@@ -99,8 +105,11 @@ int Game::Update()
 		SGD::InputManager::GetInstance()->Update() == false ||
 		SGD::AudioManager::GetInstance()->Update() == false)
 		return 1;
-	unsigned long CurrentTime = GetTickCount();
 
+	
+	//SGD::MessageManager::GetInstance()->Update();
+
+	unsigned long CurrentTime = GetTickCount();
 	float ElapsedTime = (CurrentTime - m_GameTime) / 1000.0f;
 	
 	m_GameTime = CurrentTime;
@@ -123,7 +132,7 @@ int Game::Update()
 		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !GetFullScreen());
 
 	}
-
+	SGD::EventManager::GetInstance()->Update();
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
@@ -139,4 +148,29 @@ void Game::Terminate()
 
 	SGD::GraphicsManager::GetInstance()->Terminate();
 	SGD::GraphicsManager::GetInstance()->DeleteInstance();
+
+	//SGD::EventManager::GetInstance()->Terminate();
+	//SGD::EventManager::GetInstance()->DeleteInstance();
+}
+
+bool Game::CheckPrevious()
+{
+	if (m_PreviousState == nullptr)
+		return false;
+
+	return true;
+}
+
+void Game::Pause(IGameState* m_NextState)
+{
+	m_PreviousState = m_CurrentState;
+	m_CurrentState = m_NextState;
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+	{
+		m_PreviousState->Exit();
+		m_PreviousState = nullptr;
+	}
+	else
+		m_CurrentState->Enter();
 }

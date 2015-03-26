@@ -173,6 +173,7 @@ void	 Son::Update(float elapsedTime)
 
 			if (GetBackPack())
 			{
+				m_vtVelocity.y = -256.0f;
 				SetBackPack(false);
 				upArrow = true;
 				m_vtVelocity.y = -256.0f;
@@ -256,10 +257,15 @@ SGD::Rectangle  Son::GetRect(void)	const
 }
 void Son::HandleCollision(IEntity* pOther)
 {
-	if (pOther->GetType() == ENT_FATHER && dynamic_cast<Son*>(this)->GetBackPack())
+	if (pOther->GetType() == ENT_FATHER && this->GetBackPack())
 	{
-		dynamic_cast<Son*>(this)->SetOnGround(false);
-		dynamic_cast<Son*>(this)->SetCurrCharacter(false);
+		this->SetOnGround(false);
+		this->SetCurrCharacter(false);
+	}
+	if (pOther->GetType() == ENT_SWORDSMAN)
+	{
+		SGD::Event *event = new SGD::Event("SON_DIED", nullptr, this);
+		event->QueueEvent();
 	}
 
 }

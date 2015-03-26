@@ -19,6 +19,7 @@ Father::~Father()
 
 
 
+
 void	 Father::Update(float elapsedTime)
 {
 	if (GetCurrCharacter())
@@ -159,5 +160,10 @@ void Father::HandleCollision(IEntity* pOther)
 	{
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
+	}
+	if (pOther->GetType() == ENT_SWORDSMAN)
+	{
+		SGD::Event* event = new SGD::Event("FATHER_DIED", nullptr, this);
+		event->QueueEvent();
 	}
 }

@@ -75,10 +75,13 @@ void OptionState::Exit()
 
 bool OptionState::Update(float _ElapsedTime)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == false)
 	{
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
-		return true;
+	}
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == true)
+	{
+		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow) )
 	{
