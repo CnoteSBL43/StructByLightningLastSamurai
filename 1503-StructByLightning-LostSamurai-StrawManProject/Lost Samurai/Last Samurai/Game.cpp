@@ -114,6 +114,8 @@ int Game::Update()
 	
 	m_GameTime = CurrentTime;
 
+	if (ElapsedTime > .100f)
+		ElapsedTime = .100f;
 
 	if (m_CurrentState->Update(ElapsedTime)== false)
 	{

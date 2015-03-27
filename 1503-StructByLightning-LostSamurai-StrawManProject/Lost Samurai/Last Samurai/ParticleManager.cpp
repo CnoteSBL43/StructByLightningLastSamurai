@@ -205,10 +205,12 @@ void ParticleManager::RenderEmitter(unsigned int _emitterID)
 	}
 }
 
-void ParticleManager::HandleEvent(const SGD::Event* potato)
+
+void ParticleManager::HandleEvent(const SGD::Event* _Event)
 {
-	if (potato->GetEventID() == "Steps")
+	if (_Event->GetEventID() == "Steps")
 	{
-		int x = 10;
+
 	}
 }
+

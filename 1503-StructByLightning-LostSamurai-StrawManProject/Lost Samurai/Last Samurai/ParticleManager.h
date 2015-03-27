@@ -11,7 +11,7 @@
 #include "../SGD Wrappers/SGD_Event.h"
 #include "../SGD Wrappers/SGD_IListener.h"
 
-class ParticleManager: public SGD::IListener
+class ParticleManager : public SGD::IListener
 {
 	std::vector<Emitter> activeEmitters;
 	std::map<std::string, Emitter> loadedEmitters;
@@ -29,6 +29,9 @@ public:
 
 	void UpdateEmitter(unsigned int _emitterID, float _elapsedTime);
 	void RenderEmitter(unsigned int _emitterID);
-	void HandleEvent(const SGD::Event* potato);
+
+
+	void HandleEvent(const SGD::Event* _Event);
+
 };
 
