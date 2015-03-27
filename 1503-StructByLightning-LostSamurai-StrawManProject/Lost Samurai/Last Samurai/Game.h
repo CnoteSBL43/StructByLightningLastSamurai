@@ -25,6 +25,9 @@ private:
 	Game& operator=(const Game&) = delete;
 	// This is a IGameState Pointer So that you Can store the Current game State
 	IGameState* m_CurrentState = nullptr;
+	IGameState* m_PreviousState = nullptr;
+	IGameState* pCurrentState = nullptr; //for pause menu
+	
 	// This is a Unsigned long Variable used to get Real time 
 	unsigned long m_GameTime = 0;
 	// This is used for storing the Music Volumes and SFX Volumes 
@@ -69,6 +72,8 @@ public:
 	int Update();
 	// This will Terminate all of the The Variables used int he Game Class 
 	void Terminate();
+	void Pause(IGameState* n_NextState);
+	bool CheckPrevious();
 
 	// This is a Size Variable that is used to adjust the Screne size of the Game 
 	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600};

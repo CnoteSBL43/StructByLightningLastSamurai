@@ -8,6 +8,10 @@
 #include <Windows.h>
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include "GameplayState.h"
+#include "AnimationSystem.h"
+
+#include "../SGD Wrappers/SGD_EventManager.h"
+#include "../SGD Wrappers/SGD_MessageManager.h"
 
 // this is Getting the Instance of the Game so that it can be a singleton 
 Game* Game::m_Instance = nullptr;
@@ -97,6 +101,10 @@ bool Game::Initialize()
 		   SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
 
+	// Initialize the Event & Message Managers
+	SGD::EventManager::GetInstance()->Initialize();
+	//SGD::MessageManager::GetInstance()->Initialize(&Game::MessageProc);
+
 #if !defined( DEBUG ) && !defined( _DEBUG )
 	SGD::GraphicsManager::GetInstance()->ShowConsoleWindow(false);
 #endif
@@ -105,6 +113,7 @@ bool Game::Initialize()
 	// This is used to Get the Time that is stored from the begining of the Compiler 
 	m_GameTime = GetTickCount();
 
+	//Read Character info
 	//Reading the options file
 	// This is a Tiny XML Document you Need to make to Load from a File
 	TiXmlDocument m_Document;
@@ -178,6 +187,10 @@ int Game::Update()
 		SGD::InputManager::GetInstance()->Update() == false ||
 		SGD::AudioManager::GetInstance()->Update() == false)
 		return 1;
+
+	
+	//SGD::MessageManager::GetInstance()->Update();
+
 	// This will Set the Current Time the Get Tick count 
 	unsigned long CurrentTime = GetTickCount();
 	// you are doing an equation to get the elapseTime  
@@ -185,6 +198,8 @@ int Game::Update()
 	// Then setting m_GameTime  to the CurrentTime 
 	m_GameTime = CurrentTime;
 
+	if (ElapsedTime > .100f)
+		ElapsedTime = .100f;
 
 	if (m_CurrentState->Update(ElapsedTime)== false)
 	{
@@ -203,7 +218,7 @@ int Game::Update()
 		SGD::GraphicsManager::GetInstance()->Resize(SGD::Size{ GetScreenSize().width, GetScreenSize().height }, !GetFullScreen());
 
 	}
-
+	SGD::EventManager::GetInstance()->Update();
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
@@ -228,4 +243,29 @@ void Game::Terminate()
 
 	SGD::GraphicsManager::GetInstance()->Terminate();
 	SGD::GraphicsManager::GetInstance()->DeleteInstance();
+
+	SGD::EventManager::GetInstance()->Terminate();
+	SGD::EventManager::GetInstance()->DeleteInstance();
+}
+
+bool Game::CheckPrevious()
+{
+	if (m_PreviousState == nullptr)
+		return false;
+
+	return true;
+}
+
+void Game::Pause(IGameState* m_NextState)
+{
+	m_PreviousState = m_CurrentState;
+	m_CurrentState = m_NextState;
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+	{
+		m_PreviousState->Exit();
+		m_PreviousState = nullptr;
+	}
+	else
+		m_CurrentState->Enter();
 }

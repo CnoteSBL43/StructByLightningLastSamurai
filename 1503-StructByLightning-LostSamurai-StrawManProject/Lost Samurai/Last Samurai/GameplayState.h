@@ -4,6 +4,8 @@
 #include "../SGD Wrappers/SGD_Geometry.h"
 #include <vector>
 #include "../SGD Wrappers/SGD_Declarations.h"
+#include "ParticleManager.h"
+
 class Actor;
 class EntityManager;
 class TileSystem;
@@ -23,25 +25,31 @@ private:
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	// this is a Htexture used to Render the fathers image 
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_PauseImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_PointerImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 	// Game Entities
 
 	// This is a Entity Manager that Pointer variable used to send things to the entity manager
 	EntityManager* m_pEntities = nullptr;
+	ParticleManager* m_ParticleManager = nullptr;
 	// This is an Actor Pointer variable named Father used to create the Father 
 	Actor* father = nullptr;
 	// This is an Actor Pointer variable named Son used to create the SOn 
 	Actor* son = nullptr;
+	Actor* swordsman = nullptr;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
 	TileSystem* Load;
 	// This is Currently not used at all (Do Not Use Unless Specified);
 	SGD::Point m_start = { 0, 0 };
+	//******Pause*****//
+	bool m_Pause = false;
+	int cursorPos = 0;
 	
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
-
 
 	///collision might need to remove if not used
 	bool k = false;
@@ -53,15 +61,19 @@ public:
 	void Enter(void);
 	// this is used to exit the gameplaystate
 	void Exit(void);
-
 	// this is the update function that Takes in a float to make the objects simulate movement
 	bool Update(float _ElapsedTime);
 	// This is a function for Render that takes in a float to the objects to simulate movement
 	void Render(float _ElapsedTime);
+	//*****PAUSE******//
+	void RenderPause(void);
+	void Pause(void);
+
 	// This is an Actor Pointer That creates the Father object
 	Actor*  CreateFather(void);
 	// This is an Actor Pointer that creates the SOn Object
 	Actor* CreateSon(void);
+	Actor* CreateSwordsman(void);
 
 	int checkx, checky;//check collision
 	bool check = false; // check collision

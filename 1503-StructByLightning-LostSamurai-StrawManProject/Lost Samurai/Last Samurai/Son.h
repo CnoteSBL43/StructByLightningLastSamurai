@@ -3,6 +3,7 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include <vector>
+#include "AnimationSystem.h"
 class Son :
 	public Player
 {
@@ -23,20 +24,13 @@ public:
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 
 
-private:
-	struct Frame
-	{
-		SGD::Rectangle		rFrame;		// source rectangle
-		SGD::Point			ptAnchor;	// relative position within source
-	};
-	std::vector<Frame> frames;
-	void CreateFrames();
 
+private:
+	AnimationTimestamp m_Timestamp;
 	int direction = 0;
-	float jumpVelocity = 256.0f, gravity = 0.8f,frameswitch = 0.0f;
+	float frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter=false;
-	bool lrArrow = false, upArrow = false;
-
+	bool lrArrow = false, upArrow = false; // using this so that when backpacked i move left or right the son falls down to ground //same reason for up
 };
 

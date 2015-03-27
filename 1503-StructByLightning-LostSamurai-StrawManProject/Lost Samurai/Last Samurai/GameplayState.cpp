@@ -2,7 +2,9 @@
 #include"Father.h"
 #include "Game.h"
 #include "Son.h"
+#include "Swordsman.h"
 #include "Actor.h"
+#include "SaveGameState.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_Message.h"
@@ -12,6 +14,9 @@
 #include"../Last Samurai/TileSystem.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
+#include "AnimationSystem.h"
+
+
 #include "Tile.h"
 #include <sstream>
 
@@ -91,6 +96,16 @@ Actor* GameplayState::CreateSon(void)
 	// this is returning a newly alocated Son object so that it can be sent to the entity manager
 	return son;
 }
+Actor* GameplayState::CreateSwordsman(void)
+{
+	Player* swordsman = new Swordsman;
+	swordsman->SetPosition(SGD::Point{ 100.0f, 540.0f });
+	swordsman->SetAlive(true);
+	swordsman->SetImage(m_FatherImage);
+	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
+	swordsman->SetVelocity({ 64.0f, 0.0f });
+	return swordsman;
+}
 
 //*********************************************************************//
 //	File: GamePlayState.cpp
@@ -103,17 +118,27 @@ Actor* GameplayState::CreateSon(void)
 //*********************************************************************//
 void GameplayState::Enter()
 {
+
+
 	// This is setting the Fathers Image so he can be seen on screen.
 	// the Fathers Texture is Located in the resources folder. 
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
+	m_PauseImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Pause.png");
+	m_PointerImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Finger.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
+	m_ParticleManager = new ParticleManager;
+	AnimationSystem::GetInstance()->Load("../anim.xml");
+	//AnimationSystem::GetInstance()->Load("../anim2.xml");
 	// this is setting the CreateFather Function the The Father Actor Pointer so that it can be stored in the Enitiy Manger for later use 
 	father = CreateFather();
 	// The Father Acotr Pointer will be sent inside the entity manager in bucket zero 
 	m_pEntities->AddEntity(father, father->GetType());
 	// this is setting the CreateSon Function the The SOn Actor Pointer so that it can be stored in the Enitiy Manger for later use 
 	son = CreateSon();
+	m_pEntities->AddEntity(son, 1);
+	swordsman = CreateSwordsman();
+	m_pEntities->AddEntity(swordsman, 2);
 	// The Father Acotr Pointer will be sent inside the entity manager in bucket One 
 	m_pEntities->AddEntity(son, son->GetType());
 	// Underneath this is a SetCamaraPosition It is currently Comment out (Reason Unknown Will Comback to Let you why it was Commented out)
@@ -143,8 +168,14 @@ void GameplayState::Enter()
 //*********************************************************************//
 void GameplayState::Exit()
 {
+	AnimationSystem::GetInstance()->Exit();
 	// This is terminating the Father image so that you will not have any memory leaks 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_PointerImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_PauseImage);
+
+	m_Pause = false;
+	cursorPos = 0;
 	// Father is being released from the Pointer it was associated with so that The Release function
 	// Can take car of all dynamic memory 
 	father->Release();
@@ -155,6 +186,9 @@ void GameplayState::Exit()
 	son->Release();
 	// after you release the father you are going to set him to a nullptr just in case so that you can make sure he is reslly null (Safe Check)
 	son = nullptr;
+	swordsman->Release();
+	swordsman = nullptr;
+	delete m_ParticleManager;
 	// this is an if Check makeing sure that m_pEntities are not null so that it can properly Erase everytihng that is inside of it 
 	if (m_pEntities != nullptr)
 	{
@@ -181,11 +215,15 @@ void GameplayState::Exit()
 //*********************************************************************//
 bool GameplayState::Update(float _ElapsedTime)
 {
-
 	// This is an if Check that turn on and off Debug mode for the Tile Collison 
 	// If you Press F3 and the Bool Called Debug is False you Will set it to true 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == false)
 	{
+		if (!m_Pause)
+			m_Pause = true;
+		else
+			m_Pause = false;
+
 		// this is setting Debug to true so that it can turn on Debug mode 
 		Debug = true;
 	}
@@ -202,7 +240,7 @@ bool GameplayState::Update(float _ElapsedTime)
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J))
 	{
-		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J))
 		{
 			dynamic_cast<Father*>(father)->SetCurrCharacter(false);
 			dynamic_cast<Son*>(son)->SetCurrCharacter(true);
@@ -226,10 +264,22 @@ bool GameplayState::Update(float _ElapsedTime)
 	{
 		// if the if check is true it will Use m_pEntities Check Collision function to see if they car coliding? (CHECK FOR BETTER EXPLENATION)
 		m_pEntities->CheckCollisions(0, 1);
-	}
 
-	// This is  is another Dynamic Cast if check checking if the father is the current object that the player is using at the moment 
-	// ?(NEED TO DICUSS WHY THERE IS SO MANY DYNAMIC_CASTING GOING ON)?
+
+	}
+	else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
+	{
+		Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+		// This is  is another Dynamic Cast if check checking if the father is the current object that the player is using at the moment 
+		// ?(NEED TO DICUSS WHY THERE IS SO MANY DYNAMIC_CASTING GOING ON)?
+	}
+	//replace son after backpacing is activated
+	if (dynamic_cast<Son*>(son)->GetBackPack())
+	{
+		dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
+		dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x - 16.0f, dynamic_cast<Father*>(father)->GetPosition().y - 16.0f });
+	}
 	if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 	{
 		// This is a Game Instance Singleton Calling the The Camera's SetPosition
@@ -292,8 +342,8 @@ void GameplayState::Render(float _ElapsedTime)
 	// It will use the Variable Load to get the Grids with and the Grids Height
 	// So that it will determine where in the world that Tile will go
 	SGD::Rectangle CullingRect;
-		CullingRect.left = Game::GetInstance()->GetCameraPosition().x;
-		CullingRect.top = Game::GetInstance()->GetCameraPosition().y;
+	CullingRect.left = Game::GetInstance()->GetCameraPosition().x;
+	CullingRect.top = Game::GetInstance()->GetCameraPosition().y;
 	for (int X = 0; X < Load->m_Grid->m_GridWidth; X++)
 	{
 		for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)
@@ -395,6 +445,8 @@ void GameplayState::Render(float _ElapsedTime)
 
 	// This is GOing to render all of the Objects inside the Entity Manager 
 	m_pEntities->RenderAll();
+	if (m_Pause)
+		RenderPause();
 }
 
 
@@ -430,4 +482,59 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 
 	/* Restore previous warning levels */
 #pragma warning( pop )
+}
+
+void GameplayState::Pause(void)
+{
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow))
+	{
+		cursorPos++;
+		if (cursorPos > 4)
+			cursorPos = 0;
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow))
+	{
+		;
+		cursorPos--;
+		if (cursorPos < 0)
+			cursorPos = 4;
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 0)
+	{
+		m_Pause = false;
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 1)
+	{
+		Game::GetInstance()->Pause(InstructionsState::GetInstance());
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 2)
+	{
+		Game::GetInstance()->Pause(OptionState::GetInstance());
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 3)
+	{
+		Game::GetInstance()->Pause(SaveGameState::GetInstance());
+	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 4)
+	{
+		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
+	}
+}
+
+void GameplayState::RenderPause(void)
+{
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_PauseImage, SGD::Point(10.0f, 100.0f));
+	switch (cursorPos)
+	{
+	case 0: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 175));
+		break;
+	case 1: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 215));
+		break;
+	case 2: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 250));
+		break;
+	case 3: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 290));
+		break;
+	case 4: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 325));
+		break;
+	}
 }

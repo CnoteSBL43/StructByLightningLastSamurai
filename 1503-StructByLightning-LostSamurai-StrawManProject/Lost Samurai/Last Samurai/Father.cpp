@@ -1,32 +1,20 @@
 #include "Father.h"
 #include "Game.h"
 #include "Son.h"
+#include "AnimationSystem.h"
 #include <sstream>
 Father::Father()
 {
-	CreateFrames();
+	m_Timestamp.SetOwner(this);
+	m_Timestamp.SetCurrAnim("Idle");
+	m_Timestamp.SetCurrFrame(0);
+	m_Timestamp.SetElapsedTime(0);
+
 }
 
 
 Father::~Father()
 {
-}
-void Father::CreateFrames()
-{
-
-
-	frames.push_back({ { 0, 22, 45, 95 }, { 22, 90 } });
-	frames.push_back({ { 44, 22, 85, 95 }, { 22, 90 } });
-	frames.push_back({ { 84, 22, 117, 95 }, { 22, 90 } });
-	frames.push_back({ { 118, 22, 162, 95 }, { 22, 90 } });
-	frames.push_back({ { 163, 22, 215, 95 }, { 22, 90 } });
-
-
-	/*frames.push_back({ { 0, 32, 64, 128 }, { 22, 90 } });
-	frames.push_back({ { 0, 32, 64, 128 }, { 22, 90 } });
-	frames.push_back({ { 0, 32, 64, 128 }, { 22, 90 } });
-	frames.push_back({ { 0, 32, 64, 128 }, { 22, 90 } });
-	frames.push_back({ { 0, 32, 64, 128 }, { 22, 90 } });*/
 }
 
 
@@ -52,6 +40,13 @@ void	 Father::Update(float elapsedTime)
 				direction++;
 				frameswitch = 0.0f;
 			}
+			if (direction >= 5)
+				direction = 0;
+
+			m_Timestamp.SetCurrAnim("Running");
+			m_Timestamp.SetCurrFrame(direction);
+			m_Timestamp.SetElapsedTime(elapsedTime);
+
 		}
 
 		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
@@ -65,6 +60,13 @@ void	 Father::Update(float elapsedTime)
 				direction++;
 				frameswitch = 0.0f;
 			}
+			if (direction >= 5)
+				direction = 0;
+
+			m_Timestamp.SetCurrAnim("Running");
+			m_Timestamp.SetCurrFrame(direction);
+			m_Timestamp.SetElapsedTime(elapsedTime);
+
 		}
 		else
 			m_vtVelocity.x = 0.0f;
@@ -86,18 +88,21 @@ void	 Father::Update(float elapsedTime)
 			m_vtVelocity.y += 4.9f;
 		}
 
-		if (direction > 4)
-			direction = 0;
+
 		frameswitch += elapsedTime;
 		Actor::Update(elapsedTime);
 	}
 	else if (!GetCurrCharacter())
 	{
 		m_vtVelocity.x = 0.0f;
+		direction = 0;
+		m_Timestamp.SetCurrAnim("Idle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
 		Actor::Update(elapsedTime);
 		if (m_ptPosition.y <= 380)//ground level -100
 		{
-			m_vtVelocity.y += 4.9f;
+			m_vtVelocity.y += GetGravity();
 
 		}
 		if (m_ptPosition.y > 480 && !GetOnGround())
@@ -108,11 +113,14 @@ void	 Father::Update(float elapsedTime)
 		}
 	}
 
+	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
 void	 Father::Render(void)
 {
+	//SGD::Rectangle frame = frames[direction].rFrame;
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
 #pragma region This Region is For Debug Mode Use F3 To see the Collision Rect
-	SGD::Rectangle frame = frames[direction].rFrame;
+	//SGD::Rectangle frame = frames[direction].rFrame;
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == false)
 	{
 		Debug = true;
@@ -137,14 +145,19 @@ void	 Father::Render(void)
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
 
-		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage, p,
-			frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -1, 1 });
+		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage, p,
+		//	frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
 	}
 	else
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
-		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 32.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
-		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ 1, 1 });
+		SGD::Point p = m_ptPosition;
+		p.x -= Game::GetInstance()->GetCameraPosition().x;
+		p.y -= Game::GetInstance()->GetCameraPosition().y;
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 1, 1 });
+		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
+		//{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
+		//frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -GetSize().width, GetSize().height });
 	}
 	/*std::wostringstream s1,s2;
 	s1 << GetRect().top;
@@ -157,14 +170,13 @@ void	 Father::Render(void)
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 32.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y }, SGD::Size{ 32, 64 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y);
 }
 void Father::HandleCollision(IEntity* pOther)
 {
 	if (pOther->GetType() == ENT_SON)
 	{
-		dynamic_cast<Father*>(this)->SetCurrCharacter(true);
-		dynamic_cast<Father*>(this)->SetBackPack(true);
+		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
 	if (pOther->GetType() == ENT_TILES)
