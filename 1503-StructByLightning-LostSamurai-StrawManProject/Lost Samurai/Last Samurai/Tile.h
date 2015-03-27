@@ -23,5 +23,9 @@ public:
 	CollisonRect* CollisionRectangle;
 	void HandleCollision(IEntity* pOther);
 	int GetType(void)	const;
+	void Update(float _elapsedTime);
+
+	// this is For Debug Mode;
+	bool Debug = false;
 };
 

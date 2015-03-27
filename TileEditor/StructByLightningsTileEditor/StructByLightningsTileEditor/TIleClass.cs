@@ -20,9 +20,23 @@ namespace StructByLightningsTileEditor
         int m_CheckPointY;
         int m_CheckPointX;
 
+        int m_AIPositionX;
+        int m_AIPositionY;
 
         string m_triggerEvent;
 
+
+        public int AIPositionX
+        {
+            get { return m_AIPositionX; }
+            set { m_AIPositionX = value; }
+        }
+
+        public int AIPositionY
+        {
+            get { return m_AIPositionY; }
+            set { m_AIPositionY = value; }
+        }
         // this a string getter and setter
         public string Triggerevent
         {

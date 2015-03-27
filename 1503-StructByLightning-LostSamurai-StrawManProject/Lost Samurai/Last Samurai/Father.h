@@ -15,6 +15,7 @@ public:
 	int		GetType(void)	const				{ return ENT_FATHER; }
 	SGD::Rectangle GetRect(void)	const			;
 	void	HandleCollision( IEntity* pOther)	;
+	bool upArrow = false;
 
 	//void SetCamVector(SGD::Vector _vec){ pos = _vec; }
 	//SGD::Vector GetCameraVector(void)const { return pos; }
@@ -28,6 +29,9 @@ public:
 
 	bool GetCollisionRect(){ return collisionrect; }
 	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
+
+	bool letLeft = true, letRight = true, cannotJump = false;
+
 
 private:
 	struct Frame

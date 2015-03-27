@@ -267,7 +267,12 @@ bool GameplayState::Update(float _ElapsedTime)
 
 
 	m_pEntities->UpdateAll(_ElapsedTime);
+	SetK(false);
 	m_pEntities->CheckCollisions(Actor::EntityType::ENT_FATHER, Actor::EntityType::ENT_TILES);
+	if (!GetK() && dynamic_cast<Father*>(father)->upArrow == false)
+		father->SetVelocity(SGD::Vector{ 0.0f, 128.0f });
+	else if (GetK() && dynamic_cast<Father*>(father)->upArrow == false)
+		father->SetVelocity(SGD::Vector{ 0.0f, 0.0f });
 	return true;
 }
 
@@ -286,6 +291,9 @@ void GameplayState::Render(float _ElapsedTime)
 	// This i s a nested for loop to make the destination rectangle as well as the source rectangle
 	// It will use the Variable Load to get the Grids with and the Grids Height
 	// So that it will determine where in the world that Tile will go
+	SGD::Rectangle CullingRect;
+		CullingRect.left = Game::GetInstance()->GetCameraPosition().x;
+		CullingRect.top = Game::GetInstance()->GetCameraPosition().y;
 	for (int X = 0; X < Load->m_Grid->m_GridWidth; X++)
 	{
 		for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)

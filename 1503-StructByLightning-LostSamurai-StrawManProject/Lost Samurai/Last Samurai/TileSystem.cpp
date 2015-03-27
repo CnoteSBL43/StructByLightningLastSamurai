@@ -93,11 +93,13 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		
 		Map[m_Tile->PositionX][m_Tile->PositionY] = m_Tile;
 
+
 #pragma region This Will Decide where the 2 Characters will spawn 
 		if (Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnX != 0 && Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnY != 0)
 		{
-			_father->SetPosition(SGD::Point{ (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnX - (Game::GetInstance()->GetScreenSize().width / 2), (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnY - (Game::GetInstance()->GetScreenSize().height / 100) });
-			_Son->SetPosition(SGD::Point{ (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnX + 50, (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnY * 1.95f });
+			// This is The Spawning From XML to the Fathers SetPosition As well as the Sons Position
+			_father->SetPosition(SGD::Point{ (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnX - (Game::GetInstance()->GetScreenSize().width / 2 - Game::GetInstance()->GetCameraPosition().x) + 20, (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnY -  Game::GetInstance()->GetCameraPosition().y -20});
+			_Son->SetPosition(SGD::Point{ (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnX - 620, (float)Map[m_Tile->PositionX][m_Tile->PositionY]->SpawnY  + 260 });
 			
 		}
 #pragma endregion

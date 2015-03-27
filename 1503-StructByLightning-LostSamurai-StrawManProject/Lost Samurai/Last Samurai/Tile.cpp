@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include"../SGD Wrappers/SGD_GraphicsManager.h"
+#include "../SGD Wrappers/SGD_InputManager.h"
 #include "Game.h"
 Tile::Tile()
 {
@@ -13,26 +14,29 @@ Tile::~Tile()
 
 void Tile::Render()
 {
+	if (Debug)
+	{
 
-	//camera offest
-	SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition() ;
-	SGD::Size screen = Game::GetInstance()->GetScreenSize();
-	//the render rect after the offest
-	SGD::Point pt = { GetPosition().x - PositionOffset.x - screen.width/2
-		, GetPosition().y - PositionOffset.y };
 
-	//render rect
-	SGD::Rectangle draw = rect;
+		//camera offest
+		SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
+		SGD::Size screen = Game::GetInstance()->GetScreenSize();
+		//the render rect after the offest
+		SGD::Point pt = { GetPosition().x - PositionOffset.x - screen.width / 2
+			, GetPosition().y - PositionOffset.y };
 
-	draw.left = pt.x;
-	draw.right = draw.left + rect.ComputeWidth();
-	draw.top = pt.y;
-	draw.bottom = draw.top + rect.ComputeHeight();
+		//render rect
+		SGD::Rectangle draw = rect;
 
-	//draw rect
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255,255,255 }, {}, 3);
+		draw.left = pt.x;
+		draw.right = draw.left + rect.ComputeWidth();
+		draw.top = pt.y;
+		draw.bottom = draw.top + rect.ComputeHeight();
 
+		//draw rect
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 255, 255 }, {}, 3);
+	}
 }
 
 void Tile::HandleCollision(IEntity* pOther)
@@ -74,4 +78,14 @@ SGD::Rectangle Tile::GetRect() const
 	draw.bottom = draw.top + rect.ComputeHeight();
 
 	return draw;
+}
+
+void Tile::Update(float _elapsedTime)
+{
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == false)
+		Debug = true;
+
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == true)
+		Debug = false;
+
 }

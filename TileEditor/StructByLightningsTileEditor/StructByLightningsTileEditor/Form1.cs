@@ -184,6 +184,12 @@ namespace StructByLightningsTileEditor
 
                             if (TileMap[X, Y].SpawnX != 0 && TileMap[X, Y].SpawnY != 0)
                                 m_DirectXDraw.DrawText("R", DestinationRectangle.X, DestinationRectangle.Y, Color.Black);
+
+                            if (TileMap[X, Y].CheckPointX != 0 && TileMap[X, Y].CheckPointY != 0)
+                                m_DirectXDraw.DrawText("CP", DestinationRectangle.X, DestinationRectangle.Y, Color.Black);
+
+                            if (TileMap[X, Y].AIPositionX != 0 && TileMap[X, Y].AIPositionY != 0)
+                                m_DirectXDraw.DrawText("AI", DestinationRectangle.X, DestinationRectangle.Y, Color.Black);
                         }
                         m_DirectXDraw.DrawHollowRect(DestinationRectangle, Color.BlueViolet, 1);
 
@@ -728,41 +734,40 @@ namespace StructByLightningsTileEditor
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].SpawnX = e.Location.Y;
-                TileMap[X, Y].SpawnY = e.Location.X;
+                TileMap[X, Y].SpawnX = e.Location.X;
+                TileMap[X, Y].SpawnY = e.Location.Y;
 
             }
-            else
-            {
-                return;
-
-            }
+            
             #endregion
 
 
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
-            if (e.Button == MouseButtons.Right && m_CheckPoint.Checked == true)
+            if (e.Button == MouseButtons.Left && m_CheckPoint.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-                TileMap[X, Y].CheckPointX = Y;
-                TileMap[X, Y].CheckPointY = X;
+                TileMap[X, Y].CheckPointX = e.Location.X;
+                TileMap[X, Y].CheckPointY = e.Location.Y;
 
             }
-            else
-                return;
+            
+
+
+
             #endregion
 
 
             #region This is a Check for the Right Mouse Click and Radio Button Respawn
 
-            if (e.Button == MouseButtons.Right && m_AI.Checked == true)
+            if (e.Button == MouseButtons.Left && m_AI.Checked == true)
             {
                 int X = (e.Location.X - GridPanel.AutoScrollPosition.X) / m_PixalSize.Width;
                 int Y = (e.Location.Y - GridPanel.AutoScrollPosition.Y) / m_PixalSize.Height;
 
-
+                TileMap[X, Y].AIPositionX = e.Location.X;
+                TileMap[X, Y].AIPositionX = e.Location.Y;
 
 
             }
@@ -812,7 +817,7 @@ namespace StructByLightningsTileEditor
 
         private void saveXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             SaveFileDialog Save = new SaveFileDialog();
             Save.Filter = "All Files|*.*|Xml Files|*.xml";
             Save.FilterIndex = 2;
@@ -917,23 +922,27 @@ namespace StructByLightningsTileEditor
                 TileImage = m_Texture.LoadTexture(m_filename);
                 m_Attribute = m_Element.Attribute("MapHeight");
                 m_Picture.Height = int.Parse(m_Attribute.Value);
+
                 m_Attribute = m_Element.Attribute("MapWidth");
                 m_Picture.Width = int.Parse(m_Attribute.Value);
+
                 m_Attribute = m_Element.Attribute("TileHeight");
                 m_PixalSize.Height = int.Parse(m_Attribute.Value);
                 m_Attribute = m_Element.Attribute("TileWidth");
                 m_PixalSize.Width = int.Parse(m_Attribute.Value);
                 m_Attribute = m_Element.Attribute("ImageHeight");
                 TileMap = new TIleClass[m_Picture.Width, m_Picture.Height];
+
+
                 XElement m_element = m_Element.Element("Tile");
-                int width = m_Texture.GetTextureWidth(TileImage);
-                int height = m_Texture.GetTextureHeight(TileImage);
-                Size sz = new Size(width / m_PixalSize.Width,
-                     height / m_PixalSize.Height);
-                TilePanel.AutoScrollMinSize = sz;
-                GridPanel.AutoScrollMinSize = m_Picture;
+
                 //TIleClass m_Tiles = new TIleClass(m_Picture.Width, m_Picture.Height);
                 //TIleClass[,] tileMapTemp = new TIleClass[m_Picture.Width, m_Picture.Height];
+                GridWidth.Value = m_Picture.Width;
+                GridHeight.Value = m_Picture.Height;
+                GridPanel.AutoScroll = true;
+                TilePanel.AutoScroll = true;
+
                 int X = 0;
                 int Y = 0;
                 foreach (XElement m_XElement in m_Element.Elements())
@@ -989,6 +998,14 @@ namespace StructByLightningsTileEditor
 
             }
 
+            GridPanel.AutoScroll = true;
+            TilePanel.AutoScroll = true;
+            int width = m_Texture.GetTextureWidth(TileImage);
+            int height = m_Texture.GetTextureHeight(TileImage);
+            Size sz = new Size(width / m_PixalSize.Width,
+                 height / m_PixalSize.Height);
+            TilePanel.AutoScrollMinSize = sz;
+            GridPanel.AutoScrollMinSize = m_Picture;
 
             //Doc.Add();
             //m_element.

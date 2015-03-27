@@ -35,14 +35,18 @@ void	 Father::Update(float elapsedTime)
 {
 	if (GetCurrCharacter())
 	{
-		if (!GetOnGround())
+		if (!GetOnGround() && !upArrow && !GameplayState::GetInstance()->GetK())
 			m_vtVelocity.y = 64.0f;
-		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow))
+		
+		if (cannotJump)
+			m_vtVelocity.y = 64.0f;
+
+		if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight)
 		{
 			m_FacingtoRight = true;
-			m_vtVelocity.x = 64.0f;
+			m_vtVelocity.x = 128.0f;
 
-
+			letLeft = true;
 			if (frameswitch >= 0.07f)
 			{
 				direction++;
@@ -50,12 +54,12 @@ void	 Father::Update(float elapsedTime)
 			}
 		}
 
-		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow))
+		else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
 		{
 			m_FacingtoRight = false;
-			m_vtVelocity.x = -64.0f;
+			m_vtVelocity.x = -128.0f;
 
-
+			letRight = true;
 			if (frameswitch >= 0.07f)
 			{
 				direction++;
@@ -66,26 +70,22 @@ void	 Father::Update(float elapsedTime)
 			m_vtVelocity.x = 0.0f;
 
 		//Jump
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow)&& !cannotJump )
 		{
 			if (GetOnGround())
 			{
 				previousPosY = m_ptPosition.y;
 				SetOnGround(false);
+				upArrow = true;
 				m_vtVelocity.y = -256.0f;
 			}
 		}
-		if (m_ptPosition.y <= previousPosY-100)//ground level -100
+		if (m_ptPosition.y <= previousPosY - 200)//ground level -100
 		{
+			upArrow = false;
 			m_vtVelocity.y += 4.9f;
+		}
 
-		}
-		if (m_ptPosition.y>480 && !GetOnGround())
-		{
-			m_ptPosition.y = 480;
-			m_vtVelocity.y = 0;
-			SetOnGround(true);
-		}
 		if (direction > 4)
 			direction = 0;
 		frameswitch += elapsedTime;
@@ -100,7 +100,7 @@ void	 Father::Update(float elapsedTime)
 			m_vtVelocity.y += 4.9f;
 
 		}
-		if (m_ptPosition.y>480 && !GetOnGround())
+		if (m_ptPosition.y > 480 && !GetOnGround())
 		{
 			m_ptPosition.y = 480;
 			m_vtVelocity.y = 0;
@@ -143,7 +143,7 @@ void	 Father::Render(void)
 	else
 	{
 		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
-		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x-32.0f , m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
+		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 32.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
 		frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ 1, 1 });
 	}
 	/*std::wostringstream s1,s2;
@@ -157,7 +157,7 @@ void	 Father::Render(void)
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x-32.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y }, SGD::Size{ 32, 64 });
+	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 32.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y }, SGD::Size{ 32, 64 });
 }
 void Father::HandleCollision(IEntity* pOther)
 {
@@ -167,16 +167,51 @@ void Father::HandleCollision(IEntity* pOther)
 		dynamic_cast<Father*>(this)->SetBackPack(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_TILES )
-	{
-		//float left =pOther->GetRect().left;
-		//m_ptPosition += m_vtVelocity;
-		//this->SetVelocity(SGD::Vector{ 0, 0 });
-		//->SetPosition(SGD::Point{ (float)pOther->GetRect().left + this->GetSize().width, (float)pOther->GetRect().top + this->GetSize().height });
-		if (GetRect().right >= pOther->GetRect().left)
+	if (pOther->GetType() == ENT_TILES)
+	{	
+		SetCollisionRect(true);
+		GameplayState::GetInstance()->SetK(true);
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		if (this->GetRect().ComputeHeight() == Rect.ComputeHeight()*2)
 		{
-			m_ptPosition.x -= 1.0f;
+			if ( this->GetRect().left == Rect.left)//colliding with rect on the left
+			{
+				//set x psoition to the right of rect or pOther rect
+			//	m_ptPosition.x = pOther->GetRect().right;
+				m_vtVelocity.x = 0.0f;
+				letLeft = false;
+			}
+			else if ( this->GetRect().right == Rect.right)//colliding with rect on right
+			{
+			
+				//set x position to the left of rect or pOther rect
+				letRight = false;
+				m_vtVelocity.x = 0.0f;
+			}
 		}
-		
+		else //(this->GetRect().ComputeWidth() == Rect.ComputeWidth())
+		{
+			if (this->GetRect().top < pOther->GetRect().bottom && this->GetRect().top == Rect.top)//player colliding with a collision rect on top of him
+			{
+				//a  bool so that he cant jump or cannot press Up arrow
+				cannotJump = true;
+				letLeft = true;
+				letRight = true;
+				m_vtVelocity.y = 0.0f;
+				SetCollisionRect(false);
+				GameplayState::GetInstance()->SetK(false);
+			}
+			else if (this->GetRect().bottom >= pOther->GetRect().top && this->GetRect().bottom == Rect.bottom)//player colliding with a collision rect below him
+			{
+				//set him on the floor and set ground to true
+				cannotJump = false;
+				SetOnGround(true);
+				upArrow = false;
+				m_vtVelocity.y = 0.0f;
+
+			}
+		}	
+
 	}
 }
