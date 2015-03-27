@@ -516,6 +516,7 @@ namespace WindowsFormsApplication1
                 frame.Collisionrect = CollisionRect;
                 frame.Anchorpt = AnchorPt;
                 frame.particlept = ParticlePt;
+                frame.isLooping = LoopingCheckBox.Checked;
                 int count = FrameListBox.Items.Count + 1;
                 frame.name = "Frame " + count.ToString();
                 if (TriggerTypeComboBox.SelectedIndex != 0)
@@ -551,7 +552,8 @@ namespace WindowsFormsApplication1
                 CollisionRectHeightUpDown.Value = 0;
                 ParticlePtXUpDown.Value = 0;
                 ParticlePtYUpDown.Value = 0;
-
+                AnimationNameTextBox.Clear();
+                TriggerNameBox.Clear();
 
                 FrameRectButton.BackColor = SystemColors.Control;
                 AnchorButton.BackColor = SystemColors.Control;
@@ -710,6 +712,7 @@ namespace WindowsFormsApplication1
                 frametemp.framerect.X = (int)FrameRectXUpDown.Value;
                 FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
+
             else if (FrameListBox.SelectedIndex == -1)
                 FrameRect.X = (int)FrameRectXUpDown.Value;
         }
@@ -880,6 +883,19 @@ namespace WindowsFormsApplication1
                 FrameRectYUpDown.Value = tframe.framerect.Y;
                 FrameRectWidthUpDown.Value = tframe.framerect.Width;
                 FrameRectHeightUpDown.Value = tframe.framerect.Height;
+                TriggerNameBox.Text = tframe.triggername;
+                if (tframe.triggertype == "None")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 0;
+                }
+                else if (tframe.triggertype == "Event")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 1;
+                }
+                else if (tframe.triggertype == "Message")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 2;
+                }
             }
         }
         private void LoopingCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -1035,6 +1051,19 @@ namespace WindowsFormsApplication1
                 FrameRectYUpDown.Value = fr.framerect.Y;
                 FrameRectWidthUpDown.Value = fr.framerect.Width;
                 FrameRectHeightUpDown.Value = fr.framerect.Height;
+                TriggerNameBox.Text = fr.triggername;
+                if (fr.triggertype == "None")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 0;
+                }
+                else if (fr.triggertype == "Event")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 1;
+                }
+                else if (fr.triggertype == "Message")
+                {
+                    TriggerTypeComboBox.SelectedIndex = 2;
+                }
             }
         }
 
@@ -1060,7 +1089,14 @@ namespace WindowsFormsApplication1
 
         private void OpenAnimationFile_Click(object sender, EventArgs e)
         {
+            SaveFileDialog Save = new SaveFileDialog();
+            Save.Filter = "All Files|*.*|Xml Files|*.xml";
+            Save.FilterIndex = 2;
+            Save.DefaultExt = ".xml";
+            if (DialogResult.OK == Save.ShowDialog())
+            {
 
+            }
         }
 
         private void SaveAsAnimation_Click(object sender, EventArgs e)
@@ -1075,16 +1111,6 @@ namespace WindowsFormsApplication1
                 XElement root = new XElement("Character");
                 XAttribute att = new XAttribute("Image", m_FileName);
                 root.Add(att);
-                //XElement Coll = new XElement("Animation");
-                //att = new XAttribute("RectX", CollisionRect.X - AnchorPt.X);
-                //Coll.Add(att);
-                //att = new XAttribute("RectY", CollisionRect.Y - AnchorPt.Y);
-                //Coll.Add(att);
-                //att = new XAttribute("RectWidth", CollisionRect.Width);
-                //Coll.Add(att);
-                //att = new XAttribute("RectHeight", CollisionRect.Height);
-                //Coll.Add(att);
-                //root.Add(Coll);
                 for (int i = 0; i < AnimationListBox.Items.Count; i++)
                 {
                     XElement Ani = new XElement("Animation");
@@ -1130,12 +1156,23 @@ namespace WindowsFormsApplication1
                         att = new XAttribute("Time", tempani.m_Frames[j].timer);
                         DrawFrame.Add(att);
                         tempfr.Add(DrawFrame);
+                        DrawFrame = new XElement("Trigger");
+                        att = new XAttribute("Type", tempani.m_Frames[j].triggertype);
+                        DrawFrame.Add(att);
+                        att = new XAttribute("Name", tempani.m_Frames[j].triggername);
+                        DrawFrame.Add(att);
+                        tempfr.Add(DrawFrame);
                         Ani.Add(tempfr);
                     }
                     root.Add(Ani);
                 }
                 root.Save(Save.FileName);
             }
+        }
+
+        private void TriggerNameBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

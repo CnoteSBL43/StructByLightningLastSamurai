@@ -6,26 +6,22 @@
 #include "Frame.h"
 #include "Father.h"
 #include "Son.h"
+#include "../SGD Wrappers/SGD_Event.h"
+
 AnimationSystem* AnimationSystem::GetInstance()
 {
 	static AnimationSystem m_Instance;
 	return &m_Instance;
 }
 
+SGD::Point AnimationSystem::GetParticlePt(int _frame, std::string _animationname)
+{
+	return m_Loaded[_animationname.c_str()].GetFrames()[_frame].GetAnchorPt();
+}
+
 void AnimationSystem::Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD::Size _scale)
 {
 	SGD::Point temppt = SGD::Point((float)_PosX, (float)_PosY);
-	//SGD::Point point = Game::GetInstance()->GetCameraPosition();
-	//SGD::Point pointtwo = dynamic_cast<Father*>(_info.GetOwner())->GetPosition();
-	//m_Loaded[_info.GetCurrAnim().c_str()].GetFrames()[_info.GetCurrFrame()].SetCollisionRect(SGD::Rectangle{ (float)_PosX, (float)_PosY, (float)_PosX + 64, (float)_PosY + 100 });
-	//if (dynamic_cast<Father*>(_info.GetOwner())->GetFacing() == true)
-	//	m_FatherRect = SGD::Rectangle{ (float)_PosX - 64, (float)_PosY, (float)_PosX, (float)_PosY + 100 };
-	//else
-	//	m_FatherRect = SGD::Rectangle{ (float)_PosX, (float)_PosY, (float)_PosX + 64, (float)_PosY + 100 };
-	/*if (_info.GetOwner()->GetType() == Father::ENT_FATHER)
-		GM->DrawRectangle(m_FatherRect, SGD::Color(255, 0, 0));
-		if (_info.GetOwner()->GetType() == Son::ENT_SON)
-		GM->DrawRectangle(m_SonRect, SGD::Color(255, 0, 0));*/
 	SGD::Point pt = m_Loaded[_info.GetCurrAnim().c_str()].GetFrames()[_info.GetCurrFrame()].GetAnchorPt();
 	SGD::Rectangle crect = m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetCollisionRect();
 	GM->DrawRectangle(GetRect(_info, _PosX, _PosY), SGD::Color(255, 0, 0));
@@ -37,9 +33,12 @@ void AnimationSystem::Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp _info)
 {
-	if (_info.GetOwner() != nullptr)
+	if (m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerType() == "Event" && m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName() != "None")
 	{
-
+		SGD::Event* tempevent = new SGD::Event(m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName().c_str(),nullptr,this);
+		tempevent->SendEventNow();
+		delete tempevent;
+		tempevent = nullptr;
 	}
 }
 
@@ -58,7 +57,8 @@ void AnimationSystem::Load(const char * _filename)
 	double x, y;
 	double ptx, pty;
 	double time;
-
+	std::string trigtype;
+	std::string trigname;
 	TiXmlDocument doc;
 	if (doc.LoadFile(_filename) == false)
 		return;
@@ -102,6 +102,9 @@ void AnimationSystem::Load(const char * _filename)
 			Draw->Attribute("Y", &pty);
 			Draw = Draw->NextSiblingElement("Time");
 			Draw->Attribute("Time", &time);
+			Draw = Draw->NextSiblingElement("Trigger");
+			trigtype = Draw->Attribute("Type");
+			trigname = Draw->Attribute("Name");
 			Frames = Frames->NextSiblingElement();
 			Frame frame;
 			frame.SetDrawFrame(SGD::Rectangle{ (float)left, (float)top, (float)(left + width), (float)(top + height) });
@@ -110,18 +113,8 @@ void AnimationSystem::Load(const char * _filename)
 			frame.SetCollisionRect(SGD::Rectangle{ (float)cleft, (float)ctop, (float)(cleft + cwidth), (float)(ctop + cheight) });
 			frame.SetParticlePt(SGD::Point{ (float)ptx, (float)pty });
 			frame.SetTimer((float)time);
-			if (m_AnimationName == "Idle")
-			{
-				m_Loaded[m_AnimationName].SetLooping(false);
-			}
-			else if (count == 1 && m_AnimationName == "Running")
-			{
-				m_Loaded[m_AnimationName].SetLooping(true);
-			}
-			else
-			{
-				m_Loaded[m_AnimationName].SetLooping(true);
-			}
+			frame.SetTriggerType(trigtype);
+			frame.SetTriggerName(trigname);
 			m_Loaded[m_AnimationName].AddFrames(frame);
 		}
 		Animation = Animation->NextSiblingElement();

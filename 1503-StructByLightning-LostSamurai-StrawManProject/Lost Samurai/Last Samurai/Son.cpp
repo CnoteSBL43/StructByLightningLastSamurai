@@ -253,7 +253,7 @@ void	 Son::Render(void)
 
 SGD::Rectangle  Son::GetRect(void)	const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y);
 }
 void Son::HandleCollision(IEntity* pOther)
 {

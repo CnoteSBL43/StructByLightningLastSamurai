@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         public string triggertype;
         public string triggername;
         public float timer;
+        public bool isLooping;
         public Rectangle Anchorpt
         {
             get { return anchorpt; }

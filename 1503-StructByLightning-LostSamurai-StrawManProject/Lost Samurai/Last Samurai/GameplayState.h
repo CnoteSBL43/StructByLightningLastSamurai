@@ -4,13 +4,13 @@
 #include "../SGD Wrappers/SGD_Geometry.h"
 #include <vector>
 #include "../SGD Wrappers/SGD_Declarations.h"
-#include "../SGD Wrappers/SGD_Event.h"
-#include "../SGD Wrappers/SGD_IListener.h"
+#include "ParticleManager.h"
+
 class Actor;
 class EntityManager;
 class TileSystem;
 class GameplayState :
-	public IGameState,public SGD::IListener
+	public IGameState
 {
 private:
 	GameplayState() = default;
@@ -24,6 +24,7 @@ private:
 	//*****************************************************************//
 	// Game Entities
 	EntityManager* m_pEntities = nullptr;
+	ParticleManager* m_ParticleManager = nullptr;
 	Actor* father = nullptr;
 	Actor* son = nullptr;
 	Actor* swordsman = nullptr;
@@ -33,8 +34,7 @@ private:
 	//******Pause*****//
 	bool m_Pause = false;
 	int cursorPos = 0;
-	//**Events
-	void HandleEvent(const SGD::Event* pEvent) override;
+	
 
 
 	static void MessageProc(const SGD::Message* pMsg);

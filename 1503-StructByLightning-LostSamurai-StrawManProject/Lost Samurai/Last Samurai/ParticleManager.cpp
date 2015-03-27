@@ -10,7 +10,10 @@
 #include "../resource/TinyXML/tinystr.h"
 #include "../resource/TinyXML/tinyxml.h"
 
-
+ParticleManager::ParticleManager()
+{
+	SGD::IListener::RegisterForEvent("Steps");
+}
 
 void ParticleManager::LoadEmitter(char* _fileName)
 {
@@ -199,5 +202,13 @@ void ParticleManager::RenderEmitter(unsigned int _emitterID)
 	for (size_t i = 0; i < activeEmitters.size(); i++)
 	{
 		activeEmitters[i].Render();
+	}
+}
+
+void ParticleManager::HandleEvent(const SGD::Event* potato)
+{
+	if (potato->GetEventID() == "Steps")
+	{
+		int x = 10;
 	}
 }

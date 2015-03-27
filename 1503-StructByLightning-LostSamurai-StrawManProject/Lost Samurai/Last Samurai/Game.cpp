@@ -149,8 +149,8 @@ void Game::Terminate()
 	SGD::GraphicsManager::GetInstance()->Terminate();
 	SGD::GraphicsManager::GetInstance()->DeleteInstance();
 
-	//SGD::EventManager::GetInstance()->Terminate();
-	//SGD::EventManager::GetInstance()->DeleteInstance();
+	SGD::EventManager::GetInstance()->Terminate();
+	SGD::EventManager::GetInstance()->DeleteInstance();
 }
 
 bool Game::CheckPrevious()

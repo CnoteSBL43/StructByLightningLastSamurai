@@ -921,6 +921,7 @@
             this.TriggerNameBox.Name = "TriggerNameBox";
             this.TriggerNameBox.Size = new System.Drawing.Size(168, 22);
             this.TriggerNameBox.TabIndex = 11;
+            this.TriggerNameBox.TextChanged += new System.EventHandler(this.TriggerNameBox_TextChanged);
             // 
             // label12
             // 

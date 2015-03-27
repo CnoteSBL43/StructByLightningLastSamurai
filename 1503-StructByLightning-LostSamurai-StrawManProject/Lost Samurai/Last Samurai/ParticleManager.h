@@ -8,15 +8,16 @@
 #include "Emitter.h"
 #include <vector>
 #include <map>
+#include "../SGD Wrappers/SGD_Event.h"
+#include "../SGD Wrappers/SGD_IListener.h"
 
-
-class ParticleManager
+class ParticleManager: public SGD::IListener
 {
 	std::vector<Emitter> activeEmitters;
 	std::map<std::string, Emitter> loadedEmitters;
 
 public:
-	ParticleManager() = default;
+	ParticleManager();
 	~ParticleManager() = default;
 
 	void LoadEmitter(char * _fileName);
@@ -28,5 +29,6 @@ public:
 
 	void UpdateEmitter(unsigned int _emitterID, float _elapsedTime);
 	void RenderEmitter(unsigned int _emitterID);
+	void HandleEvent(const SGD::Event* potato);
 };
 

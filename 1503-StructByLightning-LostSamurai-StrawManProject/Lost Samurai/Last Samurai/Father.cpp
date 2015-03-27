@@ -113,7 +113,7 @@ void	 Father::Update(float elapsedTime)
 		}
 	}
 
-	AnimationSystem::GetInstance()->Update(elapsedTime, m_Timestamp);
+	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
 void	 Father::Render(void)
 {
@@ -127,7 +127,7 @@ void	 Father::Render(void)
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
 
-		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -1, 1 });
 		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage, p,
 		//	frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ GetSize().width, GetSize().height });
 	}
@@ -136,7 +136,7 @@ void	 Father::Render(void)
 		SGD::Point p = m_ptPosition;
 		p.x -= Game::GetInstance()->GetCameraPosition().x;
 		p.y -= Game::GetInstance()->GetCameraPosition().y;
-		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 1, 1 });
 		//SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
 		//{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
 		//frame, 0.0f, {}, { 255, 255, 255 }, SGD::Size{ -GetSize().width, GetSize().height });
@@ -152,7 +152,7 @@ void	 Father::Render(void)
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y);
 }
 void Father::HandleCollision(IEntity* pOther)
 {

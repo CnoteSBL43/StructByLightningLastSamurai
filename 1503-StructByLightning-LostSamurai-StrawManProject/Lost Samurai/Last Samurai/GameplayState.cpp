@@ -8,7 +8,6 @@
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_Message.h"
-#include "../SGD Wrappers/SGD_EventManager.h"
 #include"MainMenuState.h"
 #include "Message.h"
 #include "EntityManager.h"
@@ -16,7 +15,7 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_Geometry.h"
 #include "AnimationSystem.h"
-#include "../SGD Wrappers/SGD_IListener.h"
+
 
 GameplayState* GameplayState::GetInstance()
 {
@@ -59,14 +58,13 @@ Actor* GameplayState::CreateSwordsman(void)
 }
 void GameplayState::Enter()
 {
-	//Register the class to the events it should know of
-	SGD::IListener::RegisterForEvent("FATHER_DIED");
-	SGD::IListener::RegisterForEvent("SON_DIED");
+	
 
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
 	m_PauseImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Pause.png");
 	m_PointerImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Finger.png");
 	m_pEntities = new EntityManager;
+	m_ParticleManager = new ParticleManager;
 	AnimationSystem::GetInstance()->Load("../anim.xml");
 	//AnimationSystem::GetInstance()->Load("../anim2.xml");
 	father = CreateFather();
@@ -96,6 +94,7 @@ void GameplayState::Exit()
 	son = nullptr;
 	swordsman->Release();
 	swordsman = nullptr;
+	delete m_ParticleManager;
 	if (m_pEntities != nullptr)
 	{
 		m_pEntities->RemoveAll();
@@ -226,6 +225,7 @@ void GameplayState::Pause(void)
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow))
 	{
+		;
 		cursorPos--;
 		if (cursorPos < 0)
 			cursorPos = 4;
@@ -267,13 +267,5 @@ void GameplayState::RenderPause(void)
 		break;
 	case 4: SGD::GraphicsManager::GetInstance()->DrawTexture(m_PointerImage, SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 250, 325));
 		break;
-	}
-}
-void GameplayState::HandleEvent(const SGD::Event* pEvent)
-{
-	if (pEvent->GetEventID() == "FATHER_DIED" || pEvent->GetEventID() == "SON_DIED")
-	{
-		//Do stuff when the father or son dies
-		//like respawn,render someother sprite(not in this function obv), particle effect etc
 	}
 }
