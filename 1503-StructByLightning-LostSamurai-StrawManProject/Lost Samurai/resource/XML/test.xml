@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Particles>
+  <Emitter>
+    <Sprite Name="Flicker.png" />
+    <SpriteWidth Width="32" />
+    <SpriteHeight Height="32" />
+    <PositionX X="134" />
+    <PositionY Y="215" />
+    <SpreadWidth SWidth="1" />
+    <SpreadHeight SHeight="1" />
+    <SpawnRate Rate="50" />
+    <MaximumParticles Max="500" />
+  </Emitter>
+  <Flyweight>
+    <Continuous Bool="1" />
+    <VelXPos XPos="100" />
+    <VelXNeg XNeg="-100" />
+    <VelYPos YPos="100" />
+    <VelYNeg YNeg="-100" />
+    <ScaleStart ScaleS="1.0" />
+    <ScaleEnd ScaleE="0.25" />
+    <RotationStart RotS="0" />
+    <RotationEnd RotE="360" />
+    <LifeMin Min="3" />
+    <LifeMax Max="5" />
+    <StartAlpha StartA="255" />
+    <StartRed StartR="0" />
+    <StartGreen StartG="255" />
+    <StartBlue StartB="0" />
+    <EndAlpha EndA="0" />
+    <EndRed EndR="0" />
+    <EndGreen EndG="0" />
+    <EndBlue EndB="255" />
+  </Flyweight>
+</Particles>
