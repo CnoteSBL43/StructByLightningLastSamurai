@@ -110,12 +110,18 @@ void Emitter::CreateParticles()
 			Particle* particle = new Particle();
 			SGD::Point position;
 			int maxLife;
+			int width = (int)GetSpread().width;
+			int height = (int)GetSpread().height;
+			float min = m_attributes.GetMinLife() * 10;
+			float max = m_attributes.GetMaxLife() * 10;
+			float life;
 
-			position.x = (rand() % (int)GetSpread().width) + m_position.x;
-			position.y = (rand() % (int)GetSpread().height) + m_position.y;
+			position.x = (rand() % width) + m_position.x;
+			position.y = (rand() % height) + m_position.y;
 			particle->SetPosition(position);
-			maxLife = (int)m_attributes.GetMinLife() * 10 - (rand() % ((int)m_attributes.GetMaxLife() * 10 + (int)m_attributes.GetMinLife() * 10));
-			particle->SetMaxLife((float)maxLife / 10);
+			maxLife = (int)min + (rand() % ((int)max - (int)min + 1));
+			life = (float)maxLife / 10;
+			particle->SetMaxLife(life);
 			particle->SetCurrLife(particle->GetMaxLife());
 			particle->SetScaleCurr(GetFlyweight().GetScaleStart());
 			particle->SetRotationCurr(0);

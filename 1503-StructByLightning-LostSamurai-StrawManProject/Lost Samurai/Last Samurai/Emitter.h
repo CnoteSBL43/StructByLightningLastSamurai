@@ -21,6 +21,7 @@ class Emitter
 	bool m_continuous;
 	unsigned int m_maximumParticles;
 	unsigned int m_spawnRate;
+	unsigned long m_ulGameTime = 0;
 	int m_width;
 	int m_height;
 	SGD::Point m_position;
