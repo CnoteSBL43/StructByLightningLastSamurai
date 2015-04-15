@@ -60,6 +60,7 @@ public:
 	std::vector<Tile*> m_Deathcollision;
 	std::vector<Tile*> m_CheckPoints;
 	std::vector<Tile*> m_AI;
+	std::vector<Tile*> Ledges;
 
 	std::map<std::string, std::vector<SGD::Rectangle*>> Traps;
 

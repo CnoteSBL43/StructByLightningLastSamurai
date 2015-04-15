@@ -181,6 +181,12 @@ void GameplayState::Enter()
 		m_pEntities->AddEntity(Load->m_Deathcollision[i], 4);
 		Load->m_Deathcollision[i]->Release();
 	}
+
+	for (unsigned int i = 0; i < Load->Ledges.size(); i++)
+	{
+		m_pEntities->AddEntity(Load->Ledges[i], 7);
+		Load->Ledges[i]->Release();
+	}
 	for (int i = 0; i < Load->Traps["Spikes"].size(); i++)
 	{
 		m_Spikes = CreateSpikes(i);

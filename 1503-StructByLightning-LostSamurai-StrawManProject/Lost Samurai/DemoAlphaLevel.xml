@@ -7207,7 +7207,6 @@
   <RectEelemnt CollisionRectleft="0" CollisionRectTop="128" CollisionRectRight="288" CollisionRectBottom="192" />
   <RectEelemnt CollisionRectleft="256" CollisionRectTop="0" CollisionRectRight="288" CollisionRectBottom="128" />
   <RectEelemnt CollisionRectleft="256" CollisionRectTop="0" CollisionRectRight="672" CollisionRectBottom="32" />
-  <RectEelemnt CollisionRectleft="384" CollisionRectTop="352" CollisionRectRight="448" CollisionRectBottom="384" />
   <RectEelemnt CollisionRectleft="576" CollisionRectTop="96" CollisionRectRight="800" CollisionRectBottom="160" />
   <RectEelemnt CollisionRectleft="256" CollisionRectTop="544" CollisionRectRight="320" CollisionRectBottom="1056" />
   <RectEelemnt CollisionRectleft="320" CollisionRectTop="992" CollisionRectRight="640" CollisionRectBottom="1024" />
@@ -7223,19 +7222,13 @@
   <RectEelemnt CollisionRectleft="896" CollisionRectTop="0" CollisionRectRight="928" CollisionRectBottom="160" />
   <RectEelemnt CollisionRectleft="896" CollisionRectTop="96" CollisionRectRight="1216" CollisionRectBottom="160" />
   <RectEelemnt CollisionRectleft="1152" CollisionRectTop="160" CollisionRectRight="1216" CollisionRectBottom="448" />
-  <RectEelemnt CollisionRectleft="1024" CollisionRectTop="352" CollisionRectRight="1088" CollisionRectBottom="384" />
   <RectEelemnt CollisionRectleft="1216" CollisionRectTop="384" CollisionRectRight="1696" CollisionRectBottom="448" />
   <RectEelemnt CollisionRectleft="1216" CollisionRectTop="352" CollisionRectRight="1696" CollisionRectBottom="416" />
   <RectEelemnt CollisionRectleft="1632" CollisionRectTop="0" CollisionRectRight="1696" CollisionRectBottom="384" />
   <RectEelemnt CollisionRectleft="1152" CollisionRectTop="672" CollisionRectRight="1888" CollisionRectBottom="736" />
   <RectEelemnt CollisionRectleft="1888" CollisionRectTop="672" CollisionRectRight="2560" CollisionRectBottom="736" />
   <RectEelemnt CollisionRectleft="2208" CollisionRectTop="576" CollisionRectRight="2528" CollisionRectBottom="672" />
-  <RectEelemnt CollisionRectleft="1728" CollisionRectTop="512" CollisionRectRight="1792" CollisionRectBottom="544" />
-  <RectEelemnt CollisionRectleft="1728" CollisionRectTop="384" CollisionRectRight="1792" CollisionRectBottom="416" />
-  <RectEelemnt CollisionRectleft="1792" CollisionRectTop="288" CollisionRectRight="1856" CollisionRectBottom="320" />
   <RectEelemnt CollisionRectleft="1984" CollisionRectTop="128" CollisionRectRight="2528" CollisionRectBottom="608" />
-  <RectEelemnt CollisionRectleft="1760" CollisionRectTop="160" CollisionRectRight="1856" CollisionRectBottom="192" />
-  <RectEelemnt CollisionRectleft="2752" CollisionRectTop="32" CollisionRectRight="2816" CollisionRectBottom="544" />
   <RectEelemnt CollisionRectleft="2016" CollisionRectTop="0" CollisionRectRight="2624" CollisionRectBottom="32" />
   <RectEelemnt CollisionRectleft="2624" CollisionRectTop="0" CollisionRectRight="3232" CollisionRectBottom="32" />
   <RectEelemnt CollisionRectleft="2560" CollisionRectTop="672" CollisionRectRight="3328" CollisionRectBottom="736" />
@@ -7255,4 +7248,13 @@
   <RectEelemnt CollisionRectleft="3872" CollisionRectTop="32" CollisionRectRight="3936" CollisionRectBottom="512" />
   <RectEelemnt CollisionRectleft="3360" CollisionRectTop="0" CollisionRectRight="3936" CollisionRectBottom="32" />
   <RectEelemnt CollisionRectleft="3232" CollisionRectTop="0" CollisionRectRight="3360" CollisionRectBottom="32" />
+  <RectEelemnt CollisionRectleft="1696" CollisionRectTop="0" CollisionRectRight="2016" CollisionRectBottom="32" />
+  <RectEelemnt CollisionRectleft="0" CollisionRectTop="0" CollisionRectRight="32" CollisionRectBottom="480" />
+  <RectLedge CollisionRectleft="384" CollisionRectTop="352" CollisionRectRight="448" CollisionRectBottom="384" />
+  <RectLedge CollisionRectleft="1024" CollisionRectTop="352" CollisionRectRight="1088" CollisionRectBottom="384" />
+  <RectLedge CollisionRectleft="1088" CollisionRectTop="544" CollisionRectRight="1184" CollisionRectBottom="576" />
+  <RectLedge CollisionRectleft="1728" CollisionRectTop="512" CollisionRectRight="1792" CollisionRectBottom="544" />
+  <RectLedge CollisionRectleft="1728" CollisionRectTop="384" CollisionRectRight="1792" CollisionRectBottom="416" />
+  <RectLedge CollisionRectleft="1792" CollisionRectTop="288" CollisionRectRight="1856" CollisionRectBottom="320" />
+  <RectLedge CollisionRectleft="1760" CollisionRectTop="160" CollisionRectRight="1856" CollisionRectBottom="192" />
 </Map>
