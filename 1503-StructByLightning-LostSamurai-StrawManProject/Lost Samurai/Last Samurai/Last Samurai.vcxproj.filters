@@ -51,9 +51,6 @@
     <Filter Include="Weapons">
       <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Physics">
-      <UniqueIdentifier>{6a6f6f49-1c2f-4343-912a-c24eea96d1af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game States\MessageSystem">
       <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
     </Filter>
@@ -236,20 +233,8 @@
     <ClCompile Include="CreateArrowMessage.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Rope.cpp">
-      <Filter>Source\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Pulley.cpp">
-      <Filter>Source\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleMass.cpp">
-      <Filter>Source\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Link.cpp">
-      <Filter>Source\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source\Objects</Filter>
+    <ClCompile Include="PopUpSpikes.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source</Filter>
@@ -455,21 +440,7 @@
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="CreateArrowMessage.h" />
-    <ClInclude Include="Pulley.h">
-      <Filter>Source\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Rope.h">
-      <Filter>Source\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleMass.h">
-      <Filter>Source\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Link.h">
-      <Filter>Source\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Source\Objects</Filter>
-    </ClInclude>
+    <ClInclude Include="PopUpSpikes.h" />
     <ClInclude Include="Bullet.h" />
   </ItemGroup>
   <ItemGroup>

@@ -20,5 +20,6 @@ private:
 	DartCannon* m_DartCannon;
 	SGD::Rectangle rect;
 	bool Debug = false;
+	float m_timer = 30.0;
 };
 

@@ -8,9 +8,9 @@ public:
 	
 	Spike();
 	~Spike();
-	void Render();
-	//SGD::Rectangle GetRect() const;
 	
+	//SGD::Rectangle GetRect() const;
+	void Render();
 
 protected:
 SGD::Rectangle rect;

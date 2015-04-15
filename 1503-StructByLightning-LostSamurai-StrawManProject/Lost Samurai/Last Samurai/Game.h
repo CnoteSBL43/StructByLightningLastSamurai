@@ -27,7 +27,7 @@ private:
 	IGameState* m_CurrentState = nullptr;
 	IGameState* m_PreviousState = nullptr;
 	IGameState* pCurrentState = nullptr; //for pause menu
-
+	
 	// This is a Unsigned long Variable used to get Real time 
 	unsigned long m_GameTime = 0;
 	// This is used for storing the Music Volumes and SFX Volumes 
@@ -35,14 +35,7 @@ private:
 	// This is a variable that is used to make the Game go into full screen mode 
 	bool m_FullScreen = false;
 	BitmapFont font;
-	// This is a Size Variable that is used to adjust the Screne size of the Game 
-	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600 };
-	// This is a Size Variable that is used to adjust the World  size of the Game 
-	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 800 };
-	// This is a Point So that you can set the Where the camera is going to be 
-	SGD::Point		m_CameraPosition;
-	SGD::Vector		m_CameraPosVector;
-	SGD::Vector		m_CameraDestinationVector;
+	
 
 public:
 	// this is a Static Game Singleton GetInsatance()
@@ -52,18 +45,12 @@ public:
 
 	// this a Getter for the Screen Size of the Game 
 	SGD::Size	GetScreenSize(void) const		{ return m_szScreenSize; }
+	// This is a Getter for the Camera Position in the Game 
+	SGD::Point	GetCameraPosition(void)const	{ return m_CameraPosition; }
 	// this is a Getter for the World Size of the Game 
 	SGD::Size	GetWorldSize(void)const			{ return m_szWorldSize; }
-
-	// This is a Accessor for the Camera Position in the Game 
-	SGD::Point	GetCameraPosition(void)const	{ return m_CameraPosition; }
-	SGD::Vector GetCameraPosVector(void)const { return m_CameraPosVector; }
-	SGD::Vector GetCameraDestinationVector(void)const { return m_CameraDestinationVector; }
-
 	// This is a Mutator that is Setting the Camera's Position 
 	void SetCameraPosition(SGD::Point _pos){ m_CameraPosition = _pos; }
-	void SetCameraPosVector(SGD::Vector _vec){ m_CameraPosVector = _vec; }
-	void SetCameraDestinationVector(SGD::Vector _vec){ m_CameraDestinationVector = _vec; }
 	// This is a Getter To see if the Full screen mode is true or false 
 	bool GetFullScreen(){ return m_FullScreen; }
 	// This is a mutator to set the fullscreen to either true or false
@@ -92,6 +79,12 @@ public:
 	void Pause(IGameState* n_NextState);
 	bool CheckPrevious();
 
+	// This is a Size Variable that is used to adjust the Screne size of the Game 
+	SGD::Size		m_szScreenSize = SGD::Size{ 800,600};
+	// This is a Size Variable that is used to adjust the World  size of the Game 
+	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 800};
+	// This is a Point So that you can set the Where the camera is going to be 
+	SGD::Point		m_CameraPosition;
 
 	//State Mutator
 	// This is going to change a state when needed 

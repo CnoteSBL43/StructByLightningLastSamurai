@@ -213,7 +213,7 @@
   <Tile PositionX="5" PositionY="10" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="5" PositionY="11" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="5" PositionY="12" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
-  <Tile PositionX="5" PositionY="13" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
+  <Tile PositionX="5" PositionY="13" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="Doors" />
   <Tile PositionX="5" PositionY="14" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="5" PositionY="15" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="5" PositionY="16" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
@@ -725,7 +725,7 @@
   <Tile PositionX="18" PositionY="2" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="18" PositionY="3" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="18" PositionY="4" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
-  <Tile PositionX="18" PositionY="5" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
+  <Tile PositionX="18" PositionY="5" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="Doors" />
   <Tile PositionX="18" PositionY="6" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="18" PositionY="7" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="18" PositionY="8" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
@@ -2521,7 +2521,7 @@
   <Tile PositionX="62" PositionY="38" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="62" PositionY="39" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="63" PositionY="0" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
-  <Tile PositionX="63" PositionY="1" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
+  <Tile PositionX="63" PositionY="1" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="Doors" />
   <Tile PositionX="63" PositionY="2" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="63" PositionY="3" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="63" PositionY="4" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
@@ -2684,7 +2684,7 @@
   <Tile PositionX="67" PositionY="1" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="67" PositionY="2" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="67" PositionY="3" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
-  <Tile PositionX="67" PositionY="4" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
+  <Tile PositionX="67" PositionY="4" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="PopSpikes" />
   <Tile PositionX="67" PositionY="5" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="67" PositionY="6" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="67" PositionY="7" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
@@ -4898,7 +4898,7 @@
   <Tile PositionX="122" PositionY="15" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="122" PositionY="16" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="122" PositionY="17" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
-  <Tile PositionX="122" PositionY="18" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
+  <Tile PositionX="122" PositionY="18" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="Doors" />
   <Tile PositionX="122" PositionY="19" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="122" PositionY="20" TileID="149" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="21" TilePositionY="4" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />
   <Tile PositionX="122" PositionY="21" TileID="37" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="5" TilePositionY="1" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" />

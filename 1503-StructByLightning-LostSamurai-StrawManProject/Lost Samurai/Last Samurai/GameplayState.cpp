@@ -26,6 +26,7 @@
 #include "CannonBall.h"
 #include "CreateCannonBallMessage.h"
 #include "CreateArrowMessage.h"
+#include "PopUpSpikes.h"
 
 #include"CreateSwordMan.h"
 //*********************************************************************//
@@ -192,20 +193,24 @@ void GameplayState::Enter()
 		m_pEntities->AddEntity(Load->Ledges[i], 7);
 		Load->Ledges[i]->Release();
 	}
-	for (unsigned int i = 0; i < Load->Traps["Spikes"].size(); i++)
+	for (int i = 0; i < Load->Traps["Spikes"].size(); i++)
 	{
 		m_Spikes = CreateSpikes(i);
 		m_pEntities->AddEntity(m_Spikes, 5);
 	}
 
-	for (unsigned int i = 0; i < Load->Traps["Cannon"].size(); i++)
+	for (int i = 0; i < Load->Traps["Cannon"].size(); i++)
 	{
 		m_pEntities->AddEntity(CreateCannon(i), 5);
 	}
 
-	for (unsigned int i = 0; i < Load->Traps["darts"].size(); i++)
+	for (int i = 0; i < Load->Traps["darts"].size(); i++)
 	{
 		m_pEntities->AddEntity(CreateDarts(i), 5);
+	}
+	for (int i = 0; i < Load->Traps["PopSpikes"].size(); i++)
+	{
+		m_pEntities->AddEntity(CreatePopUpSpikes(i), 5);
 	}
 
 }
@@ -303,7 +308,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		Pause();
 	else
 	{
-		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
+		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 		{
 			float xIncrement, yIncrement;
 			xIncrement = yIncrement = 5.0f;
@@ -322,55 +327,14 @@ bool GameplayState::Update(float _ElapsedTime)
 			yIncrement = 1.0f;
 			}*/
 
-			if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
-			{
+			Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x + xIncrement, Game::GetInstance()->GetCameraPosVector().y });
-				if (Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
-				}
-			}
-			else if (Game::GetInstance()->GetCameraPosVector().x > Game::GetInstance()->GetCameraDestinationVector().x)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x - xIncrement, Game::GetInstance()->GetCameraPosVector().y });
-				if (Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetCameraDestinationVector().x <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
-				}
-			}
-			if (Game::GetInstance()->GetCameraPosVector().y < Game::GetInstance()->GetCameraDestinationVector().y)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y + yIncrement });
-				if (Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
-				}
-			}
-			else if (Game::GetInstance()->GetCameraPosVector().y > Game::GetInstance()->GetCameraDestinationVector().y)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y - yIncrement });
-				if (Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetCameraDestinationVector().y <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
-
-				}
-			}
-		}
-		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
-		{
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
-			Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
-
-			//	Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 			//SGD::GraphicsManager::GetInstance()->DrawRectangle(SGD::Rectangle{ Game::GetInstance()->GetCameraPosition().x, Game::GetInstance()->GetCameraPosition().y, 800, 600 }, SGD::Color(255, 0, 0));
+
 		}
 		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
 		{
-
-
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
-			Game::GetInstance()->SetCameraDestinationVector({ son->GetPosition().x, son->GetPosition().y });
+			Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
 		}
 
@@ -470,11 +434,13 @@ void GameplayState::Render(float _ElapsedTime)
 			//SGD::GraphicsManager::GetInstance()->DrawRectangle(DestinationRectangle, SGD::Color{ 255, 0, 255, 255 }, SGD::Color{ 255, 255, 0, 0 }, 5);
 
 
-			SGD::Rectangle tileRect;
-			tileRect.left = (X* Load->m_Tile->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2);// -Game::GetInstance()->GetCameraPosition().x;
-			tileRect.top = (float)Y* Load->m_Tile->m_TileHeight;
-			tileRect.right = tileRect.left + Load->m_Tile->m_TileWidth;
-			tileRect.bottom = tileRect.top + Load->m_Tile->m_TileHeight;
+			SGD::Point m_Point;
+			m_Point.x = (X* Load->m_Tile->m_TileWidth + Load->m_Tile->m_TileWidth) - Game::GetInstance()->GetScreenSize().width / 2;
+			m_Point.y = (float)Y* Load->m_Tile->m_TileHeight + Load->m_Tile->m_TileHeight;
+			SGD::Point m_Point2;
+			m_Point2.x = (float)X* Load->m_Tile->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2;
+			m_Point2.y = (float)Y* Load->m_Tile->m_TileHeight + Load->m_Tile->m_TileHeight;
+
 			//// This is a SourceRectangle, It will Draw all the tiles Where the Destination Rectangle is Placed
 			SGD::Rectangle SourceRectangle;
 			// This is The Cell Algorithem
@@ -495,25 +461,21 @@ void GameplayState::Render(float _ElapsedTime)
 			// You will Get a Point Times the X from the For Loop with the Map's Tile Width minus half the screen witdh minus the Camera's X position 
 			// You will Get a Point Times the Y from the For Loop with the Map's Tile Height minus half the screen Height minus the Camera's Y position 
 			// Then Pass it the Source Rectangle to Draw it on the Screen
-			/*	if (X != 0 && Y != 0)
+			if (X != 0 && Y != 0)
 			{
-			if (CullingRect.IsPointInRectangle(m_Point))
-			{
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
-			}
-			else if (CullingRect.IsPointInRectangle(m_Point2))
-			{
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
-			}
+				if (CullingRect.IsPointInRectangle(m_Point))
+				{
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+				}
+				else if (CullingRect.IsPointInRectangle(m_Point2))
+				{
+					SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+				}
 			}
 			else
 			{
-			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
-
-			}*/
-			if (CullingRect.IsIntersecting(tileRect))
-			{
 				SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+
 			}
 			SGD::Rectangle rect;
 			rect.left = ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x;
@@ -790,11 +752,20 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 {
 	Arrow* m_DartCannon = new Arrow();
-	m_DartCannon->SetPosition(_DartCannon->GetPosition());
+	m_DartCannon->SetPosition(SGD::Point{ _DartCannon->GetPosition().x - 450, _DartCannon->GetPosition().y + 20 });
 	m_DartCannon->SetSize(SGD::Size{ 16, 16, });
 	SGD::Vector newVelocity = { -200, 0 };
 	m_DartCannon->SetVelocity(newVelocity);
 	m_DartCannon->SetDartCannon(_DartCannon);
 	return m_DartCannon;
 
+}
+
+Actor*  GameplayState::CreatePopUpSpikes(int i) const
+{
+
+	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
+	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
+
+	return m_PUSpikes;
 }

@@ -16,6 +16,7 @@ Father::Father()
 	m_Timestamp.SetCurrFrame(0);
 	m_Timestamp.SetElapsedTime(0);
 	SGD::IListener::RegisterForEvent("Death");
+	SGD::IListener::RegisterForEvent("Death1");
 	SetStamina(100);
 }
 
@@ -353,6 +354,17 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
 		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		//m_Timestamp.SetCurrFrame(direction);
+
+	}
+	if (pEvent->GetEventID() == "Death1")
+	{
+		direction = 0;
+		SetStamina(100);
+		m_Timestamp.SetCurrAnim("FatherDeath");
+		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
+		event->QueueEvent();
+		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().top - 300 });
 		//m_Timestamp.SetCurrFrame(direction);
 
 	}
