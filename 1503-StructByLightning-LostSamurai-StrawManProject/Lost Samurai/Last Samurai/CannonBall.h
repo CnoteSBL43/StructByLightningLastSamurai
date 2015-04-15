@@ -2,12 +2,13 @@
 #include "Actor.h"
 #include "Cannon.h"
 #include "AnimationTimestamp.h"
-class CannonBall: public Actor
+#include "Bullet.h"
+class CannonBall : public Bullet
 {
 public:
 	CannonBall();
 	~CannonBall();
-	
+
 	void SetCannon(Cannon* _Cannon);
 	void Render();
 	void Update(float elapsedTime);

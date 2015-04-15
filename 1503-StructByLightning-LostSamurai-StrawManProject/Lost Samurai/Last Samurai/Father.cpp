@@ -50,7 +50,7 @@ void	 Father::Update(float elapsedTime)
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight)
 			{
 				SetFacing(true);
-				m_vtVelocity.x = 128.0f;
+				m_vtVelocity.x = 256.0f;
 				letLeft = true;
 				if (frameswitch >= 0.07f)
 				{
@@ -138,14 +138,7 @@ void	 Father::Update(float elapsedTime)
 					grounded = true;
 				}
 			}
-			if (GetOnGround() == false)
-			{
-				direction = 0;
-				m_vtVelocity.y += 2.0f;
-				m_Timestamp.SetCurrAnim("FatherJump");
-				m_Timestamp.SetCurrFrame(direction);
-				m_Timestamp.SetElapsedTime(elapsedTime);
-			}
+			
 			if (m_ptPosition.y <= previousPosY - 200)//ground level -100
 			{
 				upArrow = false;
@@ -230,6 +223,14 @@ void	 Father::Update(float elapsedTime)
 	else if (GetCurrCharacter() == true && !isFlashing)
 		m_staminastate.alpha = 255;
 	frameswitch += elapsedTime;
+	if (GetOnGround() == false)
+	{
+		direction = 0;
+		m_vtVelocity.y += 10.0f;
+		m_Timestamp.SetCurrAnim("FatherJump");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
+	}
 	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
 

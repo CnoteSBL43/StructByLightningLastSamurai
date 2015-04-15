@@ -32,6 +32,7 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="BowMan.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CannonBall.cpp" />
     <ClCompile Include="CreateCannonBallMessage.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="BitmapFont.h" />
     <ClInclude Include="BowMan.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CannonBall.h" />
     <ClInclude Include="CreateCannonBallMessage.h" />
