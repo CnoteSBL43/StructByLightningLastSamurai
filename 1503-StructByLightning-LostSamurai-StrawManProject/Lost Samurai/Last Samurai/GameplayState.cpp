@@ -306,7 +306,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
 		{
 			float xIncrement, yIncrement;
-			xIncrement = yIncrement = 1.0f;
+			xIncrement = yIncrement = 5.0f;
 			/*float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
 			fabs(xDistance);
 			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;

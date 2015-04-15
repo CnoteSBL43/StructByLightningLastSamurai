@@ -42,9 +42,6 @@
     <Filter Include="Source\TinyXML">
       <UniqueIdentifier>{73a1b841-c23d-420e-8625-12f69d930b31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\MessageSystem">
-      <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game States">
       <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
     </Filter>
@@ -56,6 +53,9 @@
     </Filter>
     <Filter Include="Source\Physics">
       <UniqueIdentifier>{6a6f6f49-1c2f-4343-912a-c24eea96d1af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game States\MessageSystem">
+      <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +198,7 @@
       <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="CreateSwordMan.cpp">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="Spike.cpp">
       <Filter>Traps</Filter>
@@ -219,10 +219,10 @@
       <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="DestroyActorMessage.cpp">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="CreateCannonBallMessage.cpp">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="Arrow.cpp">
       <Filter>Weapons</Filter>
@@ -416,10 +416,10 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="MessageID.h">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="CreateSwordMan.h">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="Cannon.h">
       <Filter>Traps</Filter>
@@ -443,13 +443,13 @@
       <Filter>Source\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CreateCannonBallMessage.h">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="CannonBall.h">
       <Filter>Weapons</Filter>
     </ClInclude>
     <ClInclude Include="DestroyActorMessage.h">
-      <Filter>Source\MessageSystem</Filter>
+      <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="BitmapFont.h">
       <Filter>Source\Core</Filter>
