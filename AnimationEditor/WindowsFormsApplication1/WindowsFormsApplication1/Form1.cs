@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,13 +29,12 @@ namespace WindowsFormsApplication1
         public Rectangle ParticlePt = new Rectangle(0, 0, 0, 0);
         int FRed = 0, FGreen = 0, FBlue = 255;
         int CRed = 255, CGreen = 0, CBlue = 0;
-        int ARed = 0, AGreen = 0, ABlue = 0;
+        int ARed = 255, AGreen = 0, ABlue = 255;
         int PRed = 0, PGreen = 255, PBlue = 0;
         Size spritesize = Size.Empty;
         Size Camera = Size.Empty;
         Point CameraCenter = Point.Empty;
         float Timer;
-        float animationtime;
         public bool IsLooping
         {
             get { return isLooping; }
@@ -73,10 +73,11 @@ namespace WindowsFormsApplication1
             FrameLoop = true;
             ShowFrameInfo = true;
             FrameListBox.SelectedIndex = -1;
+            AnimFrames.SelectedIndex = -1;
+            AnimationListBox.SelectedIndex = -1;
             Camera = SpritePanel.Size;
             CameraCenter = new Point(0, 0);
             Timer = 0;
-            animationtime = 0.7f;
             timer1.Start();
             TriggerTypeComboBox.DataSource = Enum.GetValues(typeof(Triggers));
         }
@@ -125,26 +126,29 @@ namespace WindowsFormsApplication1
                 throwaway.Width = AnchorPt.Width;
                 throwaway.Height = AnchorPt.Height;
                 DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
-
-                throwaway.X = ParticlePt.X - CameraCenter.X;
-                throwaway.Y = ParticlePt.Y - CameraCenter.Y;
-                throwaway.Width = ParticlePt.Width;
-                throwaway.Height = ParticlePt.Height;
-                DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                for (int i = 0; i < ParticlePtListBox.Items.Count; i++)
+                {
+                    Rectangle r = (Rectangle)ParticlePtListBox.Items[i];
+                    throwaway.X = r.X - CameraCenter.X;
+                    throwaway.Y = r.Y - CameraCenter.Y;
+                    throwaway.Width = ParticlePt.Width;
+                    throwaway.Height = ParticlePt.Height;
+                    DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                }
                 if (AnimFrames.SelectedIndex == -1)
                 {
                     for (int i = 0; i < FrameListBox.Items.Count; i++)
                     {
                         Frames temp = (Frames)FrameListBox.Items[i];
 
-                        throwaway.X = temp.Framerect.X - CameraCenter.X;
-                        throwaway.Y = temp.Framerect.Y - CameraCenter.Y;
+                        throwaway.X = temp.Framerect.X - CameraCenter.X + temp.anchorpt.X;
+                        throwaway.Y = temp.Framerect.Y - CameraCenter.Y + temp.anchorpt.Y;
                         throwaway.Width = temp.Framerect.Width;
                         throwaway.Height = temp.Framerect.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, FRed, FGreen, FBlue), 2);
 
-                        throwaway.X = temp.Collisionrect.X - CameraCenter.X;
-                        throwaway.Y = temp.Collisionrect.Y - CameraCenter.Y;
+                        throwaway.X = temp.Collisionrect.X - CameraCenter.X + temp.anchorpt.X;
+                        throwaway.Y = temp.Collisionrect.Y - CameraCenter.Y + temp.anchorpt.Y;
                         throwaway.Width = temp.Collisionrect.Width;
                         throwaway.Height = temp.Collisionrect.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, CRed, CGreen, CBlue), 2);
@@ -155,26 +159,29 @@ namespace WindowsFormsApplication1
                         throwaway.Height = temp.Anchorpt.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
 
-                        throwaway.X = temp.particlept.X - CameraCenter.X;
-                        throwaway.Y = temp.particlept.Y - CameraCenter.Y;
-                        throwaway.Width = temp.particlept.Width;
-                        throwaway.Height = temp.particlept.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                        for (int k = 0; k < temp.particlept.Count; k++)
+                        {
+                            throwaway.X = temp.particlept[k].X - CameraCenter.X + temp.anchorpt.X;
+                            throwaway.Y = temp.particlept[k].Y - CameraCenter.Y + temp.anchorpt.Y;
+                            throwaway.Width = temp.particlept[k].Width;
+                            throwaway.Height = temp.particlept[k].Height;
+                            DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                        }
                     }
                 }
-                if (FrameListBox.Items.Count == 0)
+                if (FrameListBox.SelectedIndex == -1)
                 {
                     for (int i = 0; i < AnimFrames.Items.Count; i++)
                     {
                         Frames temp = (Frames)AnimFrames.Items[i];
-                        throwaway.X = temp.Framerect.X - CameraCenter.X;
-                        throwaway.Y = temp.Framerect.Y - CameraCenter.Y;
+                        throwaway.X = temp.Framerect.X - CameraCenter.X + temp.anchorpt.X;
+                        throwaway.Y = temp.Framerect.Y - CameraCenter.Y + temp.anchorpt.Y;
                         throwaway.Width = temp.Framerect.Width;
                         throwaway.Height = temp.Framerect.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, FRed, FGreen, FBlue), 2);
 
-                        throwaway.X = temp.Collisionrect.X - CameraCenter.X;
-                        throwaway.Y = temp.Collisionrect.Y - CameraCenter.Y;
+                        throwaway.X = temp.Collisionrect.X - CameraCenter.X + temp.anchorpt.X;
+                        throwaway.Y = temp.Collisionrect.Y - CameraCenter.Y + temp.anchorpt.Y;
                         throwaway.Width = temp.Collisionrect.Width;
                         throwaway.Height = temp.Collisionrect.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, CRed, CGreen, CBlue), 2);
@@ -185,11 +192,14 @@ namespace WindowsFormsApplication1
                         throwaway.Height = temp.Anchorpt.Height;
                         DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
 
-                        throwaway.X = temp.particlept.X - CameraCenter.X;
-                        throwaway.Y = temp.particlept.Y - CameraCenter.Y;
-                        throwaway.Width = temp.particlept.Width;
-                        throwaway.Height = temp.particlept.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                        for (int j = 0; j < temp.particlept.Count; j++)
+                        {
+                            throwaway.X = temp.particlept[j].X - CameraCenter.X + temp.anchorpt.X;
+                            throwaway.Y = temp.particlept[j].Y - CameraCenter.Y + temp.anchorpt.Y;
+                            throwaway.Width = temp.particlept[j].Width;
+                            throwaway.Height = temp.particlept[j].Height;
+                            DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
+                        }
                     }
                 }
             }
@@ -204,147 +214,102 @@ namespace WindowsFormsApplication1
             DXAnimDraw.DeviceBegin();
             DXAnimDraw.SpriteBegin();
             {
+
                 if (FrameListBox.SelectedIndex != -1)
                 {
-                    if (FrameListBox.Items.Count > 0)
+                    Frames tempframe = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                    if (isPaused == false)
                     {
-                        if (Timer >= animationtime && FrameLoop)
+                        if (Timer >= tempframe.timer && FrameLoop)
                         {
                             if (FrameListBox.SelectedIndex < FrameListBox.Items.Count - 1 && FrameListBox.SelectedIndex != -1)
-                            {
                                 FrameListBox.SelectedIndex++;
-                            }
                             else
-                            {
                                 FrameListBox.SelectedIndex = 0;
-                            }
                             Timer = 0.0f;
                         }
-                        if (!FrameLoop && Timer >= animationtime)
+                        if (!FrameLoop && tempframe.timer >= Timer)
                         {
                             if (FrameListBox.SelectedIndex < FrameListBox.Items.Count - 1 && FrameListBox.SelectedIndex != -1)
-                            {
                                 FrameListBox.SelectedIndex++;
-                            }
                             else if (FrameListBox.SelectedIndex > FrameListBox.Items.Count - 1)
-                            {
                                 FrameListBox.SelectedIndex = -1;
-                            }
                             Timer = 0.0f;
-                        }
-                        if (spritesheetimg != -1 && FrameListBox.SelectedIndex != -1)
-                        {
-                            Frames tempframe = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                            TextureManager.Draw(spritesheetimg, AnchorPt.X - (AnchorPt.X - AnimationPanel.Size.Width / 2), AnchorPt.Y - (AnchorPt.Y - AnimationPanel.Size.Height / 2), 1, 1, tempframe.Framerect);
                         }
                     }
+                    Frames tfr = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                    Rectangle rect = new Rectangle(tfr.framerect.X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                        tfr.framerect.Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), tfr.framerect.Width, tfr.framerect.Height);
+                    Rectangle rec = new Rectangle(tfr.framerect.X + tfr.anchorpt.X, tfr.framerect.Y + tfr.anchorpt.Y, tfr.framerect.Width, tfr.framerect.Height);
+                    if (spritesheetimg != -1)
+                        TextureManager.Draw(spritesheetimg, rect.X, rect.Y, 1, 1, rec);
+                    if (ShowFrameInfo)
+                    {
+                        Rectangle arect = new Rectangle(tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                            tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), 1, 1);
+                        DXDraw.DrawHollowRect(arect, Color.FromArgb(255, 0, 0, 0), 2);
+                        DXDraw.DrawHollowRect(rect, Color.FromArgb(255, 0, 0, 255), 2);
+                        Rectangle r = new Rectangle(tfr.collisionrect.X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                            tfr.collisionrect.Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), tfr.collisionrect.Width, tfr.collisionrect.Height);
+                        DXDraw.DrawHollowRect(r, Color.FromArgb(255, 255, 0, 0), 2);
+                        for (int i = 0; i < tfr.particlept.Count; i++)
+                        {
+                            Rectangle re = new Rectangle(tfr.particlept[i].X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                                tfr.particlept[i].Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), 1, 1);
+                            DXDraw.DrawHollowRect(re, Color.FromArgb(255, 0, 255, 0), 2);
+                        }
+                    }
+
                 }
                 if (AnimFrames.SelectedIndex != -1)
                 {
-                    if (AnimFrames.Items.Count > 0)
+                    Frames tempframe = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                    if (isPaused == false)
                     {
-                        if (Timer >= animationtime && FrameLoop)
+                        if (Timer >= tempframe.timer && FrameLoop)
                         {
                             if (AnimFrames.SelectedIndex < AnimFrames.Items.Count - 1 && AnimFrames.SelectedIndex != -1)
-                            {
                                 AnimFrames.SelectedIndex++;
-                            }
                             else
-                            {
                                 AnimFrames.SelectedIndex = 0;
-                            }
                             Timer = 0.0f;
                         }
-                        if (!FrameLoop && Timer >= animationtime)
+                        if (!FrameLoop && tempframe.timer >= Timer)
                         {
                             if (AnimFrames.SelectedIndex < AnimFrames.Items.Count - 1 && AnimFrames.SelectedIndex != -1)
-                            {
                                 AnimFrames.SelectedIndex++;
-                            }
                             else if (AnimFrames.SelectedIndex > AnimFrames.Items.Count - 1)
-                            {
                                 AnimFrames.SelectedIndex = -1;
-                            }
                             Timer = 0.0f;
                         }
-                        if (spritesheetimg != -1 && AnimFrames.SelectedIndex != -1)
+                    }
+                    Frames tfr = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+
+                    Rectangle rect = new Rectangle(tfr.framerect.X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                        tfr.framerect.Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), tfr.framerect.Width, tfr.framerect.Height);
+                    Rectangle rec = new Rectangle(tfr.framerect.X + tfr.anchorpt.X, tfr.framerect.Y + tfr.anchorpt.Y, tfr.framerect.Width, tfr.framerect.Height);
+                    if (spritesheetimg != -1)
+                        TextureManager.Draw(spritesheetimg, rect.X, rect.Y, 1, 1, rec);
+                    if (ShowFrameInfo)
+                    {
+                        Rectangle arect = new Rectangle(tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                            tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), 1, 1);
+                        DXDraw.DrawHollowRect(arect, Color.FromArgb(255, 0, 0, 0), 2);
+                        DXDraw.DrawHollowRect(rect, Color.FromArgb(255, 0, 0, 255), 2);
+                        Rectangle r = new Rectangle(tfr.collisionrect.X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                            tfr.collisionrect.Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), tfr.collisionrect.Width, tfr.collisionrect.Height);
+                        DXDraw.DrawHollowRect(r, Color.FromArgb(255, 255, 0, 0), 2);
+                        for (int i = 0; i < tfr.particlept.Count; i++)
                         {
-                            Frames tempframe = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
-                            TextureManager.Draw(spritesheetimg, AnimationPanel.Size.Width / 2, AnimationPanel.Size.Height / 2, 1, 1, tempframe.Framerect);
+                            Rectangle re = new Rectangle(tfr.particlept[i].X + tfr.anchorpt.X - (tfr.anchorpt.X - AnimationPanel.Size.Width / 2),
+                                tfr.particlept[i].Y + tfr.anchorpt.Y - (tfr.anchorpt.Y - AnimationPanel.Size.Height / 2), 1, 1);
+                            DXDraw.DrawHollowRect(re, Color.FromArgb(255, 0, 255, 0), 2);
                         }
                     }
-                }
-                if (ShowFrameInfo)
-                {
-
-
-                    Rectangle throwaway = Rectangle.Empty;
-                    if (AnimFrames.SelectedIndex == -1 && FrameListBox.SelectedIndex != -1)
-                    {
-                        Frames temp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-
-                        throwaway.X = AnimationPanel.Size.Width / 2;
-                        throwaway.Y = AnimationPanel.Size.Height / 2;
-                        throwaway.Width = temp.Framerect.Width;
-                        throwaway.Height = temp.Framerect.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, FRed, FGreen, FBlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - temp.collisionrect.X);
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - temp.collisionrect.Y);
-                        throwaway.Width = temp.Collisionrect.Width;
-                        throwaway.Height = temp.Collisionrect.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, CRed, CGreen, CBlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - temp.anchorpt.X);
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - temp.anchorpt.Y);
-                        throwaway.Width = temp.Anchorpt.Width;
-                        throwaway.Height = temp.Anchorpt.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - AnchorPt.X);
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - AnchorPt.Y);
-                        throwaway.Width = AnchorPt.Width;
-                        throwaway.Height = AnchorPt.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - temp.particlept.X); ;
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - temp.particlept.Y); ;
-                        throwaway.Width = temp.particlept.Width;
-                        throwaway.Height = temp.particlept.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
-
-                    }
-
-                    if (FrameListBox.Items.Count == 0 && AnimFrames.SelectedIndex != -1)
-                    {
-                        Frames temp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
-                        throwaway.X = AnimationPanel.Size.Width / 2;
-                        throwaway.Y = AnimationPanel.Size.Height / 2;
-                        throwaway.Width = temp.Framerect.Width;
-                        throwaway.Height = temp.Framerect.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, FRed, FGreen, FBlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - temp.collisionrect.X);
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - temp.collisionrect.Y);
-                        throwaway.Width = temp.Collisionrect.Width;
-                        throwaway.Height = temp.Collisionrect.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, CRed, CGreen, CBlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - AnchorPt.X);
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - AnchorPt.Y);
-                        throwaway.Width = AnchorPt.Width;
-                        throwaway.Height = AnchorPt.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, ARed, AGreen, ABlue), 2);
-
-                        throwaway.X = AnimationPanel.Size.Width / 2 - (temp.framerect.X - temp.particlept.X); ;
-                        throwaway.Y = AnimationPanel.Size.Height / 2 - (temp.framerect.Y - temp.particlept.Y); ;
-                        throwaway.Width = temp.particlept.Width;
-                        throwaway.Height = temp.particlept.Height;
-                        DXDraw.DrawHollowRect(throwaway, Color.FromArgb(255, PRed, PGreen, PBlue), 2);
-
-                    }
 
                 }
+
             }
             DXAnimDraw.SpriteEnd();
             DXAnimDraw.DeviceEnd();
@@ -435,6 +400,11 @@ namespace WindowsFormsApplication1
         private void SpritePanel_MouseUp(object sender, MouseEventArgs e)
         {
             isDown = false;
+            if (DrawingParticlePt)
+            {
+                ParticlePtListBox.Items.Add(ParticlePt);
+                ParticlePt = Rectangle.Empty;
+            }
         }
 
         #endregion
@@ -471,6 +441,7 @@ namespace WindowsFormsApplication1
             AnimFrames.SelectedIndex = -1;
             AnimationListBox.SelectedIndex = -1;
             FrameListBox.SelectedIndex = -1;
+
         }
 
         private void CollisionRectButton_Click(object sender, EventArgs e)
@@ -488,6 +459,7 @@ namespace WindowsFormsApplication1
             AnimFrames.SelectedIndex = -1;
             AnimationListBox.SelectedIndex = -1;
             FrameListBox.SelectedIndex = -1;
+
         }
         private void ParticlePtButton_Click(object sender, EventArgs e)
         {
@@ -504,18 +476,28 @@ namespace WindowsFormsApplication1
             AnimFrames.SelectedIndex = -1;
             AnimationListBox.SelectedIndex = -1;
             FrameListBox.SelectedIndex = -1;
+
         }
 
         private void AddFrameButton_Click(object sender, EventArgs e)
         {
-            if (FrameRect != Rectangle.Empty && CollisionRect != Rectangle.Empty && AnchorPt != Rectangle.Empty && ParticlePt != Rectangle.Empty)
+            if (FrameRect != Rectangle.Empty && CollisionRect != Rectangle.Empty && AnchorPt != Rectangle.Empty && ParticlePtListBox.Items.Count > 0)
             {
                 Frames frame = new Frames();
+                frame.particlept = new List<Rectangle>();
                 frame.timer = (float)FrameDurationUpDown.Value;
-                frame.Framerect = FrameRect;
-                frame.Collisionrect = CollisionRect;
+                frame.Framerect = new Rectangle(FrameRect.X - AnchorPt.X, FrameRect.Y - AnchorPt.Y, FrameRect.Width, FrameRect.Height);
+                frame.Collisionrect = new Rectangle(CollisionRect.X - AnchorPt.X, CollisionRect.Y - AnchorPt.Y, CollisionRect.Width, CollisionRect.Height);
                 frame.Anchorpt = AnchorPt;
-                frame.particlept = ParticlePt;
+                for (int i = 0; i < ParticlePtListBox.Items.Count; i++)
+                {
+                    Rectangle termp = (Rectangle)ParticlePtListBox.Items[i];
+                    termp.X -= AnchorPt.X;
+                    termp.Y -= AnchorPt.Y;
+                    //new Rectangle(ParticlePt.X - AnchorPt.X, ParticlePt.Y - AnchorPt.Y, ParticlePt.Width, ParticlePt.Height);
+                    frame.particlept.Add(termp);
+                }
+                ParticlePtListBox.Items.Clear();
                 frame.isLooping = LoopingCheckBox.Checked;
                 int count = FrameListBox.Items.Count + 1;
                 frame.name = "Frame " + count.ToString();
@@ -530,7 +512,7 @@ namespace WindowsFormsApplication1
                 {
                     frame.triggertype = "Message";
                 }
-                else if (true)
+                else if (TriggerTypeComboBox.SelectedIndex == 2)
                 {
                     frame.triggertype = "Event";
                 }
@@ -569,26 +551,28 @@ namespace WindowsFormsApplication1
                 FrameListBox.Items.RemoveAt(FrameListBox.SelectedIndex);
             }
             FrameListBox.SelectedIndex = -1;
-            AnchorXUpDown.Value = AnchorPt.X;
-            AnchorYUpDown.Value = AnchorPt.Y;
-            FrameRectXUpDown.Value = FrameRect.X;
-            FrameRectYUpDown.Value = FrameRect.Y;
-            FrameRectWidthUpDown.Value = FrameRect.Width;
-            FrameRectHeightUpDown.Value = FrameRect.Height;
-            CollisionRectXUpDown.Value = CollisionRect.X;
-            CollisionRectYUpDown.Value = CollisionRect.Y;
-            CollisionRectWidthUpDown.Value = CollisionRect.Width;
-            CollisionRectHeightUpDown.Value = CollisionRect.Height;
-            ParticlePtXUpDown.Value = ParticlePt.X;
-            ParticlePtYUpDown.Value = ParticlePt.Y;
+            AnchorXUpDown.Value = 0;
+            AnchorYUpDown.Value = 0;
+            FrameRectXUpDown.Value = 0;
+            FrameRectYUpDown.Value = 0;
+            FrameRectWidthUpDown.Value = 0;
+            FrameRectHeightUpDown.Value = 0;
+            CollisionRectXUpDown.Value = 0;
+            CollisionRectYUpDown.Value = 0;
+            CollisionRectWidthUpDown.Value = 0;
+            CollisionRectHeightUpDown.Value = 0;
+            ParticlePtXUpDown.Value = 0;
+            ParticlePtYUpDown.Value = 0;
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
             if (isPaused == true)
             {
+                //FrameRect.
                 isPaused = false;
                 DrawingFrameRect = DrawingCollisionRect = DrawingAnchorPoint = false;
+                TriggerTypeComboBox.Enabled = false;
             }
 
         }
@@ -598,28 +582,43 @@ namespace WindowsFormsApplication1
             if (isPaused == false)
             {
                 isPaused = true;
+                TriggerTypeComboBox.Enabled = true;
             }
         }
 
         private void NextFrameButton_Click(object sender, EventArgs e)
         {
-            if (FrameListBox.SelectedIndex < FrameListBox.Items.Count - 1 && FrameListBox.SelectedIndex != -1)
+            if (FrameListBox.SelectedIndex != -1)
             {
-                FrameListBox.SelectedIndex++;
+                if (FrameListBox.SelectedIndex < FrameListBox.Items.Count - 1)
+                    FrameListBox.SelectedIndex++;
+                else
+                    FrameListBox.SelectedIndex = 0;
             }
-            else
-                FrameListBox.SelectedIndex = 0;
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                if (AnimFrames.SelectedIndex < AnimFrames.Items.Count - 1)
+                    AnimFrames.SelectedIndex++;
+                else
+                    AnimFrames.SelectedIndex = 0;
+            }
         }
 
         private void PreviousFrameButton_Click(object sender, EventArgs e)
         {
-            if (FrameListBox.SelectedIndex == 0)
+            if (FrameListBox.SelectedIndex != -1)
             {
-                FrameListBox.SelectedIndex = FrameListBox.Items.Count - 1;
+                if (FrameListBox.SelectedIndex > 0)
+                    FrameListBox.SelectedIndex--;
+                else
+                    FrameListBox.SelectedIndex = FrameListBox.Items.Count - 1;
             }
-            else
+            else if (AnimFrames.SelectedIndex != -1)
             {
-                FrameListBox.SelectedIndex--;
+                if (AnimFrames.SelectedIndex > 0)
+                    AnimFrames.SelectedIndex--;
+                else
+                    AnimFrames.SelectedIndex = AnimFrames.Items.Count - 1;
             }
         }
 
@@ -633,10 +632,16 @@ namespace WindowsFormsApplication1
                 FrameRect = Rectangle.Empty;
                 CollisionRect = Rectangle.Empty;
             }
+            if (AnimFrames.SelectedIndex != -1)
+            {
+                AnimFrames.Items.RemoveAt(AnimFrames.SelectedIndex);
+                AnimFrames.SelectedIndex = -1;
+            }
         }
 
         private void DeselectButton_Click(object sender, EventArgs e)
         {
+            AnimFrames.SelectedIndex = -1;
             FrameListBox.SelectedIndex = -1;
             AnchorXUpDown.Value = AnchorPt.X;
             AnchorYUpDown.Value = AnchorPt.Y;
@@ -698,6 +703,15 @@ namespace WindowsFormsApplication1
 
         private void RemoveAnimButton_Click(object sender, EventArgs e)
         {
+            if (AnimationListBox.SelectedIndex != -1)
+            {
+                AnimationListBox.Items.RemoveAt(AnimationListBox.SelectedIndex);
+                AnimationListBox.SelectedIndex = -1;
+                AnimationNameTextBox.Clear();
+                AnimFrames.SelectedIndex = -1;
+                AnimFrames.Items.Clear();
+                isPaused = true;
+            }
 
         }
 
@@ -709,11 +723,21 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.framerect.X = (int)FrameRectXUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
-            }
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
 
-            else if (FrameListBox.SelectedIndex == -1)
+                frametemp.framerect.X = (int)FrameRectXUpDown.Value - frametemp.anchorpt.X;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.framerect.X = (int)FrameRectXUpDown.Value - frametemp.anchorpt.X;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (AnimFrames.SelectedIndex == -1 && FrameListBox.SelectedIndex == -1)
                 FrameRect.X = (int)FrameRectXUpDown.Value;
         }
 
@@ -722,10 +746,21 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.framerect.Y = (int)FrameRectYUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                frametemp.framerect.Y = (int)FrameRectYUpDown.Value - frametemp.anchorpt.Y;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.framerect.Y = (int)FrameRectYUpDown.Value - frametemp.anchorpt.Y;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 FrameRect.Y = (int)FrameRectYUpDown.Value;
         }
 
@@ -734,10 +769,21 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
                 frametemp.framerect.Width = (int)FrameRectWidthUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.framerect.Width = (int)FrameRectWidthUpDown.Value;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 FrameRect.Width = (int)FrameRectWidthUpDown.Value;
         }
 
@@ -746,10 +792,22 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
                 frametemp.framerect.Height = (int)FrameRectHeightUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.framerect.Height = (int)FrameRectHeightUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 FrameRect.Height = (int)FrameRectHeightUpDown.Value;
         }
 
@@ -758,10 +816,21 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.collisionrect.X = (int)CollisionRectXUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                frametemp.collisionrect.X = (int)CollisionRectXUpDown.Value - frametemp.anchorpt.X;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.collisionrect.X = (int)CollisionRectXUpDown.Value - frametemp.anchorpt.X;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 CollisionRect.X = (int)CollisionRectXUpDown.Value;
         }
 
@@ -770,11 +839,24 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.collisionrect.Y = (int)CollisionRectYUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                frametemp.collisionrect.Y = (int)CollisionRectYUpDown.Value - frametemp.anchorpt.Y;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.collisionrect.Y = (int)CollisionRectYUpDown.Value - frametemp.anchorpt.Y;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 CollisionRect.Y = (int)CollisionRectYUpDown.Value;
+
         }
 
         private void CollisionRectWidthUpDown_ValueChanged(object sender, EventArgs e)
@@ -782,23 +864,47 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
                 frametemp.collisionrect.Width = (int)CollisionRectWidthUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+
+                frametemp.collisionrect.Width = (int)CollisionRectWidthUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 CollisionRect.Width = (int)CollisionRectWidthUpDown.Value;
         }
 
         private void CollisionRectHeightUpDown_ValueChanged(object sender, EventArgs e)
         {
-
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
                 frametemp.collisionrect.Height = (int)CollisionRectHeightUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.collisionrect.Height = (int)CollisionRectHeightUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 CollisionRect.Height = (int)CollisionRectHeightUpDown.Value;
         }
 
@@ -807,10 +913,22 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
                 frametemp.anchorpt.X = (int)AnchorXUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.anchorpt.X = (int)AnchorXUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 AnchorPt.X = (int)AnchorXUpDown.Value;
         }
 
@@ -818,22 +936,44 @@ namespace WindowsFormsApplication1
         {
             if (FrameListBox.SelectedIndex != -1)
             {
-                Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
                 frametemp.anchorpt.Y = (int)AnchorYUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.anchorpt.Y = (int)AnchorYUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 AnchorPt.Y = (int)AnchorYUpDown.Value;
-        }
-
-        private void AnimationSpeedUpDown_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void FrameDurationUpDown_ValueChanged(object sender, EventArgs e)
         {
-            animationtime = (float)FrameDurationUpDown.Value;
+            if (FrameListBox.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                frametemp.timer = (float)FrameDurationUpDown.Value;
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.timer = (float)FrameDurationUpDown.Value;
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
         }
 
         private void ParticlePtXUpDown_ValueChanged(object sender, EventArgs e)
@@ -841,10 +981,30 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.particlept.X = (int)ParticlePtXUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = frametemp.particlept[ParticlePtListBox.SelectedIndex];
+                    pt.X = (int)ParticlePtXUpDown.Value;
+                    frametemp.particlept[ParticlePtListBox.SelectedIndex] = pt;
+                }
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
             }
-            else if (FrameListBox.SelectedIndex == -1)
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = frametemp.particlept[ParticlePtListBox.SelectedIndex];
+                    pt.X = (int)ParticlePtXUpDown.Value;
+                    frametemp.particlept[ParticlePtListBox.SelectedIndex] = pt;
+                }
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
                 ParticlePt.X = (int)ParticlePtXUpDown.Value;
         }
 
@@ -853,12 +1013,32 @@ namespace WindowsFormsApplication1
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
-                frametemp.particlept.Y = (int)ParticlePtYUpDown.Value;
-                FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
-            }
-            else if (FrameListBox.SelectedIndex == -1)
-                ParticlePt.Y = (int)ParticlePtYUpDown.Value;
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = frametemp.particlept[ParticlePtListBox.SelectedIndex];
+                    pt.Y = (int)ParticlePtYUpDown.Value;
+                    frametemp.particlept[ParticlePtListBox.SelectedIndex] = pt;
+                }
+                if (frametemp != frametemptwo)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
 
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = frametemp.particlept[ParticlePtListBox.SelectedIndex];
+                    pt.Y = (int)ParticlePtYUpDown.Value;
+                    frametemp.particlept[ParticlePtListBox.SelectedIndex] = pt;
+                }
+                if (frametemp != frametemptwo)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
+                ParticlePt.Y = (int)ParticlePtYUpDown.Value;
         }
 
 
@@ -867,34 +1047,52 @@ namespace WindowsFormsApplication1
 
         private void FrameListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DrawingAnchorPoint = false;
+            DrawingCollisionRect = false;
+            DrawingFrameRect = false;
+            DrawingParticlePt = false;
             AnimFrames.SelectedIndex = -1;
             if (FrameListBox.SelectedIndex != -1)
             {
                 Frames tframe = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
                 AnchorXUpDown.Value = tframe.anchorpt.X;
                 AnchorYUpDown.Value = tframe.anchorpt.Y;
-                ParticlePtXUpDown.Value = tframe.particlept.X;
-                ParticlePtYUpDown.Value = tframe.particlept.Y;
-                CollisionRectXUpDown.Value = tframe.collisionrect.X;
-                CollisionRectYUpDown.Value = tframe.collisionrect.Y;
+                ParticlePtListBox.Items.Clear();
+                for (int i = 0; i < tframe.particlept.Count; i++)
+                {
+                    ParticlePtListBox.Items.Add(tframe.particlept[i]);
+                }
+
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = (Rectangle)ParticlePtListBox.Items[ParticlePtListBox.SelectedIndex];
+                    ParticlePtXUpDown.Value = pt.X;
+                    ParticlePtYUpDown.Value = pt.Y;
+                }
+                CollisionRectXUpDown.Value = tframe.collisionrect.X + tframe.anchorpt.X;
+                CollisionRectYUpDown.Value = tframe.collisionrect.Y + tframe.anchorpt.Y;
                 CollisionRectWidthUpDown.Value = tframe.collisionrect.Width;
                 CollisionRectHeightUpDown.Value = tframe.collisionrect.Height;
-                FrameRectXUpDown.Value = tframe.framerect.X;
-                FrameRectYUpDown.Value = tframe.framerect.Y;
+                FrameRectXUpDown.Value = tframe.framerect.X + tframe.anchorpt.X;
+                FrameRectYUpDown.Value = tframe.framerect.Y + tframe.anchorpt.Y;
                 FrameRectWidthUpDown.Value = tframe.framerect.Width;
                 FrameRectHeightUpDown.Value = tframe.framerect.Height;
+                FrameDurationUpDown.Value = (decimal)tframe.timer;
                 TriggerNameBox.Text = tframe.triggername;
-                if (tframe.triggertype == "None")
+                if (TriggerTypeComboBox.Enabled)
                 {
-                    TriggerTypeComboBox.SelectedIndex = 0;
-                }
-                else if (tframe.triggertype == "Event")
-                {
-                    TriggerTypeComboBox.SelectedIndex = 1;
-                }
-                else if (tframe.triggertype == "Message")
-                {
-                    TriggerTypeComboBox.SelectedIndex = 2;
+                    if (tframe.triggertype == "None")
+                    {
+                        TriggerTypeComboBox.SelectedIndex = 0;
+                    }
+                    else if (tframe.triggertype == "Message")
+                    {
+                        TriggerTypeComboBox.SelectedIndex = 1;
+                    }
+                    else if (tframe.triggertype == "Event")
+                    {
+                        TriggerTypeComboBox.SelectedIndex = 2;
+                    }
                 }
             }
         }
@@ -912,14 +1110,50 @@ namespace WindowsFormsApplication1
         }
         private void LoadSpriteSheet_Click(object sender, EventArgs e)
         {
+            if (spritesheetimg != -1)
+            {
+                TextureManager.UnloadTexture(spritesheetimg);
+                spritesheetimg = -1;
+            }
+            AnchorXUpDown.Value = 0;
+            AnchorYUpDown.Value = 0;
+            ParticlePtXUpDown.Value = 0;
+            ParticlePtYUpDown.Value = 0;
+            FrameRectXUpDown.Value = 0;
+            FrameRectYUpDown.Value = 0;
+            FrameRectWidthUpDown.Value = 0;
+            FrameRectHeightUpDown.Value = 0;
+            CollisionRectXUpDown.Value = 0;
+            CollisionRectYUpDown.Value = 0;
+            CollisionRectWidthUpDown.Value = 0;
+            CollisionRectHeightUpDown.Value = 0;
+            AnimationNameTextBox.Clear();
+            TriggerNameBox.Clear();
+            TriggerTypeComboBox.SelectedIndex = 0;
+            LoopingCheckBox.Checked = true;
+            FrameInfoCheckBox.Checked = true;
+            FrameDurationUpDown.Value = (decimal)0.700;
+            FrameListBox.SelectedIndex = -1;
+            FrameListBox.Items.Clear();
+            AnimationListBox.SelectedIndex = -1;
+            AnimationListBox.Items.Clear();
+            AnimFrames.SelectedIndex = -1;
+            AnimFrames.Items.Clear();
+            ParticlePtListBox.SelectedIndex = -1;
+            ParticlePtListBox.Items.Clear();
+            this.Invalidate();
+
             OpenFileDialog Load = new OpenFileDialog();
+            Load.Filter = "All Files|*.*|PNG Files|*.png";
             if (DialogResult.OK == Load.ShowDialog())
             {
-                m_FileName = Load.SafeFileName;
-                spritesheetimg = TextureManager.LoadTexture(Load.FileName);
-                spritesize = new Size(TextureManager.GetTextureWidth(spritesheetimg), TextureManager.GetTextureHeight(spritesheetimg));
-
-                UpdateScrollBars();
+                if (Path.GetExtension(Load.FileName) == ".png")
+                {
+                    m_FileName = Load.SafeFileName;
+                    spritesheetimg = TextureManager.LoadTexture(Load.FileName);
+                    spritesize = new Size(TextureManager.GetTextureWidth(spritesheetimg), TextureManager.GetTextureHeight(spritesheetimg));
+                    UpdateScrollBars();
+                }
             }
         }
         private void UpdateScrollBars()
@@ -965,26 +1199,42 @@ namespace WindowsFormsApplication1
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (spritesheetimg != -1)
+            {
                 TextureManager.UnloadTexture(spritesheetimg);
+                spritesheetimg = -1;
+            }
+
             AnchorXUpDown.Value = 0;
             AnchorYUpDown.Value = 0;
+            ParticlePtXUpDown.Value = 0;
+            ParticlePtYUpDown.Value = 0;
             FrameRectXUpDown.Value = 0;
             FrameRectYUpDown.Value = 0;
             FrameRectWidthUpDown.Value = 0;
             FrameRectHeightUpDown.Value = 0;
             CollisionRectXUpDown.Value = 0;
             CollisionRectYUpDown.Value = 0;
-            CollisionRectHeightUpDown.Value = 0;
             CollisionRectWidthUpDown.Value = 0;
+            CollisionRectHeightUpDown.Value = 0;
+            AnimationNameTextBox.Clear();
+            TriggerNameBox.Clear();
+            TriggerTypeComboBox.SelectedIndex = 0;
+            LoopingCheckBox.Checked = true;
+            FrameDurationUpDown.Value = (decimal)0.700;
+            FrameInfoCheckBox.Checked = true;
             FrameListBox.SelectedIndex = -1;
             FrameListBox.Items.Clear();
-            FrameRect = Rectangle.Empty;
-            CollisionRect = Rectangle.Empty;
+            AnimationListBox.SelectedIndex = -1;
+            AnimationListBox.Items.Clear();
+            AnimFrames.SelectedIndex = -1;
+            AnimFrames.Items.Clear();
+            ParticlePtListBox.SelectedIndex = -1;
+            ParticlePtListBox.Items.Clear();
+            ParticlePt = Rectangle.Empty;
             AnchorPt = Rectangle.Empty;
-            AnimationNameTextBox.Clear();
-            FrameDurationUpDown.Value = 0;
-            TriggerTypeComboBox.SelectedIndex = 0;
-            TriggerNameBox.Clear();
+            CollisionRect = Rectangle.Empty;
+            FrameRect = Rectangle.Empty;
+            this.Invalidate();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -1031,6 +1281,10 @@ namespace WindowsFormsApplication1
 
         private void AnimFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DrawingAnchorPoint = false;
+            DrawingCollisionRect = false;
+            DrawingFrameRect = false;
+            DrawingParticlePt = false;
             FrameRect = Rectangle.Empty;
             CollisionRect = Rectangle.Empty;
             AnchorPt = Rectangle.Empty;
@@ -1039,28 +1293,39 @@ namespace WindowsFormsApplication1
             if (AnimFrames.SelectedIndex != -1)
             {
                 Frames fr = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
-                ParticlePtXUpDown.Value = fr.particlept.X;
-                ParticlePtYUpDown.Value = fr.particlept.Y;
+                ParticlePtListBox.Items.Clear();
+                for (int i = 0; i < fr.particlept.Count; i++)
+                {
+                    ParticlePtListBox.Items.Add(fr.particlept[i]);
+                }
+
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Rectangle pt = (Rectangle)ParticlePtListBox.Items[ParticlePtListBox.SelectedIndex];
+                    ParticlePtXUpDown.Value = pt.X;
+                    ParticlePtYUpDown.Value = pt.Y;
+                }
                 AnchorXUpDown.Value = fr.anchorpt.X;
                 AnchorYUpDown.Value = fr.anchorpt.Y;
-                CollisionRectXUpDown.Value = fr.collisionrect.X;
-                CollisionRectYUpDown.Value = fr.collisionrect.Y;
+                CollisionRectXUpDown.Value = fr.collisionrect.X + fr.anchorpt.X;
+                CollisionRectYUpDown.Value = fr.collisionrect.Y + fr.anchorpt.Y;
                 CollisionRectWidthUpDown.Value = fr.collisionrect.Width;
                 CollisionRectHeightUpDown.Value = fr.collisionrect.Height;
-                FrameRectXUpDown.Value = fr.framerect.X;
-                FrameRectYUpDown.Value = fr.framerect.Y;
+                FrameRectXUpDown.Value = fr.framerect.X + fr.anchorpt.X;
+                FrameRectYUpDown.Value = fr.framerect.Y + fr.anchorpt.Y;
                 FrameRectWidthUpDown.Value = fr.framerect.Width;
                 FrameRectHeightUpDown.Value = fr.framerect.Height;
+                FrameDurationUpDown.Value = (decimal)fr.timer;
                 TriggerNameBox.Text = fr.triggername;
                 if (fr.triggertype == "None")
                 {
                     TriggerTypeComboBox.SelectedIndex = 0;
                 }
-                else if (fr.triggertype == "Event")
+                else if (fr.triggertype == "Message")
                 {
                     TriggerTypeComboBox.SelectedIndex = 1;
                 }
-                else if (fr.triggertype == "Message")
+                else if (fr.triggertype == "Event")
                 {
                     TriggerTypeComboBox.SelectedIndex = 2;
                 }
@@ -1089,13 +1354,114 @@ namespace WindowsFormsApplication1
 
         private void OpenAnimationFile_Click(object sender, EventArgs e)
         {
-            SaveFileDialog Save = new SaveFileDialog();
+            if (spritesheetimg != -1)
+            {
+                TextureManager.UnloadTexture(spritesheetimg);
+                spritesheetimg = -1;
+            }
+            AnchorXUpDown.Value = 0;
+            AnchorYUpDown.Value = 0;
+            ParticlePtXUpDown.Value = 0;
+            ParticlePtYUpDown.Value = 0;
+            FrameRectXUpDown.Value = 0;
+            FrameRectYUpDown.Value = 0;
+            FrameRectWidthUpDown.Value = 0;
+            FrameRectHeightUpDown.Value = 0;
+            CollisionRectXUpDown.Value = 0;
+            CollisionRectYUpDown.Value = 0;
+            CollisionRectWidthUpDown.Value = 0;
+            CollisionRectHeightUpDown.Value = 0;
+            AnimationNameTextBox.Clear();
+            TriggerNameBox.Clear();
+            TriggerTypeComboBox.SelectedIndex = 0;
+            LoopingCheckBox.Checked = true;
+            FrameInfoCheckBox.Checked = true;
+            FrameDurationUpDown.Value = (decimal)0.700;
+            FrameListBox.SelectedIndex = -1;
+            FrameListBox.Items.Clear();
+            AnimationListBox.SelectedIndex = -1;
+            AnimationListBox.Items.Clear();
+            AnimFrames.SelectedIndex = -1;
+            AnimFrames.Items.Clear();
+            this.Invalidate();
+
+            OpenFileDialog Save = new OpenFileDialog();
             Save.Filter = "All Files|*.*|Xml Files|*.xml";
             Save.FilterIndex = 2;
             Save.DefaultExt = ".xml";
             if (DialogResult.OK == Save.ShowDialog())
             {
-
+                if (Path.GetExtension(Save.FileName) == ".xml")
+                {
+                    XElement root = XElement.Load(Save.FileName);
+                    XAttribute imgfilename = root.Attribute("Image");
+                    XAttribute filter = root.Attribute("MF");
+                    if (filter == null)
+                        return;
+                    m_FileName = imgfilename.Value;
+                    spritesheetimg = TextureManager.LoadTexture(m_FileName);
+                    spritesize = new Size(TextureManager.GetTextureWidth(spritesheetimg), TextureManager.GetTextureHeight(spritesheetimg));
+                    IEnumerable<XElement> Anim = root.Elements();
+                    foreach (XElement Ani in Anim)
+                    {
+                        Animation anima = new Animation();
+                        anima.m_Frames = new List<Frames>();
+                        XAttribute aniname = Ani.Attribute("Name");
+                        anima.name = aniname.Value;
+                        UpdateScrollBars();
+                        int count = 0;
+                        IEnumerable<XElement> Framess = Ani.Elements();
+                        foreach (XElement FR in Framess)
+                        {
+                            XElement Draw = FR.Element("Draw");
+                            XAttribute drx = Draw.Attribute("RectX");
+                            XAttribute dry = Draw.Attribute("RectY");
+                            XAttribute drw = Draw.Attribute("RectWidth");
+                            XAttribute drh = Draw.Attribute("RectHeight");
+                            XElement Collide = FR.Element("Collision");
+                            XAttribute crx = Collide.Attribute("RectX");
+                            XAttribute cry = Collide.Attribute("RectY");
+                            XAttribute crw = Collide.Attribute("RectWidth");
+                            XAttribute crh = Collide.Attribute("RectHeight");
+                            XElement Anchor = FR.Element("AnchorPT");
+                            XAttribute aptx = Anchor.Attribute("X");
+                            XAttribute apty = Anchor.Attribute("Y");
+                            XElement Particle = FR.Element("Particles");
+                            Frames f = new Frames();
+                            f.particlept = new List<Rectangle>();
+                            IEnumerable<XElement> ParticlePt = Particle.Elements();
+                            foreach (XElement Particles in ParticlePt)
+                            {
+                                XAttribute ptx = Particles.Attribute("X");
+                                XAttribute pty = Particles.Attribute("Y");
+                                Rectangle r = new Rectangle(int.Parse(ptx.Value), int.Parse(pty.Value), 1, 1);
+                                f.particlept.Add(r);
+                            }
+                            XElement time = FR.Element("Time");
+                            XAttribute timer = time.Attribute("Time");
+                            XElement trigger = FR.Element("Trigger");
+                            XAttribute trigtype = trigger.Attribute("Type");
+                            XAttribute trigname = trigger.Attribute("Name");
+                            f.anchorpt.X = int.Parse(aptx.Value);
+                            f.anchorpt.Y = int.Parse(apty.Value);
+                            f.collisionrect.X = int.Parse(crx.Value);
+                            f.collisionrect.Y = int.Parse(cry.Value);
+                            f.collisionrect.Width = int.Parse(crw.Value);
+                            f.collisionrect.Height = int.Parse(crh.Value);
+                            f.framerect.X = int.Parse(drx.Value);
+                            f.framerect.Y = int.Parse(dry.Value);
+                            f.framerect.Width = int.Parse(drw.Value);
+                            f.framerect.Height = int.Parse(drh.Value);
+                            f.timer = float.Parse(timer.Value);
+                            f.triggertype = trigtype.Value;
+                            f.triggername = trigname.Value;
+                            f.name = "Frame " + count.ToString();
+                            count++;
+                            anima.m_Frames.Add(f);
+                        }
+                        AnimationListBox.Items.Add(anima);
+                    }
+                }
             }
         }
 
@@ -1109,7 +1475,13 @@ namespace WindowsFormsApplication1
             if (DialogResult.OK == Save.ShowDialog())
             {
                 XElement root = new XElement("Character");
-                XAttribute att = new XAttribute("Image", m_FileName);
+                XAttribute att;
+                if (m_FileName != null)
+                    att = new XAttribute("Image", m_FileName);
+                else
+                    att = new XAttribute("Image", "Empty");
+                root.Add(att);
+                att = new XAttribute("MF", "Filter");
                 root.Add(att);
                 for (int i = 0; i < AnimationListBox.Items.Count; i++)
                 {
@@ -1121,9 +1493,9 @@ namespace WindowsFormsApplication1
                     {
                         XElement tempfr = new XElement("Frame");
                         XElement DrawFrame = new XElement("Draw");
-                        att = new XAttribute("RectX", tempani.m_Frames[j].Framerect.X - tempani.m_Frames[j].anchorpt.X);
+                        att = new XAttribute("RectX", tempani.m_Frames[j].Framerect.X);
                         DrawFrame.Add(att);
-                        att = new XAttribute("RectY", tempani.m_Frames[j].Framerect.Y - tempani.m_Frames[j].anchorpt.Y);
+                        att = new XAttribute("RectY", tempani.m_Frames[j].Framerect.Y);
                         DrawFrame.Add(att);
                         att = new XAttribute("RectWidth", tempani.m_Frames[j].Framerect.Width);
                         DrawFrame.Add(att);
@@ -1131,9 +1503,9 @@ namespace WindowsFormsApplication1
                         DrawFrame.Add(att);
                         tempfr.Add(DrawFrame);
                         DrawFrame = new XElement("Collision");
-                        att = new XAttribute("RectX", tempani.m_Frames[j].collisionrect.X - tempani.m_Frames[j].anchorpt.X);
+                        att = new XAttribute("RectX", tempani.m_Frames[j].collisionrect.X);
                         DrawFrame.Add(att);
-                        att = new XAttribute("RectY", tempani.m_Frames[j].collisionrect.Y - tempani.m_Frames[j].anchorpt.Y);
+                        att = new XAttribute("RectY", tempani.m_Frames[j].collisionrect.Y);
                         DrawFrame.Add(att);
                         att = new XAttribute("RectWidth", tempani.m_Frames[j].collisionrect.Width);
                         DrawFrame.Add(att);
@@ -1146,12 +1518,17 @@ namespace WindowsFormsApplication1
                         att = new XAttribute("Y", tempani.m_Frames[j].anchorpt.Y);
                         DrawFrame.Add(att);
                         tempfr.Add(DrawFrame);
-                        DrawFrame = new XElement("ParticlePT");
-                        att = new XAttribute("X", tempani.m_Frames[j].particlept.X - tempani.m_Frames[j].anchorpt.X);
-                        DrawFrame.Add(att);
-                        att = new XAttribute("Y", tempani.m_Frames[j].particlept.Y - tempani.m_Frames[j].anchorpt.Y);
-                        DrawFrame.Add(att);
-                        tempfr.Add(DrawFrame);
+                        XElement Particles = new XElement("Particles");
+                        for (int k = 0; k < tempani.m_Frames[j].particlept.Count; k++)
+                        {
+                            DrawFrame = new XElement("ParticlePT");
+                            att = new XAttribute("X", tempani.m_Frames[j].particlept[k].X);
+                            DrawFrame.Add(att);
+                            att = new XAttribute("Y", tempani.m_Frames[j].particlept[k].Y);
+                            DrawFrame.Add(att);
+                            Particles.Add(DrawFrame);
+                        }
+                        tempfr.Add(Particles);
                         DrawFrame = new XElement("Time");
                         att = new XAttribute("Time", tempani.m_Frames[j].timer);
                         DrawFrame.Add(att);
@@ -1172,7 +1549,109 @@ namespace WindowsFormsApplication1
 
         private void TriggerNameBox_TextChanged(object sender, EventArgs e)
         {
-
+            if (FrameListBox.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                frametemp.triggername = TriggerNameBox.Text;
+                if (frametemptwo != frametemp)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                frametemp.triggername = TriggerNameBox.Text;
+                if (frametemptwo != frametemp)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
         }
+
+        private void TriggerTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (FrameListBox.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+
+                if (TriggerTypeComboBox.SelectedIndex == 0)
+                {
+                    frametemp.triggertype = "None";
+                }
+                if (TriggerTypeComboBox.SelectedIndex == 1)
+                {
+                    frametemp.triggertype = "Message";
+                }
+                if (TriggerTypeComboBox.SelectedIndex == 2)
+                {
+                    frametemp.triggertype = "Event";
+                }
+                if (frametemptwo != frametemp)
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = frametemp;
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemptwo = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+
+                if (TriggerTypeComboBox.SelectedIndex == 0)
+                {
+                    frametemp.triggertype = "None";
+                }
+                if (TriggerTypeComboBox.SelectedIndex == 1)
+                {
+                    frametemp.triggertype = "Message";
+                }
+                if (TriggerTypeComboBox.SelectedIndex == 2)
+                {
+                    frametemp.triggertype = "Event";
+                }
+                if (frametemptwo != frametemp)
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = frametemp;
+            }
+        }
+
+        private void ParticlePtListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ParticlePtListBox.SelectedIndex != -1)
+            {
+                Rectangle r = (Rectangle)ParticlePtListBox.Items[ParticlePtListBox.SelectedIndex];
+                ParticlePtXUpDown.Value = r.X;
+                ParticlePtYUpDown.Value = r.Y;
+            }
+        }
+
+        private void RemoveFrameButton_Click_1(object sender, EventArgs e)
+        {
+            if (FrameListBox.SelectedIndex != -1)
+            {
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Frames temp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
+                    temp.particlept.RemoveAt(ParticlePtListBox.SelectedIndex);
+                    ParticlePtListBox.Items.RemoveAt(ParticlePtListBox.SelectedIndex);
+                    FrameListBox.Items[FrameListBox.SelectedIndex] = temp;
+                }
+            }
+            else if (AnimFrames.SelectedIndex != -1)
+            {
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    Frames temp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                    temp.particlept.RemoveAt(ParticlePtListBox.SelectedIndex);
+                    ParticlePtListBox.Items.RemoveAt(ParticlePtListBox.SelectedIndex);
+                    AnimFrames.Items[AnimFrames.SelectedIndex] = temp;
+                }
+            }
+            else if (FrameListBox.SelectedIndex == -1 && AnimFrames.SelectedIndex == -1)
+            {
+                if (ParticlePtListBox.SelectedIndex != -1)
+                {
+                    ParticlePtListBox.Items.RemoveAt(ParticlePtListBox.SelectedIndex);
+                }
+            }
+        }
+
+
     }
 }

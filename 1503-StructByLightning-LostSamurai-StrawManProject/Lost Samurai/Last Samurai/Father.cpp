@@ -16,7 +16,7 @@ Father::Father()
 	m_Timestamp.SetCurrFrame(0);
 	m_Timestamp.SetElapsedTime(0);
 	SGD::IListener::RegisterForEvent("Death");
-
+	SetStamina(100);
 }
 
 
@@ -30,14 +30,10 @@ void	 Father::Update(float elapsedTime)
 {
 	float x = m_ptPosition.x;
 	float y = m_ptPosition.y;
-
-
 	SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
 	event->QueueEvent();
-
 	if (m_Timestamp.GetCurrAnim() != "FatherDeath")
 	{
-
 		if (m_ptPosition.x >= 250.0f && !enemy)
 		{
 			enemy = true;
@@ -47,18 +43,14 @@ void	 Father::Update(float elapsedTime)
 		}
 		if (GetCurrCharacter())
 		{
-
 			if (!GetOnGround() && !upArrow)
 				m_vtVelocity.y = 64.0f;
-
 			if (cannotJump)
 				m_vtVelocity.y = 64.0f;
-
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight)
 			{
 				SetFacing(true);
 				m_vtVelocity.x = 128.0f;
-
 				letLeft = true;
 				if (frameswitch >= 0.07f)
 				{
@@ -82,18 +74,14 @@ void	 Father::Update(float elapsedTime)
 					}
 					//delete event;
 				}
-
 				m_Timestamp.SetCurrAnim("FatherRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
-
 			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
 			{
 				SetFacing(false);
 				m_vtVelocity.x = -256.0f;
-
 				letRight = true;
 				if (frameswitch >= 0.07f)
 				{
@@ -105,7 +93,6 @@ void	 Father::Update(float elapsedTime)
 						event->QueueEvent();
 					}
 					//delete event;
-
 				}
 				if (direction >= 4)
 				{
@@ -117,11 +104,9 @@ void	 Father::Update(float elapsedTime)
 					}
 					//delete event;
 				}
-
 				m_Timestamp.SetCurrAnim("FatherRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
 			else
 			{
@@ -137,25 +122,27 @@ void	 Father::Update(float elapsedTime)
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
-
 			//Jump
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
 			{
-				if (GetOnGround())
+				if (GetStamina() >= 10)
 				{
-					previousPosY = m_ptPosition.y;
-					SetOnGround(false);
-					upArrow = true;
-					m_vtVelocity.y = -512.0f;
+					if (GetOnGround())
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						SetOnGround(false);
+						upArrow = true;
+						m_vtVelocity.y = -512.0f;
+					}
+					grounded = true;
 				}
-				grounded = true;
 			}
 			if (GetOnGround() == false)
 			{
 				direction = 0;
 				m_vtVelocity.y += 2.0f;
 				m_Timestamp.SetCurrAnim("FatherJump");
-
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
@@ -178,11 +165,8 @@ void	 Father::Update(float elapsedTime)
 			{
 				upArrow = false;
 				m_vtVelocity.y += 64.0f;
-
 			}
-
 		}
-
 	}
 	else
 	{
@@ -200,7 +184,51 @@ void	 Father::Update(float elapsedTime)
 			m_Timestamp.SetElapsedTime(elapsedTime);
 		}
 	}
-	SGD::Rectangle rect = GetRect();
+	if (GetStamina() < 0)
+		SetStamina(0);
+	if (GetStamina() >= 100)
+		SetStamina(100);
+	else
+		if (GetOnGround())
+			SetStamina(GetStamina() + 0.06f);
+	if (GetStamina() <= 75)
+	{
+		m_staminastate.green = 168;
+		m_staminastate.blue = 168;
+	}
+	if (GetStamina() <= 25)
+	{
+		isFlashing = true;
+		m_staminastate.green = 0;
+		m_staminastate.blue = 0;
+	}
+	if (GetStamina() == 100)
+	{
+		isFlashing = false;
+		m_staminastate.green = 255;
+		m_staminastate.blue = 255;
+	}
+	if (isFlashing)
+	{
+		if (FlashTimer >= FlashNow)
+		{
+			FlashTimer = 0.0f;
+			if (m_staminastate.alpha == 0)
+				m_staminastate.alpha = 255;
+			else if (m_staminastate.alpha == 255)
+				m_staminastate.alpha = 0;
+		}
+		FlashTimer += elapsedTime;
+	}
+	else
+		FlashTimer = 0.0f;
+	if (GetStamina() >= 75)
+		isFlashing = false;
+
+	if (GetCurrCharacter() == false && !isFlashing)
+		m_staminastate.alpha = 128;
+	else if (GetCurrCharacter() == true && !isFlashing)
+		m_staminastate.alpha = 255;
 	frameswitch += elapsedTime;
 	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
@@ -234,29 +262,16 @@ void	 Father::Render(void)
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
 
 #pragma endregion
-
+	SGD::Point p = m_ptPosition;
+	p.x -= Game::GetInstance()->GetCameraPosition().x;
+	p.y -= Game::GetInstance()->GetCameraPosition().y;
+	SGD::Rectangle r = { p.x, p.y - 80.0f, p.x + GetStamina() / 2, p.y - 72.5f };
+	if (GetStamina() > 0)
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
 	if (GetFacing())
-	{
-		SGD::Point p = m_ptPosition;
-
-		p.x -= Game::GetInstance()->GetCameraPosition().x;
-		p.y -= Game::GetInstance()->GetCameraPosition().y;
-
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -1, 1 });
-
-	}
 	else
-	{
-		SGD::Point p = m_ptPosition;
-
-		p.x -= Game::GetInstance()->GetCameraPosition().x;
-		p.y -= Game::GetInstance()->GetCameraPosition().y;
-
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 1, 1 });
-
-	}
-
-
 }
 
 SGD::Rectangle  Father::GetRect(void)	const
@@ -332,6 +347,7 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 	if (pEvent->GetEventID() == "Death")
 	{
 		direction = 0;
+		SetStamina(100);
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();

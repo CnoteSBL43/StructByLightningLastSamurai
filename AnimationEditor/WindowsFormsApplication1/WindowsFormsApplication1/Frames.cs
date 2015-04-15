@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
         public Rectangle framerect;
         public Rectangle collisionrect;
         public Rectangle anchorpt;
-        public Rectangle particlept;
+        public List<Rectangle> particlept;
         public string triggertype;
         public string triggername;
         public float timer;

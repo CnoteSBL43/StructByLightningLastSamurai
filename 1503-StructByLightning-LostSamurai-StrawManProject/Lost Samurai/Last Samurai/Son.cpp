@@ -5,7 +5,6 @@
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "GameplayState.h"
 #include "TileSystem.h"
-
 Son::Son()
 {
 	m_Timestamp.SetCurrAnim("SonIdle");
@@ -15,7 +14,9 @@ Son::Son()
 	//SetPosition(SGD::Point{ 100.0f, 200.0f });
 	//CreateFrames();
 	SGD::IListener::RegisterForEvent("Death");
+	SetStamina(50);
 }
+
 
 
 Son::~Son()
@@ -117,23 +118,26 @@ void	 Son::Update(float elapsedTime)
 			//Jump
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
 			{
-				if (GetOnGround())
+				if (GetStamina() >= 10)
 				{
-					previousPosY = m_ptPosition.y;
-					SetOnGround(false);
-					upArrow = true;
-					m_vtVelocity.y = -256.0f;
+					if (GetOnGround())
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						SetOnGround(false);
+						upArrow = true;
+						m_vtVelocity.y = -256.0f;
+					}
+					if (GetBackPack())
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						m_vtVelocity.y = -256.0f;
+						SetBackPack(false);
+						upArrow = true;
+					}
+					grounded = true;
 				}
-				if (GetBackPack())
-				{
-					previousPosY = m_ptPosition.y;
-					m_vtVelocity.y = -256.0f;
-					SetBackPack(false);
-					upArrow = true;
-					/*SGD::Event *event = new SGD::Event("Jump", nullptr, this);
-					event->QueueEvent(*/
-				}
-				grounded = true;
 			}
 			if (m_ptPosition.y <= previousPosY - 100)//ground level -100
 			{
@@ -190,9 +194,64 @@ void	 Son::Update(float elapsedTime)
 			m_Timestamp.SetElapsedTime(elapsedTime);
 		}
 	}
+
+	if (GetStamina() < 0)
+	{
+		SetStamina(0);
+	}
+	if (GetStamina() >= 50)
+	{
+		SetStamina(50);
+	}
+	if (GetStamina() <= 33)
+	{
+		isFlashing = false;
+		m_staminastate.green = 168;
+		m_staminastate.blue = 168;
+	}
+	if (GetStamina() <= 17)
+	{
+		isFlashing = true;
+		m_staminastate.green = 0;
+		m_staminastate.blue = 0;
+	}
+	if (GetStamina() == 50)
+	{
+		isFlashing = false;
+		m_staminastate.green = 255;
+		m_staminastate.blue = 255;
+	}
+	else
+	{
+		if (GetOnGround())
+			SetStamina((GetStamina() + 0.06f));
+	}
+	if (isFlashing)
+	{
+		if (FlashTimer >= FlashNow)
+		{
+			FlashTimer = 0.0f;
+			if (m_staminastate.alpha == 0)
+				m_staminastate.alpha = 255;
+			else if (m_staminastate.alpha == 255)
+				m_staminastate.alpha = 0;
+		}
+		FlashTimer += elapsedTime;
+	}
+	else
+		FlashTimer = 0.0f;
+	if (GetStamina() >= 33)
+		isFlashing = false;
+
+	if (GetCurrCharacter() == false && !isFlashing)
+		m_staminastate.alpha = 128;
+	else if (GetCurrCharacter() == true && !isFlashing)
+		m_staminastate.alpha = 255;
+
 	frameswitch += elapsedTime;
 	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
+
 void	 Son::Render(void)
 {
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
@@ -219,14 +278,13 @@ void	 Son::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x + GetRect().ComputeWidth() / 2;
 	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() - 3.0f;
+	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
+	if (GetStamina() > 0)
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
 	if (m_FacingtoRight)
-	{
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
-	}
 	else
-	{
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
-	}
 }
 
 SGD::Rectangle  Son::GetRect(void)	const
@@ -303,6 +361,7 @@ void Son::HandleEvent(const SGD::Event* pEvent)
 	{
 		//direction = 0;
 		m_Timestamp.SetCurrAnim("SonDeath");
+		SetStamina(50);
 		//m_Timestamp.SetCurrFrame(direction);
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();

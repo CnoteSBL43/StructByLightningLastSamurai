@@ -134,6 +134,8 @@ void GameplayState::Enter()
 	m_SpikesImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/paintex_spikes.png");
 	m_CannonImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/canon.png");
 	m_DartTrapImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/darttrap.png");
+	m_FatherFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/FatherHead.png");
+	m_SonFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/SonHead.png");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -220,6 +222,11 @@ void GameplayState::Exit()
 	// This is terminating the Father image so that you will not have any memory leaks 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_PointerImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherFaceImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SonFaceImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SpikesImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_DartTrapImage);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
 	m_Pause = false;
 	cursorPos = 0;
@@ -524,6 +531,9 @@ void GameplayState::Render(float _ElapsedTime)
 	s << father->GetVelocity().y;
 	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);*/
 
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
+
 	if (m_Pause)
 		RenderPause();
 }
@@ -554,29 +564,29 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-										  GameplayState* self = GameplayState::GetInstance();
-										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-										  self->m_pEntities->AddEntity(swordman, 2);
-										  swordman->Release();
-										  swordman = nullptr;
-										  break;
+		GameplayState* self = GameplayState::GetInstance();
+		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+		self->m_pEntities->AddEntity(swordman, 2);
+		swordman->Release();
+		swordman = nullptr;
+		break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-										 Actor* pActor = DestroyMsg->GetEntityMessage();
-										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-										 break;
+		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+		Actor* pActor = DestroyMsg->GetEntityMessage();
+		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+		break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-									   break;
+		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+		break;
 
 	}
 	}
@@ -696,7 +706,7 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 {
 	CannonBall* temp = new CannonBall();
 	//temp->SetImage(m_CannonBallImage);
-	temp->SetPosition(SGD::Point{ _Cannon->GetPosition().x , _Cannon->GetPosition().y + 30});
+	temp->SetPosition(SGD::Point{ _Cannon->GetPosition().x, _Cannon->GetPosition().y + 30 });
 	temp->SetSize(SGD::Size{ 16, 16, });
 	SGD::Vector newVelocity = { -200, 0 };
 	temp->SetVelocity(newVelocity);
