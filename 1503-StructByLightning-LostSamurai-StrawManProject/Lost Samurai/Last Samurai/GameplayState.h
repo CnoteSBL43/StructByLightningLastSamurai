@@ -32,6 +32,8 @@ private:
 	SGD::HTexture m_CannonImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_DartTrapImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_CannonBallImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_FatherFaceImage = SGD::INVALID_HANDLE;
+	SGD::HTexture	m_SonFaceImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 	// Game Entities
 
@@ -53,7 +55,7 @@ private:
 	//******Pause*****//
 	bool m_Pause = false;
 	int cursorPos = 0;
-	
+
 	SGD::HAudio m_Backround;
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
@@ -80,7 +82,7 @@ public:
 	Actor*  CreateFather(void);
 	// This is an Actor Pointer that creates the SOn Object
 	Actor* CreateSon(void);
-	Actor* CreateSwordsman(Actor* _player)const ;
+	Actor* CreateSwordsman(Actor* _player)const;
 	Actor* CreateSpikes(int i) const;
 	Actor* CreateDarts(int i) const;
 	Actor* CreateCannon(int i) const;
@@ -90,7 +92,7 @@ public:
 	int checkx, checky;//check collision
 	bool check = false; // check collision
 	bool intersect = false;//check collision
-	float POSOFCOLLISION=0;//checkcollision
+	float POSOFCOLLISION = 0;//checkcollision
 	// This used to go into debug Mode;
 	bool Debug = false;
 

@@ -24,7 +24,7 @@ public:
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
 	int GetDirection(){ return direction; }
-	
+
 	void SetDirection(int _direction) { direction = _direction; }
 	void HandleEvent(const SGD::Event* pEvent);
 	bool GetCollisionRect(){ return collisionrect; }
@@ -33,7 +33,8 @@ public:
 	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false;
 	bool enemy = false;//to create enemy once
 	bool grounded = true;
-
+	SGD::Color GetStaminaState() { return m_staminastate; }
+	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
 
 private:
 	AnimationTimestamp m_Timestamp;
@@ -45,5 +46,9 @@ private:
 
 	bool collisionrect = false;//collision rectangle  fix ?
 	float previousPosY;
+	SGD::Color m_staminastate = { 255, 255, 255, 255 };
+	bool isFlashing = false;
+	float FlashTimer = 0.0f;
+	float FlashNow = 0.2f;
 };
 

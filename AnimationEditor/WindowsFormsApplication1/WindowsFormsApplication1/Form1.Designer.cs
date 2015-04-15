@@ -42,7 +42,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolBox = new System.Windows.Forms.GroupBox();
             this.ParticlePtButton = new System.Windows.Forms.Button();
-            this.RemoveFrameButton = new System.Windows.Forms.Button();
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.AnchorButton = new System.Windows.Forms.Button();
             this.CollisionRectButton = new System.Windows.Forms.Button();
@@ -109,11 +108,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.FrameListBox = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.RemoveFrameButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.AnimFrames = new System.Windows.Forms.ListBox();
             this.label23 = new System.Windows.Forms.Label();
             this.AnimationListBox = new System.Windows.Forms.ListBox();
+            this.ParticlePtListBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.ToolBox.SuspendLayout();
             this.AnchorBox.SuspendLayout();
@@ -226,7 +227,6 @@
             // ToolBox
             // 
             this.ToolBox.Controls.Add(this.ParticlePtButton);
-            this.ToolBox.Controls.Add(this.RemoveFrameButton);
             this.ToolBox.Controls.Add(this.AddFrameButton);
             this.ToolBox.Controls.Add(this.AnchorButton);
             this.ToolBox.Controls.Add(this.CollisionRectButton);
@@ -246,23 +246,9 @@
             this.ParticlePtButton.Size = new System.Drawing.Size(132, 43);
             this.ParticlePtButton.TabIndex = 5;
             this.ParticlePtButton.Text = "Particle Point";
-            this.toolTip1.SetToolTip(this.ParticlePtButton, "Tool for setting the anchor point.");
+            this.toolTip1.SetToolTip(this.ParticlePtButton, "Tool for setting particle points.");
             this.ParticlePtButton.UseVisualStyleBackColor = true;
             this.ParticlePtButton.Click += new System.EventHandler(this.ParticlePtButton_Click);
-            // 
-            // RemoveFrameButton
-            // 
-            this.RemoveFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveFrameButton.Location = new System.Drawing.Point(4, 253);
-            this.RemoveFrameButton.Name = "RemoveFrameButton";
-            this.RemoveFrameButton.Size = new System.Drawing.Size(132, 26);
-            this.RemoveFrameButton.TabIndex = 4;
-            this.RemoveFrameButton.Text = "Remove Frame";
-            this.toolTip1.SetToolTip(this.RemoveFrameButton, "Click to add the frame to the frame list.\r\nNOTE: You can only add a frame to the " +
-        "\r\nframe list once you have drawn a Frame \r\nRectangle, a Collision Rectangle, \r\na" +
-        "nd an Anchor Point.");
-            this.RemoveFrameButton.UseVisualStyleBackColor = true;
-            this.RemoveFrameButton.Click += new System.EventHandler(this.RemoveFrameButton_Click);
             // 
             // AddFrameButton
             // 
@@ -272,9 +258,7 @@
             this.AddFrameButton.Size = new System.Drawing.Size(132, 39);
             this.AddFrameButton.TabIndex = 3;
             this.AddFrameButton.Text = "Add Frame";
-            this.toolTip1.SetToolTip(this.AddFrameButton, "Click to add the frame to the frame list.\r\nNOTE: You can only add a frame to the " +
-        "\r\nframe list once you have drawn a Frame \r\nRectangle, a Collision Rectangle, \r\na" +
-        "nd an Anchor Point.");
+            this.toolTip1.SetToolTip(this.AddFrameButton, resources.GetString("AddFrameButton.ToolTip"));
             this.AddFrameButton.UseVisualStyleBackColor = true;
             this.AddFrameButton.Click += new System.EventHandler(this.AddFrameButton_Click);
             // 
@@ -350,6 +334,11 @@
             0,
             0,
             0});
+            this.ParticlePtYUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.ParticlePtYUpDown.Name = "ParticlePtYUpDown";
             this.ParticlePtYUpDown.Size = new System.Drawing.Size(120, 22);
             this.ParticlePtYUpDown.TabIndex = 8;
@@ -363,6 +352,11 @@
             0,
             0,
             0});
+            this.ParticlePtXUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.ParticlePtXUpDown.Name = "ParticlePtXUpDown";
             this.ParticlePtXUpDown.Size = new System.Drawing.Size(120, 22);
             this.ParticlePtXUpDown.TabIndex = 7;
@@ -421,6 +415,11 @@
             0,
             0,
             0});
+            this.AnchorXUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.AnchorXUpDown.Name = "AnchorXUpDown";
             this.AnchorXUpDown.Size = new System.Drawing.Size(120, 22);
             this.AnchorXUpDown.TabIndex = 1;
@@ -434,6 +433,11 @@
             0,
             0,
             0});
+            this.AnchorYUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.AnchorYUpDown.Name = "AnchorYUpDown";
             this.AnchorYUpDown.Size = new System.Drawing.Size(120, 22);
             this.AnchorYUpDown.TabIndex = 0;
@@ -461,7 +465,7 @@
             this.RectBox.Controls.Add(this.FrameRectXUpDown);
             this.RectBox.Location = new System.Drawing.Point(677, 108);
             this.RectBox.Name = "RectBox";
-            this.RectBox.Size = new System.Drawing.Size(557, 138);
+            this.RectBox.Size = new System.Drawing.Size(557, 141);
             this.RectBox.TabIndex = 3;
             this.RectBox.TabStop = false;
             this.RectBox.Text = "Rectangle Properties";
@@ -528,6 +532,11 @@
             0,
             0,
             0});
+            this.CollisionRectHeightUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.CollisionRectHeightUpDown.Name = "CollisionRectHeightUpDown";
             this.CollisionRectHeightUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectHeightUpDown.TabIndex = 15;
@@ -541,6 +550,11 @@
             0,
             0,
             0});
+            this.CollisionRectWidthUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.CollisionRectWidthUpDown.Name = "CollisionRectWidthUpDown";
             this.CollisionRectWidthUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectWidthUpDown.TabIndex = 14;
@@ -554,6 +568,11 @@
             0,
             0,
             0});
+            this.CollisionRectYUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.CollisionRectYUpDown.Name = "CollisionRectYUpDown";
             this.CollisionRectYUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectYUpDown.TabIndex = 13;
@@ -567,6 +586,11 @@
             0,
             0,
             0});
+            this.CollisionRectXUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.CollisionRectXUpDown.Name = "CollisionRectXUpDown";
             this.CollisionRectXUpDown.Size = new System.Drawing.Size(120, 22);
             this.CollisionRectXUpDown.TabIndex = 12;
@@ -616,6 +640,11 @@
             0,
             0,
             0});
+            this.FrameRectHeightUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.FrameRectHeightUpDown.Name = "FrameRectHeightUpDown";
             this.FrameRectHeightUpDown.Size = new System.Drawing.Size(120, 22);
             this.FrameRectHeightUpDown.TabIndex = 7;
@@ -629,6 +658,11 @@
             0,
             0,
             0});
+            this.FrameRectWidthUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.FrameRectWidthUpDown.Name = "FrameRectWidthUpDown";
             this.FrameRectWidthUpDown.Size = new System.Drawing.Size(120, 22);
             this.FrameRectWidthUpDown.TabIndex = 6;
@@ -642,6 +676,11 @@
             0,
             0,
             0});
+            this.FrameRectYUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.FrameRectYUpDown.Name = "FrameRectYUpDown";
             this.FrameRectYUpDown.Size = new System.Drawing.Size(120, 22);
             this.FrameRectYUpDown.TabIndex = 5;
@@ -655,6 +694,11 @@
             0,
             0,
             0});
+            this.FrameRectXUpDown.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
             this.FrameRectXUpDown.Name = "FrameRectXUpDown";
             this.FrameRectXUpDown.Size = new System.Drawing.Size(120, 22);
             this.FrameRectXUpDown.TabIndex = 4;
@@ -795,9 +839,9 @@
             // RemoveAnimButton
             // 
             this.RemoveAnimButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveAnimButton.Location = new System.Drawing.Point(488, 200);
+            this.RemoveAnimButton.Location = new System.Drawing.Point(488, 108);
             this.RemoveAnimButton.Name = "RemoveAnimButton";
-            this.RemoveAnimButton.Size = new System.Drawing.Size(131, 27);
+            this.RemoveAnimButton.Size = new System.Drawing.Size(131, 54);
             this.RemoveAnimButton.TabIndex = 21;
             this.RemoveAnimButton.Text = "Remove Animation";
             this.toolTip1.SetToolTip(this.RemoveAnimButton, "Remove the Currently selected animation.");
@@ -807,7 +851,7 @@
             // AddAnimationButton
             // 
             this.AddAnimationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddAnimationButton.Location = new System.Drawing.Point(488, 167);
+            this.AddAnimationButton.Location = new System.Drawing.Point(488, 75);
             this.AddAnimationButton.Name = "AddAnimationButton";
             this.AddAnimationButton.Size = new System.Drawing.Size(131, 27);
             this.AddAnimationButton.TabIndex = 20;
@@ -819,7 +863,7 @@
             // DeselectButton
             // 
             this.DeselectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeselectButton.Location = new System.Drawing.Point(141, 224);
+            this.DeselectButton.Location = new System.Drawing.Point(141, 234);
             this.DeselectButton.Name = "DeselectButton";
             this.DeselectButton.Size = new System.Drawing.Size(131, 30);
             this.DeselectButton.TabIndex = 19;
@@ -848,9 +892,9 @@
             this.RemoveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RemoveButton.Location = new System.Drawing.Point(141, 188);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(131, 30);
+            this.RemoveButton.Size = new System.Drawing.Size(131, 40);
             this.RemoveButton.TabIndex = 17;
-            this.RemoveButton.Text = "Remove";
+            this.RemoveButton.Text = "Remove Frame";
             this.toolTip1.SetToolTip(this.RemoveButton, "Removes the currently selected frame.");
             this.RemoveButton.UseVisualStyleBackColor = true;
             this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
@@ -917,7 +961,7 @@
             // 
             // TriggerNameBox
             // 
-            this.TriggerNameBox.Location = new System.Drawing.Point(488, 139);
+            this.TriggerNameBox.Location = new System.Drawing.Point(278, 185);
             this.TriggerNameBox.Name = "TriggerNameBox";
             this.TriggerNameBox.Size = new System.Drawing.Size(168, 22);
             this.TriggerNameBox.TabIndex = 11;
@@ -926,7 +970,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(485, 119);
+            this.label12.Location = new System.Drawing.Point(275, 165);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 17);
             this.label12.TabIndex = 10;
@@ -935,15 +979,16 @@
             // TriggerTypeComboBox
             // 
             this.TriggerTypeComboBox.FormattingEnabled = true;
-            this.TriggerTypeComboBox.Location = new System.Drawing.Point(488, 92);
+            this.TriggerTypeComboBox.Location = new System.Drawing.Point(278, 138);
             this.TriggerTypeComboBox.Name = "TriggerTypeComboBox";
             this.TriggerTypeComboBox.Size = new System.Drawing.Size(168, 24);
             this.TriggerTypeComboBox.TabIndex = 9;
+            this.TriggerTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.TriggerTypeComboBox_SelectedIndexChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(485, 72);
+            this.label11.Location = new System.Drawing.Point(275, 118);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 17);
             this.label11.TabIndex = 8;
@@ -951,6 +996,7 @@
             // 
             // FrameDurationUpDown
             // 
+            this.FrameDurationUpDown.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.FrameDurationUpDown.DecimalPlaces = 3;
             this.FrameDurationUpDown.Increment = new decimal(new int[] {
             1,
@@ -961,11 +1007,6 @@
             this.FrameDurationUpDown.Name = "FrameDurationUpDown";
             this.FrameDurationUpDown.Size = new System.Drawing.Size(95, 22);
             this.FrameDurationUpDown.TabIndex = 7;
-            this.FrameDurationUpDown.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            65536});
             this.FrameDurationUpDown.ValueChanged += new System.EventHandler(this.FrameDurationUpDown_ValueChanged);
             // 
             // label10
@@ -1026,6 +1067,18 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // RemoveFrameButton
+            // 
+            this.RemoveFrameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveFrameButton.Location = new System.Drawing.Point(803, 255);
+            this.RemoveFrameButton.Name = "RemoveFrameButton";
+            this.RemoveFrameButton.Size = new System.Drawing.Size(132, 39);
+            this.RemoveFrameButton.TabIndex = 6;
+            this.RemoveFrameButton.Text = "Remove Particle";
+            this.toolTip1.SetToolTip(this.RemoveFrameButton, "Removes the currently selected particle point.");
+            this.RemoveFrameButton.UseVisualStyleBackColor = true;
+            this.RemoveFrameButton.Click += new System.EventHandler(this.RemoveFrameButton_Click_1);
+            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -1071,12 +1124,24 @@
             this.AnimationListBox.TabIndex = 0;
             this.AnimationListBox.SelectedIndexChanged += new System.EventHandler(this.AnimationListBox_SelectedIndexChanged);
             // 
+            // ParticlePtListBox
+            // 
+            this.ParticlePtListBox.FormattingEnabled = true;
+            this.ParticlePtListBox.ItemHeight = 16;
+            this.ParticlePtListBox.Location = new System.Drawing.Point(677, 255);
+            this.ParticlePtListBox.Name = "ParticlePtListBox";
+            this.ParticlePtListBox.Size = new System.Drawing.Size(120, 84);
+            this.ParticlePtListBox.TabIndex = 5;
+            this.ParticlePtListBox.SelectedIndexChanged += new System.EventHandler(this.ParticlePtListBox_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1463, 617);
+            this.Controls.Add(this.RemoveFrameButton);
+            this.Controls.Add(this.ParticlePtListBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.AnimSettBox);
             this.Controls.Add(this.AnimationBox);
@@ -1180,7 +1245,6 @@
         private System.Windows.Forms.NumericUpDown CollisionRectWidthUpDown;
         private System.Windows.Forms.NumericUpDown CollisionRectYUpDown;
         private System.Windows.Forms.NumericUpDown CollisionRectXUpDown;
-        private System.Windows.Forms.Button RemoveFrameButton;
         private System.Windows.Forms.ToolStripMenuItem OpenAnimationFile;
         private System.Windows.Forms.ToolStripMenuItem LoadSpriteSheet;
         private System.Windows.Forms.VScrollBar SpritePanelVScrollBar;
@@ -1211,6 +1275,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ListBox AnimationListBox;
         private System.Windows.Forms.CheckBox FrameInfoCheckBox;
+        private System.Windows.Forms.ListBox ParticlePtListBox;
+        private System.Windows.Forms.Button RemoveFrameButton;
     }
 }
 

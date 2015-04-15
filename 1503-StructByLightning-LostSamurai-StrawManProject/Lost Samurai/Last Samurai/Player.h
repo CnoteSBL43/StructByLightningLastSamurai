@@ -12,7 +12,7 @@ class Player :
 public:
 	Player();
 	~Player();
-	
+
 	void	Update(float elapsedTime) = 0;
 	void	Render(void) = 0;
 
@@ -32,9 +32,10 @@ public:
 	void SetJumpVelocity(float _jumpVelocity){ jumpVelocity = _jumpVelocity; }
 	bool GetFacing(){ return m_FacingtoRight; }
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
-
+	float GetStamina() { return m_Stamina; }
+	void SetStamina(float _stamina) { m_Stamina = _stamina; }
 private:
-	int m_Stamina;
+	float m_Stamina;
 	float jumpVelocity = 256.0f, gravity = 4.9f;
 	bool m_Hanging;
 	bool m_BackPack = false;

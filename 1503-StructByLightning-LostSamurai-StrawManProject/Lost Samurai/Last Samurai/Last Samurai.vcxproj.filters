@@ -194,14 +194,8 @@
     <ClCompile Include="CreateDart.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="CreateSwordMan.cpp">
       <Filter>Source\MessageSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="BowMan.cpp">
-      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Spike.cpp">
       <Filter>Traps</Filter>
@@ -218,17 +212,23 @@
     <ClCompile Include="SmashingColumns.cpp">
       <Filter>Traps</Filter>
     </ClCompile>
-    <ClCompile Include="Arrow.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CannonBall.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="BowMan.cpp">
+      <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="DestroyActorMessage.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="CreateCannonBallMessage.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\MessageSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonBall.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapFont.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,11 +397,7 @@
     <ClInclude Include="CreateSwordMan.h">
       <Filter>Source\MessageSystem</Filter>
     </ClInclude>
-    <ClInclude Include="BowMan.h" />
     <ClInclude Include="Cannon.h">
-      <Filter>Traps</Filter>
-    </ClInclude>
-    <ClInclude Include="BitmapFont.h">
       <Filter>Traps</Filter>
     </ClInclude>
     <ClInclude Include="DartCannon.h">
@@ -419,9 +415,21 @@
     <ClInclude Include="Arrow.h">
       <Filter>Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="CannonBall.h" />
-    <ClInclude Include="DestroyActorMessage.h" />
-    <ClInclude Include="CreateCannonBallMessage.h" />
+    <ClInclude Include="BowMan.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateCannonBallMessage.h">
+      <Filter>Source\MessageSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonBall.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="DestroyActorMessage.h">
+      <Filter>Source\MessageSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapFont.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">
