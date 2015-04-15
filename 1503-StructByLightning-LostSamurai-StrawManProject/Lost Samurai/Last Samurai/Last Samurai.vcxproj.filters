@@ -230,6 +230,9 @@
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="CreateArrowMessage.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -430,6 +433,7 @@
     <ClInclude Include="BitmapFont.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
+    <ClInclude Include="CreateArrowMessage.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">

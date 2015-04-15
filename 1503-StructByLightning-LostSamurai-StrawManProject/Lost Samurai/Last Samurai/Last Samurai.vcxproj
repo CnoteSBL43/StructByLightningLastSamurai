@@ -34,6 +34,7 @@
     <ClCompile Include="BowMan.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CannonBall.cpp" />
+    <ClCompile Include="CreateArrowMessage.cpp" />
     <ClCompile Include="CreateCannonBallMessage.cpp" />
     <ClCompile Include="CreateDart.cpp" />
     <ClCompile Include="CreateSwordMan.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="BowMan.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CannonBall.h" />
+    <ClInclude Include="CreateArrowMessage.h" />
     <ClInclude Include="CreateCannonBallMessage.h" />
     <ClInclude Include="CreateDart.h" />
     <ClInclude Include="CreateSwordMan.h" />

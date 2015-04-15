@@ -6,6 +6,7 @@
 #include "../SGD Wrappers/SGD_Declarations.h"
 #include "ParticleManager.h"
 #include "Cannon.h"
+#include "DartCannon.h"
 
 
 class Actor;
@@ -89,6 +90,7 @@ public:
 	Actor* CreateRocks(int i) const;
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
+	Actor* CreateArrow(DartCannon*);
 	int checkx, checky;//check collision
 	bool check = false; // check collision
 	bool intersect = false;//check collision

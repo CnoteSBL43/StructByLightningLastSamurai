@@ -19,11 +19,13 @@
 #include "Tile.h"
 #include  "Spike.h"
 #include "Cannon.h"
+#include "Arrow.h"
 #include "DartCannon.h"
 #include <sstream>
 #include "DestroyActorMessage.h"
 #include "CannonBall.h"
 #include "CreateCannonBallMessage.h"
+#include "CreateArrowMessage.h"
 
 #include"CreateSwordMan.h"
 //*********************************************************************//
@@ -143,6 +145,7 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/FatherAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/SonAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Cannonball.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
 
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
@@ -564,29 +567,38 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-		GameplayState* self = GameplayState::GetInstance();
-		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-		self->m_pEntities->AddEntity(swordman, 2);
-		swordman->Release();
-		swordman = nullptr;
-		break;
+										  GameplayState* self = GameplayState::GetInstance();
+										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+										  self->m_pEntities->AddEntity(swordman, 2);
+										  swordman->Release();
+										  swordman = nullptr;
+										  break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-		Actor* pActor = DestroyMsg->GetEntityMessage();
-		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-		break;
+										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+										 Actor* pActor = DestroyMsg->GetEntityMessage();
+										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+										 break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-		break;
+									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+									   break;
+
+	}
+	case MessageID::MSG_ARROW:
+	{
+
+								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
+								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
+								 break;
 
 	}
 	}
@@ -713,5 +725,18 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 	temp->SetCannon(_Cannon);
 
 	return temp;
+
+}
+
+Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
+{
+	Arrow* m_DartCannon = new Arrow();
+	m_DartCannon->SetPosition(_DartCannon->GetPosition());
+	m_DartCannon->SetSize(SGD::Size{ 16, 16, });
+	SGD::Vector newVelocity = { -200, 0 };
+	m_DartCannon->SetVelocity(newVelocity);
+	m_DartCannon->SetDartCannon(_DartCannon);
+
+	return m_DartCannon;
 
 }

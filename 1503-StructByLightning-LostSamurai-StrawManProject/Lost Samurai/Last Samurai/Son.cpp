@@ -126,7 +126,7 @@ void	 Son::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -256.0f;
+						m_vtVelocity.y = -512.0f;
 					}
 					if (GetBackPack())
 					{
