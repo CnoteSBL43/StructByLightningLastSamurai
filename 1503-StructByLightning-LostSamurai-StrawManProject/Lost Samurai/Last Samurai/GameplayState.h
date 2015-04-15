@@ -61,8 +61,8 @@ private:
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
 
-	///collision might need to remove if not used
-	bool k = false;
+	bool movementTurnOff = false;
+
 
 public:
 	// this is a Gamplaystate Pointer function used to  make a singleton 
@@ -98,13 +98,13 @@ public:
 	// This used to go into debug Mode;
 	bool Debug = false;
 
-	//collision might need to remove if not needed
-	bool GetK(){ return k; }
-	void SetK(bool _k){ k = _k; }
 
 	Actor*  GetFather(){ return father; }
 	Actor* GetSon(){ return son; }
 	//Culling Rect
 	SGD::Rectangle CullingRect;
 
+	float stiffnessValue = 0.8f;
+	bool GetMovementOff(){ return movementTurnOff; }
+	void SetMovementOff(bool _off){ movementTurnOff = _off; }
 };

@@ -53,7 +53,7 @@ void BitmapFont::LoadLookUpChart(const char* _fileName)
 		m_lookUpChart[(char)id].s_height = (int)attribute;
 
 		if (attribute > m_highestHeight)
-			m_highestHeight = attribute;
+			m_highestHeight =(int) attribute;
 
 		charElement->Attribute("xoffset", &attribute);
 		m_lookUpChart[(char)id].s_xOffset = (int)attribute;
@@ -99,12 +99,12 @@ void BitmapFont::Draw(const char * _output, SGD::Point _position, float _scale, 
 
 
 		SGD::Point pt;
-		pt.x = m_lookUpChart[ch].s_x;
-		pt.y = m_lookUpChart[ch].s_y;
+		pt.x = (float)m_lookUpChart[ch].s_x;
+		pt.y = (float)m_lookUpChart[ch].s_y;
 
 		SGD::Size sz;
-		sz.width = m_lookUpChart[ch].s_width;
-		sz.height = m_lookUpChart[ch].s_height;
+		sz.width = (float)m_lookUpChart[ch].s_width;
+		sz.height = (float)m_lookUpChart[ch].s_height;
 
 		SGD::Rectangle rect = { pt, sz };
 
@@ -132,7 +132,7 @@ void BitmapFont::Draw(const wchar_t * _output, SGD::Point _position, float _scal
 	for (int i = 0; _output[i]; i++)
 	{
 		// Get the current character
-		char ch = _output[i];
+		char ch = (char)_output[i];
 
 		if (ch == ' ')
 		{
@@ -149,12 +149,12 @@ void BitmapFont::Draw(const wchar_t * _output, SGD::Point _position, float _scal
 
 
 		SGD::Point pt;
-		pt.x = m_lookUpChart[ch].s_x;
-		pt.y = m_lookUpChart[ch].s_y;
+		pt.x = (float)m_lookUpChart[ch].s_x;
+		pt.y = (float)m_lookUpChart[ch].s_y;
 
 		SGD::Size sz;
-		sz.width = m_lookUpChart[ch].s_width;
-		sz.height = m_lookUpChart[ch].s_height;
+		sz.width = (float)m_lookUpChart[ch].s_width;
+		sz.height = (float)m_lookUpChart[ch].s_height;
 
 		SGD::Rectangle rect = { pt, sz };
 
