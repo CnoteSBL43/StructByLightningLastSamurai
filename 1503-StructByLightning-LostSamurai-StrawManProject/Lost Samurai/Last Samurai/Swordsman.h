@@ -1,8 +1,8 @@
 #pragma once
-#include "Player.h"
+#include "Actor.h"
 #include <vector>
 class Swordsman :
-	public Player
+	public Actor
 {
 public:
 	Swordsman();
@@ -11,7 +11,7 @@ public:
 
 	void	Update(float elapsedTime);
 	void	Render(void);
-	//int		GetType(void)	const				{ return ENT_SWORDSMAN; }
+	int		GetType(void)	const				{ return ENT_SWORDSMAN; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision( IEntity* pOther);
 	void SetDestination(float _dest){ destination = _dest; }
@@ -19,7 +19,8 @@ public:
 	bool toRight = true;
 	bool toLeft = false;
 	
-
+	void SetTarget(Actor * _target){ target = _target; }
+	Actor * GetTarget(){ return target; }
 
 private:
 	struct Frame
@@ -34,6 +35,7 @@ private:
 	float frameswitch = 0.0f;
 	float destination ;
 	bool m_facingRight = true;
+	Actor* target = nullptr;
 
 };
 

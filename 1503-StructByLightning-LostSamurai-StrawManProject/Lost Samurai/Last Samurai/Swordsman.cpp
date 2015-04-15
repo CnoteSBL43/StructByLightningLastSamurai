@@ -44,6 +44,7 @@ void	 Swordsman::Update(float elapsedTime)
 		toLeft = false;
 		m_vtVelocity.x = 64.0f;
 	}
+	//SGD::GraphicsManager::GetInstance()->DrawLine(SGD::Point{m_ptPosition.x,destination},)
 	frameswitch += elapsedTime;
 	Actor::Update(elapsedTime);
 }

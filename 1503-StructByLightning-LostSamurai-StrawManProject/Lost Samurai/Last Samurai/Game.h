@@ -6,7 +6,7 @@
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include "../SGD Wrappers/SGD_Utilities.h"
 #include "SplashState.h"
-
+#include "BitmapFont.h"
 
 class IGameState;
 class TileSystem;
@@ -31,11 +31,11 @@ private:
 	// This is a Unsigned long Variable used to get Real time 
 	unsigned long m_GameTime = 0;
 	// This is used for storing the Music Volumes and SFX Volumes 
-	int m_MusicVol = 100, m_SFXVol = 100;
+	int m_MusicVol = 100, m_SFXVol = 100, m_Language = 0;//0-english 1 -spanish
 	// This is a variable that is used to make the Game go into full screen mode 
 	bool m_FullScreen = false;
-
-
+	BitmapFont font;
+	
 
 public:
 	// this is a Static Game Singleton GetInsatance()
@@ -63,7 +63,11 @@ public:
 	int GetSFXVolume(){ return m_SFXVol; }
 	// This is a mutator to set the Volume of the SFX 
 	void SetSFXVolume(int _sfxVol){ m_SFXVol = _sfxVol; }
+	int GetLanguage(){ return m_Language; }
+	void SetLanguage(int _language){ m_Language = _language; }
 
+	//Font
+	BitmapFont GetFont(){ return font; }
 
 	//Setup,Play,Cleanup
 	// This is used to Initailize all of the Variables and gamestate that will be set at the start of the game 
@@ -76,7 +80,7 @@ public:
 	bool CheckPrevious();
 
 	// This is a Size Variable that is used to adjust the Screne size of the Game 
-	SGD::Size		m_szScreenSize = SGD::Size{ 800, 600};
+	SGD::Size		m_szScreenSize = SGD::Size{ 800,600};
 	// This is a Size Variable that is used to adjust the World  size of the Game 
 	SGD::Size		m_szWorldSize = SGD::Size{ 1024, 800};
 	// This is a Point So that you can set the Where the camera is going to be 

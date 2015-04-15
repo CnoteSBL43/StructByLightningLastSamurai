@@ -29,8 +29,17 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="AnimationTimestamp.cpp" />
+    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="BitmapFont.cpp" />
+    <ClCompile Include="BowMan.cpp" />
+    <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="CannonBall.cpp" />
+    <ClCompile Include="CreateCannonBallMessage.cpp" />
     <ClCompile Include="CreateDart.cpp" />
+    <ClCompile Include="CreateSwordMan.cpp" />
     <ClCompile Include="CreditState.cpp" />
+    <ClCompile Include="DartCannon.cpp" />
+    <ClCompile Include="DestroyActorMessage.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Father.cpp" />
@@ -51,8 +60,11 @@
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rock.cpp" />
     <ClCompile Include="SaveGameState.cpp" />
+    <ClCompile Include="SmashingColumns.cpp" />
     <ClCompile Include="Son.cpp" />
+    <ClCompile Include="Spike.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="Swordsman.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -82,8 +94,17 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AnimationTimestamp.h" />
+    <ClInclude Include="Arrow.h" />
+    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="BowMan.h" />
+    <ClInclude Include="Cannon.h" />
+    <ClInclude Include="CannonBall.h" />
+    <ClInclude Include="CreateCannonBallMessage.h" />
     <ClInclude Include="CreateDart.h" />
+    <ClInclude Include="CreateSwordMan.h" />
     <ClInclude Include="CreditState.h" />
+    <ClInclude Include="DartCannon.h" />
+    <ClInclude Include="DestroyActorMessage.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Father.h" />
@@ -99,7 +120,7 @@
     <ClInclude Include="LoadGameState.h" />
     <ClInclude Include="LoadState.h" />
     <ClInclude Include="MainMenuState.h" />
-    <ClInclude Include="Message.h" />
+    <ClInclude Include="MessageID.h" />
     <ClInclude Include="OptionState.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleFlyweight.h" />
@@ -107,8 +128,11 @@
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="SaveGameState.h" />
+    <ClInclude Include="SmashingColumns.h" />
     <ClInclude Include="Son.h" />
+    <ClInclude Include="Spike.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="Swordsman.h" />
     <ClInclude Include="Tile.h" />
@@ -160,6 +184,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\DirectX SDK\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\DirectX SDK\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

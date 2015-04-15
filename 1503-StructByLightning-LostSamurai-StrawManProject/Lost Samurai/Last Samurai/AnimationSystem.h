@@ -25,14 +25,14 @@ public:
 	static AnimationSystem* GetInstance();
 
 	//Accessor
-	std::map<std::string, Animation> GetLoaded() { return m_Loaded; }
-	SGD::Rectangle GetRect(AnimationTimestamp _info, int _PosX, int _PosY);
-	SGD::Point GetParticlePt(int _frame, std::string _animationname);
+	std::map<std::string, Animation>& GetLoaded() { return m_Loaded; }
+	SGD::Rectangle GetRect(const AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
+	SGD::Point GetParticlePt(AnimationTimestamp& info, int _X, int _Y, int _index);
 	//SGD::Rectangle GetSonRect() { return m_SonRect; }
 	//Methods
 
-	void Update(int _elapsedtime, AnimationTimestamp _info);
-	void Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
+	void Update(int _elapsedtime, AnimationTimestamp& _info);
+	void Render(AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
 	void Load(const char* _filename);
 	void Exit();
 

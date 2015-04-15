@@ -19,12 +19,15 @@ Emitter::Emitter()
 	m_position.x = 0;
 	m_position.y = 0;
 	m_spawnTime = .100f;
+	m_spawning = false;
 }
 
 
 Emitter::~Emitter()
 {
 	Clear();
+	if (m_sprite != SGD::INVALID_HANDLE)
+		SGD::GraphicsManager::GetInstance()->UnloadTexture(m_sprite);
 }
 
 
@@ -44,8 +47,17 @@ void Emitter::Update(float _elapsedTime)
 {
 	m_spawnTime -= _elapsedTime;
 
-	if (aliveList.size() < GetMaxParticles())
-		CreateParticles();
+	if (m_spawning)
+	{
+
+		if (aliveList.size() < GetMaxParticles())
+			CreateParticles();
+		if (m_continuous == false)
+		{
+			if (aliveList.size() >= GetSpawnRate())
+				m_spawning = false;
+		}
+	}
 
 	std::list<Particle*>::iterator iter = aliveList.begin();
 
@@ -86,9 +98,12 @@ void Emitter::Render()
 
 	while (iter != aliveList.end())
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture(m_sprite, (*iter)->GetPosition(), (*iter)->GetRotationCurr(),
-			SGD::Vector((float)GetWidth() / 2, (float)GetHeight() / 2), SGD::Color((unsigned char)(*iter)->GetAlphaCurr(), 
-			(unsigned char)(*iter)->GetRedCurr(), (unsigned char)(*iter)->GetGreenCurr(), (unsigned char)(*iter)->GetBlueCurr()), 
+		SGD::Point pt = (*iter)->GetPosition();
+		pt.x -= Game::GetInstance()->GetCameraPosition().x;
+		pt.y -= Game::GetInstance()->GetCameraPosition().y;
+		SGD::GraphicsManager::GetInstance()->DrawTexture(m_sprite, pt, (*iter)->GetRotationCurr(),
+			SGD::Vector((float)GetWidth() / 2, (float)GetHeight() / 2), SGD::Color((unsigned char)(*iter)->GetAlphaCurr(),
+			(unsigned char)(*iter)->GetRedCurr(), (unsigned char)(*iter)->GetGreenCurr(), (unsigned char)(*iter)->GetBlueCurr()),
 			SGD::Size((*iter)->GetScaleCurr(), (*iter)->GetScaleCurr()));
 
 		iter++;
@@ -115,9 +130,11 @@ void Emitter::CreateParticles()
 			float min = m_attributes.GetMinLife() * 10;
 			float max = m_attributes.GetMaxLife() * 10;
 			float life;
+			if (width)
+				position.x = (rand() % width) + m_position.x;
+			if (height)
+				position.y = (rand() % height) + m_position.y;
 
-			position.x = (rand() % width) + m_position.x;
-			position.y = (rand() % height) + m_position.y;
 			particle->SetPosition(position);
 			maxLife = (int)min + (rand() % ((int)max - (int)min + 1));
 			life = (float)maxLife / 10;

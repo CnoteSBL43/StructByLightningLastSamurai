@@ -2,10 +2,11 @@
 #include "Player.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
+#include "../SGD Wrappers/SGD_IListener.h"
 #include <vector>
 #include "AnimationSystem.h"
 class Son :
-	public Player
+	public Player, public SGD::IListener
 {
 public:
 	Son();
@@ -22,7 +23,11 @@ public:
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
 	bool GetFacing(){ return m_FacingtoRight; }
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
-
+	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false, lrArrow = false;//lrArrow so the player can get off the father
+	bool GetCollisionRect(){ return collisionrect; }
+	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
+	void HandleEvent(const SGD::Event* pEvent);
+	AnimationTimestamp& GetTimeStamp() { return m_Timestamp; }
 
 
 private:
@@ -31,6 +36,10 @@ private:
 	float frameswitch = 0.0f;
 	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter=false;
-	bool lrArrow = false, upArrow = false; // using this so that when backpacked i move left or right the son falls down to ground //same reason for up
+	float previousPosY;
+	bool collisionrect = false;//collision rectangle  fix ?
+	bool Debug = false;
+	bool grounded = true;
+
 };
 

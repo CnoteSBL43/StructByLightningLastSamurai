@@ -22,7 +22,7 @@ void Tile::Render()
 		SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
 		SGD::Size screen = Game::GetInstance()->GetScreenSize();
 		//the render rect after the offest
-		SGD::Point pt = { GetPosition().x - PositionOffset.x - screen.width / 2
+		SGD::Point pt = { (GetPosition().x - screen.width / 2)- PositionOffset.x
 			, GetPosition().y - PositionOffset.y };
 
 		//render rect
@@ -35,19 +35,27 @@ void Tile::Render()
 
 		//draw rect
 		SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
-		SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 255, 255 }, {}, 3);
+		//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 0, 255, 255, 255 }, { 255, 255, 255, 255 }, 3);
 	}
 }
 
 void Tile::HandleCollision(IEntity* pOther)
 {
-	
-	if (pOther->GetType() == ENT_FATHER)
+
+	if (pOther->GetType() == ENT_FATHER && this->GetType() == ENT_TRIGGER)
 	{
 
-		
+		SGD::Event* FatherDeath = new SGD::Event("Death", nullptr, this);
+		FatherDeath->SendEventNow(pOther);
+		delete FatherDeath;
 
+	}
+	if (pOther->GetType() == ENT_SON && this->GetType() == ENT_TRIGGER)
+	{
 
+		SGD::Event* SonDeath = new SGD::Event("Death", nullptr, this);
+		SonDeath->SendEventNow(pOther);
+		delete SonDeath;
 	}
 
 
@@ -56,18 +64,17 @@ void Tile::HandleCollision(IEntity* pOther)
 int Tile::GetType(void)	const
 {
 
-	return ENT_TILES;
+	return _Type;
 
 }
 
 SGD::Rectangle Tile::GetRect() const
 {
 	//camera offest
-	SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
+	//SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
 	SGD::Size screen = Game::GetInstance()->GetScreenSize();
 	//the render rect after the offest
-	SGD::Point pt = { GetPosition().x - PositionOffset.x - screen.width / 2
-		, GetPosition().y - PositionOffset.y };
+	SGD::Point pt = { GetPosition().x - screen.width / 2, GetPosition().y};
 
 	//render rect
 	SGD::Rectangle draw = rect;

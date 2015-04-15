@@ -29,6 +29,7 @@ class Emitter
 	ParticleFlyweight m_attributes;
 
 	float m_spawnTime;
+	bool m_spawning;
 	std::list<Particle*> aliveList;
 	std::queue<Particle*> deadQueue;
 
@@ -54,10 +55,11 @@ public:
 	SGD::Point GetPosition() const { return m_position; }
 	SGD::Size GetSpread() const { return m_spread; }
 	SGD::HTexture GetImage() const { return m_sprite; }
-	const char* GetSprite() const { return m_name.c_str(); }
+	const char* GetEmitterName() const { return m_name.c_str(); }
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
 	bool GetContinuous() const { return m_continuous; }
+	bool GetSpawning() const { return m_spawning; }
 
 	// Mutators
 	void SetFlyweight(ParticleFlyweight _attributes) { m_attributes = _attributes; }
@@ -66,10 +68,11 @@ public:
 	void SetPosition(SGD::Point _pos) { m_position = _pos; }
 	void SetSpread(SGD::Size _spread) { m_spread = _spread; }
 	void SetImage(SGD::HTexture _sprite) { m_sprite = _sprite; }
-	void SetSprite(const char* _name) { m_name = _name; }
+	void SetEmitterName(const char* _name) { m_name = _name; }
 	void SetWidth(int _width) { m_width = _width; }
 	void SetHeight(int _height) { m_height = _height; }
 	void SetContinuous(bool _continuous) { m_continuous = _continuous; }
+	void SetSpawning(bool _spawning) { m_spawning = _spawning; }
 
 	void Update(float _elapsedTime);
 	void Render();

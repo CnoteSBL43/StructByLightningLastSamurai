@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Particles ParticleEditorXML="0" Name="StepParticles">
+  <Emitter>
+    <Sprite Name="Puff.png" />
+    <SpriteWidth Width="32" />
+    <SpriteHeight Height="32" />
+    <PositionX X="289" />
+    <PositionY Y="376" />
+    <SpreadWidth SWidth="1" />
+    <SpreadHeight SHeight="1" />
+    <SpawnRate Rate="5" />
+    <MaximumParticles Max="500" />
+  </Emitter>
+  <Flyweight>
+    <Continuous Bool="0" />
+    <VelXPos XPos="100" />
+    <VelXNeg XNeg="-100" />
+    <VelYPos YPos="0" />
+    <VelYNeg YNeg="-100" />
+    <ScaleStart ScaleS="0.8" />
+    <ScaleEnd ScaleE="0.1" />
+    <RotationStart RotS="0" />
+    <RotationEnd RotE="0" />
+    <LifeMin Min="0.8" />
+    <LifeMax Max="1.5" />
+    <StartAlpha StartA="255" />
+    <StartRed StartR="0" />
+    <StartGreen StartG="0" />
+    <StartBlue StartB="128" />
+    <EndAlpha EndA="0" />
+    <EndRed EndR="0" />
+    <EndGreen EndG="255" />
+    <EndBlue EndB="255" />
+  </Flyweight>
+</Particles>

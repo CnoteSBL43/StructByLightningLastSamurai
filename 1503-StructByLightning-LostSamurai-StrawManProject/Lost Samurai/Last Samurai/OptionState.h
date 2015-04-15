@@ -18,8 +18,8 @@ private:
 	SGD::HAudio m_Music = SGD::INVALID_HANDLE;
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
-	int MusicVol, SFXVol;
-	bool fullscreen;
+	int MusicVol, SFXVol, language;
+	bool fullscreen, tempLanguage = false;//if true trhen spanish else english
 	int m_CursorPos = 0;
 
 public:
@@ -35,6 +35,7 @@ public:
 
 	void	SetMusicVol(int _musicvolume) { MusicVol = _musicvolume; }
 	void	SetSFXVol(int _sfxvolume) { SFXVol = _sfxvolume; }
+	SGD::HTexture m_BackArrow = SGD::INVALID_HANDLE;
 
 
 };

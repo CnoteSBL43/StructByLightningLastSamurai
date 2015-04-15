@@ -5,6 +5,8 @@
 #include <vector>
 #include "../SGD Wrappers/SGD_Declarations.h"
 #include "ParticleManager.h"
+#include "Cannon.h"
+
 
 class Actor;
 class EntityManager;
@@ -25,8 +27,11 @@ private:
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	// this is a Htexture used to Render the fathers image 
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
-	SGD::HTexture m_PauseImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_PointerImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_SpikesImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_CannonImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_DartTrapImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_CannonBallImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 	// Game Entities
 
@@ -37,7 +42,8 @@ private:
 	Actor* father = nullptr;
 	// This is an Actor Pointer variable named Son used to create the SOn 
 	Actor* son = nullptr;
-	Actor* swordsman = nullptr;
+	Actor* m_Spikes = nullptr;
+	Actor* m_Cannon = nullptr;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
@@ -48,6 +54,7 @@ private:
 	bool m_Pause = false;
 	int cursorPos = 0;
 	
+	SGD::HAudio m_Backround;
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
 
@@ -68,13 +75,18 @@ public:
 	//*****PAUSE******//
 	void RenderPause(void);
 	void Pause(void);
-
+	TileSystem* GetTileSystem() { return Load; }
 	// This is an Actor Pointer That creates the Father object
 	Actor*  CreateFather(void);
 	// This is an Actor Pointer that creates the SOn Object
 	Actor* CreateSon(void);
-	Actor* CreateSwordsman(void);
-
+	Actor* CreateSwordsman(Actor* _player)const ;
+	Actor* CreateSpikes(int i) const;
+	Actor* CreateDarts(int i) const;
+	Actor* CreateCannon(int i) const;
+	Actor* CreateRocks(int i) const;
+	Actor* CreateSmashingColumns(int i) const;
+	Actor* CreateCannonBall(Cannon*);
 	int checkx, checky;//check collision
 	bool check = false; // check collision
 	bool intersect = false;//check collision
@@ -85,4 +97,10 @@ public:
 	//collision might need to remove if not needed
 	bool GetK(){ return k; }
 	void SetK(bool _k){ k = _k; }
+
+	Actor*  GetFather(){ return father; }
+	Actor* GetSon(){ return son; }
+	//Culling Rect
+	SGD::Rectangle CullingRect;
+
 };

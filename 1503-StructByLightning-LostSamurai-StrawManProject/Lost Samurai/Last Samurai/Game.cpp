@@ -9,7 +9,6 @@
 #include "../SGD Wrappers/SGD_AudioManager.h"
 #include "GameplayState.h"
 #include "AnimationSystem.h"
-
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "../SGD Wrappers/SGD_MessageManager.h"
 
@@ -96,14 +95,16 @@ bool Game::Initialize()
 
 	// This is a If check that is Using the SGD Grphics Manager 
 	// It is going to Initialize the Window. Call the Window "LOST SAMURAI" and set the Screen Size 
-	if (SGD::GraphicsManager::GetInstance()->Initialize(L"Lost Samurai", m_szScreenSize, false) == false || 
-		   SGD::InputManager::GetInstance()->Initialize() == false || 
-		   SGD::AudioManager::GetInstance()->Initialize() == false)
+	if (SGD::GraphicsManager::GetInstance()->Initialize(L"Lost Samurai", m_szScreenSize, false) == false ||
+		SGD::InputManager::GetInstance()->Initialize() == false ||
+		SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
 
 	// Initialize the Event & Message Managers
 	SGD::EventManager::GetInstance()->Initialize();
-	//SGD::MessageManager::GetInstance()->Initialize(&Game::MessageProc);
+	font.LoadLookUpChart("../resource/XML/font.xml");
+
+	
 
 #if !defined( DEBUG ) && !defined( _DEBUG )
 	SGD::GraphicsManager::GetInstance()->ShowConsoleWindow(false);
@@ -136,7 +137,8 @@ bool Game::Initialize()
 		// This Double Attribute will Set the SFX Volume With a string and a Integer variable
 		m_Element->SetDoubleAttribute("SFXVolume", m_SFXVol);
 		// This Double Attribute will Set the FULLScreen With a string and a Boolean variable
-		m_Element->SetDoubleAttribute("FullScreen",m_FullScreen);
+		m_Element->SetDoubleAttribute("FullScreen", m_FullScreen);
+		m_Element->SetDoubleAttribute("Language", m_Language);
 		// After you Get done saveing all your variables inside the XML file you WIll The Document and save it out
 		m_Document.SaveFile("Options");
 	}
@@ -153,10 +155,11 @@ bool Game::Initialize()
 		m_Element->Attribute("SFXVolume", &m_SFXVol);
 		// Use the XElement Variable to Find the String in the XML File and then Store the Variable to the FullScreen Variable 
 		m_Element->Attribute("FullScreen", &fullscreen);
+		m_Element->Attribute("Language", &m_Language);
 		// This is an If check that checks if the fullscreen variable is 0(False == 0) Or if it is 1 (True == 1)
 		if (fullscreen == 0)
 			m_FullScreen = false;
-		else 
+		else
 			m_FullScreen = true;
 	}
 	// You will Set the FullScreen Variable to the Fullscreen Function 
@@ -165,7 +168,7 @@ bool Game::Initialize()
 	SetMusicVolume(m_MusicVol);
 	// You will Set the SFX  Variable to the SFXVolume Function 
 	SetSFXVolume(m_SFXVol);
-	
+
 	return true;
 }
 
@@ -188,8 +191,7 @@ int Game::Update()
 		SGD::AudioManager::GetInstance()->Update() == false)
 		return 1;
 
-	
-	//SGD::MessageManager::GetInstance()->Update();
+
 
 	// This will Set the Current Time the Get Tick count 
 	unsigned long CurrentTime = GetTickCount();
@@ -198,10 +200,10 @@ int Game::Update()
 	// Then setting m_GameTime  to the CurrentTime 
 	m_GameTime = CurrentTime;
 
-	if (ElapsedTime > .100f)
-		ElapsedTime = .100f;
+	/*if (ElapsedTime > .100f)
+		ElapsedTime = .100f;*/
 
-	if (m_CurrentState->Update(ElapsedTime)== false)
+	if (m_CurrentState->Update(ElapsedTime) == false)
 	{
 		return 1;
 	}
@@ -219,6 +221,7 @@ int Game::Update()
 
 	}
 	SGD::EventManager::GetInstance()->Update();
+	
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
@@ -234,6 +237,9 @@ int Game::Update()
 //*********************************************************************//
 void Game::Terminate()
 {
+	font.Terminate();
+
+	AnimationSystem::GetInstance()->Exit();
 	ChangeState(nullptr);
 	SGD::AudioManager::GetInstance()->Terminate();
 	SGD::AudioManager::GetInstance()->DeleteInstance();
@@ -246,6 +252,7 @@ void Game::Terminate()
 
 	SGD::EventManager::GetInstance()->Terminate();
 	SGD::EventManager::GetInstance()->DeleteInstance();
+	
 }
 
 bool Game::CheckPrevious()

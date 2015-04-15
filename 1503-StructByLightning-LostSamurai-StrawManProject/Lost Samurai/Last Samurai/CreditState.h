@@ -21,5 +21,7 @@ public:
 
 	bool	Update(float _ElapsedTime);
 	void	Render(float _ElapsedTime);
+	SGD::HTexture m_BackArrow = SGD::INVALID_HANDLE;
+
 };
 

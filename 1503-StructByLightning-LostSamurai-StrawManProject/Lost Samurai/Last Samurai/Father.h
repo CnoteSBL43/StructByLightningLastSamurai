@@ -3,9 +3,10 @@
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "AnimationTimestamp.h"
+#include "../SGD Wrappers/SGD_IListener.h"
 #include <vector>
-class Father :
-	public Player
+class Father : public Player, public SGD::IListener
+
 {
 public:
 	Father();
@@ -16,35 +17,29 @@ public:
 	int		GetType(void)	const				{ return ENT_FATHER; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision(IEntity* pOther);
-	bool upArrow = false;
+
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
-	//void SetCamVector(SGD::Vector _vec){ pos = _vec; }
-	//SGD::Vector GetCameraVector(void)const { return pos; }
 
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
 	int GetDirection(){ return direction; }
-	bool GetFacing(){ return m_FacingtoRight; }
-	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
+	
 	void SetDirection(int _direction) { direction = _direction; }
-
+	void HandleEvent(const SGD::Event* pEvent);
 	bool GetCollisionRect(){ return collisionrect; }
 	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
 
-	bool letLeft = true, letRight = true, cannotJump = false;
+	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false;
+	bool enemy = false;//to create enemy once
+	bool grounded = true;
 
 
 private:
-	struct Frame
-	{
-		SGD::Rectangle		rFrame;		// source rectangle
-		SGD::Point			ptAnchor;	// relative position within source
-	};
 	AnimationTimestamp m_Timestamp;
 	int direction = 0;
 	float frameswitch = 0.0f;
-	bool m_FacingtoRight = true;//to change the scale for the father(direction)
+	//to change the scale for the father(direction)
 	bool isCurrentCharacter = true; //to check if he is the current character. Starts as the father always 	
 	bool Debug = false;
 

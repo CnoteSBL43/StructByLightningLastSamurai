@@ -18,7 +18,7 @@ public:
 	~Animation();
 
 	//Accessors
-	std::vector<Frame>	GetFrames() const		{ return m_Frames; }
+	std::vector<Frame>&	GetFrames()				{ return m_Frames; }
 	std::string			GetName() const			{ return m_Name; }
 	int					GetID() const			{ return m_ImageID; }
 	bool				CheckIfLooping() const;

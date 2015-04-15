@@ -31,5 +31,11 @@ bool SplashState::Update(float _ElapsedTime)
 void SplashState::Render(float _ElapsedTime)
 {
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_TeamLogo, SGD::Point(160.0f, 150.0f));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Press Esc to Skip", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 70, 375), SGD::Color(0, 2, 150));
+	if (Game::GetInstance()->GetLanguage()==0)
+	{
+		Game::GetInstance()->GetFont().Draw("Press Esc to Skip", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 80, 375), 0.4f,SGD::Color(250, 0,0));
+	}
+	else
+		Game::GetInstance()->GetFont().Draw("Presione Esc Para Saltar", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 80, 375), 0.4f,SGD::Color(250, 0,0));
+	
 }

@@ -14,41 +14,60 @@ AnimationSystem* AnimationSystem::GetInstance()
 	return &m_Instance;
 }
 
-SGD::Point AnimationSystem::GetParticlePt(int _frame, std::string _animationname)
+SGD::Point AnimationSystem::GetParticlePt(AnimationTimestamp& _ts, int _X, int _Y, int _index)
 {
-	return m_Loaded[_animationname.c_str()].GetFrames()[_frame].GetAnchorPt();
+	SGD::Point pt = m_Loaded[_ts.GetCurrAnim()].GetFrames()[_ts.GetCurrFrame()].GetParticlePt()[_index];
+	pt.x += _X;
+	pt.y += _Y;
+	return pt;
 }
 
-void AnimationSystem::Render(AnimationTimestamp _info, int _PosX, int _PosY, SGD::Size _scale)
+void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale)
 {
+
 	SGD::Point temppt = SGD::Point((float)_PosX, (float)_PosY);
 	SGD::Point pt = m_Loaded[_info.GetCurrAnim().c_str()].GetFrames()[_info.GetCurrFrame()].GetAnchorPt();
 	SGD::Rectangle crect = m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetCollisionRect();
-	GM->DrawRectangle(GetRect(_info, _PosX, _PosY), SGD::Color(255, 0, 0));
+	//GM->DrawRectangle(GetRect(_info, _PosX, _PosY), SGD::Color(255, 0, 0));
 	SGD::Rectangle rect = m_Loaded[_info.GetCurrAnim().c_str()].GetFrames()[_info.GetCurrFrame()].GetDrawFrame();
 	temppt.x += rect.left * _scale.width;
 	temppt.y += rect.top * _scale.height;
-	GM->DrawTextureSection(m_Img, temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	if (_info.GetOwner()->GetType() == Actor::ENT_FATHER)
+		GM->DrawTextureSection(m_Imgs[0], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	if (_info.GetOwner()->GetType() == Actor::ENT_SON)
+		GM->DrawTextureSection(m_Imgs[1], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	//if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
+	//GM->DrawTextureSection(m_Imgs[], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	if (_info.GetOwner()->GetType() == Actor::ENT_CANNONBALL)
+GM->DrawTextureSection(m_Imgs[2], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+
 }
 
-void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp _info)
+void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)
 {
-	if (m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerType() == "Event" && m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName() != "None")
+	if (m_Loaded[_info.GetCurrAnim()].GetFrames().size() > (unsigned int)_info.GetCurrFrame())
 	{
-		SGD::Event* tempevent = new SGD::Event(m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName().c_str(),nullptr,this);
-		tempevent->SendEventNow();
-		delete tempevent;
-		tempevent = nullptr;
+		if (m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerType() == "Event" && m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName() != "None")
+		{
+			SGD::Event* tempevent = new SGD::Event(m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetTriggerName().c_str(), nullptr, this);
+			tempevent->SendEventNow();
+			delete tempevent;
+			tempevent = nullptr;
+		}
 	}
 }
 
-SGD::Rectangle AnimationSystem::GetRect(AnimationTimestamp _info, int _PosX, int _PosY)
+SGD::Rectangle AnimationSystem::GetRect(const AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale)
 {
-
-	SGD::Point point = Game::GetInstance()->GetCameraPosition();
-	SGD::Point pt = m_Loaded[_info.GetCurrAnim().c_str()].GetFrames()[_info.GetCurrFrame()].GetAnchorPt();
+	SGD::Point pt = { (float)_PosX, (float)_PosY };
 	SGD::Rectangle crect = m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetCollisionRect();
-	return SGD::Rectangle{ crect.left + _PosX, crect.top + _PosY, (crect.left + _PosX) + crect.ComputeWidth(), (crect.top + _PosY) + crect.ComputeHeight() };
+	float x = crect.left + pt.x;
+	float y = crect.top + pt.y;
+	float width = (crect.left + pt.x) + crect.ComputeWidth() * _scale.width;
+	float height = (crect.top + pt.y) + crect.ComputeHeight() * _scale.height;
+	//if (_info.GetOwner()->GetType() == Actor::ENT_SON)
+	//	return SGD::Rectangle{ crect.left + pt.x + 10.0f, crect.top + pt.y + 35.0f, width + 10.0f, height + 35.0f };
+	return SGD::Rectangle{ x, y, width, height };
 }
 
 void AnimationSystem::Load(const char * _filename)
@@ -66,17 +85,6 @@ void AnimationSystem::Load(const char * _filename)
 	m_ImgString = root->Attribute("Image");
 
 #pragma region XML
-
-	/*root->Attribute("RectX", &cleft);
-	root->Attribute("RectY", &ctop);
-	root->Attribute("RectRight", &cright);
-	root->Attribute("RectBottom", &cbottom);
-	if (count == 0)
-	m_FatherRect = SGD::Rectangle{ (float)cleft, (float)ctop, (float)cright, (float)cbottom };
-	else if (count == 1)
-	m_SonRect = SGD::Rectangle{ (float)cleft, (float)ctop, (float)cright, (float)cbottom };
-	count += 1;*/
-
 	TiXmlElement* Animation = root->FirstChildElement("Animation");
 	while (Animation != nullptr)
 	{
@@ -97,21 +105,25 @@ void AnimationSystem::Load(const char * _filename)
 			Draw = Draw->NextSiblingElement("AnchorPT");
 			Draw->Attribute("X", &x);
 			Draw->Attribute("Y", &y);
-			Draw = Draw->NextSiblingElement("ParticlePT");
-			Draw->Attribute("X", &ptx);
-			Draw->Attribute("Y", &pty);
+			Draw = Draw->NextSiblingElement("Particles");
+			TiXmlElement* Particles = Draw->FirstChildElement("ParticlePT");
+			Frame frame;
+			while (Particles != nullptr)
+			{
+				Particles->Attribute("X", &ptx);
+				Particles->Attribute("Y", &pty);
+				Particles = Particles->NextSiblingElement();
+				frame.AddParticlePoint(SGD::Point{ (float)ptx, (float)pty });
+			}
 			Draw = Draw->NextSiblingElement("Time");
 			Draw->Attribute("Time", &time);
 			Draw = Draw->NextSiblingElement("Trigger");
 			trigtype = Draw->Attribute("Type");
 			trigname = Draw->Attribute("Name");
 			Frames = Frames->NextSiblingElement();
-			Frame frame;
 			frame.SetDrawFrame(SGD::Rectangle{ (float)left, (float)top, (float)(left + width), (float)(top + height) });
 			frame.SetAnchorPt(SGD::Point{ (float)x, (float)y });
-			SGD::Point point = Game::GetInstance()->GetCameraPosition();
-			frame.SetCollisionRect(SGD::Rectangle{ (float)cleft, (float)ctop, (float)(cleft + cwidth), (float)(ctop + cheight) });
-			frame.SetParticlePt(SGD::Point{ (float)ptx, (float)pty });
+			frame.SetCollisionRect(SGD::Rectangle{ SGD::Point((float)cleft, (float)ctop), SGD::Size((float)cwidth, (float)cheight) });
 			frame.SetTimer((float)time);
 			frame.SetTriggerType(trigtype);
 			frame.SetTriggerName(trigname);
@@ -128,9 +140,7 @@ void AnimationSystem::Load(const char * _filename)
 			i++;
 		else
 			str.append(m_ImgString);
-
 	}
-
 	m_Img = GM->LoadTexture(str.c_str());
 	m_Imgs.push_back(m_Img);
 #pragma endregion 

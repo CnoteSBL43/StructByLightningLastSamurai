@@ -6,18 +6,31 @@
 //*********************************************************************//
 #include "ParticleManager.h"
 #include "ParticleFlyweight.h"
+
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../resource/TinyXML/tinystr.h"
 #include "../resource/TinyXML/tinyxml.h"
+#include "AnimationSystem.h"
+#include "Father.h"
+#include "Son.h"
+#include "Game.h"
+
+
 
 ParticleManager::ParticleManager()
 {
-	SGD::IListener::RegisterForEvent("Steps");
+	SGD::IListener::RegisterForEvent("Walking");
+	SGD::IListener::RegisterForEvent("Grounded");
+	SGD::IListener::RegisterForEvent("Backpacking");
+	SGD::IListener::RegisterForEvent("DEATH");
+	//SGD::IListener::RegisterForEvent("Jump");
 }
+
 
 void ParticleManager::LoadEmitter(char* _fileName)
 {
-	Emitter emitter;
+	Emitter *emitter = new Emitter();
+	//Emitter emitter;
 	ParticleFlyweight flyweight;
 
 	double emit, fly;
@@ -33,16 +46,15 @@ void ParticleManager::LoadEmitter(char* _fileName)
 	TiXmlElement* emitterElements = children->FirstChildElement("Sprite");
 	std::string imgName = "../resource/graphics/";
 	imgName += emitterElements->Attribute("Name");
-	emitter.SetSprite(imgName.c_str());
 	SGD::HTexture image = SGD::GraphicsManager::GetInstance()->LoadTexture(imgName.c_str());
-	emitter.SetImage(image);
+	emitter->SetImage(image);
 
 	emitterElements = emitterElements->NextSiblingElement("SpriteWidth");
 	emitterElements->Attribute("Width", &emit);
-	emitter.SetWidth((int)emit);
+	emitter->SetWidth((int)emit);
 	emitterElements = emitterElements->NextSiblingElement("SpriteHeight");
 	emitterElements->Attribute("Height", &emit);
-	emitter.SetHeight((int)emit);
+	emitter->SetHeight((int)emit);
 
 	SGD::Point pt;
 	emitterElements = emitterElements->NextSiblingElement("PositionX");
@@ -51,7 +63,7 @@ void ParticleManager::LoadEmitter(char* _fileName)
 	emitterElements = emitterElements->NextSiblingElement("PositionY");
 	emitterElements->Attribute("Y", &emit);
 	pt.y = 450.0f;
-	emitter.SetPosition(pt);
+	emitter->SetPosition(pt);
 
 	SGD::Size sz;
 	emitterElements = emitterElements->NextSiblingElement("SpreadWidth");
@@ -60,15 +72,15 @@ void ParticleManager::LoadEmitter(char* _fileName)
 	emitterElements = emitterElements->NextSiblingElement("SpreadHeight");
 	emitterElements->Attribute("SHeight", &emit);
 	sz.height = (float)emit;
-	emitter.SetSpread(sz);
+	emitter->SetSpread(sz);
 
 	emitterElements = emitterElements->NextSiblingElement("SpawnRate");
 	emitterElements->Attribute("Rate", &emit);
-	emitter.SetSpawnRate((int)emit);
+	emitter->SetSpawnRate((int)emit);
 
 	emitterElements = emitterElements->NextSiblingElement("MaximumParticles");
 	emitterElements->Attribute("Max", &emit);
-	emitter.SetMaxParticles((int)emit);
+	emitter->SetMaxParticles((int)emit);
 
 	children = children->NextSiblingElement("Flyweight");
 
@@ -79,7 +91,7 @@ void ParticleManager::LoadEmitter(char* _fileName)
 		stuff = true;
 	else
 		stuff = false;
-	emitter.SetContinuous(stuff);
+	emitter->SetContinuous(stuff);
 
 	flyweightElements = flyweightElements->NextSiblingElement("VelXPos");
 	flyweightElements->Attribute("XPos", &fly);
@@ -142,8 +154,17 @@ void ParticleManager::LoadEmitter(char* _fileName)
 	flyweight.SetBlueEnd((float)fly);
 
 
-	emitter.SetFlyweight(flyweight);
+	emitter->SetFlyweight(flyweight);
 	activeEmitters.push_back(emitter);
+}
+
+ParticleManager::~ParticleManager()
+{
+	for (size_t i = 0; i < activeEmitters.size(); i++)
+	{
+		delete activeEmitters[i];
+	}
+	activeEmitters.clear();
 }
 
 void ParticleManager::UnLoadEmitter(std::string _emitterName)
@@ -163,7 +184,7 @@ void ParticleManager::FreeEmitter(unsigned int _emitterID)
 {
 	if (_emitterID < activeEmitters.size())
 	{
-		std::vector<Emitter>::iterator iter = activeEmitters.begin();
+		std::vector<Emitter*>::iterator iter = activeEmitters.begin();
 
 		int count = 0;
 
@@ -171,6 +192,7 @@ void ParticleManager::FreeEmitter(unsigned int _emitterID)
 		{
 			if (count == _emitterID)
 			{
+				//delete *iter;
 				iter = activeEmitters.erase(iter);
 				break;
 			}
@@ -193,7 +215,7 @@ void ParticleManager::UpdateEmitter(unsigned int _emitterID, float _elapsedTime)
 {
 	for (size_t i = 0; i < activeEmitters.size(); i++)
 	{
-		activeEmitters[i].Update(_elapsedTime);
+		activeEmitters[i]->Update(_elapsedTime);
 	}
 }
 
@@ -201,16 +223,97 @@ void ParticleManager::RenderEmitter(unsigned int _emitterID)
 {
 	for (size_t i = 0; i < activeEmitters.size(); i++)
 	{
-		activeEmitters[i].Render();
+		activeEmitters[i]->Render();
 	}
 }
 
-
 void ParticleManager::HandleEvent(const SGD::Event* _Event)
 {
-	if (_Event->GetEventID() == "Steps")
+	if (_Event->GetEventID() == "Walking")
 	{
+		if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_FATHER)
+		{
+			Father* entity = reinterpret_cast<Father*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[0]->SetPosition(point);
+			activeEmitters[0]->SetSpawning(true);
+		}
+		else if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_SON)
+		{
+			Son* entity = reinterpret_cast<Son*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[0]->SetPosition(point);
+			activeEmitters[0]->SetSpawning(true);
+		}
+	}
+	else if (_Event->GetEventID() == "Grounded")
+	{
+		if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_FATHER)
+		{
+			Father* entity = reinterpret_cast<Father*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = { -100, 600 };
+			//SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x , (int)entity->GetPosition().y);
+			activeEmitters[1]->SetPosition(pt);
+			activeEmitters[1]->SetSpawning(true);
+		}
+		else if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_SON)
+		{
+			Son* entity = reinterpret_cast<Son*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[1]->SetPosition(point);
+			activeEmitters[1]->SetSpawning(true);
+		}
+	}
+	else if (_Event->GetEventID() == "Backpacking")
+	{
+		Son* entity = reinterpret_cast<Son*>(_Event->GetSender());
+		//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+		SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+		SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+		activeEmitters[2]->SetPosition(point);
+		activeEmitters[2]->SetSpawning(true);
 
 	}
+	else if (_Event->GetEventID() == "DEATH")
+	{
+		if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_FATHER)
+		{
+			Father* entity = reinterpret_cast<Father*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[3]->SetPosition(point);
+			activeEmitters[3]->SetSpawning(true);
+		}
+		else if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_SON)
+		{
+			Son* entity = reinterpret_cast<Son*>(_Event->GetSender());
+			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[3]->SetPosition(point);
+			activeEmitters[3]->SetSpawning(true);
+		}
+
+	}
+	//else if (_Event->GetEventID() == "Jump")
+	//{
+	//	Son* entity = reinterpret_cast<Son*>(_Event->GetSender());
+	//	//SGD::Size sz = Game::GetInstance()->GetScreenSize();
+	//	SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+	//	entity->GetTimeStamp().SetCurrFrame(0);
+	//	SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y);
+	//	activeEmitters[0]->SetPosition(point);
+	//	activeEmitters[0]->SetSpawning(true);
+
+	//}
+
 }
 

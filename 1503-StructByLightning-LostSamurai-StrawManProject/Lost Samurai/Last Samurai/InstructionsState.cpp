@@ -8,12 +8,12 @@ InstructionsState* InstructionsState::GetInstance()
 
 void InstructionsState::Enter()
 {
-
+	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
 }
 
 void InstructionsState::Exit()
 {
-
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BackArrow);
 }
 
 bool InstructionsState::Update(float _ElapsedTime)
@@ -31,11 +31,26 @@ bool InstructionsState::Update(float _ElapsedTime)
 
 void InstructionsState::Render(float _ElapsedTime)
 {
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Instructions", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 50, 10), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Left Arrow", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 100, 50), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Move Left", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 + 50, 50), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Right Arrow", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 100, 100), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Move Right", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 + 50, 100), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Spacebar", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 - 100, 150), SGD::Color(0, 255, 0));
-	SGD::GraphicsManager::GetInstance()->DrawString(L"Jump", SGD::Point(Game::GetInstance()->GetScreenSize().width / 2 + 50, 150), SGD::Color(0, 255, 0));
-}  ;
+	if (Game::GetInstance()->GetLanguage() == 0)
+	{
+		Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 270.0f, 50.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Move Left      -", SGD::Point{ 175.0f, 200.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Move Right    -", SGD::Point{ 175.0f, 250.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Jump             -", SGD::Point{ 175.0f, 300.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Left Arrow", SGD::Point{ 475.0f, 200.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Right Arrow", SGD::Point{ 475.0f, 250.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Up Arrow", SGD::Point{ 475.0f, 300.0f }, 0.50f);
+	}
+	else
+	{
+		Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 270.0f, 50.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Mover a la Izquierda    -", SGD::Point{ 100.0f, 200.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("mover a la Derecha    -", SGD::Point{ 100.0f, 250.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Jump                           -", SGD::Point{ 100.0f, 300.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Flecha Izquierda", SGD::Point{ 500.0f, 200.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Flecha Derecha", SGD::Point{ 500.0f, 250.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Flecha Arriba", SGD::Point{ 500.0f, 300.0f }, 0.50f);
+	}
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_BackArrow, SGD::Point{ 5.0f, Game::GetInstance()->GetScreenSize().height - 75 });
+	Game::GetInstance()->GetFont().Draw("Esc", SGD::Point{ 125.0f, Game::GetInstance()->GetScreenSize().height - 60 }, 0.50f);
+}

@@ -5,6 +5,7 @@
 #include "Son.h"
 #include "IEntity.h"
 #include "Tile.h"
+#include <string.h>
 class TileSystem
 {
 
@@ -13,43 +14,55 @@ protected:
 	SGD::HTexture m_TileImage;
 	struct tile1
 	{
-	
+
 		int m_TileWidth;
 		int m_TileHeight;
 		int m_TileID;
 		int PositionX;
 		int PositionY;
 		SGD::Size m_Image;
-		int SpawnX = 0;
-		int SpawnY = 0;
 		int m_Collision;
-		SGD::Point CheckPoint;
-		
+		int m_Spawn;
+		int m_Checkpoint;
+		int m_Trigger;
+		int CheckPointX;
+		int CheckPointY;
+
+		std::string m_EventString;
+
+		std::string TrapNames;
+		int TriggerPositionX;
+		int TrigerPositionY;
+
+		int Traps;
+
 	};
 
 	struct Grid
 	{
 		int m_GridWidth;
 		int m_GridHeight;
-		
+
 	};
-	
+
 public:
 	TileSystem();
 	~TileSystem();
-	void LoadTileXml(Father* _father,Son* _Son);
+	void LoadTileXml(Father* _father, Son* _Son);
 	tile1* m_Tile;
 	Grid* m_Grid;
-//Tile* Map[][];
+	//Tile* Map[][];
 	//Grid* m_GridMap[10][10];
 	SGD::HTexture GetTileImage() { return m_TileImage; }
 
 	std::vector<tile1*>* Map;
 	std::vector<Tile*> m_CollisionRect;
-	// Tiles Width
+	std::vector<Tile*> m_Deathcollision;
+	std::vector<Tile*> m_CheckPoints;
+	std::vector<Tile*> m_AI;
 
-	// Tiles Height
+	std::map<std::string, std::vector<SGD::Rectangle*>> Traps;
 
-	
+
 };
 

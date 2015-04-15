@@ -12,8 +12,7 @@ class Player :
 public:
 	Player();
 	~Player();
-	//enum EntityType { ENT_BASE, ENT_FATHER, ENT_SON, ENT_SWORDSMAN };
-
+	
 	void	Update(float elapsedTime) = 0;
 	void	Render(void) = 0;
 
@@ -31,7 +30,8 @@ public:
 	float GetGravity(){ return gravity; }
 	float GetJumpVelocity(){ return jumpVelocity; }
 	void SetJumpVelocity(float _jumpVelocity){ jumpVelocity = _jumpVelocity; }
-
+	bool GetFacing(){ return m_FacingtoRight; }
+	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 
 private:
 	int m_Stamina;
@@ -40,6 +40,7 @@ private:
 	bool m_BackPack = false;
 	bool m_OnGround = true;
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
+	bool m_FacingtoRight = true;//to change the scale for the father(direction)
 
 
 };
