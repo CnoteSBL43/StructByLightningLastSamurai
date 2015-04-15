@@ -54,6 +54,9 @@
     <Filter Include="Weapons">
       <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{6a6f6f49-1c2f-4343-912a-c24eea96d1af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -229,6 +232,24 @@
     </ClCompile>
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateArrowMessage.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Rope.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Pulley.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleMass.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Link.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source</Filter>
@@ -432,6 +453,22 @@
     </ClInclude>
     <ClInclude Include="BitmapFont.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateArrowMessage.h" />
+    <ClInclude Include="Pulley.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleMass.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Link.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h" />
   </ItemGroup>

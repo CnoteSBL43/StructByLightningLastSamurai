@@ -19,11 +19,13 @@
 #include "Tile.h"
 #include  "Spike.h"
 #include "Cannon.h"
+#include "Arrow.h"
 #include "DartCannon.h"
 #include <sstream>
 #include "DestroyActorMessage.h"
 #include "CannonBall.h"
 #include "CreateCannonBallMessage.h"
+#include "CreateArrowMessage.h"
 
 #include"CreateSwordMan.h"
 //*********************************************************************//
@@ -143,6 +145,7 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/FatherAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/SonAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Cannonball.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
 
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
@@ -183,18 +186,24 @@ void GameplayState::Enter()
 		m_pEntities->AddEntity(Load->m_Deathcollision[i], 4);
 		Load->m_Deathcollision[i]->Release();
 	}
-	for (int i = 0; i < Load->Traps["Spikes"].size(); i++)
+
+	for (unsigned int i = 0; i < Load->Ledges.size(); i++)
+	{
+		m_pEntities->AddEntity(Load->Ledges[i], 7);
+		Load->Ledges[i]->Release();
+	}
+	for (unsigned int i = 0; i < Load->Traps["Spikes"].size(); i++)
 	{
 		m_Spikes = CreateSpikes(i);
 		m_pEntities->AddEntity(m_Spikes, 5);
 	}
 
-	for (int i = 0; i < Load->Traps["Cannon"].size(); i++)
+	for (unsigned int i = 0; i < Load->Traps["Cannon"].size(); i++)
 	{
 		m_pEntities->AddEntity(CreateCannon(i), 5);
 	}
 
-	for (int i = 0; i < Load->Traps["darts"].size(); i++)
+	for (unsigned int i = 0; i < Load->Traps["darts"].size(); i++)
 	{
 		m_pEntities->AddEntity(CreateDarts(i), 5);
 	}
@@ -294,17 +303,74 @@ bool GameplayState::Update(float _ElapsedTime)
 		Pause();
 	else
 	{
+		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
+		{
+			float xIncrement, yIncrement;
+			xIncrement = yIncrement = 1.0f;
+			/*float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
+			fabs(xDistance);
+			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
+			fabs(yDistance);
+			if (xDistance > yDistance)
+			{
+			xIncrement = 1.0f;
+			yIncrement = 0.5f;
+			}
+			else
+			{
+			xIncrement = 0.5f;
+			yIncrement = 1.0f;
+			}*/
+
+			if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
+			{
+
+				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x + xIncrement, Game::GetInstance()->GetCameraPosVector().y });
+				if (Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x <= 1.0f)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
+				}
+			}
+			else if (Game::GetInstance()->GetCameraPosVector().x > Game::GetInstance()->GetCameraDestinationVector().x)
+			{
+				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x - xIncrement, Game::GetInstance()->GetCameraPosVector().y });
+				if (Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetCameraDestinationVector().x <= 1.0f)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
+				}
+			}
+			if (Game::GetInstance()->GetCameraPosVector().y < Game::GetInstance()->GetCameraDestinationVector().y)
+			{
+				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y + yIncrement });
+				if (Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y <= 1.0f)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
+				}
+			}
+			else if (Game::GetInstance()->GetCameraPosVector().y > Game::GetInstance()->GetCameraDestinationVector().y)
+			{
+				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y - yIncrement });
+				if (Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetCameraDestinationVector().y <= 1.0f)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
+
+				}
+			}
+		}
 		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 		{
+			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
+			Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
 
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
-
+			//	Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
 			//SGD::GraphicsManager::GetInstance()->DrawRectangle(SGD::Rectangle{ Game::GetInstance()->GetCameraPosition().x, Game::GetInstance()->GetCameraPosition().y, 800, 600 }, SGD::Color(255, 0, 0));
-
 		}
 		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
 		{
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+
+			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
+			Game::GetInstance()->SetCameraDestinationVector({ son->GetPosition().x, son->GetPosition().y });
 
 		}
 
@@ -404,13 +470,11 @@ void GameplayState::Render(float _ElapsedTime)
 			//SGD::GraphicsManager::GetInstance()->DrawRectangle(DestinationRectangle, SGD::Color{ 255, 0, 255, 255 }, SGD::Color{ 255, 255, 0, 0 }, 5);
 
 
-			SGD::Point m_Point;
-			m_Point.x = (X* Load->m_Tile->m_TileWidth + Load->m_Tile->m_TileWidth) - Game::GetInstance()->GetScreenSize().width / 2;
-			m_Point.y = (float)Y* Load->m_Tile->m_TileHeight + Load->m_Tile->m_TileHeight;
-			SGD::Point m_Point2;
-			m_Point2.x = (float)X* Load->m_Tile->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2;
-			m_Point2.y = (float)Y* Load->m_Tile->m_TileHeight + Load->m_Tile->m_TileHeight;
-
+			SGD::Rectangle tileRect;
+			tileRect.left = (X* Load->m_Tile->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2);// -Game::GetInstance()->GetCameraPosition().x;
+			tileRect.top = (float)Y* Load->m_Tile->m_TileHeight;
+			tileRect.right = tileRect.left + Load->m_Tile->m_TileWidth;
+			tileRect.bottom = tileRect.top + Load->m_Tile->m_TileHeight;
 			//// This is a SourceRectangle, It will Draw all the tiles Where the Destination Rectangle is Placed
 			SGD::Rectangle SourceRectangle;
 			// This is The Cell Algorithem
@@ -431,21 +495,25 @@ void GameplayState::Render(float _ElapsedTime)
 			// You will Get a Point Times the X from the For Loop with the Map's Tile Width minus half the screen witdh minus the Camera's X position 
 			// You will Get a Point Times the Y from the For Loop with the Map's Tile Height minus half the screen Height minus the Camera's Y position 
 			// Then Pass it the Source Rectangle to Draw it on the Screen
-			if (X != 0 && Y != 0)
+			/*	if (X != 0 && Y != 0)
 			{
-				if (CullingRect.IsPointInRectangle(m_Point))
-				{
-					SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
-				}
-				else if (CullingRect.IsPointInRectangle(m_Point2))
-				{
-					SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
-				}
+			if (CullingRect.IsPointInRectangle(m_Point))
+			{
+			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+			}
+			else if (CullingRect.IsPointInRectangle(m_Point2))
+			{
+			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+			}
 			}
 			else
 			{
-				SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
+			SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
 
+			}*/
+			if (CullingRect.IsIntersecting(tileRect))
+			{
+				SGD::GraphicsManager::GetInstance()->DrawTextureSection(Load->GetTileImage(), SGD::Point{ ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x, (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y }, SourceRectangle);
 			}
 			SGD::Rectangle rect;
 			rect.left = ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x;
@@ -558,29 +626,38 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-		GameplayState* self = GameplayState::GetInstance();
-		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-		self->m_pEntities->AddEntity(swordman, 2);
-		swordman->Release();
-		swordman = nullptr;
-		break;
+										  GameplayState* self = GameplayState::GetInstance();
+										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+										  self->m_pEntities->AddEntity(swordman, 2);
+										  swordman->Release();
+										  swordman = nullptr;
+										  break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-		Actor* pActor = DestroyMsg->GetEntityMessage();
-		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-		break;
+										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+										 Actor* pActor = DestroyMsg->GetEntityMessage();
+										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+										 break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-		break;
+									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+									   break;
+
+	}
+	case MessageID::MSG_ARROW:
+	{
+
+								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
+								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
+								 break;
 
 	}
 	}
@@ -707,5 +784,18 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 	temp->SetCannon(_Cannon);
 
 	return temp;
+
+}
+
+Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
+{
+	Arrow* m_DartCannon = new Arrow();
+	m_DartCannon->SetPosition(_DartCannon->GetPosition());
+	m_DartCannon->SetSize(SGD::Size{ 16, 16, });
+	SGD::Vector newVelocity = { -200, 0 };
+	m_DartCannon->SetVelocity(newVelocity);
+	m_DartCannon->SetDartCannon(_DartCannon);
+
+	return m_DartCannon;
 
 }

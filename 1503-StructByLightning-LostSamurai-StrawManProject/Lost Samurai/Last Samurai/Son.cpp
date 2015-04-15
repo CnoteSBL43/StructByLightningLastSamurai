@@ -31,7 +31,7 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-			if (!GetOnGround() && !upArrow && !GameplayState::GetInstance()->GetK() && !GetBackPack() && !lrArrow)
+			if (!GetOnGround() && !upArrow  && !GetBackPack() && !lrArrow)
 				m_vtVelocity.y = 64.0f;
 
 			if (cannotJump)
@@ -126,7 +126,7 @@ void	 Son::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -256.0f;
+						m_vtVelocity.y = -512.0f;
 					}
 					if (GetBackPack())
 					{

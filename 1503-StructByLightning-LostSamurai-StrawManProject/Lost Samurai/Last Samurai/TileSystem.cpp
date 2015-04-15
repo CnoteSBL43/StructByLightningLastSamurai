@@ -342,10 +342,10 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		tile->Attribute("CollisionRectRight", &Right);
 		tile->Attribute("CollisionRectBottom", &Bottom);
 		SGD::Rectangle rect1;
-		rect1.left = Left;
-		rect1.top = Top;
-		rect1.bottom = Bottom;
-		rect1.right = Right;
+		rect1.left = (float)Left;
+		rect1.top = (float)Top;
+		rect1.bottom = (float)Bottom;
+		rect1.right =(float) Right;
 		rect->left = rect1.left;// -Game::GetInstance()->GetCameraPosition().x / 2;
 		rect->top = rect1.top;// -Game::GetInstance()->GetCameraPosition().y / 2;
 		rect->right = rect1.left + rect1.ComputeWidth();// -Game::GetInstance()->GetCameraPosition().x / 2;
@@ -353,6 +353,38 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		m_Tile->SetRect(*rect);
 		m_Tile->SetPosition(SGD::Point{ (float)rect->left, (float)rect->top });
 		m_CollisionRect.push_back(m_Tile);
+
+
+		tile = tile->NextSiblingElement();
+	}
+
+
+	tile = Root->FirstChildElement("RectLedge");
+	while (tile != nullptr)
+	{
+		Tile* m_Tile = new Tile();
+		SGD::Rectangle* rect = new SGD::Rectangle();
+		int Left;
+		int Top;
+		int Right;
+		int Bottom;
+		tile->Attribute("CollisionRectleft", &Left);
+		tile->Attribute("CollisionRectTop", &Top);
+		tile->Attribute("CollisionRectRight", &Right);
+		tile->Attribute("CollisionRectBottom", &Bottom);
+		SGD::Rectangle rect1;
+		rect1.left = (float)Left;
+		rect1.top = (float)Top;
+		rect1.bottom = (float)Bottom;
+		rect1.right = (float)Right;
+		rect->left = rect1.left;// -Game::GetInstance()->GetCameraPosition().x / 2;
+		rect->top = rect1.top;// -Game::GetInstance()->GetCameraPosition().y / 2;
+		rect->right = rect1.left + rect1.ComputeWidth();// -Game::GetInstance()->GetCameraPosition().x / 2;
+		rect->bottom = rect1.top + rect1.ComputeHeight();// -Game::GetInstance()->GetCameraPosition().y / 2;
+		m_Tile->SetRect(*rect);
+		m_Tile->SetPosition(SGD::Point{ (float)rect->left, (float)rect->top });
+		Ledges.push_back(m_Tile);
+
 
 
 		tile = tile->NextSiblingElement();
