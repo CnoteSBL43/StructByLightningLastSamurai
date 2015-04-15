@@ -795,7 +795,6 @@ Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 	SGD::Vector newVelocity = { -200, 0 };
 	m_DartCannon->SetVelocity(newVelocity);
 	m_DartCannon->SetDartCannon(_DartCannon);
-
 	return m_DartCannon;
 
 }

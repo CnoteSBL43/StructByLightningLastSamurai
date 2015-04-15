@@ -1,9 +1,9 @@
 #pragma once
-#include "Actor.h"
+#include "Bullet.h"
 #include "Cannon.h"
 #include "AnimationTimestamp.h"
 #include "DartCannon.h"
-class Arrow : public Actor
+class Arrow : public Bullet
 {
 public:
 	Arrow();

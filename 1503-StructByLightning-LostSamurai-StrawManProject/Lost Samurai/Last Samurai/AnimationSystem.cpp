@@ -39,8 +39,9 @@ void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SG
 	//if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
 	//GM->DrawTextureSection(m_Imgs[], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	if (_info.GetOwner()->GetType() == Actor::ENT_CANNONBALL)
-GM->DrawTextureSection(m_Imgs[2], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-
+		GM->DrawTextureSection(m_Imgs[2], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	if (_info.GetOwner()->GetType() == Actor::ENT_ARROW)
+		GM->DrawTextureSection(m_Imgs[3], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)
