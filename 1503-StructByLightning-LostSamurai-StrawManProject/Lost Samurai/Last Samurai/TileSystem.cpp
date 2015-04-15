@@ -315,7 +315,35 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Traps["Cannon"].push_back(Rect);
 			}
 
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "PopSpikes")
+			{
+				SGD::Rectangle* Rect = new SGD::Rectangle();
+				Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+					Game::GetInstance()->GetScreenSize().width / 2;
 
+
+				Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+					Game::GetInstance()->GetScreenSize().height / 2;
+				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+				Traps["PopSpikes"].push_back(Rect);
+			}
+
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "Doors")
+			{
+				SGD::Rectangle* Rect = new SGD::Rectangle();
+				Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+					Game::GetInstance()->GetScreenSize().width / 2;
+
+
+				Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+					Game::GetInstance()->GetScreenSize().height / 2;
+				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+				Traps["Doors"].push_back(Rect);
+			}
+
+			
 			
 			
 		
@@ -342,10 +370,10 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		tile->Attribute("CollisionRectRight", &Right);
 		tile->Attribute("CollisionRectBottom", &Bottom);
 		SGD::Rectangle rect1;
-		rect1.left = (float)Left;
-		rect1.top = (float)Top;
-		rect1.bottom = (float)Bottom;
-		rect1.right =(float) Right;
+		rect1.left = Left;
+		rect1.top = Top;
+		rect1.bottom = Bottom;
+		rect1.right = Right;
 		rect->left = rect1.left;// -Game::GetInstance()->GetCameraPosition().x / 2;
 		rect->top = rect1.top;// -Game::GetInstance()->GetCameraPosition().y / 2;
 		rect->right = rect1.left + rect1.ComputeWidth();// -Game::GetInstance()->GetCameraPosition().x / 2;
@@ -373,10 +401,10 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		tile->Attribute("CollisionRectRight", &Right);
 		tile->Attribute("CollisionRectBottom", &Bottom);
 		SGD::Rectangle rect1;
-		rect1.left = (float)Left;
-		rect1.top = (float)Top;
-		rect1.bottom = (float)Bottom;
-		rect1.right = (float)Right;
+		rect1.left = Left;
+		rect1.top = Top;
+		rect1.bottom = Bottom;
+		rect1.right = Right;
 		rect->left = rect1.left;// -Game::GetInstance()->GetCameraPosition().x / 2;
 		rect->top = rect1.top;// -Game::GetInstance()->GetCameraPosition().y / 2;
 		rect->right = rect1.left + rect1.ComputeWidth();// -Game::GetInstance()->GetCameraPosition().x / 2;

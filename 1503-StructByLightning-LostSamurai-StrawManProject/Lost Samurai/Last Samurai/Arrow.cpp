@@ -40,7 +40,7 @@ void Arrow::Render()
 	//draw rect
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ .3f, .3f });
 	/*if (Debug)
 	{*/
 	SGD::Rectangle re = GetRect();
@@ -48,7 +48,7 @@ void Arrow::Render()
 	re.right -= Game::GetInstance()->GetCameraPosition().x;
 	re.top -= Game::GetInstance()->GetCameraPosition().y;
 	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
-
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 
 }
 void Arrow::Update(float elapsedTime)
@@ -70,6 +70,25 @@ int	Arrow::GetType(void) const
 //SGD::Rectangle GetRect(void) const;
 void Arrow::HandleCollision(IEntity* pOther)
 {
+	if (pOther->GetType() == ENT_TILES)
+	{
+		
+			DestroyActorMessage* destroy = new DestroyActorMessage{ this };
+			destroy->QueueMessage();
+			destroy = nullptr;
+		
+
+	}
+
+	if (pOther->GetType() == ENT_FATHER)
+	{
+		SGD::Event* CannonBallHit = new SGD::Event("Death1", nullptr, this);
+		CannonBallHit->QueueEvent(pOther);
+		DestroyActorMessage* destroy = new DestroyActorMessage{ this };
+		destroy->QueueMessage();
+		destroy = nullptr;
+
+	}
 
 
 }

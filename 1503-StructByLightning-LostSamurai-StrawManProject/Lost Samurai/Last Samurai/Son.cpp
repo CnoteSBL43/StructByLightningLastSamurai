@@ -31,7 +31,7 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-			if (!GetOnGround() && !upArrow  && !GetBackPack() && !lrArrow)
+			if (!GetOnGround() && !upArrow && !GameplayState::GetInstance()->GetK() && !GetBackPack() && !lrArrow)
 				m_vtVelocity.y = 64.0f;
 
 			if (cannotJump)
@@ -365,7 +365,7 @@ void Son::HandleEvent(const SGD::Event* pEvent)
 		//m_Timestamp.SetCurrFrame(direction);
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		//this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
+		this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
 	}
 
 }
