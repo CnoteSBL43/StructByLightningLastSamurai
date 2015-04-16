@@ -20,7 +20,7 @@ public:
 
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
-
+	bool GetHanging(){ return isHanging; }
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
 	int GetDirection(){ return direction; }
@@ -29,6 +29,7 @@ public:
 	void HandleEvent(const SGD::Event* pEvent);
 	bool GetCollisionRect(){ return collisionrect; }
 	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
+	void SetHanging(bool _collisionrect){ isHanging = _collisionrect; }
 
 	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false;
 	bool enemy = false;//to create enemy once

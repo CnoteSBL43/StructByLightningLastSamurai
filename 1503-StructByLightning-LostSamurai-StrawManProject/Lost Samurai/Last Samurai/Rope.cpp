@@ -80,7 +80,7 @@ void Rope::Update(float dt)
 			ropeLink->SolveDistanceConstraint(num_Of_Iterations);
 		}
 	}
-	for (unsigned int i = 0; i < particles.size(); i++)
+	for (int i = 0; i < particles.size(); i++)
 	{
 		SGD::Rectangle rect = { SGD::Point(particles[i].GetCurrPosition().x, particles[i].GetCurrPosition().y), SGD::Size(10.0f, 10.0f) };
 		particles[i].SetRectangle(rect);

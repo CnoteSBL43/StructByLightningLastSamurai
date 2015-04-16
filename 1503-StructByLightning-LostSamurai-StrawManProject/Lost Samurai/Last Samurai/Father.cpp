@@ -128,7 +128,7 @@ void	 Father::Update(float elapsedTime)
 			{
 				if (GetStamina() >= 10)
 				{
-					if (GetOnGround())
+					if (GetOnGround() || GetHanging())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
@@ -228,7 +228,6 @@ void	 Father::Update(float elapsedTime)
 	if (GetOnGround() == false)
 	{
 		direction = 0;
-		m_vtVelocity.y += 10.0f;
 		m_Timestamp.SetCurrAnim("FatherJump");
 		m_Timestamp.SetCurrFrame(direction);
 		m_Timestamp.SetElapsedTime(elapsedTime);
@@ -296,20 +295,14 @@ void Father::HandleCollision(IEntity* pOther)
 	{
 		if (pOther->GetRect().IsIntersecting(this->GetRect()))
 		{
-			m_ptPosition.x = pOther->GetRect().left + pOther->GetRect().ComputeWidth() / 2;
-			m_ptPosition.y = pOther->GetRect().top + pOther->GetRect().ComputeHeight() / 2 +  10;
-			isHanging = true;
-		}
-		else
-		{
-			isHanging = false;
+			if (!upArrow)
+			{
+				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
+				isHanging = true;
+			}
 		}
 	}
-	else
-	{
-		isHanging = false;
-	}
-	if (pOther->GetType() == ENT_TILES && isHanging == false)
+	if (pOther->GetType() == ENT_TILES && isHanging==false)
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;
@@ -328,17 +321,27 @@ void Father::HandleCollision(IEntity* pOther)
 				else if (Rect.bottom == GetRect().bottom)
 				{
 					//set him on the floor and set ground to true
-					SetOnGround(true);
-					cannotJump = false;
-					upArrow = false;
-					m_vtVelocity.y = 0.0f;
-					float op = GetRect().bottom - GetPosition().y;
-					m_ptPosition.y = Rect.top - op;
-					if (grounded)
+					if (Rect.ComputeWidth() < 7.0f)
 					{
+						SetOnGround(false);
+						SetCollisionRect(false);
+						cannotJump = false;
+						upArrow = false;
+					}
+					else
+					{
+						SetOnGround(true);
+						cannotJump = false;
+						upArrow = false;
+						m_vtVelocity.y = 0.0f;
+						float op = GetRect().bottom - GetPosition().y;
+						m_ptPosition.y = Rect.top - op;
+						/*if (grounded)
+						{
 						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
 						event->QueueEvent();
 						grounded = false;
+						}*/
 					}
 				}
 			}
@@ -352,6 +355,7 @@ void Father::HandleCollision(IEntity* pOther)
 					letLeft = false;
 				else if (GetRect().right == Rect.right)
 					letRight = false;
+
 			}
 		}
 	}
