@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include <vector>
+#include "AnimationSystem.h"
 class Swordsman :
 	public Actor
 {
@@ -23,19 +24,12 @@ public:
 	Actor * GetTarget(){ return target; }
 
 private:
-	struct Frame
-	{
-		SGD::Rectangle		rFrame;		// source rectangle
-		SGD::Point			ptAnchor;	// relative position within source
-	};
-	std::vector<Frame> frames;
-	void CreateFrames();
-
 	int direction = 0;
 	float frameswitch = 0.0f;
 	float destination ;
 	bool m_facingRight = true;
 	Actor* target = nullptr;
-
+	AnimationTimestamp m_Timestamp;
+	bool Debug = false;
 };
 

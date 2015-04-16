@@ -45,7 +45,46 @@ TileSystem::~TileSystem()
 	}
 
 
+	for (unsigned int j = 0; j < m_Deathcollision.size(); j++)
+	{
+		delete m_Deathcollision[j];
+		m_Deathcollision[j] = nullptr;
+	}
 
+	for (unsigned int j = 0; j < Ledges.size(); j++)
+	{
+		delete Ledges[j];
+		Ledges[j] = nullptr;
+	}
+	//Traps.clear();
+	for (unsigned int i = 0; i < Traps["darts"].size(); i++)
+	{
+		delete Traps["darts"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Rocks"].size(); i++)
+	{
+		delete Traps["Rocks"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Smashing"].size(); i++)
+	{
+		delete Traps["Smashing"][i];
+	}
+	for (unsigned int i = 0; i < Traps["PopSpikes"].size(); i++)
+	{
+		delete Traps["PopSpikes"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Cannon"].size(); i++)
+	{
+		delete Traps["Cannon"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Spikes"].size(); i++)
+	{
+		delete Traps["Spikes"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Doors"].size(); i++)
+	{
+		delete Traps["Doors"][i];
+	}
 
 
 #pragma endregion
@@ -88,7 +127,9 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 	Root->Attribute("TileWidth", &height);
 	Root->Attribute("ImageHeight", &IHeight);
 	Root->Attribute("ImageWidth", &IWidth);
-	TiXmlElement* tile = Root->FirstChildElement();
+	TiXmlElement* tilecollison = Root->FirstChildElement("Collision");
+	TiXmlElement* tile = tilecollison->FirstChildElement();
+#pragma region First Child
 
 	while (tile != nullptr)
 	{
@@ -136,7 +177,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 
 			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 
-			_father->SetPosition(SGD::Point{ (float)Rect->left + 15, Rect->top - 200 });
+			_father->SetPosition(SGD::Point{ (float)Rect->left + 425, Rect->top - 400 });
 			//TileClass = nullptr;
 			_Son->SetPosition(SGD::Point{ (float)Rect->left + 75, Rect->top });
 
@@ -251,6 +292,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Spikes"].push_back(Rect);
+				
 			}
 			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "Smashing")
 			{
@@ -264,7 +306,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Smashing"].push_back(Rect);
-
+				
 
 
 			}
@@ -282,6 +324,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Rocks"].push_back(Rect);
+				
 
 			}
 
@@ -297,6 +340,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["darts"].push_back(Rect);
+				
 
 
 			}
@@ -313,6 +357,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Cannon"].push_back(Rect);
+				
 			}
 
 			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "PopSpikes")
@@ -327,6 +372,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["PopSpikes"].push_back(Rect);
+				
 			}
 
 			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "Doors")
@@ -341,6 +387,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Doors"].push_back(Rect);
+				
 			}
 
 			
@@ -355,8 +402,15 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 			break;
 
 		tile = tile->NextSiblingElement();
+		if (tile->GetText() == "RectElement")
+		{
+			int x = 0;
+		}
 	}
-	tile = Root->FirstChildElement("RectEelemnt");
+#pragma endregion
+	tilecollison = tilecollison->NextSiblingElement("Rect"); 
+	//tile = rect->FirstChildElement();
+	tile = tilecollison->FirstChildElement();
 	while (tile != nullptr)
 	{
 		Tile* m_Tile = new Tile();
@@ -381,16 +435,17 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		m_Tile->SetRect(*rect);
 		m_Tile->SetPosition(SGD::Point{ (float)rect->left, (float)rect->top });
 		m_CollisionRect.push_back(m_Tile);
-
+		delete rect;
 
 		tile = tile->NextSiblingElement();
 	}
+	
 
-
-	tile = Root->FirstChildElement("RectLedge");
+	tilecollison = tilecollison->NextSiblingElement("Ledge");
+	tile = tilecollison->FirstChildElement();
 	while (tile != nullptr)
 	{
-		Tile* m_Tile = new Tile();
+		
 		SGD::Rectangle* rect = new SGD::Rectangle();
 		int Left;
 		int Top;
@@ -409,11 +464,9 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 		rect->top = rect1.top;// -Game::GetInstance()->GetCameraPosition().y / 2;
 		rect->right = rect1.left + rect1.ComputeWidth();// -Game::GetInstance()->GetCameraPosition().x / 2;
 		rect->bottom = rect1.top + rect1.ComputeHeight();// -Game::GetInstance()->GetCameraPosition().y / 2;
-		m_Tile->SetRect(*rect);
-		m_Tile->SetPosition(SGD::Point{ (float)rect->left, (float)rect->top });
-		Ledges.push_back(m_Tile);
-
-
+		Traps["Ledges"].push_back(rect);
+		//delete m_Tile;
+		
 
 		tile = tile->NextSiblingElement();
 	}

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="Bowman.png" MF="Filter">
+  <Animation Name="ArcherShoot">
+    <Frame>
+      <Draw RectX="-30" RectY="-65" RectWidth="56" RectHeight="77" />
+      <Collision RectX="-19" RectY="-63" RectWidth="45" RectHeight="68" />
+      <AnchorPT X="96" Y="65" />
+      <Particles>
+        <ParticlePT X="7" Y="0" />
+        <ParticlePT X="-10" Y="1" />
+        <ParticlePT X="-4" Y="-24" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="ArcherIdle">
+    <Frame>
+      <Draw RectX="-23" RectY="-64" RectWidth="68" RectHeight="72" />
+      <Collision RectX="-19" RectY="-52" RectWidth="41" RectHeight="60" />
+      <AnchorPT X="23" Y="143" />
+      <Particles>
+        <ParticlePT X="0" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

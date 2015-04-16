@@ -1,19 +1,14 @@
 #pragma once
 #include "Actor.h"
-class Spike: public Actor
+class Spike : public Actor
 {
 public:
-
-	
-	
 	Spike();
 	~Spike();
-	
-	//SGD::Rectangle GetRect() const;
+	SGD::Rectangle GetRect() const;
 	void Render();
-
 protected:
-SGD::Rectangle rect;
+	SGD::Rectangle rect;
 	bool Debug = false;
 };
 

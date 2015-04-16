@@ -12,10 +12,10 @@ Box::~Box()
 
 void Box::CalculateVelocity(SGD::Vector v)
 {
-	if (isHeavy)
-		SetVelocity({ v.x *0.5f ,v.y}) ;
-	else
-		SetVelocity({ v.x *0.75f, v.y });
+	//if (isHeavy)
+	//	SetVelocity({ v.x *0.5f ,v.y}) ;
+	//else
+	//	SetVelocity({ v.x *0.75f, v.y });
 
 }
 

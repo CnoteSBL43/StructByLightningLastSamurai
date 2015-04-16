@@ -73,7 +73,7 @@ void	 Son::Update(float elapsedTime)
 			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
 			{
 				m_FacingtoRight = false;
-				m_vtVelocity.x = -64.0f;
+				m_vtVelocity.x = -128.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letRight = true;

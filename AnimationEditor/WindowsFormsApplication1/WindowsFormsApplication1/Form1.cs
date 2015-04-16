@@ -936,7 +936,7 @@ namespace WindowsFormsApplication1
         {
             if (FrameListBox.SelectedIndex != -1)
             {
-                Frames frametemp = (Frames)AnimFrames.Items[AnimFrames.SelectedIndex];
+                Frames frametemp = (Frames)AnimFrames.Items[FrameListBox.SelectedIndex];
                 Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
                 frametemp.anchorpt.Y = (int)AnchorYUpDown.Value;
                 if (frametemp != frametemptwo)

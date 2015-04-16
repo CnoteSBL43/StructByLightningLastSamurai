@@ -43,7 +43,7 @@ private:
 	//to change the scale for the father(direction)
 	bool isCurrentCharacter = true; //to check if he is the current character. Starts as the father always 	
 	bool Debug = false;
-
+	bool isHanging = false;
 	bool collisionrect = false;//collision rectangle  fix ?
 	float previousPosY;
 	SGD::Color m_staminastate = { 255, 255, 255, 255 };

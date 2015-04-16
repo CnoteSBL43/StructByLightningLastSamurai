@@ -135,11 +135,12 @@ void	 Father::Update(float elapsedTime)
 						SetOnGround(false);
 						upArrow = true;
 						m_vtVelocity.y = -512.0f;
+						isHanging = false;
 					}
 					grounded = true;
 				}
 			}
-			
+
 			if (m_ptPosition.y <= previousPosY - 200)//ground level -100
 			{
 				upArrow = false;
@@ -291,12 +292,24 @@ void Father::HandleCollision(IEntity* pOther)
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_SWORDSMAN)
+	if (pOther->GetType() == ENT_LEDGE)
 	{
-
+		if (pOther->GetRect().IsIntersecting(this->GetRect()))
+		{
+			m_ptPosition.x = pOther->GetRect().left + pOther->GetRect().ComputeWidth() / 2;
+			m_ptPosition.y = pOther->GetRect().top + pOther->GetRect().ComputeHeight() / 2 +  10;
+			isHanging = true;
+		}
+		else
+		{
+			isHanging = false;
+		}
 	}
-
-	if (pOther->GetType() == ENT_TILES)
+	else
+	{
+		isHanging = false;
+	}
+	if (pOther->GetType() == ENT_TILES && isHanging == false)
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;

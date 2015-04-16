@@ -29,6 +29,7 @@
 #include "PopUpSpikes.h"
 
 #include"CreateSwordMan.h"
+#include "Ledges.h"
 //*********************************************************************//
 //	File: GamePlayState.cpp
 //	Function: GetInstance
@@ -38,6 +39,7 @@
 // this is used to make a singleton 
 //
 //*********************************************************************//
+
 GameplayState* GameplayState::GetInstance()
 {
 	// this is a Global Static GameplayState Getinsatnce to Make a SingleTon
@@ -107,7 +109,7 @@ Actor* GameplayState::CreateSon(void)
 Actor* GameplayState::CreateSwordsman(Actor* _player) const
 {
 	Actor * swordsman = new Swordsman;
-	swordsman->SetPosition(SGD::Point{ 100.0f, 540.0f });
+	swordsman->SetPosition(SGD::Point{ 175.0f, 250.0f });
 	swordsman->SetAlive(true);
 	swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
@@ -139,6 +141,8 @@ void GameplayState::Enter()
 	m_DartTrapImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/darttrap.png");
 	m_FatherFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/FatherHead.png");
 	m_SonFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/SonHead.png");
+	m_LedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ledge.png");
+
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -147,16 +151,14 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/SonAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Cannonball.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
-
+	AnimationSystem::GetInstance()->Load("../resource/XML/Swordsman.xml");
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
 	SGD::AudioManager::GetInstance()->PlayAudio(m_Backround, true);
-
 	//AnimationSystem::GetInstance()->Load("../anim2.xml");
 	// this is setting the CreateFather Function the The Father Actor Pointer so that it can be stored in the Enitiy Manger for later use 
 	father = CreateFather();
-
 	// The Father Acotr Pointer will be sent inside the entity manager in bucket zero 
 	m_pEntities->AddEntity(father, 0);
 	// this is setting the CreateSon Function the The SOn Actor Pointer so that it can be stored in the Enitiy Manger for later use 
@@ -178,39 +180,41 @@ void GameplayState::Enter()
 
 	Load->LoadTileXml((Father*)father, (Son*)son);
 	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
-	{
 		m_pEntities->AddEntity(Load->m_CollisionRect[i], 3);
-	}
 
 	for (unsigned int i = 0; i < Load->m_Deathcollision.size(); i++)
-	{
 		m_pEntities->AddEntity(Load->m_Deathcollision[i], 4);
-		Load->m_Deathcollision[i]->Release();
-	}
+	//Load->m_Deathcollision[i]->Release();
 
 	for (unsigned int i = 0; i < Load->Ledges.size(); i++)
-	{
 		m_pEntities->AddEntity(Load->Ledges[i], 7);
-		Load->Ledges[i]->Release();
-	}
-	for (int i = 0; i < Load->Traps["Spikes"].size(); i++)
+	//Load->Ledges[i]->Release();
+
+	for (unsigned int i = 0; i < Load->Traps["Spikes"].size(); i++)
 	{
 		m_Spikes = CreateSpikes(i);
 		m_pEntities->AddEntity(m_Spikes, 5);
+		//m_Spikes->Release();
 	}
 
-	for (int i = 0; i < Load->Traps["Cannon"].size(); i++)
+	for (unsigned int i = 0; i < Load->Traps["Cannon"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateCannon(i), 5);
+		Actor* temp = CreateCannon(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
 	}
 
-	for (int i = 0; i < Load->Traps["darts"].size(); i++)
+	for (unsigned int i = 0; i < Load->Traps["darts"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateDarts(i), 5);
+		Actor* temp = CreateDarts(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
 	}
-	for (int i = 0; i < Load->Traps["PopSpikes"].size(); i++)
+	for (unsigned int i = 0; i < Load->Traps["PopSpikes"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreatePopUpSpikes(i), 5);
+		Actor* temp = CreatePopUpSpikes(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
 	}
 
 }
@@ -235,6 +239,8 @@ void GameplayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SpikesImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_DartTrapImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LedgeImage);
+
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
 	m_Pause = false;
 	cursorPos = 0;
@@ -382,6 +388,10 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(6, 3);
 		m_pEntities->CheckCollisions(6, 0);
 		m_pEntities->CheckCollisions(6, 1);
+		m_pEntities->CheckCollisions(0, 5);
+		m_pEntities->CheckCollisions(1, 5);
+		m_pEntities->CheckCollisions(7, 0);
+		m_pEntities->CheckCollisions(7, 1);
 		dynamic_cast<Father*>(father)->SetCollisionRect(false);
 		m_pEntities->CheckCollisions(0, 3);
 		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false)
@@ -588,38 +598,38 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-										  GameplayState* self = GameplayState::GetInstance();
-										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-										  self->m_pEntities->AddEntity(swordman, 2);
-										  swordman->Release();
-										  swordman = nullptr;
-										  break;
+		GameplayState* self = GameplayState::GetInstance();
+		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+		self->m_pEntities->AddEntity(swordman, 2);
+		swordman->Release();
+		swordman = nullptr;
+		break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-										 Actor* pActor = DestroyMsg->GetEntityMessage();
-										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-										 break;
+		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+		Actor* pActor = DestroyMsg->GetEntityMessage();
+		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+		break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-									   break;
+		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+		break;
 
 	}
 	case MessageID::MSG_ARROW:
 	{
 
-								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
-								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
-								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
-								 break;
+		const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
+		Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
+		break;
 
 	}
 	}
@@ -705,14 +715,23 @@ void GameplayState::RenderPause(void)
 
 Actor* GameplayState::CreateSpikes(int i) const
 {
-
 	Spike* m_Spike = new Spike();
-
 	m_Spike->SetImage(m_SpikesImage);
+	m_Spike->SetSize({ 0.7f, 0.7f });
 	m_Spike->SetPosition(SGD::Point{ Load->Traps["Spikes"][i]->left - 500, Load->Traps["Spikes"][i]->top - 350 });
-
-
 	return m_Spike;
+}
+
+
+
+Actor*  GameplayState::CreatePopUpSpikes(int i) const
+{
+	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
+	m_PUSpikes->SetImage(m_SpikesImage);
+	m_PUSpikes->SetSize({ 0.7f, 0.7f });
+	m_PUSpikes->SetVelocity({ 0, 20 });
+	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
+	return m_PUSpikes;
 }
 
 Actor*  GameplayState::CreateCannon(int i) const
@@ -761,11 +780,16 @@ Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 
 }
 
-Actor*  GameplayState::CreatePopUpSpikes(int i) const
+Actor* GameplayState::CreateLedge(Ledges* _ledge) const
 {
+	Ledges* ledge = new Ledges;
+	ledge->SetPosition(_ledge->GetPosition());
+	ledge->SetSize({ 1.0f, 1.0f });
+	ledge->SetImage(m_LedgeImage);
+	return ledge;
+}
 
-	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
-	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
-
-	return m_PUSpikes;
+SGD::Rectangle Spike::GetRect() const
+{
+	return{ m_ptPosition, m_szSize };
 }

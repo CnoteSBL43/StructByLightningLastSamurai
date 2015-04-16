@@ -45,14 +45,14 @@
     <Filter Include="Source\Game States">
       <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Traps">
-      <UniqueIdentifier>{a7bfe6e8-41df-410c-b258-57c7fcf4c121}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Weapons">
-      <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game States\MessageSystem">
       <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Traps">
+      <UniqueIdentifier>{a7bfe6e8-41df-410c-b258-57c7fcf4c121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Weapons">
+      <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,19 +198,19 @@
       <Filter>Source\Game States\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="Spike.cpp">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
     <ClCompile Include="DartCannon.cpp">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
     <ClCompile Include="Cannon.cpp">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
     <ClCompile Include="Rock.cpp">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
     <ClCompile Include="SmashingColumns.cpp">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
     <ClCompile Include="BowMan.cpp">
       <Filter>Source\Entities</Filter>
@@ -222,22 +222,28 @@
       <Filter>Source\Game States\MessageSystem</Filter>
     </ClCompile>
     <ClCompile Include="Arrow.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Source\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="CannonBall.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Source\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="CreateArrowMessage.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="PopUpSpikes.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateArrowMessage.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Ledges.cpp">
+      <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -407,22 +413,22 @@
       <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="Cannon.h">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClInclude>
     <ClInclude Include="DartCannon.h">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClInclude>
     <ClInclude Include="Rock.h">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClInclude>
     <ClInclude Include="SmashingColumns.h">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClInclude>
     <ClInclude Include="Spike.h">
-      <Filter>Traps</Filter>
+      <Filter>Source\Traps</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h">
-      <Filter>Weapons</Filter>
+      <Filter>Source\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="BowMan.h">
       <Filter>Source\Entities</Filter>
@@ -431,7 +437,7 @@
       <Filter>Source\Game States\MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="CannonBall.h">
-      <Filter>Weapons</Filter>
+      <Filter>Source\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="DestroyActorMessage.h">
       <Filter>Source\Game States\MessageSystem</Filter>
@@ -439,9 +445,18 @@
     <ClInclude Include="BitmapFont.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="CreateArrowMessage.h" />
-    <ClInclude Include="PopUpSpikes.h" />
-    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="PopUpSpikes.h">
+      <Filter>Source\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Source\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateArrowMessage.h">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Ledges.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">

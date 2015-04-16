@@ -22,7 +22,7 @@ void Tile::Render()
 		SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
 		SGD::Size screen = Game::GetInstance()->GetScreenSize();
 		//the render rect after the offest
-		SGD::Point pt = { (GetPosition().x - screen.width / 2)- PositionOffset.x
+		SGD::Point pt = { (GetPosition().x - screen.width / 2) - PositionOffset.x
 			, GetPosition().y - PositionOffset.y };
 
 		//render rect
@@ -57,8 +57,6 @@ void Tile::HandleCollision(IEntity* pOther)
 		SonDeath->SendEventNow(pOther);
 		delete SonDeath;
 	}
-
-
 }
 
 int Tile::GetType(void)	const
@@ -74,7 +72,7 @@ SGD::Rectangle Tile::GetRect() const
 	//SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
 	SGD::Size screen = Game::GetInstance()->GetScreenSize();
 	//the render rect after the offest
-	SGD::Point pt = { GetPosition().x - screen.width / 2, GetPosition().y};
+	SGD::Point pt = { GetPosition().x - screen.width / 2, GetPosition().y };
 
 	//render rect
 	SGD::Rectangle draw = rect;

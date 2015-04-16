@@ -15,14 +15,14 @@ void OptionState::Enter()
 	fin.open("Options.txt");
 	if (fin.is_open())
 	{
-		int mastervol,musvol, sfxvol;
-		fin >> mastervol;
-		fin >> musvol;
-		fin >> sfxvol;
-		SetMasterVol(mastervol);
-		SetSFXVol(sfxvol);
-		SetMusicVol(musvol);
-		fin.close();
+	int mastervol,musvol, sfxvol;
+	fin >> mastervol;
+	fin >> musvol;
+	fin >> sfxvol;
+	SetMasterVol(mastervol);
+	SetSFXVol(sfxvol);
+	SetMusicVol(musvol);
+	fin.close();
 	}*/
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
 
@@ -77,8 +77,8 @@ void OptionState::Exit()
 	fout.open("Options.txt");
 	if (fout.is_open())
 	{
-		fout <<MasterVol << " " << MusicVol << " " << SFXVol;
-		fout.close();
+	fout <<MasterVol << " " << MusicVol << " " << SFXVol;
+	fout.close();
 	}*/
 }
 
@@ -92,7 +92,7 @@ bool OptionState::Update(float _ElapsedTime)
 	{
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow) )
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow))
 	{
 		if (m_CursorPos == 0)
 		{
@@ -114,7 +114,7 @@ bool OptionState::Update(float _ElapsedTime)
 			}
 			SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, SFXVol);
 			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_SFX))
-				SGD::AudioManager::GetInstance()->StopAudio(m_SFX );
+				SGD::AudioManager::GetInstance()->StopAudio(m_SFX);
 			SGD::AudioManager::GetInstance()->PlayAudio(m_SFX);
 			if (SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music))
 				SGD::AudioManager::GetInstance()->StopAudio(m_Music);
@@ -149,7 +149,7 @@ bool OptionState::Update(float _ElapsedTime)
 		if (m_CursorPos == 0)
 		{
 			MusicVol += 10;
-			if (MusicVol >100)
+			if (MusicVol > 100)
 			{
 				MusicVol = 0;
 			}
@@ -160,7 +160,7 @@ bool OptionState::Update(float _ElapsedTime)
 		else if (m_CursorPos == 1)
 		{
 			SFXVol += 10;
-			if (SFXVol >100)
+			if (SFXVol > 100)
 			{
 				SFXVol = 0;
 			}
@@ -201,30 +201,30 @@ bool OptionState::Update(float _ElapsedTime)
 		if (m_Document.LoadFile("Save1") == true)
 		{
 			TiXmlElement* m_Element = m_Document.RootElement();
-			double fPosx, fPosy, sPosx, sPosy, spawnX, spawnY;
+			double fPosx, fPosy, sPosx, sPosy;// spawnX, spawnY;
 			m_Element->Attribute("FatherPosX", &fPosx);
 			// Use the XElement Variable to Find the String in the XML File and then Store the Variable to the m_SFXVol Variable 
 			m_Element->Attribute("FatherPosY", &fPosy);
 			// Use the XElement Variable to Find the String in the XML File and then Store the Variable to the FullScreen Variable 
 			m_Element->Attribute("SonPosX", &sPosx);
 			m_Element->Attribute("SonPosY", &sPosy);
-		//	m_Element->Attribute("SpawnPointX", &spawnX);
+			//	m_Element->Attribute("SpawnPointX", &spawnX);
 			//m_Element->Attribute("SpawnPointY", &spawnY);
 			GameplayState::GetInstance()->GetFather()->SetPosition({ (float)fPosx, (float)fPosy });
 			GameplayState::GetInstance()->GetSon()->SetPosition({ (float)sPosx, (float)sPosy });
-			
+
 		}
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4)
 		m_CursorPos++;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos ==4)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4)
 		m_CursorPos = 0;
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos >0)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0)
 		m_CursorPos--;
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0)
-		m_CursorPos =4;
+		m_CursorPos = 4;
 
-	
+
 
 	return true;
 }
@@ -233,12 +233,12 @@ void OptionState::Render(float _ElapsedTime)
 {
 	std::wostringstream wos1, wos2, wos3, wos4;
 	wos1 << MusicVol;
-	wos2 << SFXVol; 
-	if(tempLanguage)
+	wos2 << SFXVol;
+	if (tempLanguage)
 		wos4 << "Spanish";
-	else 
+	else
 		wos4 << "English";
-	if (Game::GetInstance()->GetLanguage()==0)
+	if (Game::GetInstance()->GetLanguage() == 0)
 	{
 		Game::GetInstance()->GetFont().Draw("Options", SGD::Point{ 270.0f, 50.0f }, 0.75f);
 		Game::GetInstance()->GetFont().Draw("Music Volume", SGD::Point{ 125.0f, 200.0f }, 0.50f);
@@ -267,7 +267,7 @@ void OptionState::Render(float _ElapsedTime)
 	}
 	if (m_CursorPos == 0)
 	{
-		SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(50.0f, 210.0f), 0.0f, {}, SGD::Color(255,153,0));
+		SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(50.0f, 210.0f), 0.0f, {}, SGD::Color(255, 153, 0));
 	}
 	else if (m_CursorPos == 1)
 	{
@@ -282,7 +282,7 @@ void OptionState::Render(float _ElapsedTime)
 	{
 		SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(50.0f, 360.0f), 0.0f, {}, SGD::Color(255, 153, 0));
 	}
-	else if (m_CursorPos==4)
+	else if (m_CursorPos == 4)
 		SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(50.0f, 410.0f), 0.0f, {}, SGD::Color(255, 153, 0));
 
 	Game::GetInstance()->GetFont().Draw(wos1.str().c_str(), SGD::Point{ 500.0f, 200.0f }, 0.50f);

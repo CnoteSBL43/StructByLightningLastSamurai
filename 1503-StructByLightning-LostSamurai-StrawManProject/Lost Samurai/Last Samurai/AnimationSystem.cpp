@@ -36,14 +36,12 @@ void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SG
 		GM->DrawTextureSection(m_Imgs[0], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	if (_info.GetOwner()->GetType() == Actor::ENT_SON)
 		GM->DrawTextureSection(m_Imgs[1], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	//if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
-	//GM->DrawTextureSection(m_Imgs[], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	if (_info.GetOwner()->GetType() == Actor::ENT_CANNONBALL)
 		GM->DrawTextureSection(m_Imgs[2], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	if (_info.GetOwner()->GetType() == Actor::ENT_ARROW)
 		GM->DrawTextureSection(m_Imgs[3], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	
-
+	if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
+		GM->DrawTextureSection(m_Imgs[4], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)
@@ -68,8 +66,6 @@ SGD::Rectangle AnimationSystem::GetRect(const AnimationTimestamp& _info, int _Po
 	float y = crect.top + pt.y;
 	float width = (crect.left + pt.x) + crect.ComputeWidth() * _scale.width;
 	float height = (crect.top + pt.y) + crect.ComputeHeight() * _scale.height;
-	//if (_info.GetOwner()->GetType() == Actor::ENT_SON)
-	//	return SGD::Rectangle{ crect.left + pt.x + 10.0f, crect.top + pt.y + 35.0f, width + 10.0f, height + 35.0f };
 	return SGD::Rectangle{ x, y, width, height };
 }
 

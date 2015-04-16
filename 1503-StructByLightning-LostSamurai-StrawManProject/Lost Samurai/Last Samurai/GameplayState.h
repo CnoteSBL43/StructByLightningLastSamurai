@@ -8,7 +8,7 @@
 #include "Cannon.h"
 #include "DartCannon.h"
 #include "PopUpSpikes.h"
-
+#include "Ledges.h"
 
 class Actor;
 class EntityManager;
@@ -35,12 +35,13 @@ private:
 	SGD::HTexture m_DartTrapImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_CannonBallImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_FatherFaceImage = SGD::INVALID_HANDLE;
-	SGD::HTexture	m_SonFaceImage = SGD::INVALID_HANDLE;
-	//*****************************************************************//
-	// Game Entities
+	SGD::HTexture m_SonFaceImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_LedgeImage = SGD::INVALID_HANDLE;
+		//*****************************************************************//
+		// Game Entities
 
-	// This is a Entity Manager that Pointer variable used to send things to the entity manager
-	EntityManager* m_pEntities = nullptr;
+		// This is a Entity Manager that Pointer variable used to send things to the entity manager
+		EntityManager* m_pEntities = nullptr;
 	ParticleManager* m_ParticleManager = nullptr;
 	// This is an Actor Pointer variable named Father used to create the Father 
 	Actor* father = nullptr;
@@ -93,6 +94,7 @@ public:
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
 	Actor* CreateArrow(DartCannon*);
+	Actor* GameplayState::CreateLedge(Ledges*) const;
 	int checkx, checky;//check collision
 	bool check = false; // check collision
 	bool intersect = false;//check collision

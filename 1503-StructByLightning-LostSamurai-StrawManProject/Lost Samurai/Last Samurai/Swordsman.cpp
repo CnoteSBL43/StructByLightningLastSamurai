@@ -2,24 +2,21 @@
 #include "Game.h"
 #include "Son.h"
 #include <sstream>
+//#include "AnimationSystem.h"
 Swordsman::Swordsman()
 {
-	CreateFrames();
+	m_Timestamp.SetCurrAnim("SwordsmanIdle");
+	m_Timestamp.SetCurrFrame(0);
+	m_Timestamp.SetElapsedTime(0);
+	m_Timestamp.SetOwner(this);
+	//CreateFrames();
 }
 
 
 Swordsman::~Swordsman()
 {
 }
-void Swordsman::CreateFrames()
-{
 
-	frames.push_back({ { 0, 22, 45, 95 }, { 22, 90 } });
-	frames.push_back({ { 44, 22, 85, 95 }, { 22, 90 } });
-	frames.push_back({ { 84, 22, 117, 95 }, { 22, 90 } });
-	frames.push_back({ { 118, 22, 162, 95 }, { 22, 90 } });
-	frames.push_back({ { 163, 22, 215, 95 }, { 22, 90 } });
-}
 
 
 
@@ -51,33 +48,38 @@ void	 Swordsman::Update(float elapsedTime)
 
 void	 Swordsman::Render(void)
 {
-	SGD::Rectangle frame = frames[direction].rFrame;
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
-
-	if (m_facingRight)
+	//SGD::Rectangle frame = frames[direction].rFrame;
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == false)
+		Debug = true;
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == true)
+		Debug = false;
+	if (Debug)
 	{
-		SGD::Point p = m_ptPosition;
-		p.x -= Game::GetInstance()->GetCameraPosition().x;
-		p.y -= Game::GetInstance()->GetCameraPosition().y;
-		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage, p,
-			frame, 0.0f, {}, { 255, 100, 0 }, SGD::Size{ GetSize().width, GetSize().height });
+		SGD::Rectangle re = GetRect();
+		re.left -= Game::GetInstance()->GetCameraPosition().x;
+		re.right -= Game::GetInstance()->GetCameraPosition().x;
+		re.top -= Game::GetInstance()->GetCameraPosition().y;
+		re.bottom -= Game::GetInstance()->GetCameraPosition().y;
+		SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 	}
-	else
 
-		SGD::GraphicsManager::GetInstance()->DrawTextureSection(m_hImage,
-		{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 64.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y },
-		frame, 0.0f, {}, { 255, 100, 0 }, SGD::Size{ -GetSize().width, GetSize().height });
-	
+	SGD::Point p = m_ptPosition;
+	p.x -= Game::GetInstance()->GetCameraPosition().x;
+	p.y -= Game::GetInstance()->GetCameraPosition().y;
+	if (m_facingRight)
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, { -1, 1 });
+	else
+		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, { 1, 1 });
 }
 
 SGD::Rectangle  Swordsman::GetRect(void)	const
 {
-	return SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 54.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y + 6.0f }, SGD::Size{ 45, 99 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, { 1, 1 });//SGD::Rectangle(SGD::Point{ m_ptPosition.x - Game::GetInstance()->GetCameraPosition().x - 54.0f, m_ptPosition.y - Game::GetInstance()->GetCameraPosition().y + 6.0f }, SGD::Size{ 45, 99 });
 }
 void Swordsman::HandleCollision(IEntity* pOther)
 {
 	if (pOther->GetType() == ENT_SON || pOther->GetType() == ENT_FATHER)
 	{
-		
+
 	}
 }

@@ -53,6 +53,7 @@
     <ClCompile Include="GameplayState.cpp" />
     <ClCompile Include="InstructionsState.cpp" />
     <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="Ledges.cpp" />
     <ClCompile Include="LoadGameState.cpp" />
     <ClCompile Include="LoadState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="InstructionsState.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="Ledges.h" />
     <ClInclude Include="LoadGameState.h" />
     <ClInclude Include="LoadState.h" />
     <ClInclude Include="MainMenuState.h" />
