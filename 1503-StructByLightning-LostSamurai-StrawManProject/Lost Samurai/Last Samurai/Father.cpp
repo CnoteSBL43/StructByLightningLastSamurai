@@ -180,12 +180,19 @@ void	 Father::Update(float elapsedTime)
 		}
 	}
 	if (GetStamina() < 0)
+	{
+		isHanging = false;
 		SetStamina(0);
+	}
 	if (GetStamina() >= 100)
 		SetStamina(100);
 	else
+	{
 		if (GetOnGround())
 			SetStamina(GetStamina() + 0.06f);
+	}
+	if (isHanging == true && GetOnGround() == false)
+		SetStamina(GetStamina() - 0.5f);
 	if (GetStamina() <= 75)
 	{
 		m_staminastate.green = 168;
@@ -232,6 +239,7 @@ void	 Father::Update(float elapsedTime)
 		m_Timestamp.SetCurrFrame(direction);
 		m_Timestamp.SetElapsedTime(elapsedTime);
 	}
+
 	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
 }
 
@@ -295,14 +303,17 @@ void Father::HandleCollision(IEntity* pOther)
 	{
 		if (pOther->GetRect().IsIntersecting(this->GetRect()))
 		{
-			if (!upArrow)
+			if (GetStamina() > 5)
 			{
-				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
-				isHanging = true;
+				if (!upArrow)
+				{
+					m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
+					isHanging = true;
+				}
 			}
 		}
 	}
-	if (pOther->GetType() == ENT_TILES && isHanging==false)
+	if (pOther->GetType() == ENT_TILES && isHanging == false)
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;

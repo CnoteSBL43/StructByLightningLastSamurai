@@ -22,7 +22,7 @@ protected:	virtual ~Actor(void) = default;		// protected to force reference coun
 public:
 	//*****************************************************************//
 	// Entity Types:
-	enum EntityType { ENT_BASE, ENT_PLAYER, ENT_FATHER, ENT_SON, ENT_TILES, ENT_SWORDSMAN, ENT_TRIGGER, ENT_CANNONBALL,ENT_ARROW, ENT_BOX, ENT_POPUPSPIKES, ENT_LEDGE,ENT_GAMEOBJECT };
+	enum EntityType { ENT_BASE, ENT_PLAYER, ENT_FATHER, ENT_SON, ENT_TILES, ENT_SWORDSMAN, ENT_TRIGGER, ENT_CANNONBALL, ENT_ARROW, ENT_BOX, ENT_POPUPSPIKES, ENT_LEDGE, ENT_GAMEOBJECT };
 
 	//*****************************************************************//
 	// Facing Direction
@@ -54,6 +54,7 @@ public:
 	float			GetRotation(void) const			{ return m_fRotation; }
 	bool			GetAlive(void) const			{ return m_Alive; }
 
+	float			GetWeight() const					{ return m_Weight; }
 	// Mutators:
 	void			SetImage(SGD::HTexture	img)	{ m_hImage = img; }
 	void			SetPosition(SGD::Point	pos) 	{ m_ptPosition = pos; }
@@ -61,6 +62,7 @@ public:
 	void			SetSize(SGD::Size		size) 	{ m_szSize = size; }
 	void			SetRotation(float			rad)	{ m_fRotation = rad; }
 	void			SetAlive(bool _alive)				{ m_Alive = _alive; }
+	void			SetWeight(float _weight)			{ m_Weight = _weight; }
 protected:
 	//*****************************************************************//
 	// Shared members:
@@ -74,5 +76,5 @@ private:
 	//*****************************************************************//
 	// reference count
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
-
+	float m_Weight;
 };
