@@ -118,6 +118,15 @@ Actor* GameplayState::CreateSwordsman(Actor* _player) const
 	return swordsman;
 }
 
+Actor* GameplayState::CreateLedge(int i) const
+{
+	Ledges* ledge = new Ledges;
+	ledge->SetPosition(SGD::Point{ Load->Traps["Ledges"][i]->left-400.0f, Load->Traps["Ledges"][i]->top });
+	ledge->SetSize({ 64.0f, 32.0f });
+	ledge->SetImage(m_LedgeImage);
+	return ledge;
+}
+
 //*********************************************************************//
 //	File: GamePlayState.cpp
 //	Function: Enter
@@ -186,8 +195,7 @@ void GameplayState::Enter()
 		m_pEntities->AddEntity(Load->m_Deathcollision[i], 4);
 	//Load->m_Deathcollision[i]->Release();
 
-	for (unsigned int i = 0; i < Load->Ledges.size(); i++)
-		m_pEntities->AddEntity(Load->Ledges[i], 7);
+	
 	//Load->Ledges[i]->Release();
 
 	for (unsigned int i = 0; i < Load->Traps["Spikes"].size(); i++)
@@ -195,6 +203,10 @@ void GameplayState::Enter()
 		m_Spikes = CreateSpikes(i);
 		m_pEntities->AddEntity(m_Spikes, 5);
 		//m_Spikes->Release();
+	}
+	for (unsigned int i = 0; i < Load->Traps["Ledges"].size(); i++)
+	{
+		m_pEntities->AddEntity(CreateLedge(i), 5);
 	}
 
 	for (unsigned int i = 0; i < Load->Traps["Cannon"].size(); i++)
@@ -383,6 +395,9 @@ bool GameplayState::Update(float _ElapsedTime)
 		CullingRect.right = CullingRect.left + Game::GetInstance()->GetScreenSize().width;
 		CullingRect.bottom = CullingRect.top + Game::GetInstance()->GetScreenSize().height;
 
+		dynamic_cast<Father*>(father)->SetHanging(false);
+
+	
 		m_pEntities->CheckCollisions(0, 4);
 		m_pEntities->CheckCollisions(1, 4);
 		m_pEntities->CheckCollisions(6, 3);
@@ -392,10 +407,14 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(1, 5);
 		m_pEntities->CheckCollisions(7, 0);
 		m_pEntities->CheckCollisions(7, 1);
+
 		dynamic_cast<Father*>(father)->SetCollisionRect(false);
 		m_pEntities->CheckCollisions(0, 3);
-		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false)
-			father->SetVelocity(SGD::Vector{ 0.0f, 64.0f });
+		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging())
+		{
+			if (!dynamic_cast<Father*>(father)->GetHanging())
+				father->SetVelocity(SGD::Vector{ 0.0f, 64.0f });
+		}
 
 		dynamic_cast<Son*>(son)->SetCollisionRect(false);
 		m_pEntities->CheckCollisions(1, 3);
@@ -567,7 +586,9 @@ void GameplayState::Render(float _ElapsedTime)
 
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
-
+	std::wostringstream s;
+	s << father->GetVelocity().y;
+	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	if (m_Pause)
 		RenderPause();
 }
@@ -778,15 +799,6 @@ Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 	m_DartCannon->SetDartCannon(_DartCannon);
 	return m_DartCannon;
 
-}
-
-Actor* GameplayState::CreateLedge(Ledges* _ledge) const
-{
-	Ledges* ledge = new Ledges;
-	ledge->SetPosition(_ledge->GetPosition());
-	ledge->SetSize({ 1.0f, 1.0f });
-	ledge->SetImage(m_LedgeImage);
-	return ledge;
 }
 
 SGD::Rectangle Spike::GetRect() const

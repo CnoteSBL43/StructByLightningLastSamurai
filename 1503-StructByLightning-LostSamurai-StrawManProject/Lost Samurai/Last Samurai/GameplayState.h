@@ -94,7 +94,7 @@ public:
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
 	Actor* CreateArrow(DartCannon*);
-	Actor* GameplayState::CreateLedge(Ledges*) const;
+	Actor* GameplayState::CreateLedge(int i) const;
 	int checkx, checky;//check collision
 	bool check = false; // check collision
 	bool intersect = false;//check collision
