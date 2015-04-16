@@ -129,9 +129,8 @@ Actor* GameplayState::CreateSwordsman(Actor* _player) const
 //*********************************************************************//
 void GameplayState::Enter()
 {
-
+	
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
-
 	// This is setting the Fathers Image so he can be seen on screen.
 	// the Fathers Texture is Located in the resources folder. 
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
@@ -288,6 +287,8 @@ void GameplayState::Exit()
 //*********************************************************************//
 bool GameplayState::Update(float _ElapsedTime)
 {
+
+
 	// This is an if Check that turn on and off Debug mode for the Tile Collison 
 	// If you Press F3 and the Bool Called Debug is False you Will set it to true 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::F3) && Debug == false)
@@ -421,6 +422,7 @@ bool GameplayState::Update(float _ElapsedTime)
 //*********************************************************************//
 void GameplayState::Render(float _ElapsedTime)
 {
+
 
 	// This i s a nested for loop to make the destination rectangle as well as the source rectangle
 	// It will use the Variable Load to get the Grids with and the Grids Height
@@ -570,6 +572,7 @@ void GameplayState::Render(float _ElapsedTime)
 
 	if (m_Pause)
 		RenderPause();
+
 }
 
 

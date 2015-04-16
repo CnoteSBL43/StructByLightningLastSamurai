@@ -29,6 +29,7 @@ ParticleManager::ParticleManager()
 
 void ParticleManager::LoadEmitter(char* _fileName)
 {
+	//Game::GetInstance()->GetFont().Draw("Loading", { Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetScreenSize().height / 2 }, 1, { 255, 255, 255, 255 });
 	Emitter *emitter = new Emitter();
 	//Emitter emitter;
 	ParticleFlyweight flyweight;

@@ -71,6 +71,7 @@ SGD::Rectangle AnimationSystem::GetRect(const AnimationTimestamp& _info, int _Po
 
 void AnimationSystem::Load(const char * _filename)
 {
+	//Game::GetInstance()->GetFont().Draw("Loading", { Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetScreenSize().height / 2 }, 1, { 255, 255, 255, 255 });
 	double left, top, width, height, cleft, ctop, cheight, cwidth;
 	double x, y;
 	double ptx, pty;

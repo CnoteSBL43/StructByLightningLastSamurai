@@ -54,6 +54,8 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             this.Focus();
             this.DoubleBuffered = true;
+            //this.MinimizeBox = false;
+            this.MaximizeBox = false;
             UpdateScrollBars();
         }
 
@@ -936,7 +938,7 @@ namespace WindowsFormsApplication1
         {
             if (FrameListBox.SelectedIndex != -1)
             {
-                Frames frametemp = (Frames)AnimFrames.Items[FrameListBox.SelectedIndex];
+                Frames frametemp = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
                 Frames frametemptwo = (Frames)FrameListBox.Items[FrameListBox.SelectedIndex];
                 frametemp.anchorpt.Y = (int)AnchorYUpDown.Value;
                 if (frametemp != frametemptwo)

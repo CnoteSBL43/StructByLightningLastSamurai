@@ -22,7 +22,6 @@ void MainMenuState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_Pointer);
 	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_GameMusic);
-
 }
 
 bool MainMenuState::Update(float _ElapsedTime)
@@ -36,7 +35,7 @@ bool MainMenuState::Update(float _ElapsedTime)
 		Game::GetInstance()->ChangeState(GameplayState::GetInstance());
 		return true;
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos==1)//instructions
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 1)//instructions
 	{
 		Game::GetInstance()->ChangeState(InstructionsState::GetInstance());
 		return true;
@@ -57,15 +56,15 @@ bool MainMenuState::Update(float _ElapsedTime)
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4)
 		m_CursorPos++;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos ==4)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4)
 		m_CursorPos = 0;
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos >0)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0)
 		m_CursorPos--;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos ==0)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0)
 		m_CursorPos = 4;
 
 
-	 return true;
+	return true;
 }
 
 void MainMenuState::Render(float _ElapsedTime)
@@ -90,15 +89,15 @@ void MainMenuState::Render(float _ElapsedTime)
 	}
 	switch (m_CursorPos)
 	{
-	case 0: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 210.0f), 0.0f, {}, SGD::Color(255,153,0));
-		break;																	   
-	case 1: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 260.0f), 0.0f, {}, SGD::Color(255,153,0));
-		break;																	   				  
-	case 2: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 310.0f), 0.0f, {}, SGD::Color(255,153,0));
-		break;																	   				  
-	case 3: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 360.0f), 0.0f, {}, SGD::Color(255,153,0));
-		break;																	   				 
-	case 4: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 410.0f), 0.0f, {}, SGD::Color(255,153,0));
+	case 0: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 210.0f), 0.0f, {}, SGD::Color(255, 153, 0));
+		break;
+	case 1: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 260.0f), 0.0f, {}, SGD::Color(255, 153, 0));
+		break;
+	case 2: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 310.0f), 0.0f, {}, SGD::Color(255, 153, 0));
+		break;
+	case 3: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 360.0f), 0.0f, {}, SGD::Color(255, 153, 0));
+		break;
+	case 4: SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(250.0f, 410.0f), 0.0f, {}, SGD::Color(255, 153, 0));
 		break;
 	}
 

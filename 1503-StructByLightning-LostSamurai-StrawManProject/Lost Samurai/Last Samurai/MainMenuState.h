@@ -17,6 +17,7 @@ private:
 	SGD::HAudio m_GameMusic = SGD::INVALID_HANDLE;
 	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
 	int m_CursorPos = 0;
+	bool isLoading = false;
 
 public:
 	static MainMenuState* GetInstance();

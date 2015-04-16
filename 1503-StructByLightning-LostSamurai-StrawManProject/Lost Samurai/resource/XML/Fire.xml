@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="fire.png" MF="Filter">
+  <Animation Name="Fire">
+    <Frame>
+      <Draw RectX="-16" RectY="-52" RectWidth="29" RectHeight="58" />
+      <Collision RectX="-15" RectY="-52" RectWidth="26" RectHeight="58" />
+      <AnchorPT X="37" Y="111" />
+      <Particles>
+        <ParticlePT X="0" Y="0" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-13" RectY="-77" RectWidth="26" RectHeight="79" />
+      <Collision RectX="-13" RectY="-56" RectWidth="26" RectHeight="58" />
+      <AnchorPT X="118" Y="111" />
+      <Particles>
+        <ParticlePT X="0" Y="1" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-13" RectY="-78" RectWidth="26" RectHeight="84" />
+      <Collision RectX="-13" RectY="-52" RectWidth="26" RectHeight="58" />
+      <AnchorPT X="197" Y="111" />
+      <Particles>
+        <ParticlePT X="-1" Y="1" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-11" RectY="-72" RectWidth="24" RectHeight="79" />
+      <Collision RectX="-11" RectY="-51" RectWidth="24" RectHeight="58" />
+      <AnchorPT X="265" Y="111" />
+      <Particles>
+        <ParticlePT X="-265" Y="-110" />
+        <ParticlePT X="0" Y="-2" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-11" RectY="-73" RectWidth="24" RectHeight="81" />
+      <Collision RectX="-11" RectY="-50" RectWidth="24" RectHeight="58" />
+      <AnchorPT X="345" Y="111" />
+      <Particles>
+        <ParticlePT X="-345" Y="-111" />
+        <ParticlePT X="0" Y="1" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-12" RectY="-75" RectWidth="23" RectHeight="85" />
+      <Collision RectX="-13" RectY="-48" RectWidth="25" RectHeight="58" />
+      <AnchorPT X="425" Y="111" />
+      <Particles>
+        <ParticlePT X="-427" Y="-111" />
+        <ParticlePT X="0" Y="-2" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

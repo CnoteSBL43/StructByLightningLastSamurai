@@ -64,19 +64,15 @@ void Game::ChangeState(IGameState* _NextState)
 {
 	// This is an If Check that will Check if m_CurrentState is not  NUll Pointer 
 	if (m_CurrentState != nullptr)
-	{
 		// This will exit the State the m_CurrentState is At, at the moment in time 
 		m_CurrentState->Exit();
-	}
 	// This will go to the next state that it assigned to in the pramater 
 	m_CurrentState = _NextState;
 
 	// This is an If Check that will Check if m_CurrentState is not  NUll Pointer 
 	if (m_CurrentState != nullptr)
-	{
 		// this will Enter the new state that you want to go in 
 		m_CurrentState->Enter();
-	}
 }
 
 //*********************************************************************//
@@ -104,7 +100,7 @@ bool Game::Initialize()
 	SGD::EventManager::GetInstance()->Initialize();
 	font.LoadLookUpChart("../resource/XML/font.xml");
 
-	
+
 
 #if !defined( DEBUG ) && !defined( _DEBUG )
 	SGD::GraphicsManager::GetInstance()->ShowConsoleWindow(false);
@@ -221,7 +217,7 @@ int Game::Update()
 
 	}
 	SGD::EventManager::GetInstance()->Update();
-	
+
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
@@ -252,7 +248,7 @@ void Game::Terminate()
 
 	SGD::EventManager::GetInstance()->Terminate();
 	SGD::EventManager::GetInstance()->DeleteInstance();
-	
+
 }
 
 bool Game::CheckPrevious()

@@ -17,6 +17,8 @@ class GameplayState :
 	public IGameState
 {
 private:
+
+	
 	// this is the default Constructor 
 	GameplayState() = default;
 	// this is a default Deconstructor
