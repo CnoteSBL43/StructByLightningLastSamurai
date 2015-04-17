@@ -9,7 +9,7 @@ Pulley::Pulley(int length, int numberOfPartciles, SGD::Vector location)
 {
 	index = 0;
 	r = new Rope(length, numberOfPartciles, location);
-	SetPoint1({ r->GetParticleAt(10)->GetCurrPosition().x-50.0f, r->GetParticleAt(10)->GetCurrPosition().y -100.0f });
+	SetPoint1({ r->GetParticleAt(10)->GetCurrPosition().x-100.0f, r->GetParticleAt(10)->GetCurrPosition().y -100.0f });
 	SetPoint2({ r->GetParticleAt(10)->GetCurrPosition().x, r->GetParticleAt(10)->GetCurrPosition().y - 200.0f });
 	SetPoint3({ r->GetParticleAt(10)->GetCurrPosition().x+50.0f, r->GetParticleAt(10)->GetCurrPosition().y - 180.0f });
 	
@@ -20,7 +20,7 @@ Pulley::Pulley(int length, int numberOfPartciles, SGD::Vector location)
 	r->GetParticleAt(10)->SetCurrPosition(GetPoint2());
 	r->GetParticleAt(11)->SetCurrPosition(GetPoint3());
 	r->GetParticleAt(19)->SetMass(800.0f);
-	r->GetParticleAt(0)->SetCurrPosition({ r->GetParticleAt(9)->GetCurrPosition().x-20.0f, r->GetParticleAt(9)->GetCurrPosition().y + 150.0f });
+	r->GetParticleAt(0)->SetCurrPosition({ r->GetParticleAt(9)->GetCurrPosition().x-100.0f, r->GetParticleAt(9)->GetCurrPosition().y + 150.0f });
 	r->GetParticleAt(19)->SetCurrPosition({ r->GetParticleAt(11)->GetCurrPosition().x +150.0f, r->GetParticleAt(11)->GetCurrPosition().y + 150.0f });
 }
 

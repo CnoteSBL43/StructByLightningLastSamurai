@@ -30,6 +30,7 @@
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="AnimationTimestamp.cpp" />
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="AutoLockingDoor.cpp" />
     <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="BowMan.cpp" />
     <ClCompile Include="Box.cpp" />
@@ -43,6 +44,7 @@
     <ClCompile Include="CreditState.cpp" />
     <ClCompile Include="DartCannon.cpp" />
     <ClCompile Include="DestroyActorMessage.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Father.cpp" />
@@ -54,6 +56,7 @@
     <ClCompile Include="InstructionsState.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Ledges.cpp" />
+    <ClCompile Include="Link.cpp" />
     <ClCompile Include="LoadGameState.cpp" />
     <ClCompile Include="LoadState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -62,10 +65,14 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleFlyweight.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
+    <ClCompile Include="ParticleMass.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PopUpSpikes.cpp" />
+    <ClCompile Include="PressurePlate.cpp" />
+    <ClCompile Include="Pulley.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="Rope.cpp" />
     <ClCompile Include="SaveGameState.cpp" />
     <ClCompile Include="SmashingColumns.cpp" />
     <ClCompile Include="Son.cpp" />
@@ -100,8 +107,10 @@
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AnimationTimestamp.h" />
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="AutoLockingDoor.h" />
     <ClInclude Include="BitmapFont.h" />
     <ClInclude Include="BowMan.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CannonBall.h" />
@@ -112,6 +121,7 @@
     <ClInclude Include="CreditState.h" />
     <ClInclude Include="DartCannon.h" />
     <ClInclude Include="DestroyActorMessage.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Father.h" />
@@ -125,6 +135,7 @@
     <ClInclude Include="InstructionsState.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Ledges.h" />
+    <ClInclude Include="Link.h" />
     <ClInclude Include="LoadGameState.h" />
     <ClInclude Include="LoadState.h" />
     <ClInclude Include="MainMenuState.h" />
@@ -133,11 +144,15 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleFlyweight.h" />
     <ClInclude Include="ParticleManager.h" />
+    <ClInclude Include="ParticleMass.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PopUpSpikes.h" />
+    <ClInclude Include="PressurePlate.h" />
+    <ClInclude Include="Pulley.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="Rope.h" />
     <ClInclude Include="SaveGameState.h" />
     <ClInclude Include="SmashingColumns.h" />
     <ClInclude Include="Son.h" />

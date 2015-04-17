@@ -33,7 +33,7 @@ public:
 
 	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false;
 	bool enemy = false;//to create enemy once
-	bool grounded = true;
+	//bool grounded = true;
 	SGD::Color GetStaminaState() { return m_staminastate; }
 	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
 

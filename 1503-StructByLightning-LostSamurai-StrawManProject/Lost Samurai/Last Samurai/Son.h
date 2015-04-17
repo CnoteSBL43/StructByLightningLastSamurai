@@ -40,7 +40,7 @@ private:
 	float previousPosY;
 	bool collisionrect = false;//collision rectangle  fix ?
 	bool Debug = false;
-	bool grounded = true;
+	//bool grounded = true;
 	SGD::Color m_staminastate = { 255, 255, 255, 255 };
 	bool isFlashing = false;
 	float FlashTimer = 0.0f;

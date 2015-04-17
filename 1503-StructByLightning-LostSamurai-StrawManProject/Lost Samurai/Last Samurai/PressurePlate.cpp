@@ -2,6 +2,7 @@
 #include "Father.h"
 #include "Son.h"
 #include "Box.h"
+#include "../SGD Wrappers/SGD_EventManager.h"
 
 PressurePlate::PressurePlate()
 {
@@ -16,7 +17,7 @@ PressurePlate::~PressurePlate()
 void PressurePlate::Update(float elapsedTime)
 {
 	if (GetHeavy())
-		SetWeight(150.0f);
+		SetWeight(100.0f);
 	else
 		SetWeight(50.0f);
 	check = false;
@@ -52,7 +53,11 @@ void PressurePlate::HandleCollision(IEntity* pOther)
 	if (pOther->GetType() == ENT_SON)
 	{
 		if (GetWeight() == dynamic_cast<Son*>(pOther)->GetWeight())
-			check = true;
+		{
+			SGD::Event* event = new SGD::Event("P", nullptr, this);
+			event->QueueEvent();
+		}
+			
 	}
 	if (pOther->GetType() == ENT_BOX)
 	{

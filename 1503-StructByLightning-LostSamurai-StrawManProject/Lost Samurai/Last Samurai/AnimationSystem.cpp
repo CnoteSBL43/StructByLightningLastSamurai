@@ -34,14 +34,16 @@ void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SG
 	temppt.y += rect.top * _scale.height;
 	if (_info.GetOwner()->GetType() == Actor::ENT_FATHER)
 		GM->DrawTextureSection(m_Imgs[0], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	if (_info.GetOwner()->GetType() == Actor::ENT_SON)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_SON)
 		GM->DrawTextureSection(m_Imgs[1], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	if (_info.GetOwner()->GetType() == Actor::ENT_CANNONBALL)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_CANNONBALL)
 		GM->DrawTextureSection(m_Imgs[2], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	if (_info.GetOwner()->GetType() == Actor::ENT_ARROW)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_ARROW)
 		GM->DrawTextureSection(m_Imgs[3], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_SWORDSMAN)
 		GM->DrawTextureSection(m_Imgs[4], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_AUTO_LOCK_DOOR)
+		GM->DrawTextureSection(m_Imgs[5], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)

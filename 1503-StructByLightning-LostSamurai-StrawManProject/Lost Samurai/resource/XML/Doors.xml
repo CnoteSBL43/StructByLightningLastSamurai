@@ -1,48 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character Image="doors.png" MF="Filter">
-  <Animation Name="ClosedDoor">
-    <Frame>
-      <Draw RectX="-5" RectY="-83" RectWidth="18" RectHeight="89" />
-      <Collision RectX="-5" RectY="-83" RectWidth="13" RectHeight="89" />
-      <AnchorPT X="100" Y="245" />
-      <Particles>
-        <ParticlePT X="1" Y="-4" />
-      </Particles>
-      <Time Time="0.7" />
-      <Trigger Type="None" Name="None" />
-    </Frame>
-  </Animation>
-  <Animation Name="ClosedAutoLockingDoor">
-    <Frame>
-      <Draw RectX="-8" RectY="-87" RectWidth="18" RectHeight="95" />
-      <Collision RectX="-8" RectY="-87" RectWidth="13" RectHeight="95" />
-      <AnchorPT X="76" Y="244" />
-      <Particles>
-        <ParticlePT X="-3" Y="1" />
-      </Particles>
-      <Time Time="0.7" />
-      <Trigger Type="None" Name="None" />
-    </Frame>
-  </Animation>
-  <Animation Name="ClosedMetalDoor">
-    <Frame>
-      <Draw RectX="-3" RectY="-87" RectWidth="12" RectHeight="94" />
-      <Collision RectX="-3" RectY="-87" RectWidth="7" RectHeight="94" />
-      <AnchorPT X="17" Y="245" />
-      <Particles>
-        <ParticlePT X="-1" Y="-7" />
-      </Particles>
-      <Time Time="0.7" />
-      <Trigger Type="None" Name="None" />
-    </Frame>
-  </Animation>
   <Animation Name="OpenDoor">
     <Frame>
-      <Draw RectX="-45" RectY="-126" RectWidth="93" RectHeight="138" />
-      <Collision RectX="-45" RectY="-126" RectWidth="93" RectHeight="138" />
-      <AnchorPT X="164" Y="133" />
+      <Draw RectX="-30" RectY="-90" RectWidth="67" RectHeight="96" />
+      <Collision RectX="-30" RectY="-90" RectWidth="67" RectHeight="96" />
+      <AnchorPT X="204" Y="99" />
       <Particles>
-        <ParticlePT X="0" Y="6" />
+        <ParticlePT X="-1" Y="-1" />
       </Particles>
       <Time Time="0.7" />
       <Trigger Type="None" Name="None" />
@@ -50,12 +14,11 @@
   </Animation>
   <Animation Name="OpenAutoLockingDoor">
     <Frame>
-      <Draw RectX="-49" RectY="-130" RectWidth="98" RectHeight="140" />
-      <Collision RectX="-49" RectY="-130" RectWidth="98" RectHeight="140" />
-      <AnchorPT X="378" Y="136" />
+      <Draw RectX="-27" RectY="-86" RectWidth="64" RectHeight="96" />
+      <Collision RectX="-27" RectY="-86" RectWidth="64" RectHeight="96" />
+      <AnchorPT X="118" Y="95" />
       <Particles>
-        <ParticlePT X="-378" Y="-130" />
-        <ParticlePT X="0" Y="-3" />
+        <ParticlePT X="4" Y="2" />
       </Particles>
       <Time Time="0.7" />
       <Trigger Type="None" Name="None" />
@@ -63,11 +26,47 @@
   </Animation>
   <Animation Name="OpenMetalDoor">
     <Frame>
-      <Draw RectX="-47" RectY="-131" RectWidth="95" RectHeight="141" />
-      <Collision RectX="-47" RectY="-131" RectWidth="95" RectHeight="141" />
-      <AnchorPT X="275" Y="136" />
+      <Draw RectX="-23" RectY="-79" RectWidth="63" RectHeight="95" />
+      <Collision RectX="-23" RectY="-79" RectWidth="63" RectHeight="95" />
+      <AnchorPT X="37" Y="88" />
       <Particles>
-        <ParticlePT X="1" Y="0" />
+        <ParticlePT X="10" Y="3" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="ClosedMetalDoor">
+    <Frame>
+      <Draw RectX="-12" RectY="-87" RectWidth="32" RectHeight="96" />
+      <Collision RectX="-12" RectY="-87" RectWidth="32" RectHeight="96" />
+      <AnchorPT X="51" Y="224" />
+      <Particles>
+        <ParticlePT X="-2" Y="1" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="ClosedAutoLockingDoor">
+    <Frame>
+      <Draw RectX="-12" RectY="-87" RectWidth="32" RectHeight="96" />
+      <Collision RectX="-12" RectY="-87" RectWidth="32" RectHeight="96" />
+      <AnchorPT X="122" Y="225" />
+      <Particles>
+        <ParticlePT X="-6" Y="-3" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="ClosedDoor">
+    <Frame>
+      <Draw RectX="-13" RectY="-86" RectWidth="32" RectHeight="96" />
+      <Collision RectX="-13" RectY="-86" RectWidth="32" RectHeight="96" />
+      <AnchorPT X="204" Y="223" />
+      <Particles>
+        <ParticlePT X="-3" Y="0" />
       </Particles>
       <Time Time="0.7" />
       <Trigger Type="None" Name="None" />

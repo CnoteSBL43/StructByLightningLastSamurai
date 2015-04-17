@@ -19,7 +19,7 @@ void PopUpSpikes::Render()
 	re.right -= Game::GetInstance()->GetCameraPosition().x;
 	re.top -= Game::GetInstance()->GetCameraPosition().y;
 	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect())
 	Spike::Render();
 }

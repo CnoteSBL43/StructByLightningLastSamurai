@@ -16,8 +16,8 @@
   <Animation Name="SonIdle">
     <Frame>
       <Draw RectX="-21" RectY="-72" RectWidth="42" RectHeight="75" />
-      <Collision RectX="-21" RectY="-70" RectWidth="42" RectHeight="73" />
-      <AnchorPT X="26" Y="335" />
+      <Collision RectX="-18" RectY="-68" RectWidth="32" RectHeight="73" />
+      <AnchorPT X="26" Y="333" />
       <Particles>
         <ParticlePT X="4" Y="-3" />
       </Particles>
@@ -26,8 +26,8 @@
     </Frame>
     <Frame>
       <Draw RectX="-21" RectY="-72" RectWidth="42" RectHeight="75" />
-      <Collision RectX="-21" RectY="-70" RectWidth="42" RectHeight="73" />
-      <AnchorPT X="83" Y="335" />
+      <Collision RectX="-18" RectY="-68" RectWidth="32" RectHeight="73" />
+      <AnchorPT X="83" Y="333" />
       <Particles>
         <ParticlePT X="2" Y="-5" />
       </Particles>
@@ -36,8 +36,8 @@
     </Frame>
     <Frame>
       <Draw RectX="-20" RectY="-72" RectWidth="43" RectHeight="75" />
-      <Collision RectX="-20" RectY="-70" RectWidth="43" RectHeight="73" />
-      <AnchorPT X="137" Y="335" />
+      <Collision RectX="-17" RectY="-68" RectWidth="32" RectHeight="73" />
+      <AnchorPT X="137" Y="333" />
       <Particles>
         <ParticlePT X="-2" Y="-4" />
       </Particles>
@@ -46,8 +46,8 @@
     </Frame>
     <Frame>
       <Draw RectX="-19" RectY="-72" RectWidth="41" RectHeight="75" />
-      <Collision RectX="-19" RectY="-70" RectWidth="41" RectHeight="73" />
-      <AnchorPT X="191" Y="335" />
+      <Collision RectX="-16" RectY="-68" RectWidth="32" RectHeight="73" />
+      <AnchorPT X="191" Y="333" />
       <Particles>
         <ParticlePT X="-3" Y="-3" />
       </Particles>
@@ -56,8 +56,8 @@
     </Frame>
     <Frame>
       <Draw RectX="-22" RectY="-72" RectWidth="43" RectHeight="75" />
-      <Collision RectX="-22" RectY="-70" RectWidth="43" RectHeight="73" />
-      <AnchorPT X="246" Y="335" />
+      <Collision RectX="-19" RectY="-68" RectWidth="32" RectHeight="73" />
+      <AnchorPT X="246" Y="333" />
       <Particles>
         <ParticlePT X="1" Y="-3" />
       </Particles>
@@ -68,7 +68,7 @@
   <Animation Name="SonRunning">
     <Frame>
       <Draw RectX="-23" RectY="-69" RectWidth="41" RectHeight="75" />
-      <Collision RectX="-23" RectY="-65" RectWidth="41" RectHeight="71" />
+      <Collision RectX="-20" RectY="-63" RectWidth="32" RectHeight="70" />
       <AnchorPT X="33" Y="428" />
       <Particles>
         <ParticlePT X="-4" Y="0" />
@@ -78,7 +78,7 @@
     </Frame>
     <Frame>
       <Draw RectX="-25" RectY="-69" RectWidth="44" RectHeight="74" />
-      <Collision RectX="-25" RectY="-65" RectWidth="44" RectHeight="70" />
+      <Collision RectX="-20" RectY="-63" RectWidth="32" RectHeight="69" />
       <AnchorPT X="90" Y="430" />
       <Particles>
         <ParticlePT X="3" Y="1" />
@@ -88,7 +88,7 @@
     </Frame>
     <Frame>
       <Draw RectX="-21" RectY="-70" RectWidth="41" RectHeight="76" />
-      <Collision RectX="-21" RectY="-66" RectWidth="41" RectHeight="72" />
+      <Collision RectX="-18" RectY="-64" RectWidth="32" RectHeight="71" />
       <AnchorPT X="138" Y="430" />
       <Particles>
         <ParticlePT X="0" Y="-3" />
@@ -98,7 +98,7 @@
     </Frame>
     <Frame>
       <Draw RectX="-21" RectY="-69" RectWidth="41" RectHeight="74" />
-      <Collision RectX="-21" RectY="-65" RectWidth="42" RectHeight="70" />
+      <Collision RectX="-18" RectY="-63" RectWidth="32" RectHeight="69" />
       <AnchorPT X="193" Y="430" />
       <Particles>
         <ParticlePT X="-7" Y="0" />

@@ -1,5 +1,5 @@
 #include "MainMenuState.h"
-
+#include "LoadGameState.h"
 MainMenuState* MainMenuState::GetInstance()
 {
 	static MainMenuState m_Instance;
@@ -32,7 +32,7 @@ bool MainMenuState::Update(float _ElapsedTime)
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 0)//PlayGame
 	{
-		Game::GetInstance()->ChangeState(GameplayState::GetInstance());
+		Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
 		return true;
 	}
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 1)//instructions

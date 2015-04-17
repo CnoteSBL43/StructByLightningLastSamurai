@@ -9,6 +9,9 @@
 #include "../SGD Wrappers/SGD_IListener.h"
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "TileSystem.h"
+#include "Box.h"
+#include "AutoLockingDoor.h"
+
 Father::Father()
 {
 	m_Timestamp.SetOwner(this);
@@ -48,61 +51,61 @@ void	 Father::Update(float elapsedTime)
 				m_vtVelocity.y = 64.0f;
 			if (cannotJump)
 				m_vtVelocity.y = 64.0f;
-			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight)
+			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight  && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(true);
-				m_vtVelocity.x = 256.0f;
+				m_vtVelocity.x = 128.0f;
 				letLeft = true;
 				if (frameswitch >= 0.07f)
 				{
 					direction++;
 					frameswitch = 0.0f;
 
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 					//delete event;
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 					//delete event;
 				}
 				m_Timestamp.SetCurrAnim("FatherRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
-			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
+			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft  && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(false);
-				m_vtVelocity.x = -256.0f;
+				m_vtVelocity.x = -128.0f;
 				letRight = true;
 				if (frameswitch >= 0.07f)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 					//delete event;
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 					//delete event;
 				}
 				m_Timestamp.SetCurrAnim("FatherRunning");
@@ -124,7 +127,7 @@ void	 Father::Update(float elapsedTime)
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				if (GetStamina() >= 10)
 				{
@@ -134,16 +137,20 @@ void	 Father::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -512.0f;
+						m_vtVelocity.y = -1024.0f;
 						isHanging = false;
 					}
-					grounded = true;
+					//grounded = true;
 				}
 			}
 
-			if (m_ptPosition.y <= previousPosY - 200)//ground level -100
+			if (GetOnGround())//ground level -100
 			{
 				upArrow = false;
+			}
+			if (!GetOnGround() && upArrow==true)
+			{
+				m_vtVelocity.y += 2.0f;
 			}
 			//frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
@@ -156,10 +163,13 @@ void	 Father::Update(float elapsedTime)
 			m_Timestamp.SetCurrFrame(direction);
 			m_Timestamp.SetElapsedTime(elapsedTime);
 			Actor::Update(elapsedTime);
-			if (m_ptPosition.y <= previousPosY - 200)//ground level -100
+			if (!GetOnGround() && upArrow == true)//ground level -100
+			{
+				m_vtVelocity.y += 2.0f;
+			}
+			if (GetOnGround())
 			{
 				upArrow = false;
-				m_vtVelocity.y += 64.0f;
 			}
 		}
 	}
@@ -189,7 +199,7 @@ void	 Father::Update(float elapsedTime)
 	else
 	{
 		if (GetOnGround())
-			SetStamina(GetStamina() + 0.06f);
+			SetStamina(GetStamina() + 0.6f);
 	}
 	if (isHanging == true && GetOnGround() == false)
 		SetStamina(GetStamina() - 0.5f);
@@ -313,6 +323,67 @@ void Father::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
+	if (pOther->GetType() == ENT_BOX)
+	{
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		if (Rect.ComputeHeight() < GetRect().ComputeHeight())
+		{
+			if (Rect.left >= this->GetRect().left && Rect.right <= this->GetRect().right)
+			{
+				letLeft = true;
+				letRight = true;
+				if (Rect.top == GetRect().top)
+				{
+					cannotJump = true;
+					SetCollisionRect(false);
+				}
+				else if (Rect.bottom == GetRect().bottom)
+				{
+					//set him on the floor and set ground to true
+					if (Rect.ComputeWidth() < 7.0f)
+					{
+						SetOnGround(false);
+						SetCollisionRect(false);
+						cannotJump = false;
+						upArrow = false;
+					}
+					else
+					{
+						cannotJump = false;
+						upArrow = false;
+						m_vtVelocity.y = 0.0f;
+						float op = GetRect().bottom - GetPosition().y;
+						m_ptPosition.y = pOther->GetRect().top - op;
+						SetOnGround(true);
+					}
+				}
+			}
+		}
+		if (Rect.ComputeWidth() < this->GetRect().ComputeWidth())
+		{
+			if (Rect.top >= this->GetRect().top && Rect.bottom <= this->GetRect().bottom)
+			{
+				m_vtVelocity.x = 0.0f;
+				if (GetRect().left == Rect.left)
+				{
+					SetVelocity({ -128.0f, 0.0f });
+					dynamic_cast<Box*>(pOther)->CalculateVelocity(GetVelocity());
+					SetVelocity(dynamic_cast<Box*>(pOther)->GetVelocity());
+					letLeft = false;
+				}
+				else if (GetRect().right == Rect.right)
+				{
+					SetVelocity({ 128.0f, 0.0f });
+					dynamic_cast<Box*>(pOther)->CalculateVelocity(GetVelocity());
+					SetVelocity(dynamic_cast<Box*>(pOther)->GetVelocity());
+					letRight = false;
+				}
+			}
+		}
+
+
+	}
 	if (pOther->GetType() == ENT_TILES && isHanging == false)
 	{
 		SetCollisionRect(true);
@@ -357,6 +428,23 @@ void Father::HandleCollision(IEntity* pOther)
 				}
 			}
 		}
+		if (Rect.ComputeWidth() < this->GetRect().ComputeWidth())
+		{
+			if (Rect.top >= this->GetRect().top && Rect.bottom <= this->GetRect().bottom)
+			{
+				m_vtVelocity.x = 0.0f;
+				if (GetRect().left == Rect.left)
+					letLeft = false;
+				else if (GetRect().right == Rect.right)
+					letRight = false;
+
+			}
+		}
+	}
+	if (pOther->GetType() == ENT_AUTO_LOCK_DOOR && !dynamic_cast<AutoLockingDoor*>(pOther)->GetOpen())
+	{
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
 		if (Rect.ComputeWidth() < this->GetRect().ComputeWidth())
 		{
 			if (Rect.top >= this->GetRect().top && Rect.bottom <= this->GetRect().bottom)

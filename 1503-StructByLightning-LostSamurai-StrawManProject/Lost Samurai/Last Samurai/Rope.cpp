@@ -8,6 +8,7 @@ Rope::Rope()
 
 Rope::~Rope()
 {
+	
 }
 
 Rope::Rope(int length, int _numberOfParticles, SGD::Vector location)
@@ -80,9 +81,13 @@ void Rope::Update(float dt)
 			ropeLink->SolveDistanceConstraint(num_Of_Iterations);
 		}
 	}
-	for (int i = 0; i < particles.size(); i++)
+	for (unsigned int i = 0; i < particles.size(); i++)
 	{
-		SGD::Rectangle rect = { SGD::Point(particles[i].GetCurrPosition().x, particles[i].GetCurrPosition().y), SGD::Size(10.0f, 10.0f) };
+		SGD::Rectangle rect;
+		if (i == GetNumberOfParticles()-1)
+			 rect = { SGD::Point(particles[i].GetCurrPosition().x, particles[i].GetCurrPosition().y), SGD::Size(96.0f, 12.0f) };
+		else
+			 rect = { SGD::Point(particles[i].GetCurrPosition().x, particles[i].GetCurrPosition().y), SGD::Size(10.0f, 10.0f) };
 		particles[i].SetRectangle(rect);
 	}
 }
@@ -98,7 +103,7 @@ void Rope::Render(float dt)
 
 		if (i == particles.size() - 1)
 		{
-			rect = { SGD::Point{ particles[i].GetCurrPosition().x - Game::GetInstance()->GetCameraPosition().x-15.0f, particles[i].GetCurrPosition().y - Game::GetInstance()->GetCameraPosition().y }, SGD::Size{ 38.0f, 38.0f } };
+			rect = { SGD::Point{ particles[i].GetCurrPosition().x - Game::GetInstance()->GetCameraPosition().x, particles[i].GetCurrPosition().y - Game::GetInstance()->GetCameraPosition().y }, SGD::Size{ 96.0f, 12.0f } };
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, SGD::Color{ 255, 0, 120, 180 });
 		}
 		else

@@ -179,11 +179,11 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 
 			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 
-			_father->SetPosition(SGD::Point{ (float)Rect->left + 425, Rect->top - 400 });
+			_father->SetPosition(SGD::Point{ Rect->left+75, Rect->top-100 });//2400 500 
 			//TileClass = nullptr;
-			_Son->SetPosition(SGD::Point{ (float)Rect->left + 75, Rect->top });
-
-
+			_Son->SetPosition(SGD::Point{ Rect->left +25, Rect->top  });
+			//_father->SetPosition(SGD::Point{ 2400,300});
+			//_Son->SetPosition(SGD::Point{ 2350,500 });
 			delete Rect;
 			Rect = nullptr;
 		}

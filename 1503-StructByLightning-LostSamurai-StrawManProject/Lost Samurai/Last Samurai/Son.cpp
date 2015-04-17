@@ -5,6 +5,7 @@
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "GameplayState.h"
 #include "TileSystem.h"
+#include"AutoLockingDoor.h"
 Son::Son()
 {
 	m_Timestamp.SetCurrAnim("SonIdle");
@@ -31,7 +32,7 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-			if (!GetOnGround() && !upArrow && !GameplayState::GetInstance()->GetK() && !GetBackPack() && !lrArrow)
+			if (!GetOnGround() && !upArrow  && !GetBackPack() && !lrArrow)
 				m_vtVelocity.y = 64.0f;
 
 			if (cannotJump)
@@ -48,20 +49,20 @@ void	 Son::Update(float elapsedTime)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 				}
 
 				m_Timestamp.SetCurrAnim("SonRunning");
@@ -81,20 +82,20 @@ void	 Son::Update(float elapsedTime)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					if (grounded == false)
+					/*if (grounded == false)
 					{
 						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
 						event->QueueEvent();
-					}
+					}*/
 				}
 
 				m_Timestamp.SetCurrAnim("SonRunning");
@@ -126,23 +127,26 @@ void	 Son::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -512.0f;
+						m_vtVelocity.y = -1024.0f;
 					}
 					if (GetBackPack())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
-						m_vtVelocity.y = -256.0f;
+						m_vtVelocity.y = -512.0f;
 						SetBackPack(false);
 						upArrow = true;
 					}
-					grounded = true;
+					//grounded = true;
 				}
 			}
-			if (m_ptPosition.y <= previousPosY - 100)//ground level -100
+			if (GetOnGround())
 			{
 				upArrow = false;
-				m_vtVelocity.y += 4.9f;
+			}
+			if (!GetOnGround() && upArrow == true)
+			{
+				m_vtVelocity.y += 2.0f;
 			}
 
 
@@ -157,10 +161,13 @@ void	 Son::Update(float elapsedTime)
 			m_Timestamp.SetCurrFrame(direction);
 			m_Timestamp.SetElapsedTime(elapsedTime);
 			Actor::Update(elapsedTime);
-			if (m_ptPosition.y <= previousPosY - 100)//ground level -100
+			if (!GetOnGround() && upArrow == true)//ground level -100
+			{
+				m_vtVelocity.y += 2.0f;
+			}
+			if (GetOnGround())
 			{
 				upArrow = false;
-				m_vtVelocity.y += 4.9f;
 			}
 		}
 		else if (!GetCurrCharacter() && GetBackPack())
@@ -324,18 +331,30 @@ void Son::HandleCollision(IEntity* pOther)
 				}
 				else if (Rect.bottom == GetRect().bottom)
 				{
-					//set him on the floor and set ground to true
-					SetOnGround(true);
-					cannotJump = false;
-					upArrow = false;
-					m_vtVelocity.y = 0.0f;
-					float op = GetRect().bottom - GetPosition().y;
-					m_ptPosition.y = Rect.top - op;
-					if (grounded)
+					if (Rect.ComputeWidth() < 7.0f)
 					{
-						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
-						event->QueueEvent();
-						grounded = false;
+						SetOnGround(false);
+						SetCollisionRect(false);
+						cannotJump = false;
+						upArrow = false;
+						lrArrow = false;
+					}
+					else
+					{
+						//set him on the floor and set ground to true
+						SetOnGround(true);
+						cannotJump = false;
+						upArrow = false;
+						lrArrow = false;
+						m_vtVelocity.y = 0.0f;
+						float op = GetRect().bottom - GetPosition().y;
+						m_ptPosition.y = Rect.top - op;
+						/*if (grounded)
+						{
+							SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
+							event->QueueEvent();
+							grounded = false;
+						}*/
 					}
 				}
 			}
@@ -349,6 +368,23 @@ void Son::HandleCollision(IEntity* pOther)
 					letLeft = false;
 				else if (GetRect().right == Rect.right)
 					letRight = false;
+			}
+		}
+	}
+	if (pOther->GetType() == ENT_AUTO_LOCK_DOOR && !dynamic_cast<AutoLockingDoor*>(pOther)->GetOpen())
+	{
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		if (Rect.ComputeWidth() < this->GetRect().ComputeWidth())
+		{
+			if (Rect.top >= this->GetRect().top && Rect.bottom <= this->GetRect().bottom)
+			{
+				m_vtVelocity.x = 0.0f;
+				if (GetRect().left == Rect.left)
+					letLeft = false;
+				else if (GetRect().right == Rect.right)
+					letRight = false;
+
 			}
 		}
 	}

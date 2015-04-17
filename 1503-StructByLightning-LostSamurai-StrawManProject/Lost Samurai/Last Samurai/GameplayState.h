@@ -13,6 +13,8 @@
 class Actor;
 class EntityManager;
 class TileSystem;
+class Pulley;
+class PressurePlate;
 class GameplayState :
 	public IGameState
 {
@@ -44,13 +46,16 @@ private:
 
 		// This is a Entity Manager that Pointer variable used to send things to the entity manager
 		EntityManager* m_pEntities = nullptr;
-	ParticleManager* m_ParticleManager = nullptr;
+	//ParticleManager* m_ParticleManager = nullptr;
 	// This is an Actor Pointer variable named Father used to create the Father 
 	Actor* father = nullptr;
 	// This is an Actor Pointer variable named Son used to create the SOn 
 	Actor* son = nullptr;
 	Actor* m_Spikes = nullptr;
 	Actor* m_Cannon = nullptr;
+	
+	Pulley* p;
+	PressurePlate* plate;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
@@ -65,8 +70,8 @@ private:
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
 
-	///collision might need to remove if not used
-	bool k = false;
+	
+	bool movementTurnOff = false;
 
 public:
 	// this is a Gamplaystate Pointer function used to  make a singleton 
@@ -96,21 +101,19 @@ public:
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
 	Actor* CreateArrow(DartCannon*);
+	Actor* CreateDoor(int i) const;
 	Actor* GameplayState::CreateLedge(int i) const;
-	int checkx, checky;//check collision
-	bool check = false; // check collision
-	bool intersect = false;//check collision
-	float POSOFCOLLISION = 0;//checkcollision
+
 	// This used to go into debug Mode;
 	bool Debug = false;
-
-	//collision might need to remove if not needed
-	bool GetK(){ return k; }
-	void SetK(bool _k){ k = _k; }
 
 	Actor*  GetFather(){ return father; }
 	Actor* GetSon(){ return son; }
 	//Culling Rect
 	SGD::Rectangle CullingRect;
 
+	float stiffnessValue = 0.8f;
+
+	bool GetMovementOff(){ return movementTurnOff; }
+	void SetMovementOff(bool _off){ movementTurnOff = _off; }
 };

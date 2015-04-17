@@ -7253,16 +7253,22 @@
     <RectEelemnt CollisionRectleft="3232" CollisionRectTop="0" CollisionRectRight="3360" CollisionRectBottom="32" />
     <RectEelemnt CollisionRectleft="1696" CollisionRectTop="0" CollisionRectRight="2016" CollisionRectBottom="32" />
     <RectEelemnt CollisionRectleft="0" CollisionRectTop="0" CollisionRectRight="32" CollisionRectBottom="480" />
+    <RectEelemnt CollisionRectleft="2752" CollisionRectTop="32" CollisionRectRight="2816" CollisionRectBottom="576" />
+    <RectEelemnt CollisionRectleft="4448" CollisionRectTop="32" CollisionRectRight="4544" CollisionRectBottom="256" />
       </Rect>
 
   <Ledge>
     <RectLedge CollisionRectleft="384" CollisionRectTop="352" CollisionRectRight="448" CollisionRectBottom="384" />
     <RectLedge CollisionRectleft="1024" CollisionRectTop="352" CollisionRectRight="1088" CollisionRectBottom="384" />
-    <RectLedge CollisionRectleft="1088" CollisionRectTop="544" CollisionRectRight="1184" CollisionRectBottom="576" />
     <RectLedge CollisionRectleft="1728" CollisionRectTop="512" CollisionRectRight="1792" CollisionRectBottom="544" />
     <RectLedge CollisionRectleft="1728" CollisionRectTop="384" CollisionRectRight="1792" CollisionRectBottom="416" />
     <RectLedge CollisionRectleft="1792" CollisionRectTop="288" CollisionRectRight="1856" CollisionRectBottom="320" />
     <RectLedge CollisionRectleft="1760" CollisionRectTop="160" CollisionRectRight="1856" CollisionRectBottom="192" />
+    <RectLedge CollisionRectleft="1824" CollisionRectTop="160" CollisionRectRight="1920" CollisionRectBottom="192" />
+    <RectLedge CollisionRectleft="4028" CollisionRectTop="512" CollisionRectRight="4124" CollisionRectBottom="544" />
+    <RectLedge CollisionRectleft="3950" CollisionRectTop="384" CollisionRectRight="4046" CollisionRectBottom="416" />
+    <RectLedge CollisionRectleft="4028" CollisionRectTop="288" CollisionRectRight="4124" CollisionRectBottom="320" />
+
   </Ledge>
 </Map>
 

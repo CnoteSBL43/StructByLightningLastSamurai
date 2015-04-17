@@ -8,7 +8,9 @@ private:
 	~LoadGameState() = default;
 	LoadGameState(const LoadGameState&) = delete;
 	LoadGameState& operator= (const LoadGameState&) = delete;
-
+	bool isLoading;
+	float m_LoadTimer = 6.0f;
+	float m_LoadingTime = 0.0f;
 public:
 	static LoadGameState* GetInstance();
 	void	Enter(void);
@@ -16,5 +18,6 @@ public:
 
 	bool	Update(float _ElapsedTime);
 	void	Render(float _ElapsedTime);
+
 };
 

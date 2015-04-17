@@ -54,6 +54,9 @@
     <Filter Include="Source\Weapons">
       <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{34db0d79-d461-4cdd-b20e-b3697c8a823b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -233,9 +236,6 @@
     <ClCompile Include="PopUpSpikes.cpp">
       <Filter>Source\Traps</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source\Traps</Filter>
     </ClCompile>
@@ -243,6 +243,30 @@
       <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
     </ClCompile>
     <ClCompile Include="Ledges.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Link.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleMass.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Pulley.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Rope.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PressurePlate.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoLockingDoor.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -455,6 +479,30 @@
       <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
     </ClInclude>
     <ClInclude Include="Ledges.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Link.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleMass.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Pulley.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PressurePlate.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoLockingDoor.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
   </ItemGroup>
