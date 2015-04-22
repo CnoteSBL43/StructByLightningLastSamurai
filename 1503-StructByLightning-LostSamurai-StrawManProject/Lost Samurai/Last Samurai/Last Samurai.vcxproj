@@ -56,6 +56,7 @@
     <ClCompile Include="InstructionsState.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Ledges.cpp" />
+    <ClCompile Include="Lever.cpp" />
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="LoadGameState.cpp" />
     <ClCompile Include="LoadState.cpp" />
@@ -81,6 +82,7 @@
     <ClCompile Include="Swordsman.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSystem.cpp" />
+    <ClCompile Include="TripWire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\resource\TinyXML\tinystr.h" />
@@ -135,6 +137,7 @@
     <ClInclude Include="InstructionsState.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Ledges.h" />
+    <ClInclude Include="Lever.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="LoadGameState.h" />
     <ClInclude Include="LoadState.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Swordsman.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSystem.h" />
+    <ClInclude Include="TripWire.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc" />

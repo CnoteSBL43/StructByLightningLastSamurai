@@ -20,7 +20,7 @@ void CreditState::Exit()
 
 bool CreditState::Update(float _ElapsedTime)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9)))
 	{
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;

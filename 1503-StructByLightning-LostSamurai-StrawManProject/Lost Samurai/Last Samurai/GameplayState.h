@@ -15,6 +15,9 @@ class EntityManager;
 class TileSystem;
 class Pulley;
 class PressurePlate;
+class Lever;
+class AutoLockingDoor;
+
 class GameplayState :
 	public IGameState
 {
@@ -41,21 +44,25 @@ private:
 	SGD::HTexture m_FatherFaceImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_SonFaceImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_LedgeImage = SGD::INVALID_HANDLE;
-		//*****************************************************************//
+	SGD::HTexture m_SmallLedgeImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_LeverImage = SGD::INVALID_HANDLE;
+	//*****************************************************************//
 		// Game Entities
 
 		// This is a Entity Manager that Pointer variable used to send things to the entity manager
 		EntityManager* m_pEntities = nullptr;
-	//ParticleManager* m_ParticleManager = nullptr;
+	ParticleManager* m_ParticleManager = nullptr;
 	// This is an Actor Pointer variable named Father used to create the Father 
 	Actor* father = nullptr;
 	// This is an Actor Pointer variable named Son used to create the SOn 
 	Actor* son = nullptr;
 	Actor* m_Spikes = nullptr;
 	Actor* m_Cannon = nullptr;
+	Actor* m_Door;
 	
 	Pulley* p;
 	PressurePlate* plate;
+	Lever *l;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
@@ -102,6 +109,11 @@ public:
 	Actor* CreateCannonBall(Cannon*);
 	Actor* CreateArrow(DartCannon*);
 	Actor* CreateDoor(int i) const;
+	//Actor* CreateLadder(int i) const;
+	Actor* CreateRopes(int i) const;
+	Actor* CreatePlates(int i) const;
+	Actor* CreateBox(int i) const;
+	Actor* CreateLevers(int i) const;
 	Actor* GameplayState::CreateLedge(int i) const;
 
 	// This used to go into debug Mode;
@@ -114,6 +126,13 @@ public:
 
 	float stiffnessValue = 0.8f;
 
+	//lever bool
+	bool lever = false;
+
+	//win door rect
+	SGD::Rectangle win;
+	bool winbool = false;
+	bool loosebool = false;
 	bool GetMovementOff(){ return movementTurnOff; }
 	void SetMovementOff(bool _off){ movementTurnOff = _off; }
 };

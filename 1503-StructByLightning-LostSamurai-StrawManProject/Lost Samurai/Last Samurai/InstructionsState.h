@@ -15,6 +15,7 @@ private:
 	~InstructionsState() = default;
 	InstructionsState(const InstructionsState&) = delete;
 	InstructionsState& operator= (const InstructionsState&) = delete;
+	bool Switch = false;
 
 public:
 	static InstructionsState* GetInstance();

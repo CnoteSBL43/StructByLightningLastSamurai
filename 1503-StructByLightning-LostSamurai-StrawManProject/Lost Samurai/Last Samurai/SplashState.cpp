@@ -18,7 +18,7 @@ void SplashState::Exit()
 bool SplashState::Update(float _ElapsedTime)
 {
 	time += _ElapsedTime;
-	if(SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || time>=8.0f)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || time >= 8.0f ||  (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9)))
 	{
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;

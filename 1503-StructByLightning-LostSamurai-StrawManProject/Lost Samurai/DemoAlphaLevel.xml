@@ -7254,11 +7254,11 @@
     <RectEelemnt CollisionRectleft="1696" CollisionRectTop="0" CollisionRectRight="2016" CollisionRectBottom="32" />
     <RectEelemnt CollisionRectleft="0" CollisionRectTop="0" CollisionRectRight="32" CollisionRectBottom="480" />
     <RectEelemnt CollisionRectleft="2752" CollisionRectTop="32" CollisionRectRight="2816" CollisionRectBottom="576" />
-    <RectEelemnt CollisionRectleft="4448" CollisionRectTop="32" CollisionRectRight="4544" CollisionRectBottom="256" />
+    <RectEelemnt CollisionRectleft="4448" CollisionRectTop="92" CollisionRectRight="4544" CollisionRectBottom="192" />
       </Rect>
 
   <Ledge>
-    <RectLedge CollisionRectleft="384" CollisionRectTop="352" CollisionRectRight="448" CollisionRectBottom="384" />
+    <RectLedge CollisionRectleft="384"  CollisionRectTop="352" CollisionRectRight="416" CollisionRectBottom="384" />
     <RectLedge CollisionRectleft="1024" CollisionRectTop="352" CollisionRectRight="1088" CollisionRectBottom="384" />
     <RectLedge CollisionRectleft="1728" CollisionRectTop="512" CollisionRectRight="1792" CollisionRectBottom="544" />
     <RectLedge CollisionRectleft="1728" CollisionRectTop="384" CollisionRectRight="1792" CollisionRectBottom="416" />

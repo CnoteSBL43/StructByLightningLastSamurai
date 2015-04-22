@@ -12,7 +12,7 @@
     <MaximumParticles Max="500" />
   </Emitter>
   <Flyweight>
-    <Continuous Bool="0" />
+    <Continuous Bool="1" />
     <VelXPos XPos="100" />
     <VelXNeg XNeg="-100" />
     <VelYPos YPos="0" />

@@ -1,9 +1,8 @@
 #pragma once
 #include"Rope.h"
+#include "GameObjects.h"
 
-
-
-class Pulley
+class Pulley :public Actor
 {
 private: 
 	Rope * r;

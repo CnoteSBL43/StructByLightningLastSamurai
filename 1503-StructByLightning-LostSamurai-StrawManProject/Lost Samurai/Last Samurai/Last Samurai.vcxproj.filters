@@ -42,12 +42,6 @@
     <Filter Include="Source\TinyXML">
       <UniqueIdentifier>{73a1b841-c23d-420e-8625-12f69d930b31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Game States">
-      <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Game States\MessageSystem">
-      <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Traps">
       <UniqueIdentifier>{a7bfe6e8-41df-410c-b258-57c7fcf4c121}</UniqueIdentifier>
     </Filter>
@@ -56,6 +50,12 @@
     </Filter>
     <Filter Include="Source\Physics">
       <UniqueIdentifier>{34db0d79-d461-4cdd-b20e-b3697c8a823b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game States">
+      <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game States\MessageSystem">
+      <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +267,12 @@
       <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Lever.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TripWire.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -503,6 +509,12 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Lever.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TripWire.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
   </ItemGroup>

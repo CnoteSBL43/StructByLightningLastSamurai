@@ -84,11 +84,11 @@ void OptionState::Exit()
 
 bool OptionState::Update(float _ElapsedTime)
 {
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == false)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == false || (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == false))
 	{
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == true)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == true || (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == true))
 	{
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
@@ -102,7 +102,7 @@ bool OptionState::Update(float _ElapsedTime)
 				MusicVol = 100;
 			}
 			SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
-			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music))
+			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music));
 				SGD::AudioManager::GetInstance()->PlayAudio(m_Music);
 		}
 		else if (m_CursorPos == 1)

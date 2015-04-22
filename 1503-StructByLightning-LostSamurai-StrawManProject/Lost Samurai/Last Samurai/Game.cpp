@@ -95,6 +95,7 @@ bool Game::Initialize()
 		SGD::InputManager::GetInstance()->Initialize() == false ||
 		SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
+	bg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/okay.jpg");
 
 	// Initialize the Event & Message Managers
 	SGD::EventManager::GetInstance()->Initialize();
@@ -218,6 +219,7 @@ int Game::Update()
 	}
 	SGD::EventManager::GetInstance()->Update();
 
+	SGD::GraphicsManager::GetInstance()->DrawTexture(bg, { 0, 0 });
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }
@@ -264,7 +266,7 @@ void Game::Pause(IGameState* m_NextState)
 	m_PreviousState = m_CurrentState;
 	m_CurrentState = m_NextState;
 
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 9))
 	{
 		m_PreviousState->Exit();
 		m_PreviousState = nullptr;

@@ -33,8 +33,8 @@ void DartCannon::Render()
 	draw.bottom = draw.top + rect.ComputeHeight();
 
 	//draw rect
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 0, 0, 0 }, {}, 3);
-	SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 1, 1 });
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 0, 0, 0 }, {}, 3);
+	SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ -1, -1 });
 
 
 

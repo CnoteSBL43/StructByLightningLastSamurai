@@ -30,37 +30,37 @@ bool MainMenuState::Update(float _ElapsedTime)
 	{
 		return false;
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 0)//PlayGame
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 0 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 0)//PlayGame
 	{
 		Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
 		return true;
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 1)//instructions
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 1 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 1)//instructions
 	{
 		Game::GetInstance()->ChangeState(InstructionsState::GetInstance());
 		return true;
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 2)//options
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 2 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 2)//options
 	{
 		Game::GetInstance()->ChangeState(OptionState::GetInstance());
 		return true;
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 3)//credits
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 3 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 3)//credits
 	{
 		Game::GetInstance()->ChangeState(CreditState::GetInstance());
 		return true;
 	}
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 4)//exit
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 4)//exit
 	{
 		return false;
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos < 4)
 		m_CursorPos++;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos == 4)
 		m_CursorPos = 0;
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos > 0)
 		m_CursorPos--;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 | SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
 		m_CursorPos = 4;
 
 

@@ -2,6 +2,7 @@
 #include "../SGD Wrappers/SGD_Event.h"
 #include "DestroyActorMessage.h"
 #include "Game.h"
+#include"Father.h"
 PopUpSpikes::PopUpSpikes()
 {
 }
@@ -52,6 +53,7 @@ void	PopUpSpikes::HandleCollision(IEntity* pOther)
 {
 	if (pOther->GetType() == Actor::ENT_FATHER)
 	{
+		dynamic_cast<Father*>(pOther)->SetAlive(false);
 		SGD::Event* CannonBallHit = new SGD::Event("Death1", nullptr, this);
 		CannonBallHit->QueueEvent(pOther);
 		//delete CannonBallHit;

@@ -7,6 +7,7 @@
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "../SGD Wrappers/SGD_Event.h"
 #include "Actor.h"
+#include "AutoLockingDoor.h"
 #include "AnimationTimestamp.h"
 
 AutoLockingDoor::AutoLockingDoor()
@@ -31,6 +32,7 @@ void AutoLockingDoor::Update(float _elspasedtime)
 		m_Timestamp.SetCurrAnim("ClosedAutoLockingDoor");
 	else
 		m_Timestamp.SetCurrAnim("OpenAutoLockingDoor");
+	playerNear = false;
 }
 void AutoLockingDoor::Render()
 {
@@ -47,7 +49,7 @@ void AutoLockingDoor::Render()
 	//draw rect
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ 1.0f, 1.0f });
 	/*if (Debug)
 	{*/
@@ -65,17 +67,18 @@ SGD::Rectangle AutoLockingDoor::GetRect(void) const
 
 void AutoLockingDoor::HandleCollision(IEntity* pOther)
 {
-
+	if (pOther->GetType() == ENT_FATHER || pOther->GetType() == ENT_SON)
+	{
+		playerNear = true;
+	}
 }
 
 void AutoLockingDoor::HandleEvent(const SGD::Event* pEvent)
 {
-	if (pEvent->GetEventID() == "P")
+	if (pEvent->GetEventID() == "P" && GetID() == 1)
 	{
 		isOpen = true;
 	}
-
-
-
+	
 
 }

@@ -27,7 +27,7 @@ protected:
 		int m_Trigger;
 		int CheckPointX;
 		int CheckPointY;
-
+		int Border;
 		std::string m_EventString;
 
 		std::string TrapNames;

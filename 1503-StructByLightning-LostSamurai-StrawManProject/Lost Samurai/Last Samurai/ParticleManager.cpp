@@ -14,15 +14,17 @@
 #include "Father.h"
 #include "Son.h"
 #include "Game.h"
+#include "GameplayState.h"
+#include "TileSystem.h"
 
 
 
 ParticleManager::ParticleManager()
 {
 	SGD::IListener::RegisterForEvent("Walking");
-	SGD::IListener::RegisterForEvent("Grounded");
+	/*SGD::IListener::RegisterForEvent("Grounded");
 	SGD::IListener::RegisterForEvent("Backpacking");
-	SGD::IListener::RegisterForEvent("DEATH");
+	SGD::IListener::RegisterForEvent("DEATH");*/
 	//SGD::IListener::RegisterForEvent("Jump");
 }
 
@@ -236,9 +238,9 @@ void ParticleManager::HandleEvent(const SGD::Event* _Event)
 		{
 			Father* entity = reinterpret_cast<Father*>(_Event->GetSender());
 			//SGD::Size sz = Game::GetInstance()->GetScreenSize();
-			SGD::Point pt = Game::GetInstance()->GetCameraPosition();
-			SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
-			activeEmitters[0]->SetPosition(point);
+			//SGD::Point pt = Game::GetInstance()->GetCameraPosition();
+			//SGD::Point point = AnimationSystem::GetInstance()->GetParticlePt(entity->GetTimeStamp(), (int)entity->GetPosition().x - (int)pt.x, (int)entity->GetPosition().y - (int)pt.y, 0);
+			activeEmitters[0]->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
 			activeEmitters[0]->SetSpawning(true);
 		}
 		else if (reinterpret_cast<Player*>(_Event->GetSender())->GetType() == Actor::ENT_SON)

@@ -45,11 +45,12 @@ private:
 	SGD::Vector		m_CameraDestinationVector;
 
 public:
+	SGD::HTexture bg = SGD::INVALID_HANDLE;
 	// this is a Static Game Singleton GetInsatance()
 	static Game* GetInstance();
 	// this is a Static Game Singleton DeleteInstance()
 	static void DeleteInstance();
-
+	float jumpvelocity = 1024.0f;
 	// this a Getter for the Screen Size of the Game 
 	SGD::Size	GetScreenSize(void) const		{ return m_szScreenSize; }
 	// this is a Getter for the World Size of the Game 

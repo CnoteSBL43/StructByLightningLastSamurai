@@ -2,6 +2,8 @@
 #include"../SGD Wrappers/SGD_GraphicsManager.h"
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "Game.h"
+#include "Father.h"
+
 Tile::Tile()
 {
 }
@@ -44,6 +46,7 @@ void Tile::HandleCollision(IEntity* pOther)
 
 	if (pOther->GetType() == ENT_FATHER && this->GetType() == ENT_TRIGGER)
 	{
+		dynamic_cast<Father*>(pOther)->SetAlive(false);
 
 		SGD::Event* FatherDeath = new SGD::Event("Death", nullptr, this);
 		FatherDeath->SendEventNow(pOther);

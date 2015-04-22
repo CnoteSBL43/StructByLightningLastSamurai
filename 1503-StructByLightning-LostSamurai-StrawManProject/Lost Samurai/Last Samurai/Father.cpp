@@ -20,7 +20,7 @@ Father::Father()
 	m_Timestamp.SetElapsedTime(0);
 	SGD::IListener::RegisterForEvent("Death");
 	SGD::IListener::RegisterForEvent("Death1");
-	SetStamina(100);
+	SetStamina(1000);
 }
 
 
@@ -34,8 +34,6 @@ void	 Father::Update(float elapsedTime)
 {
 	float x = m_ptPosition.x;
 	float y = m_ptPosition.y;
-	SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
-	event->QueueEvent();
 	if (m_Timestamp.GetCurrAnim() != "FatherDeath")
 	{
 		if (m_ptPosition.x >= 250.0f && !enemy)
@@ -47,12 +45,10 @@ void	 Father::Update(float elapsedTime)
 		}
 		if (GetCurrCharacter())
 		{
-			if (!GetOnGround() && !upArrow)
-				m_vtVelocity.y = 64.0f;
-			if (cannotJump)
-				m_vtVelocity.y = 64.0f;
-			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight  && !GameplayState::GetInstance()->GetMovementOff())
+			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
+				GameplayState::GetInstance()->loosebool = false;
+
 				SetFacing(true);
 				m_vtVelocity.x = 128.0f;
 				letLeft = true;
@@ -82,8 +78,10 @@ void	 Father::Update(float elapsedTime)
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
-			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft  && !GameplayState::GetInstance()->GetMovementOff())
+			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letLeft && !GameplayState::GetInstance()->GetMovementOff())
 			{
+				GameplayState::GetInstance()->loosebool = false;
+
 				SetFacing(false);
 				m_vtVelocity.x = -128.0f;
 				letRight = true;
@@ -127,19 +125,29 @@ void	 Father::Update(float elapsedTime)
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
 			{
+				GameplayState::GetInstance()->loosebool = false;
 				if (GetStamina() >= 10)
 				{
-					if (GetOnGround() || GetHanging())
+					if (GetHanging())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -1024.0f;
-						isHanging = false;
+						m_vtVelocity.y = -512.0f;
+						SetHanging(false);
 					}
+					if (GetOnGround() )
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						SetOnGround(false);
+						upArrow = true;
+						m_vtVelocity.y = -512.0f;
+					}
+					
 					//grounded = true;
 				}
 			}
@@ -148,9 +156,15 @@ void	 Father::Update(float elapsedTime)
 			{
 				upArrow = false;
 			}
-			if (!GetOnGround() && upArrow==true)
+			if ((!GetOnGround() && upArrow == true && !GetHanging()) )
 			{
 				m_vtVelocity.y += 2.0f;
+			}
+			if (!GetOnGround() && cannotJump == true)
+			{
+				m_vtVelocity.y = 64.0f;
+
+				cannotJump = false;
 			}
 			//frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
@@ -195,7 +209,7 @@ void	 Father::Update(float elapsedTime)
 		SetStamina(0);
 	}
 	if (GetStamina() >= 100)
-		SetStamina(100);
+		SetStamina(1000);
 	else
 	{
 		if (GetOnGround())
@@ -309,17 +323,17 @@ void Father::HandleCollision(IEntity* pOther)
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_LEDGE)
+	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig )
 	{
 		if (pOther->GetRect().IsIntersecting(this->GetRect()))
 		{
 			if (GetStamina() > 5)
 			{
-				if (!upArrow)
-				{
-					m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
-					isHanging = true;
-				}
+				previousPosY = m_ptPosition.y;
+				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
+				m_vtVelocity.y = 0.0f;
+				SetOnGround(false);
+				SetHanging(true);
 			}
 		}
 	}
@@ -464,17 +478,23 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 {
 	if (pEvent->GetEventID() == "Death")
 	{
+		SetAlive(true);
+		GameplayState::GetInstance()->loosebool = true;
 		direction = 0;
 		SetStamina(100);
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
 		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		SGD::Event* event1 = new SGD::Event("Walking", nullptr, this);
+		event1->QueueEvent();
 		//m_Timestamp.SetCurrFrame(direction);
 
 	}
 	if (pEvent->GetEventID() == "Death1")
 	{
+		GameplayState::GetInstance()->loosebool = true;
+		SetAlive(true);
 		direction = 0;
 		SetStamina(100);
 		m_Timestamp.SetCurrAnim("FatherDeath");

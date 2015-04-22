@@ -15,5 +15,6 @@ public:
 	int	GetType(void) const	{ return ENT_LEVERS; }
 	SGD::Rectangle GetRect(void) const;
 	void HandleCollision(IEntity* pOther);
+	bool GetPlayerNear(){ return playerNear; }
 };
 

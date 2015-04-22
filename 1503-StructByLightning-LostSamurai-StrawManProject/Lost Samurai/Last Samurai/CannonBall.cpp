@@ -6,6 +6,7 @@
 #include "AnimationSystem.h"
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "../SGD Wrappers/SGD_Event.h"
+#include "Father.h"
 CannonBall::CannonBall()
 {
 	m_Timestamp.SetCurrAnim("Cannonball");
@@ -80,6 +81,8 @@ void CannonBall::HandleCollision(IEntity* pOther)
 
 	if (pOther->GetType() == ENT_FATHER)
 	{
+		dynamic_cast<Father*>(pOther)->SetAlive(false);
+
 		SGD::Event* CannonBallHit = new SGD::Event("Death", nullptr, this);
 		CannonBallHit->QueueEvent(pOther);
 		DestroyActorMessage* destroy = new DestroyActorMessage{ this };
