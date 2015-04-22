@@ -105,7 +105,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../Level1.xml") == false)
+	if (Doc.LoadFile("../resource/XML/Level1.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
@@ -558,7 +558,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 
 #pragma region Concatination for the string
 	std::string Attach;
-	Attach = "../";
+	Attach = "../resource/graphics/";
 	for (unsigned int i = 0; i < Attach.size(); i++)
 	{
 		if (i != 2)

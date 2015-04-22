@@ -92,7 +92,7 @@ bool OptionState::Update(float _ElapsedTime)
 	{
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0,SGD::DPad::Left))
 	{
 		if (m_CursorPos == 0)
 		{
@@ -144,8 +144,10 @@ bool OptionState::Update(float _ElapsedTime)
 			Game::GetInstance()->SetLanguage(language);
 		}
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::RightArrow))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::RightArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right))
 	{
+		
+	
 		if (m_CursorPos == 0)
 		{
 			MusicVol += 10;
@@ -195,7 +197,7 @@ bool OptionState::Update(float _ElapsedTime)
 			Game::GetInstance()->SetLanguage(language);
 		}
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 4)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && m_CursorPos == 4)
 	{
 		TiXmlDocument m_Document;
 		if (m_Document.LoadFile("Save1") == true)
@@ -215,13 +217,13 @@ bool OptionState::Update(float _ElapsedTime)
 
 		}
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos < 4)
 		m_CursorPos++;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos == 4)
 		m_CursorPos = 0;
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0)
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos > 0)
 		m_CursorPos--;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
 		m_CursorPos = 4;
 
 

@@ -16,6 +16,7 @@ private:
 	InstructionsState(const InstructionsState&) = delete;
 	InstructionsState& operator= (const InstructionsState&) = delete;
 	bool Switch = false;
+	bool  Arcade = false;
 
 public:
 	static InstructionsState* GetInstance();
