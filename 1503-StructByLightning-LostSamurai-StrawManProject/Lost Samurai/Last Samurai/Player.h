@@ -22,6 +22,8 @@ public:
 	bool GetBackPack(){ return m_BackPack; }
 	void SetBackPack(bool _back){ m_BackPack = _back; }
 
+	SGD::Point GetCheckPoint() const{ return checkPoint; }
+	void SetCheckPoint(SGD::Point _checkPoint) { checkPoint = _checkPoint; }
 
 
 	bool GetOnGround(){ return m_OnGround; }
@@ -42,7 +44,7 @@ private:
 	bool m_OnGround = true;
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
 	bool m_FacingtoRight = true;//to change the scale for the father(direction)
-
+	SGD::Point checkPoint;
 
 };
 

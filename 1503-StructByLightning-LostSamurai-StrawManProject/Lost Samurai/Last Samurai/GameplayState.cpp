@@ -36,6 +36,7 @@
 #include "Ledges.h"
 #include "Lever.h"
 #include "AutoLockingDoor.h"
+#include "CheckPoint.h"
 
 //*********************************************************************//
 //	File: GamePlayState.cpp
@@ -145,6 +146,15 @@ Actor* GameplayState::CreateLedge(int i) const
 	}return ledge;
 }
 
+
+Actor* GameplayState::CreateCheckPoint(int i) const
+{
+	CheckPoint* checkpoint = new CheckPoint;
+	checkpoint->SetPosition(Load->m_CheckPoints[i]->GetPosition());
+	checkpoint->SetSize(Load->m_CheckPoints[i]->GetSize());
+	return checkpoint;
+}
+
 //*********************************************************************//
 //	File: GamePlayState.cpp
 //	Function: Enter
@@ -173,7 +183,7 @@ void GameplayState::Enter()
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
-	m_ParticleManager = new ParticleManager;
+	//m_ParticleManager = new ParticleManager;
 	AnimationSystem::GetInstance()->Load("../resource/XML/FatherAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/SonAnimations.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Cannonball.xml");
@@ -197,7 +207,7 @@ void GameplayState::Enter()
 	Load = new TileSystem();
 
 
-	m_ParticleManager->LoadEmitter("../resource/XML/StepParticles.xml");
+	//m_ParticleManager->LoadEmitter("../resource/XML/StepParticles.xml");
 	//m_ParticleManager->LoadEmitter("../resource/XML/LandParticles.xml");
 	//m_ParticleManager->LoadEmitter("../resource/XML/BackParticles.xml");
 	//m_ParticleManager->LoadEmitter("../resource/XML/BloodParticles.xml");
@@ -276,7 +286,12 @@ void GameplayState::Enter()
 		
 	}
 
+	unsigned int length = Load->m_CheckPoints.size();
 
+	for (unsigned int i = 0; i < length; i++)
+	{
+		m_pEntities->AddEntity(CreateCheckPoint(i), 5);
+	}
 
 	Game::GetInstance()->SetCameraPosition({ father->GetPosition().x, father->GetPosition().y });
 	Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosition().x, Game::GetInstance()->GetCameraPosition().y });
@@ -335,11 +350,11 @@ void GameplayState::Exit()
 	Game::GetInstance()->SetCameraPosition(SGD::Point{ 0.0f, 0.0f });
 	SGD::MessageManager::GetInstance()->Terminate();
 	SGD::MessageManager::DeleteInstance();
-	m_ParticleManager->FreeEmitter(0);
+	//m_ParticleManager->FreeEmitter(0);
 	//m_ParticleManager->FreeEmitter(1);
 	//m_ParticleManager->FreeEmitter(2);
 	//m_ParticleManager->FreeEmitter(3);
-	delete m_ParticleManager;
+	//delete m_ParticleManager;
 }
 
 
@@ -525,6 +540,8 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(1, 2);//son and pressure
 		m_pEntities->CheckCollisions(0, 15);//father and levers
 		m_pEntities->CheckCollisions(3, 5);//tile and box
+		m_pEntities->CheckCollisions(0, 5);
+
 		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
 		{
 			if (l->GetPlayerNear())
@@ -685,7 +702,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		SGD::MessageManager::GetInstance()->Update();
 
 	}
-	m_ParticleManager->UpdateEmitter(0, _ElapsedTime);
+	//m_ParticleManager->UpdateEmitter(_ElapsedTime);
 	p->Update(_ElapsedTime);
 	return true;
 }
@@ -837,7 +854,7 @@ void GameplayState::Render(float _ElapsedTime)
 #pragma endregion	
 
 	m_pEntities->RenderAll();
-	m_ParticleManager->RenderEmitter(0);
+	//m_ParticleManager->RenderEmitter();
 	/*std::wostringstream s;
 	s << father->GetVelocity().y;
 	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);*/

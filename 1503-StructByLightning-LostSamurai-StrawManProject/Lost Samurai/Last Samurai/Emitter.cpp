@@ -19,15 +19,14 @@ Emitter::Emitter()
 	m_position.x = 0;
 	m_position.y = 0;
 	m_spawnTime = .100f;
-	m_spawning = false;
+	m_spawning = true;
+	m_delete = false;
 }
 
 
 Emitter::~Emitter()
 {
 	Clear();
-	if (m_sprite != SGD::INVALID_HANDLE)
-		SGD::GraphicsManager::GetInstance()->UnloadTexture(m_sprite);
 }
 
 
@@ -68,6 +67,8 @@ void Emitter::Update(float _elapsedTime)
 		{
 			delete *iter;
 			iter = aliveList.erase(iter);
+			if (!m_spawning && !aliveList.size())
+				m_delete = true;
 		}
 		else
 		{
@@ -112,12 +113,6 @@ void Emitter::Render()
 
 void Emitter::CreateParticles()
 {
-	/*if (deadQueue.size() >= GetSpawnRate())
-	{
-
-
-	}
-	else*/
 	if (m_spawnTime <= 0)
 	{
 		for (size_t i = 0; i < GetSpawnRate(); i++)
@@ -158,9 +153,3 @@ void Emitter::CreateParticles()
 		m_spawnTime = .100f;
 	}
 }
-
-//void Emitter::DeadParticles(std::list<Particle*>::iterator& _iter)
-//{
-//	//deadQueue.push((*_iter));
-//	//aliveList.erase(_iter);
-//}

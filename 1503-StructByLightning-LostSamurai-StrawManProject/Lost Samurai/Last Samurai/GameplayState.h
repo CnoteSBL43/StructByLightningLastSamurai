@@ -10,6 +10,7 @@
 #include "PopUpSpikes.h"
 #include "Ledges.h"
 
+
 class Actor;
 class EntityManager;
 class TileSystem;
@@ -115,6 +116,7 @@ public:
 	Actor* CreateBox(int i) const;
 	Actor* CreateLevers(int i) const;
 	Actor* GameplayState::CreateLedge(int i) const;
+	Actor* CreateCheckPoint(int i) const;
 
 	// This used to go into debug Mode;
 	bool Debug = false;

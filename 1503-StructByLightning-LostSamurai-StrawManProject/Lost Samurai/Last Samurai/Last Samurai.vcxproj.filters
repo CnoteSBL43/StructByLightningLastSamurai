@@ -275,6 +275,9 @@
     <ClCompile Include="TripWire.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -515,6 +518,9 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="TripWire.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
   </ItemGroup>
