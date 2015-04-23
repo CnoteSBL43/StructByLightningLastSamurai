@@ -28,7 +28,7 @@ void PopUpSpikes::Render()
 SGD::Rectangle PopUpSpikes::GetRect() const
 {
 	SGD::Size size = { 175, 128 };
-	SGD::Rectangle rect = { { m_ptPosition.x - 400, m_ptPosition.y + 10 }, size };
+	SGD::Rectangle rect = { { m_ptPosition.x, m_ptPosition.y}, size };
 	return rect;
 }
 

@@ -105,7 +105,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../resource/XML/Level1.xml") == false)
+	if (Doc.LoadFile("../resource/XML/Level2.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();

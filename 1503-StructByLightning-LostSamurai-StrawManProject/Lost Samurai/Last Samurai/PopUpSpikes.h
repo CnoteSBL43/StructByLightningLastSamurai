@@ -8,7 +8,7 @@ private:
 	float m_ActiveTimer = 0.0f;
 	float m_DeactivateTime = 5.0f;
 	bool isActive = true;
-	SGD::Point m_currentpos = { m_ptPosition.x, 68 };
+	SGD::Point m_currentpos = { m_ptPosition.x, m_ptPosition.y };
 	SGD::Point bottom = { m_ptPosition.x, m_ptPosition.y + (150.0f) };
 
 public:

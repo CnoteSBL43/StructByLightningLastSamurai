@@ -190,7 +190,7 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Swordsman.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Doors.xml");
-	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/tutorial.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
 	SGD::AudioManager::GetInstance()->PlayAudio(m_Backround, true);

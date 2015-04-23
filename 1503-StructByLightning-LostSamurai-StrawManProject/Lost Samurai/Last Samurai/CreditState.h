@@ -13,7 +13,7 @@ private:
 	~CreditState() = default;
 	CreditState(const CreditState&) = delete;
 	CreditState& operator= (const CreditState&) = delete;
-
+	SGD::HAudio m_CreditMusic;
 public:
 	static CreditState* GetInstance();
 	void	Enter(void);

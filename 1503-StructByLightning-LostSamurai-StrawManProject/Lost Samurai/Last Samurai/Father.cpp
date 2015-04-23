@@ -21,6 +21,8 @@ Father::Father()
 	SGD::IListener::RegisterForEvent("Death");
 	SGD::IListener::RegisterForEvent("Death1");
 	SetStamina(1000);
+	m_FatherJump = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Jump.wav");
+	FatherLanding = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Land.wav");
 }
 
 
@@ -127,7 +129,9 @@ void	 Father::Update(float elapsedTime)
 			//Jump
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
 			{
+				SGD::AudioManager::GetInstance()->PlayAudio(m_FatherJump);
 				GameplayState::GetInstance()->loosebool = false;
+				
 				if (GetStamina() >= 10)
 				{
 					if (GetHanging())
@@ -138,6 +142,7 @@ void	 Father::Update(float elapsedTime)
 						upArrow = true;
 						m_vtVelocity.y = -512.0f;
 						SetHanging(false);
+						landing = true;
 					}
 					if (GetOnGround() )
 					{
@@ -146,6 +151,7 @@ void	 Father::Update(float elapsedTime)
 						SetOnGround(false);
 						upArrow = true;
 						m_vtVelocity.y = -512.0f;
+						landing = true;
 					}
 					
 					//grounded = true;
@@ -155,6 +161,7 @@ void	 Father::Update(float elapsedTime)
 			if (GetOnGround())//ground level -100
 			{
 				upArrow = false;
+				
 			}
 			if ((!GetOnGround() && upArrow == true && !GetHanging()) )
 			{
@@ -345,6 +352,7 @@ void Father::HandleCollision(IEntity* pOther)
 		{
 			if (Rect.left >= this->GetRect().left && Rect.right <= this->GetRect().right)
 			{
+				//SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
 				letLeft = true;
 				letRight = true;
 				if (Rect.top == GetRect().top)
@@ -361,6 +369,7 @@ void Father::HandleCollision(IEntity* pOther)
 						SetCollisionRect(false);
 						cannotJump = false;
 						upArrow = false;
+						
 					}
 					else
 					{
@@ -370,6 +379,8 @@ void Father::HandleCollision(IEntity* pOther)
 						float op = GetRect().bottom - GetPosition().y;
 						m_ptPosition.y = pOther->GetRect().top - op;
 						SetOnGround(true);
+					
+						
 					}
 				}
 			}
@@ -416,6 +427,7 @@ void Father::HandleCollision(IEntity* pOther)
 				}
 				else if (Rect.bottom == GetRect().bottom)
 				{
+					
 					//set him on the floor and set ground to true
 					if (Rect.ComputeWidth() < 7.0f)
 					{
@@ -432,6 +444,12 @@ void Father::HandleCollision(IEntity* pOther)
 						m_vtVelocity.y = 0.0f;
 						float op = GetRect().bottom - GetPosition().y;
 						m_ptPosition.y = Rect.top - op;
+						if (landing)
+						{
+							SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
+							landing = false;
+						}
+						
 						/*if (grounded)
 						{
 						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);

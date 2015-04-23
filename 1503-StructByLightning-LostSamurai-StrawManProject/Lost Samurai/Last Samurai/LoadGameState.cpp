@@ -9,12 +9,13 @@ LoadGameState* LoadGameState::GetInstance()
 
 void LoadGameState::Enter()
 {
-
+	LoadMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/loadingscreen.xwm");
+	SGD::AudioManager::GetInstance()->PlayAudio(LoadMusic);
 }
 
 void LoadGameState::Exit()
 {
-
+	SGD::AudioManager::GetInstance()->StopAudio(LoadMusic);
 }
 
 bool LoadGameState::Update(float _ElapsedTime)
@@ -23,6 +24,7 @@ bool LoadGameState::Update(float _ElapsedTime)
 	{
 		m_LoadingTime = 0;
 		Game::GetInstance()->ChangeState(GameplayState::GetInstance());
+
 	}
 	m_LoadingTime += _ElapsedTime;
 

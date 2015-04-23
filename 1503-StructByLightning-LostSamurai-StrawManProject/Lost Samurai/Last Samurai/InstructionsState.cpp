@@ -9,11 +9,14 @@ InstructionsState* InstructionsState::GetInstance()
 void InstructionsState::Enter()
 {
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
+	m_infoMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/instructionsmenu.xwm");
+	SGD::AudioManager::GetInstance()->PlayAudio(m_infoMusic, true);
 }
 
 void InstructionsState::Exit()
 {
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BackArrow);
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_infoMusic);
 }
 
 bool InstructionsState::Update(float _ElapsedTime)

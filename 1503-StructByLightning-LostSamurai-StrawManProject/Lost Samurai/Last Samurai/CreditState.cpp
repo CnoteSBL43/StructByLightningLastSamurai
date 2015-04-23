@@ -9,7 +9,8 @@ CreditState* CreditState::GetInstance()
 void CreditState::Enter()
 {
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
-
+	m_CreditMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/instructionsmenu.xwm");
+	SGD::AudioManager::GetInstance()->PlayAudio(m_CreditMusic, true);
 }
 
 void CreditState::Exit()

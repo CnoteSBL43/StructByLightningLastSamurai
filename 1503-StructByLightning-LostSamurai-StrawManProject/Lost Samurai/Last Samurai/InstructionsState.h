@@ -17,6 +17,7 @@ private:
 	InstructionsState& operator= (const InstructionsState&) = delete;
 	bool Switch = false;
 	bool  Arcade = false;
+	SGD::HAudio m_infoMusic;
 
 public:
 	static InstructionsState* GetInstance();
