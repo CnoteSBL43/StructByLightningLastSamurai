@@ -37,7 +37,7 @@
 #include "Lever.h"
 #include "AutoLockingDoor.h"
 #include "CheckPoint.h"
-
+#include"LoadGameState.h"
 //*********************************************************************//
 //	File: GamePlayState.cpp
 //	Function: GetInstance
@@ -219,7 +219,10 @@ void GameplayState::Enter()
 	plate->SetHeavy(false);
 	m_pEntities->AddEntity(plate, 2);
 
-	Load->LoadTileXml((Father*)father, (Son*)son);
+	if (!Game::GetInstance()->changelevel)
+		Load->LoadTileXml((Father*)father, (Son*)son,"../resource/XML/Level1.xml");
+	else
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/TutorialLevel.xml");
 	p = new Pulley(200, 20, SGD::Vector( 540, 900));//2840 660
 	l = new Lever();
 	l->SetPosition({ 3600, 650 });
@@ -393,15 +396,26 @@ bool GameplayState::Update(float _ElapsedTime)
 		else
 			m_Pause = false;
 	}
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Y))
+	{
+		if (!Game::GetInstance()->changelevel)
+		{
+			Game::GetInstance()->changelevel = true;
+			Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
+			return true;
+		}
+	}
 
 	if (m_Pause)
 		Pause();
 	else
 	{
-		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
+		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector()  )
 		{
 			float xIncrement, yIncrement;
-			xIncrement = yIncrement = 10.0f;
+			xIncrement = 5.0f;
+			yIncrement = 3.0f;
+			
 			/*float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
 			fabs(xDistance);
 			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
@@ -556,9 +570,9 @@ bool GameplayState::Update(float _ElapsedTime)
 		dynamic_cast<Father*>(father)->SetCollisionRect(false);
 		m_pEntities->CheckCollisions(0, 3);
 		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging())
+		//if (!dynamic_cast<Father*>(father)->GetOnGround())
 		{
-			if (!dynamic_cast<Father*>(father)->GetHanging())
-				father->SetVelocity(SGD::Vector{ 0.0f, 128.0f });
+				father->SetVelocity(SGD::Vector{ 0.0f,512.0f });
 		}
 		m_pEntities->CheckCollisions(0, 5);
 
@@ -571,7 +585,8 @@ bool GameplayState::Update(float _ElapsedTime)
 
 		}
 		if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false)
-			son->SetVelocity(SGD::Vector{ 0.0f, 128.0f });
+		//if (!dynamic_cast<Son*>(son)->GetOnGround())
+			son->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
 
 		//Rope Collision
 		SGD::Rectangle f = dynamic_cast<Father*>(father)->GetRect();
@@ -862,8 +877,8 @@ void GameplayState::Render(float _ElapsedTime)
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
 	std::wostringstream s;
-	s << father->GetVelocity().y;
-	//Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
+	s << son->GetVelocity().y;
+	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	p->Render(_ElapsedTime);
 	l->Render();
 	if (m_Pause)

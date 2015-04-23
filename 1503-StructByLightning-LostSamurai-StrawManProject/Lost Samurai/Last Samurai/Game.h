@@ -97,5 +97,7 @@ public:
 	// This is going to change a state when needed 
 	void ChangeState(IGameState* _NextState);
 
+	//change level
+	bool changelevel = false;
 };
 

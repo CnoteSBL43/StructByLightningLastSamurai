@@ -93,7 +93,7 @@ TileSystem::~TileSystem()
 	m_Grid = NULL;
 }
 
-void TileSystem::LoadTileXml(Father* _father, Son* _Son)
+void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 
 {
 	//Game::GetInstance()->GetFont().Draw("Loading", { Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetScreenSize().height / 2 }, 1, { 255, 255, 255, 255 });
@@ -105,7 +105,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile("../resource/XML/Level1.xml") == false)
+	if (Doc.LoadFile(_level) == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
@@ -181,8 +181,11 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son)
 			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 
 			_father->SetPosition(SGD::Point{ Rect->left+75, Rect->top- 100 });//2400 500 
+			_father->SetCheckPoint({ Rect->left + 75, Rect->top - 100 });
+			
 			//TileClass = nullptr;
 			_Son->SetPosition(SGD::Point{ Rect->left +25, Rect->top  });
+			_Son->SetCheckPoint({ Rect->left + 25, Rect->top });
 			//_father->SetPosition(SGD::Point{ 3800,200});
 		//	_Son->SetPosition(SGD::Point{ 2350,500 });
 			delete Rect;

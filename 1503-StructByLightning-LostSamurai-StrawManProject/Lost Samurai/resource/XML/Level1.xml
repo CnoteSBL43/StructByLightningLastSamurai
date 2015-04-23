@@ -195,7 +195,7 @@
   <Tile PositionX="6" PositionY="11" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
   <Tile PositionX="6" PositionY="12" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
   <Tile PositionX="6" PositionY="13" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
-  <Tile PositionX="6" PositionY="14" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="1" TrapNames="Doors" Border="0" />
+  <Tile PositionX="6" PositionY="14" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" TrapNames="Doors" Border="0" />
   <Tile PositionX="6" PositionY="15" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
   <Tile PositionX="6" PositionY="16" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
   <Tile PositionX="6" PositionY="17" TileID="34" TileCollision="0" Spawn="0" CheckPoint="0" TilePositionX="2" TilePositionY="2" Trigger="0" AIPositionX="0" AIPositionY="0" AIPosition="0" Traps="0" Border="0" />
@@ -1616,6 +1616,7 @@
   <RectEelemnt CollisionRectleft="1664" CollisionRectTop="0" CollisionRectRight="1728" CollisionRectBottom="896" />
   <RectEelemnt CollisionRectleft="0" CollisionRectTop="896" CollisionRectRight="800" CollisionRectBottom="960" />
   <RectEelemnt CollisionRectleft="800" CollisionRectTop="896" CollisionRectRight="1728" CollisionRectBottom="960" />
+ <RectEelemnt CollisionRectleft="288" CollisionRectTop="192" CollisionRectRight="384" CollisionRectBottom="224" />
 </Rect>
 <Ledge>
   <RectLedge CollisionRectleft="160" CollisionRectTop="320" CollisionRectRight="224" CollisionRectBottom="352" />

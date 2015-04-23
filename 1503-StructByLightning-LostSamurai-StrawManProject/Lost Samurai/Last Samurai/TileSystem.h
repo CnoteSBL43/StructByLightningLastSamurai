@@ -48,7 +48,7 @@ protected:
 public:
 	TileSystem();
 	~TileSystem();
-	void LoadTileXml(Father* _father, Son* _Son);
+	void LoadTileXml(Father* _father, Son* _Son,const char* _level);
 	tile1* m_Tile;
 	Grid* m_Grid;
 	//Tile* Map[][];

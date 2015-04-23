@@ -60,7 +60,7 @@ void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)
 	}
 }
 
-SGD::Rectangle AnimationSystem::GetRect(const AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale)
+SGD::Rectangle AnimationSystem::GetRect(const AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale)
 {
 	SGD::Point pt = { (float)_PosX, (float)_PosY };
 	SGD::Rectangle crect = m_Loaded[_info.GetCurrAnim()].GetFrames()[_info.GetCurrFrame()].GetCollisionRect();

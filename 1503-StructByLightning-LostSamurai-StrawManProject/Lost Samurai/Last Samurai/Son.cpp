@@ -15,7 +15,7 @@ Son::Son()
 	//SetPosition(SGD::Point{ 100.0f, 200.0f });
 	//CreateFrames();
 	SGD::IListener::RegisterForEvent("Death");
-	SetStamina(50);
+	SetStamina(1000);
 }
 
 
@@ -32,11 +32,9 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-			if (!GetOnGround() && !upArrow  && !GetBackPack() && !lrArrow)
-				m_vtVelocity.y = 64.0f;
+		
 
-			if (cannotJump)
-				m_vtVelocity.y = 64.0f;
+		
 
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
@@ -127,13 +125,13 @@ void	 Son::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -1024.0f;
+						m_vtVelocity.y = -800.0f;
 					}
 					if (GetBackPack())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
-						m_vtVelocity.y = -512.0f;
+						m_vtVelocity.y = -400.0f;
 						SetBackPack(false);
 						upArrow = true;
 					}
@@ -146,9 +144,16 @@ void	 Son::Update(float elapsedTime)
 			}
 			if (!GetOnGround() && upArrow == true)
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 24.0f;
+				else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
+					m_vtVelocity.y += 36.0f;
+				else
+					m_vtVelocity.y = 512.0f;
 			}
 
+			if (cannotJump)
+				m_vtVelocity.y = 512.0f;
 
 			frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
@@ -163,7 +168,12 @@ void	 Son::Update(float elapsedTime)
 			Actor::Update(elapsedTime);
 			if (!GetOnGround() && upArrow == true)//ground level -100
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 24.0f;
+				else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
+					m_vtVelocity.y += 36.0f;
+				else
+					m_vtVelocity.y = 512.0f;
 			}
 			if (GetOnGround())
 			{
@@ -187,19 +197,11 @@ void	 Son::Update(float elapsedTime)
 	}
 	else
 	{
-		if (frameswitch >= 0.1f)
-		{
-			direction++;
-			frameswitch = 0;
-		}
-		else if (direction >= 7)
-		{
 			frameswitch = 0;
 			direction = 0;
 			m_Timestamp.SetCurrAnim("SonIdle");
 			m_Timestamp.SetCurrFrame(direction);
 			m_Timestamp.SetElapsedTime(elapsedTime);
-		}
 	}
 
 	if (GetStamina() < 0)
@@ -208,7 +210,7 @@ void	 Son::Update(float elapsedTime)
 	}
 	if (GetStamina() >= 50)
 	{
-		SetStamina(50);
+		SetStamina(1000);
 	}
 	if (GetStamina() <= 33)
 	{
@@ -284,7 +286,7 @@ void	 Son::Render(void)
 	}
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x + GetRect().ComputeWidth() / 2;
-	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() - 3.0f;
+	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() -14.0f;
 	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
 	if (GetStamina() > 0)
 		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
@@ -297,7 +299,7 @@ void	 Son::Render(void)
 SGD::Rectangle  Son::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
 }
 void Son::HandleCollision(IEntity* pOther)
 {
@@ -347,8 +349,9 @@ void Son::HandleCollision(IEntity* pOther)
 						upArrow = false;
 						lrArrow = false;
 						m_vtVelocity.y = 0.0f;
-						float op = GetRect().bottom - GetPosition().y;
-						m_ptPosition.y = Rect.top - op;
+						int op = (int)GetRect().bottom - (int)GetPosition().y;
+						int s = (int)pOther->GetRect().top - op;
+						m_ptPosition.y = (float)s;
 						/*if (grounded)
 						{
 							SGD::Event* event = new SGD::Event("Grounded", nullptr, this);

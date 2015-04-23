@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Player.h"
 #include "../SGD Wrappers/SGD_GraphicsManager.h"
@@ -37,6 +38,7 @@ public:
 	SGD::Color GetStaminaState() { return m_staminastate; }
 	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
 
+	bool m = false;//bool to let the father jump off the ledge
 private:
 	AnimationTimestamp m_Timestamp;
 	int direction = 0;
