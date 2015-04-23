@@ -11,6 +11,7 @@ void MainMenuState::Enter()
 {
 	m_GameMusic = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/Game_Music.xwm");
 	m_Pointer = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Finger.png");
+	m_BkgndImg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/mainmenuimg.png");
 	int MusicVol = Game::GetInstance()->GetMusicVolume();
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
 	SGD::AudioManager::GetInstance()->PlayAudio(m_GameMusic);
@@ -20,12 +21,15 @@ void MainMenuState::Exit()
 {
 	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_Pointer);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BkgndImg);
 	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_GameMusic);
 }
 
 bool MainMenuState::Update(float _ElapsedTime)
 {
+
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))//leaves game
 	{
 		return false;
@@ -69,9 +73,10 @@ bool MainMenuState::Update(float _ElapsedTime)
 
 void MainMenuState::Render(float _ElapsedTime)
 {
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_BkgndImg, {});
+
 	if (Game::GetInstance()->GetLanguage() == 0)
 	{
-		Game::GetInstance()->GetFont().Draw("Lost Samurai", SGD::Point{ 270.0f, 50.0f }, 0.75f);
 		Game::GetInstance()->GetFont().Draw("Play", SGD::Point{ 375.0f, 200.0f }, 0.50f);
 		Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 325.0f, 250.0f }, 0.50f);
 		Game::GetInstance()->GetFont().Draw("Options", SGD::Point{ 350.0f, 300.0f }, 0.50f);
@@ -80,7 +85,6 @@ void MainMenuState::Render(float _ElapsedTime)
 	}
 	else
 	{
-		Game::GetInstance()->GetFont().Draw("Perdido Samurai", SGD::Point{ 270.0f, 50.0f }, 0.75f);
 		Game::GetInstance()->GetFont().Draw("Juego", SGD::Point{ 375.0f, 200.0f }, 0.50f);
 		Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 325.0f, 250.0f }, 0.50f);
 		Game::GetInstance()->GetFont().Draw("Opciones", SGD::Point{ 350.0f, 300.0f }, 0.50f);

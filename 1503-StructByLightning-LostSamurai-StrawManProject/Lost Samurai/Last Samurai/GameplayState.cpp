@@ -124,7 +124,7 @@ Actor* GameplayState::CreateSwordsman(Actor* _player) const
 	swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
 	swordsman->SetVelocity({ 64.0f, 0.0f });
-	dynamic_cast<Swordsman*>(swordsman)->SetTarget(_player);
+	dynamic_cast<Swordsman*>(swordsman)->SetTarget((Player*)_player);
 	return swordsman;
 }
 
@@ -179,7 +179,7 @@ void GameplayState::Enter()
 	m_SonFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/SonHead.png");
 	m_LedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigledge.png");
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
-	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png.png");
+	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -942,7 +942,7 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 	{
 
 								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
-								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+								 Actor* m_arrow = GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner());
 								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
 								 break;
 
@@ -1083,7 +1083,7 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 
 }
 
-Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
+Actor*  GameplayState::CreateArrow(Actor* _DartCannon)
 {
 	Arrow* m_DartCannon = new Arrow();
 	m_DartCannon->SetPosition(SGD::Point{ _DartCannon->GetPosition().x - 450, _DartCannon->GetPosition().y + 20 });

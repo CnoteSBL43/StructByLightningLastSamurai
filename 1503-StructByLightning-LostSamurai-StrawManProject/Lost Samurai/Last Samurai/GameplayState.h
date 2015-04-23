@@ -108,7 +108,7 @@ public:
 	Actor* CreateRocks(int i) const;
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
-	Actor* CreateArrow(DartCannon*);
+	Actor* CreateArrow(Actor*);
 	Actor* CreateDoor(int i) const;
 	//Actor* CreateLadder(int i) const;
 	Actor* CreateRopes(int i) const;

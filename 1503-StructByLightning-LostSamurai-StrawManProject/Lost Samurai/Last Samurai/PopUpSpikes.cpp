@@ -2,7 +2,6 @@
 #include "../SGD Wrappers/SGD_Event.h"
 #include "DestroyActorMessage.h"
 #include "Game.h"
-#include"Father.h"
 PopUpSpikes::PopUpSpikes()
 {
 }
@@ -20,7 +19,7 @@ void PopUpSpikes::Render()
 	re.right -= Game::GetInstance()->GetCameraPosition().x;
 	re.top -= Game::GetInstance()->GetCameraPosition().y;
 	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
-	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect())
 	Spike::Render();
 }
@@ -51,9 +50,8 @@ void PopUpSpikes::Update(float _elapsedtime)
 
 void	PopUpSpikes::HandleCollision(IEntity* pOther)
 {
-	if (pOther->GetType() == Actor::ENT_FATHER)
+	if (pOther->GetType() == Actor::ENT_FATHER || pOther->GetType() == Actor::ENT_SON)
 	{
-		dynamic_cast<Father*>(pOther)->SetAlive(false);
 		SGD::Event* CannonBallHit = new SGD::Event("Death1", nullptr, this);
 		CannonBallHit->QueueEvent(pOther);
 		//delete CannonBallHit;

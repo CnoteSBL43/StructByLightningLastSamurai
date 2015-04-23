@@ -45,7 +45,7 @@ private:
 	SGD::Vector		m_CameraDestinationVector;
 
 public:
-	SGD::HTexture bg = SGD::INVALID_HANDLE;
+	//SGD::HTexture bg = SGD::INVALID_HANDLE;
 	// this is a Static Game Singleton GetInsatance()
 	static Game* GetInstance();
 	// this is a Static Game Singleton DeleteInstance()

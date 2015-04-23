@@ -33,75 +33,48 @@ void	 Son::Update(float elapsedTime)
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
 			if (!GetOnGround() && !upArrow  && !GetBackPack() && !lrArrow)
-				m_vtVelocity.y = 64.0f;
-
+				m_vtVelocity.y = 512.0f;
 			if (cannotJump)
-				m_vtVelocity.y = 64.0f;
-
-			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
+				m_vtVelocity.y = 512.0f;
+			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight)
 			{
 				m_FacingtoRight = true;
-				m_vtVelocity.x = 128.0f;
+				m_vtVelocity.x = 512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letLeft = true;
-				if (frameswitch >= 0.07f)
+				if (frameswitch >= 0.1f)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
-
 				m_Timestamp.SetCurrAnim("SonRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
-
-			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letRight && !GameplayState::GetInstance()->GetMovementOff())
+			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
 			{
 				m_FacingtoRight = false;
-				m_vtVelocity.x = -128.0f;
+				m_vtVelocity.x = -512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letRight = true;
-				if (frameswitch >= 0.07f)
+				if (frameswitch >= 0.1f)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
-
 				m_Timestamp.SetCurrAnim("SonRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
 			else
 			{
@@ -117,7 +90,7 @@ void	 Son::Update(float elapsedTime)
 				m_vtVelocity.y += 4.9f;
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1))
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
 			{
 				if (GetStamina() >= 10)
 				{
@@ -148,8 +121,6 @@ void	 Son::Update(float elapsedTime)
 			{
 				m_vtVelocity.y += 2.0f;
 			}
-
-
 			frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
 		}
@@ -180,28 +151,15 @@ void	 Son::Update(float elapsedTime)
 			m_Timestamp.SetElapsedTime(elapsedTime);
 			Actor::Update(elapsedTime);
 		}
-
-		AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
-
-
 	}
 	else
 	{
-		if (frameswitch >= 0.1f)
-		{
-			direction++;
-			frameswitch = 0;
-		}
-		else if (direction >= 7)
-		{
-			frameswitch = 0;
-			direction = 0;
-			m_Timestamp.SetCurrAnim("SonIdle");
-			m_Timestamp.SetCurrFrame(direction);
-			m_Timestamp.SetElapsedTime(elapsedTime);
-		}
+		frameswitch = 0;
+		direction = 0;
+		m_Timestamp.SetCurrAnim("SonIdle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
 	}
-
 	if (GetStamina() < 0)
 	{
 		SetStamina(0);
@@ -285,9 +243,19 @@ void	 Son::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x + GetRect().ComputeWidth() / 2;
 	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() - 3.0f;
-	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
-	if (GetStamina() > 0)
-		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
+	if (!GetCurrCharacter())
+	{
+		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 + 37.5f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() + 37.5f / 2, 77.5 };
+		if (GetStamina() > 0 && !r.IsEmpty())
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
+	}
+	else
+	{
+		SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
+		if (GetStamina() > 0 && !r.IsEmpty())
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
+	}
+
 	if (m_FacingtoRight)
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
 	else
@@ -351,9 +319,9 @@ void Son::HandleCollision(IEntity* pOther)
 						m_ptPosition.y = Rect.top - op;
 						/*if (grounded)
 						{
-							SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
-							event->QueueEvent();
-							grounded = false;
+						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
+						event->QueueEvent();
+						grounded = false;
 						}*/
 					}
 				}
@@ -388,20 +356,6 @@ void Son::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
-	if (pOther->GetType() == ENT_LEDGE)
-	{
-		if (pOther->GetRect().IsIntersecting(this->GetRect()))
-		{
-			if (GetStamina() > 5)
-			{
-				previousPosY = m_ptPosition.y;
-				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
-				m_vtVelocity.y = 0.0f;
-				SetOnGround(false);
-				//SetHanging(true);
-			}
-		}
-	}
 }
 void Son::HandleEvent(const SGD::Event* pEvent)
 {
@@ -415,8 +369,7 @@ void Son::HandleEvent(const SGD::Event* pEvent)
 		//m_Timestamp.SetCurrFrame(direction);
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		//this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
-		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 380, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
 	}
 
 }

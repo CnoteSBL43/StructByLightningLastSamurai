@@ -11,19 +11,6 @@ OptionState* OptionState::GetInstance()
 
 void OptionState::Enter()
 {
-	/*std::ifstream fin;
-	fin.open("Options.txt");
-	if (fin.is_open())
-	{
-	int mastervol,musvol, sfxvol;
-	fin >> mastervol;
-	fin >> musvol;
-	fin >> sfxvol;
-	SetMasterVol(mastervol);
-	SetSFXVol(sfxvol);
-	SetMusicVol(musvol);
-	fin.close();
-	}*/
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
 
 	m_Music = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/Game_Music.xwm");
@@ -92,7 +79,7 @@ bool OptionState::Update(float _ElapsedTime)
 	{
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0,SGD::DPad::Left))
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::LeftArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Left))
 	{
 		if (m_CursorPos == 0)
 		{
@@ -103,7 +90,7 @@ bool OptionState::Update(float _ElapsedTime)
 			}
 			SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
 			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music));
-				SGD::AudioManager::GetInstance()->PlayAudio(m_Music);
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Music);
 		}
 		else if (m_CursorPos == 1)
 		{
@@ -146,8 +133,8 @@ bool OptionState::Update(float _ElapsedTime)
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::RightArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right))
 	{
-		
-	
+
+
 		if (m_CursorPos == 0)
 		{
 			MusicVol += 10;
@@ -242,12 +229,12 @@ void OptionState::Render(float _ElapsedTime)
 		wos4 << "English";
 	if (Game::GetInstance()->GetLanguage() == 0)
 	{
-		Game::GetInstance()->GetFont().Draw("Options", SGD::Point{ 270.0f, 50.0f }, 0.75f);
-		Game::GetInstance()->GetFont().Draw("Music Volume", SGD::Point{ 125.0f, 200.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("SFX Volume", SGD::Point{ 125.0f, 250.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("FullScreen", SGD::Point{ 125.0f, 300.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("Language", SGD::Point{ 125.0f, 350.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("Load Game", SGD::Point{ 125.0f, 400.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Options",		SGD::Point{ 270.0f, 50.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Music Volume", SGD::Point{ 125.0f, 200.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("SFX Volume",	SGD::Point{ 125.0f, 250.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("FullScreen",	SGD::Point{ 125.0f, 300.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("Language",		SGD::Point{ 125.0f, 350.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("Load Game",	SGD::Point{ 125.0f, 400.0f }, 0.375f);
 		if (fullscreen)
 			wos3 << "Yes";
 		else
@@ -255,12 +242,12 @@ void OptionState::Render(float _ElapsedTime)
 	}
 	else
 	{
-		Game::GetInstance()->GetFont().Draw("Opciones", SGD::Point{ 270.0f, 50.0f }, 0.75f);
-		Game::GetInstance()->GetFont().Draw("Volumen de la Musica", SGD::Point{ 125.0f, 200.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("SFX volumen", SGD::Point{ 125.0f, 250.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("Pantalla Completa", SGD::Point{ 125.0f, 300.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("Idioma", SGD::Point{ 125.0f, 350.0f }, 0.50f);
-		Game::GetInstance()->GetFont().Draw("Cargar Partida", SGD::Point{ 125.0f, 400.0f }, 0.50f);
+		Game::GetInstance()->GetFont().Draw("Opciones",				SGD::Point{ 270.0f, 50.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Volumen de la Musica", SGD::Point{ 125.0f, 200.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("SFX volumen",			SGD::Point{ 125.0f, 250.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("Pantalla Completa",	SGD::Point{ 125.0f, 300.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("Idioma",				SGD::Point{ 125.0f, 350.0f }, 0.375f);
+		Game::GetInstance()->GetFont().Draw("Cargar Partida",		SGD::Point{ 125.0f, 400.0f }, 0.375f);
 
 		if (fullscreen)
 			wos3 << "Si";
@@ -287,12 +274,12 @@ void OptionState::Render(float _ElapsedTime)
 	else if (m_CursorPos == 4)
 		SGD::GraphicsManager::GetInstance()->DrawTexture(m_Pointer, SGD::Point(50.0f, 410.0f), 0.0f, {}, SGD::Color(255, 153, 0));
 
-	Game::GetInstance()->GetFont().Draw(wos1.str().c_str(), SGD::Point{ 500.0f, 200.0f }, 0.50f);
-	Game::GetInstance()->GetFont().Draw(wos2.str().c_str(), SGD::Point{ 500.0f, 250.0f }, 0.50f);
-	Game::GetInstance()->GetFont().Draw(wos3.str().c_str(), SGD::Point{ 500.0f, 300.0f }, 0.50f);
-	Game::GetInstance()->GetFont().Draw(wos4.str().c_str(), SGD::Point{ 500.0f, 350.0f }, 0.50f);
+	Game::GetInstance()->GetFont().Draw(wos1.str().c_str(), SGD::Point{ 500.0f, 200.0f }, 0.375f);
+	Game::GetInstance()->GetFont().Draw(wos2.str().c_str(), SGD::Point{ 500.0f, 250.0f }, 0.375f);
+	Game::GetInstance()->GetFont().Draw(wos3.str().c_str(), SGD::Point{ 500.0f, 300.0f }, 0.375f);
+	Game::GetInstance()->GetFont().Draw(wos4.str().c_str(), SGD::Point{ 500.0f, 350.0f }, 0.375f);
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_BackArrow, SGD::Point{ 5.0f, Game::GetInstance()->GetScreenSize().height - 75 });
-	Game::GetInstance()->GetFont().Draw("Esc", SGD::Point{ 125.0f, Game::GetInstance()->GetScreenSize().height - 60 }, 0.50f);
+	Game::GetInstance()->GetFont().Draw("Esc", SGD::Point{ 125.0f, Game::GetInstance()->GetScreenSize().height - 60 }, 0.25f);
 
 
 }

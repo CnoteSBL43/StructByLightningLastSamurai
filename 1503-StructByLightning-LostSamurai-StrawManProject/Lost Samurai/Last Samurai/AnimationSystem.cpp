@@ -44,6 +44,15 @@ void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SG
 		GM->DrawTextureSection(m_Imgs[4], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_AUTO_LOCK_DOOR)
 		GM->DrawTextureSection(m_Imgs[5], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_BOWMAN)
+		GM->DrawTextureSection(m_Imgs[6], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_SMASHING_COLUMNS)
+		GM->DrawTextureSection(m_Imgs[7], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_FALLING_ROCK)
+		GM->DrawTextureSection(m_Imgs[8], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_ROLLING_BOULDER)
+		GM->DrawTextureSection(m_Imgs[9], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+
 }
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)
