@@ -19,13 +19,15 @@ void Ladder::Update(float elapsedTime)
 
 void Ladder::Render(void)
 {
-	SGD::Rectangle rect = GetRect();
-	rect.top -= Game::GetInstance()->GetCameraPosition().y;
-	rect.left -= Game::GetInstance()->GetCameraPosition().x;
-	rect.bottom -= Game::GetInstance()->GetCameraPosition().y;
-	rect.right -= Game::GetInstance()->GetCameraPosition().x;
-
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, SGD::Color{ 255, 0, 255, 0 });
+	//SGD::Rectangle rect = GetRect();
+	//rect.top -= Game::GetInstance()->GetCameraPosition().y;
+	//rect.left -= Game::GetInstance()->GetCameraPosition().x;
+	//rect.bottom -= Game::GetInstance()->GetCameraPosition().y;
+	//rect.right -= Game::GetInstance()->GetCameraPosition().x;
+	SGD::Point pt = GetPosition();
+	pt.x -= Game::GetInstance()->GetCameraPosition().x;
+	pt.y -= Game::GetInstance()->GetCameraPosition().y;
+	SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt);
 }
 
 SGD::Rectangle Ladder::GetRect(void) const

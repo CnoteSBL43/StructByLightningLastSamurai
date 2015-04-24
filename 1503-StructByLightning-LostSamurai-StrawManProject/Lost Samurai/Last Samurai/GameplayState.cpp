@@ -159,8 +159,9 @@ Actor* GameplayState::CreateCheckPoint(int i) const
 Actor* GameplayState::CreateLadder(int i) const
 {
 	Ladder* ladder = new Ladder;
-	ladder->SetPosition({ Load->Traps["Ladder"][i]->left - 800, Load->Traps["Ladder"][i]->top - 300 });
-	ladder->SetSize({ 64, 224 });
+	ladder->SetPosition({ Load->Traps["Ladder"][i]->left - 832, Load->Traps["Ladder"][i]->top - 300 });
+	ladder->SetSize({ 60, 224 });
+	ladder->SetImage(m_LadderImage);
 	return ladder;
 }
 
@@ -186,7 +187,8 @@ void GameplayState::Enter()
 	m_SonFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/SonHead.png");
 	m_LedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigledge.png");
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
-	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png.png");
+	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png");
+	m_LadderImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Ladder.png");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -322,6 +324,7 @@ void GameplayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_DartTrapImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LedgeImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LadderImage);
 
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
 	m_Pause = false;
@@ -589,16 +592,15 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(0, 3);
 		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging() && !dynamic_cast<Father*>(father)->GetonLadder())
 		{
-			if (!dynamic_cast<Father*>(father)->GetHanging())
 				father->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
 		}
+		bool k = dynamic_cast<Father*>(father)->upArrow;
 		m_pEntities->CheckCollisions(0, 5);
 
 
 		if (dynamic_cast<Son*>(son)->GetBackPack() == false)
 		{
 			dynamic_cast<Son*>(son)->SetCollisionRect(false);
-
 			m_pEntities->CheckCollisions(1, 3);
 		}
 		if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false)
@@ -857,33 +859,6 @@ void GameplayState::Render(float _ElapsedTime)
 
 
 #pragma region Debug Rects
-	// This is a if check, Checking if the Debug mode is True 
-	//if (Debug)
-	//{
-
-	//	// If the Debug Boolean is True then it will Fall in
-	//	// This is a for loop of all of the Collision Rectangles m_CollisionRect
-	//	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
-	//	{
-	//		// Useing a wide string stream to get the number of rectangles and where they are placed on the screen 
-	//		std::wostringstream wos1;
-	//		// you pass the I into the string stream 
-	//		wos1 << i;
-	//		// Getting a SGD Point to get the Position ofall of the Rectangles on the screen 
-	//		SGD::Point pos = { Load->m_CollisionRect[i]->GetPosition().x - Game::GetInstance()->GetCameraPosition().x, Load->m_CollisionRect[i]->GetPosition().y + Game::GetInstance()->GetCameraPosition().y };
-	//		//  Getting the Size of all the Collision Rectangles 
-	//		SGD::Size size{ Load->m_CollisionRect[i]->GetSize().width - Load->m_CollisionRect[i]->GetPosition().x, Load->m_CollisionRect[i]->GetSize().height - Load->m_CollisionRect[i]->GetPosition().y };
-	//		// Making a Rectangle so that you Can get the acurate positions and size of the Collision rectangles
-	//		SGD::Rectangle rectp{ pos, size };
-	//		// This is Going to Draw the Collision Recttangles On the Screen in the correct places 
-	//		SGD::GraphicsManager::GetInstance()->DrawRectangle(rectp, {}, SGD::Color{ 255, 255, 0, 0 });
-	//		// This is drawing a number inside the The COllision Rectangle
-	//		SGD::GraphicsManager::GetInstance()->DrawString(wos1.str().c_str(), SGD::Point{ rectp.left, rectp.top }, SGD::Color{ 255, 0, 255, 0 });
-	//	}
-
-
-
-	//}
 #pragma endregion	
 
 	m_pEntities->RenderAll();
@@ -895,7 +870,7 @@ void GameplayState::Render(float _ElapsedTime)
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
 	std::wostringstream s;
-	s << son->GetVelocity().y;
+	s << father->GetVelocity().y;
 	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	p->Render(_ElapsedTime);
 	if (m_Pause)

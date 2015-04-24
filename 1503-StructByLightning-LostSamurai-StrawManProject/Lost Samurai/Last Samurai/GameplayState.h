@@ -45,6 +45,7 @@ private:
 	SGD::HTexture m_LedgeImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_SmallLedgeImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_LeverImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_LadderImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 		// Game Entities
 

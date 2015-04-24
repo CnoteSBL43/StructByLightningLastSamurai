@@ -119,8 +119,6 @@ void	 Father::Update(float elapsedTime)
 						SetHanging(false);
 						m_vtVelocity.y = -800.0f;
 					}
-
-					//grounded = true;
 				}
 			}
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && GetonLadder() && !GameplayState::GetInstance()->GetMovementOff())
@@ -130,9 +128,12 @@ void	 Father::Update(float elapsedTime)
 				upArrow = false;
 			}
 
-			if (GetOnGround())//ground level -100
+			if (GetOnGround() && GetonLadder())
 			{
-				upArrow = false;
+				if (m_ptPosition.y <= previousPosY - 32.0f && upArrow)
+					m_vtVelocity.y = 0.0f;
+				if (m_ptPosition.y >= previousPosY +32.0f && !upArrow)
+					m_vtVelocity.y = 0.0f;
 			}
 			if (!GetOnGround() && upArrow == true && !GetHanging() && !GetonLadder())
 			{
@@ -143,14 +144,6 @@ void	 Father::Update(float elapsedTime)
 				else
 					m_vtVelocity.y = 512.0f;
 			}
-			if (GetOnGround() && GetonLadder())
-			{
-				if (m_ptPosition.y <= previousPosY - 50.0f && upArrow)
-					SetVelocity({ 0.0f, 0.0f });
-				if (m_ptPosition.y >= previousPosY + 50.0f && !upArrow)
-					SetVelocity({ 0.0f, 0.0f });
-			}
-
 			if (!GetOnGround() && cannotJump == true)
 			{
 				m_vtVelocity.y = 512.0f;
@@ -158,6 +151,7 @@ void	 Father::Update(float elapsedTime)
 			}
 			if (m_vtVelocity.y > 0 && GetjumpOffLedge())
 				SetjumpOffLedge(false);
+			
 			//frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
 		}
@@ -466,12 +460,16 @@ void Father::HandleCollision(IEntity* pOther)
 	{
 		SGD::Rectangle Rect;
 		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
-		if (Rect.ComputeWidth() > 15.0f)
+		if (Rect.ComputeWidth() == GetRect().ComputeWidth())
 		{
-			//bool k = letRight;
 			SetonLadder(true);
 			//m_ptPosition.y = Rect.top;
 			SetOnGround(true);
+		}
+		if (Rect.ComputeHeight() <= 32.0f)
+		{
+			SetonLadder(false);
+			SetOnGround(false);
 		}
 	}
 
