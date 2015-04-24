@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObjects.h"
-class Ladder :
-	public GameObjects
+
+
+class Ladder : public GameObjects
 {
 public:
 	Ladder();

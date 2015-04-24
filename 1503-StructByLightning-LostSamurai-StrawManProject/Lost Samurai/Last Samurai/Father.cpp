@@ -24,12 +24,14 @@ Father::Father()
 	SGD::IListener::RegisterForEvent("Death1");
 	SGD::IListener::RegisterForEvent("TargetedByBowman");
 	SGD::IListener::RegisterForEvent("UntargetedByBowman");
-	SetStamina(100);
+	SetStamina(200);
+	m_RegenStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminaregen.wav");
 }
 
 
 Father::~Father()
 {
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_RegenStamina);
 }
 
 
@@ -62,8 +64,6 @@ void	 Father::Update(float elapsedTime)
 		}
 		if (GetCurrCharacter())
 		{
-			if (cannotJump)
-				m_vtVelocity.y = 256.0f;
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight  && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(true);
@@ -91,22 +91,10 @@ void	 Father::Update(float elapsedTime)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					/*if (grounded == false)
-					{
-					SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-					event->QueueEvent();
-					}*/
-					//delete event;
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					/*if (grounded == false)
-					{
-					SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-					event->QueueEvent();
-					}*/
-					//delete event;
 				}
 				m_Timestamp.SetCurrAnim("FatherRunning");
 				m_Timestamp.SetCurrFrame(direction);
@@ -121,7 +109,7 @@ void	 Father::Update(float elapsedTime)
 				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				if (GetStamina() >= 10)
 				{
@@ -131,11 +119,29 @@ void	 Father::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -1024.0f;
-						isHanging = false;
+						m_vtVelocity.y = -800.0f;
+						SetHanging(false);
+						SetjumpOffLedge(true);
 					}
+					if (GetOnGround())
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						SetOnGround(false);
+						upArrow = true;
+						SetjumpOffLedge(false);
+						SetHanging(false);
+						m_vtVelocity.y = -800.0f;
+					}
+
 					//grounded = true;
 				}
+			}
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && GetonLadder() && !GameplayState::GetInstance()->GetMovementOff())
+			{
+				previousPosY = m_ptPosition.y;
+				m_vtVelocity.y = 512.0f;
+				upArrow = false;
 			}
 
 			if (GetOnGround())//ground level -100
@@ -148,10 +154,30 @@ void	 Father::Update(float elapsedTime)
 				}
 				timeinair = 0.0f;
 			}
-			if (!GetOnGround() && upArrow == true)
+			if (!GetOnGround() && upArrow == true && !GetHanging() && !GetonLadder())
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 24.0f;
+				else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
+					m_vtVelocity.y += 36.0f;
+				else
+					m_vtVelocity.y = 512.0f;
 			}
+			if (GetOnGround() && GetonLadder())
+			{
+				if (m_ptPosition.y <= previousPosY - 50.0f && upArrow)
+					SetVelocity({ 0.0f, 0.0f });
+				if (m_ptPosition.y >= previousPosY + 50.0f && !upArrow)
+					SetVelocity({ 0.0f, 0.0f });
+			}
+
+			if (!GetOnGround() && cannotJump == true)
+			{
+				m_vtVelocity.y = 512.0f;
+				cannotJump = false;
+			}
+			if (m_vtVelocity.y > 0 && GetjumpOffLedge())
+				SetjumpOffLedge(false);
 			//frameswitch += elapsedTime;
 		}
 		else if (!GetCurrCharacter())
@@ -163,7 +189,10 @@ void	 Father::Update(float elapsedTime)
 			m_Timestamp.SetElapsedTime(elapsedTime);
 			if (!GetOnGround() && upArrow == true)//ground level -100
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 2.0f;
+				else
+					m_vtVelocity.y = 128.0f;
 			}
 			if (GetOnGround())
 			{
@@ -180,19 +209,29 @@ void	 Father::Update(float elapsedTime)
 	}
 	if (GetStamina() < 0)
 	{
-		isHanging = false;
+		SetHanging(false);
 		SetStamina(0);
 	}
-	if (GetStamina() >= 100)
-		SetStamina(100);
+	if (GetStamina() >= 200)
+		SetStamina(200);
 	else
 	{
 		if (GetOnGround())
+		{
 			SetStamina(GetStamina() + 0.6f);
+			if (GetStamina() < 100 && !SGD::AudioManager::GetInstance()->IsAudioPlaying(m_RegenStamina))
+			{
+				SGD::AudioManager::GetInstance()->PlayAudio(m_RegenStamina);
+			}
+
+		}
+		else
+		{
+			SGD::AudioManager::GetInstance()->StopAudio(m_RegenStamina);
+		}
 	}
-	bool temp = GetOnGround();
-	if (isHanging == true && temp == false)
-		SetStamina(GetStamina() - 1.5f);
+	if (GetHanging() && GetOnGround() == false)
+		SetStamina(GetStamina() - 0.5f);
 	if (GetStamina() <= 75)
 	{
 		m_staminastate.green = 168;
@@ -232,7 +271,7 @@ void	 Father::Update(float elapsedTime)
 	else if (GetCurrCharacter() == true && !isFlashing)
 		m_staminastate.alpha = 255;
 	frameswitch += elapsedTime;
-	if (GetOnGround() == false && isHanging == false)
+	if (GetOnGround() == false && GetHanging() == false)
 	{
 		direction = 0;
 		m_Timestamp.SetCurrAnim("FatherJump");
@@ -276,17 +315,21 @@ void	 Father::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x;
 	p.y -= Game::GetInstance()->GetCameraPosition().y;
+	//int x = Game::GetInstance()->GetScreenSize().width / 2;
+	//int x2 = p.x;
+	//int ri = Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() - 25.0f;
+	//int ri2 = p.x + GetStamina();
 	if (!GetCurrCharacter())
 	{
-		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 - 25.0f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() - 25.0f / 2, 77.5 };
+		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 - 25.0f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina()/4 - 25.0f, 77.5 };
 		if (GetStamina() > 0 && !r.IsEmpty())
-			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
 	else
 	{
-		SGD::Rectangle r = { p.x, p.y - 80.0f, p.x + GetStamina() / 2, p.y - 72.5f };
+		SGD::Rectangle r = { p.x, p.y - 80.0f, p.x + GetStamina()/4, p.y - 72.5f };
 		if (GetStamina() > 0 && !r.IsEmpty())
-			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
 	if (GetFacing())
 		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -1, 1 });
@@ -307,18 +350,20 @@ void Father::HandleCollision(IEntity* pOther)
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_LEDGE)
+	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig && !GetjumpOffLedge())
 	{
-		if (pOther->GetRect().IsIntersecting(this->GetRect()))
+		SGD::Rectangle Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		letLeft = true;
+		letRight = true;
+		if (Rect.ComputeWidth() > 14.0f)
 		{
 			if (GetStamina() > 5)
 			{
-				if (!upArrow)
-				{
-					m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
-					isHanging = true;
-					SetOnGround(false);
-				}
+				previousPosY = m_ptPosition.y;
+				m_ptPosition.y = pOther->GetRect().bottom;
+				m_vtVelocity.y = 0.0f;
+				SetOnGround(false);
+				SetHanging(true);
 			}
 		}
 	}
@@ -383,7 +428,7 @@ void Father::HandleCollision(IEntity* pOther)
 
 
 	}
-	if (pOther->GetType() == ENT_TILES && isHanging == false)
+	if (pOther->GetType() == ENT_TILES && !GetHanging())
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;
@@ -415,8 +460,9 @@ void Father::HandleCollision(IEntity* pOther)
 						cannotJump = false;
 						upArrow = false;
 						m_vtVelocity.y = 0.0f;
-						float op = GetRect().bottom - GetPosition().y;
-						m_ptPosition.y = Rect.top - op;
+						int op = (int)GetRect().bottom - (int)GetPosition().y;
+						int s = (int)pOther->GetRect().top - op;
+						m_ptPosition.y = (float)s;
 						/*if (grounded)
 						{
 						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
@@ -457,6 +503,19 @@ void Father::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
+	if (pOther->GetType() == ENT_LADDER)
+	{
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		if (Rect.ComputeWidth() > 15.0f)
+		{
+			//bool k = letRight;
+			SetonLadder(true);
+			//m_ptPosition.y = Rect.top;
+			SetOnGround(true);
+		}
+	}
+
 }
 
 void Father::HandleEvent(const SGD::Event* pEvent)
@@ -468,7 +527,7 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		SetPosition(GetCheckPoint());
 		//m_Timestamp.SetCurrFrame(direction);
 
 	}

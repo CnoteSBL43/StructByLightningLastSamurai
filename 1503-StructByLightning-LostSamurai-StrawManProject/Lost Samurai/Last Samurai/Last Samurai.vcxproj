@@ -59,6 +59,7 @@
     <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="GameplayState.cpp" />
     <ClCompile Include="InstructionsState.cpp" />
+    <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Ledges.cpp" />
     <ClCompile Include="Lever.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="IEntity.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="InstructionsState.h" />
+    <ClInclude Include="Ladder.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Ledges.h" />
     <ClInclude Include="Lever.h" />

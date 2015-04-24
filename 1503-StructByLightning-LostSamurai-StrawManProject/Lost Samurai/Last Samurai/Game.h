@@ -27,7 +27,7 @@ private:
 	IGameState* m_CurrentState = nullptr;
 	IGameState* m_PreviousState = nullptr;
 	IGameState* pCurrentState = nullptr; //for pause menu
-	
+
 	// This is a Unsigned long Variable used to get Real time 
 	unsigned long m_GameTime = 0;
 	// This is used for storing the Music Volumes and SFX Volumes 
@@ -46,6 +46,7 @@ private:
 
 public:
 	//SGD::HTexture bg = SGD::INVALID_HANDLE;
+	bool cameraPanningOn = false;
 	// this is a Static Game Singleton GetInsatance()
 	static Game* GetInstance();
 	// this is a Static Game Singleton DeleteInstance()
@@ -78,6 +79,7 @@ public:
 	int GetLanguage(){ return m_Language; }
 	void SetLanguage(int _language){ m_Language = _language; }
 
+
 	//Font
 	BitmapFont GetFont(){ return font; }
 
@@ -91,11 +93,13 @@ public:
 	void Pause(IGameState* n_NextState);
 	bool CheckPrevious();
 
-	
+
 
 	//State Mutator
 	// This is going to change a state when needed 
 	void ChangeState(IGameState* _NextState);
 
+	//change level
+	bool changelevel = false;
 };
 

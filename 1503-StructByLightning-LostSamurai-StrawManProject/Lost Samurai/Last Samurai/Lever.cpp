@@ -18,7 +18,6 @@ Lever::~Lever()
 
 void Lever::Update(float elapsedTime)
 {
-	playerNear = false;
 }
 
 void Lever::Render(void)
@@ -44,8 +43,12 @@ SGD::Rectangle Lever::GetRect(void) const
 
 void Lever::HandleCollision(IEntity* pOther)
 {
-	if (pOther->GetType() == ENT_FATHER || pOther->GetType() == ENT_SON)
+	if (pOther->GetType() == ENT_FATHER )
 	{
-		playerNear = true;
+		
+	}
+	if (pOther->GetType() == ENT_SON)
+	{
+
 	}
 }

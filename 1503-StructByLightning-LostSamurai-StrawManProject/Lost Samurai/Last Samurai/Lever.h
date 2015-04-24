@@ -3,8 +3,7 @@
 #include "AnimationSystem.h"
 class Lever : public GameObjects
 {
-private:
-	bool playerNear = false;
+	int ID;
 	AnimationTimestamp m_Timestamp;
 public:
 	Lever();
@@ -16,6 +15,7 @@ public:
 	int	GetType(void) const	{ return ENT_LEVERS; }
 	SGD::Rectangle GetRect(void) const;
 	void HandleCollision(IEntity* pOther);
-	bool GetPlayerNear(){ return playerNear; }
+	void SetID(int _id){ ID = _id; }
+	int GetID() const { return ID; }
 };
 

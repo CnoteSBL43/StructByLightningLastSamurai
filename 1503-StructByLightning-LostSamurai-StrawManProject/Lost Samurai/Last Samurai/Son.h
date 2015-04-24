@@ -21,8 +21,6 @@ public:
 	int GetDirection(){ return direction; }
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
 	void SetCurrCharacter(bool _isCurrentCharacter){ isCurrentCharacter = _isCurrentCharacter; }
-	bool GetFacing(){ return m_FacingtoRight; }
-	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 	bool letLeft = true, letRight = true, cannotJump = false, upArrow = false, lrArrow = false;//lrArrow so the player can get off the father
 	bool GetCollisionRect(){ return collisionrect; }
 	void SetCollisionRect(bool _collisionrect){ collisionrect = _collisionrect; }
@@ -35,7 +33,6 @@ private:
 	AnimationTimestamp m_Timestamp;
 	int direction = 0;
 	float frameswitch = 0.0f;
-	bool m_FacingtoRight = true;//to change the scale for the Son(direction)
 	bool isCurrentCharacter = false;
 	float previousPosY;
 	bool collisionrect = false;//collision rectangle  fix ?

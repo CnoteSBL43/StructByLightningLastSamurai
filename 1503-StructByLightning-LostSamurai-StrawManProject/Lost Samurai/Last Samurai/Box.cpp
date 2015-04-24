@@ -22,7 +22,7 @@ void Box::CalculateVelocity(SGD::Vector v)
 void Box::Update(float elapsedTime)
 {
 	if (!GetIsTriggered())
-		m_vtVelocity.y = 32.0f;
+		m_vtVelocity.y = 512.0f;
 	else
 		m_vtVelocity.y = 0.0f;
 

@@ -29,13 +29,11 @@ protected:
 		int CheckPointY;
 		int Border;
 		std::string m_EventString;
-
 		std::string TrapNames;
 		int TriggerPositionX;
 		int TrigerPositionY;
-
 		int Traps;
-
+		int Door;
 	};
 
 	struct Grid
@@ -48,7 +46,7 @@ protected:
 public:
 	TileSystem();
 	~TileSystem();
-	void LoadTileXml(Father* _father, Son* _Son);
+	void LoadTileXml(Father* _father, Son* _Son,const char* _level);
 	tile1* m_Tile;
 	Grid* m_Grid;
 	//Tile* Map[][];
@@ -64,6 +62,7 @@ public:
 
 	std::map<std::string, std::vector<SGD::Rectangle*>> Traps;
 
+	int doorID[10];
 
 };
 

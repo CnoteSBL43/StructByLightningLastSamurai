@@ -2029,7 +2029,7 @@
   <RectEelemnt CollisionRectleft="864" CollisionRectTop="256" CollisionRectRight="928" CollisionRectBottom="288" />
   <RectEelemnt CollisionRectleft="352" CollisionRectTop="224" CollisionRectRight="448" CollisionRectBottom="256" />
   <RectEelemnt CollisionRectleft="416" CollisionRectTop="224" CollisionRectRight="448" CollisionRectBottom="448" />
-  <RectEelemnt CollisionRectleft="160" CollisionRectTop="256" CollisionRectRight="192" CollisionRectBottom="544" />
+  <RectEelemnt CollisionRectleft="96" CollisionRectTop="288" CollisionRectRight="128" CollisionRectBottom="544" />
   <RectEelemnt CollisionRectleft="896" CollisionRectTop="416" CollisionRectRight="928" CollisionRectBottom="544" />
   <RectEelemnt CollisionRectleft="32" CollisionRectTop="544" CollisionRectRight="992" CollisionRectBottom="608" />
   <RectEelemnt CollisionRectleft="32" CollisionRectTop="608" CollisionRectRight="64" CollisionRectBottom="1024" />
