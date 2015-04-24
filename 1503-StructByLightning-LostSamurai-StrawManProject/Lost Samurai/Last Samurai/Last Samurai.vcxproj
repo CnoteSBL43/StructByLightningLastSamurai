@@ -179,6 +179,9 @@
   <ItemGroup>
     <Text Include="Options.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3FEFFC2A-5E13-4EE7-82C7-ED91D33BB0C7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

@@ -33,6 +33,10 @@ private:
 	GameplayState& operator= (const GameplayState&) = delete;
 	// This is an Haudio used for the main menu 
 	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
+	SGD::HAudio m_SwitchSound = SGD::INVALID_HANDLE;
+	SGD::HAudio m_PickingUPSon = SGD::INVALID_HANDLE;
+	SGD::HAudio m_Movement = SGD::INVALID_HANDLE;
+	SGD::HAudio Select;
 	// this is a Htexture used to Render the fathers image 
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_PointerImage = SGD::INVALID_HANDLE;

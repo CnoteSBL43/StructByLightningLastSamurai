@@ -541,4 +541,9 @@
   <ItemGroup>
     <Text Include="Options.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

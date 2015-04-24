@@ -19,7 +19,7 @@ private:
 	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
 	int m_CursorPos = 0;
 	bool isLoading = false;
-
+	SGD::HAudio Select;
 public:
 	static MainMenuState* GetInstance();
 	void	Enter(void);

@@ -187,6 +187,10 @@ void GameplayState::Enter()
 	m_LedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigledge.png");
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
 	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png.png");
+	m_SwitchSound = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/switching characters.wav");
+	m_PickingUPSon = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/backpack.wav");
+	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -531,6 +535,7 @@ bool GameplayState::Update(float _ElapsedTime)
 
 		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 0))
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_SwitchSound);
 			if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 			{
 				dynamic_cast<Father*>(father)->SetCurrCharacter(false);
@@ -552,6 +557,7 @@ bool GameplayState::Update(float _ElapsedTime)
 
 		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 3) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_PickingUPSon);
 			m_pEntities->CheckCollisions(0, 1);
 		}
 		//replace son after backpacing is activated
@@ -991,7 +997,9 @@ void GameplayState::Pause(void)
 {
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down))
 	{
+
 		cursorPos++;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 		if (cursorPos > 4)
 			cursorPos = 0;
 	}
@@ -999,27 +1007,33 @@ void GameplayState::Pause(void)
 	{
 
 		cursorPos--;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 		if (cursorPos < 0)
 			cursorPos = 4;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 0 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 0)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		m_Pause = false;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 1 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 1)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(InstructionsState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 2 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 2)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(OptionState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 3 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 3)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(SaveGameState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 4 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 4)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 	}
 }
