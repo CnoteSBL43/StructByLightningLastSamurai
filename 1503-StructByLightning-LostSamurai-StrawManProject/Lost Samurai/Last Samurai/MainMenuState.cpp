@@ -15,6 +15,7 @@ void MainMenuState::Enter()
 	int MusicVol = Game::GetInstance()->GetMusicVolume();
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
 	SGD::AudioManager::GetInstance()->PlayAudio(m_GameMusic);
+	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
 }
 
 void MainMenuState::Exit()
@@ -28,7 +29,6 @@ void MainMenuState::Exit()
 
 bool MainMenuState::Update(float _ElapsedTime)
 {
-
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))//leaves game
 	{
@@ -59,12 +59,24 @@ bool MainMenuState::Update(float _ElapsedTime)
 		return false;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos < 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos < 4)
+	{
 		m_CursorPos++;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
+	}
+
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos == 4)
+	{
 		m_CursorPos = 0;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
+	}
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos > 0)
+	{
 		m_CursorPos--;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
+	}
+
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 | SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
 		m_CursorPos = 4;
 
 

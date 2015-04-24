@@ -39,7 +39,11 @@ public:
 
 
 private:
+	SGD::HAudio m_FatherJump;
+	SGD::HAudio FatherWalking;
+	SGD::HAudio FatherLanding;
 	AnimationTimestamp m_Timestamp;
+	bool landing = false;
 	int direction = 0;
 	float frameswitch = 0.0f;
 	//to change the scale for the father(direction)

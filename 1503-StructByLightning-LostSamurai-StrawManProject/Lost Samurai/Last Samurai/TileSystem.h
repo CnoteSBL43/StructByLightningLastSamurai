@@ -32,9 +32,12 @@ protected:
 		std::string TrapNames;
 		int TriggerPositionX;
 		int TrigerPositionY;
+		//int Door;
 		int Traps;
 		int Door;
+
 	};
+
 
 	struct Grid
 	{
@@ -62,7 +65,7 @@ public:
 
 	std::map<std::string, std::vector<SGD::Rectangle*>> Traps;
 
-	int doorID[10];
-
+	int DoorID[10];
+	int temp = 0;
 };
 

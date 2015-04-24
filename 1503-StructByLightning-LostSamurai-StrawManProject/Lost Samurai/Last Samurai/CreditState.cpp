@@ -9,19 +9,22 @@ CreditState* CreditState::GetInstance()
 void CreditState::Enter()
 {
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
-
+	m_CreditMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/creditsmenu.xwm");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
+	SGD::AudioManager::GetInstance()->PlayAudio(m_CreditMusic, true);
 }
 
 void CreditState::Exit()
 {
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BackArrow);
-
+	SGD::AudioManager::GetInstance()->StopAudio(m_CreditMusic);
 }
 
 bool CreditState::Update(float _ElapsedTime)
 {
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9)))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;
 	}

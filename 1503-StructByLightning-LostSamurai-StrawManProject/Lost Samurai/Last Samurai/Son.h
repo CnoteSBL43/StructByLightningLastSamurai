@@ -28,8 +28,17 @@ public:
 	AnimationTimestamp& GetTimeStamp() { return m_Timestamp; }
 	SGD::Color GetStaminaState() { return m_staminastate; }
 	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
-
+	bool GetHanging() { return isHanging; }
+	void SetHanging(bool _bool) { isHanging = _bool; }
 private:
+	SGD::HAudio m_SonJump;
+	SGD::HAudio SonLanding;
+	SGD::HAudio LowStamina;
+	SGD::HAudio SonOutOfstamina;
+	SGD::HAudio SonStaimadrained;
+	SGD::HAudio RegeneratingStamina;
+	bool Landing;
+	bool isHanging = false;
 	AnimationTimestamp m_Timestamp;
 	int direction = 0;
 	float frameswitch = 0.0f;

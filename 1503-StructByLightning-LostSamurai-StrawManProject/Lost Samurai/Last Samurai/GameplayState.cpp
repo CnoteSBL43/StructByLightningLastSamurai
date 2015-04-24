@@ -206,6 +206,7 @@ void GameplayState::Enter()
 
 
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/tutorial.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
 	SGD::AudioManager::GetInstance()->PlayAudio(m_Backround, true);
@@ -227,9 +228,9 @@ void GameplayState::Enter()
 	m_pEntities->AddEntity(plate, 2);
 
 	if (!Game::GetInstance()->changelevel)
-		Load->LoadTileXml((Father*)father, (Son*)son,"../resource/XML/Level1.xml");
+		Load->LoadTileXml((Father*)father, (Son*)son,"../resource/XML/TutorialLevel.xml");
 	else
-		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/TutorialLevel.xml");
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level1.xml");
 	
 	p = new Pulley(200, 20, SGD::Vector(540, 900));//2840 660
 	
@@ -453,7 +454,9 @@ bool GameplayState::Update(float _ElapsedTime)
 		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
 		{
 			float xIncrement, yIncrement;
-			float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
+			xIncrement = 5.0f;
+			yIncrement = 3.0f;
+			/*float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
 			fabs(xDistance);
 			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
 			fabs(yDistance);
@@ -466,7 +469,7 @@ bool GameplayState::Update(float _ElapsedTime)
 			{
 			xIncrement = 3.0f;
 			yIncrement = 6.0f;
-			}
+			}*/
 			if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
 			{
 
