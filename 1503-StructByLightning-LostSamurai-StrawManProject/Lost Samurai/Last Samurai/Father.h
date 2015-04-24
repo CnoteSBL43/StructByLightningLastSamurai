@@ -4,6 +4,7 @@
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "AnimationTimestamp.h"
 #include "../SGD Wrappers/SGD_IListener.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
 #include <vector>
 class Father : public Player, public SGD::IListener
 
@@ -17,7 +18,7 @@ public:
 	int		GetType(void)	const				{ return ENT_FATHER; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision(IEntity* pOther);
-
+	SGD::HAudio m_RegenStamina = SGD::INVALID_HANDLE;
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
 	bool GetCurrCharacter(){ return isCurrentCharacter; }

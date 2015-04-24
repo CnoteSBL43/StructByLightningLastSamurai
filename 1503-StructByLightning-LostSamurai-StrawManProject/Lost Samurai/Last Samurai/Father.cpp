@@ -21,11 +21,13 @@ Father::Father()
 	SGD::IListener::RegisterForEvent("Death");
 	SGD::IListener::RegisterForEvent("Death1");
 	SetStamina(1000);
+	m_RegenStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminaregen.wav");
 }
 
 
 Father::~Father()
 {
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_RegenStamina);
 }
 
 
@@ -195,11 +197,22 @@ void	 Father::Update(float elapsedTime)
 		SetStamina(0);
 	}
 	if (GetStamina() >= 100)
-		SetStamina(1000);
+		SetStamina(100);
 	else
 	{
 		if (GetOnGround())
+		{
 			SetStamina(GetStamina() + 0.6f);
+			if (GetStamina() < 100 && !SGD::AudioManager::GetInstance()->IsAudioPlaying(m_RegenStamina))
+			{
+				SGD::AudioManager::GetInstance()->PlayAudio(m_RegenStamina);
+			}
+			
+		}
+		else
+		{
+			SGD::AudioManager::GetInstance()->StopAudio(m_RegenStamina);
+		}
 	}
 	if (GetHanging() && GetOnGround() == false)
 		SetStamina(GetStamina() - 0.5f);
@@ -314,12 +327,12 @@ void Father::HandleCollision(IEntity* pOther)
 		SGD::Rectangle Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
 		letLeft = true;
 		letRight = true;
-		if (Rect.ComputeWidth()>14.0f)
+		if (Rect.ComputeWidth() > 14.0f)
 		{
 			if (GetStamina() > 5)
 			{
 				previousPosY = m_ptPosition.y;
-				m_ptPosition.y = pOther->GetRect().bottom ;
+				m_ptPosition.y = pOther->GetRect().bottom;
 				m_vtVelocity.y = 0.0f;
 				SetOnGround(false);
 				SetHanging(true);
