@@ -15,7 +15,7 @@ Son::Son()
 	//SetPosition(SGD::Point{ 100.0f, 200.0f });
 	//CreateFrames();
 	SGD::IListener::RegisterForEvent("Death");
-	SetStamina(30);
+	SetStamina(100);
 	m_SonJump = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Jump.wav");
 	SonLanding = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Land.wav");
 	SonStaimadrained = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminabeingdrained.wav");
@@ -43,19 +43,14 @@ void	 Son::Update(float elapsedTime)
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(true);
-				m_vtVelocity.x = 128.0f;
+				m_vtVelocity.x = 512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letLeft = true;
-				if (frameswitch >= 0.07f)
+				if (frameswitch >= 0.1f)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					/*if (grounded == false)
-					{
-					SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-					event->QueueEvent();
-					}*/
 				}
 				if (direction >= 4)
 				{
@@ -66,21 +61,18 @@ void	 Son::Update(float elapsedTime)
 					event->QueueEvent();
 					}*/
 				}
-
 				m_Timestamp.SetCurrAnim("SonRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
-
-			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letRight && !GameplayState::GetInstance()->GetMovementOff())
+			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft)
 			{
 				SetFacing(false);
-				m_vtVelocity.x = -128.0f;
+				m_vtVelocity.x = -512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letRight = true;
-				if (frameswitch >= 0.07f)
+				if (frameswitch >= 0.1f)
 				{
 					direction++;
 					frameswitch = 0.0f;
@@ -89,11 +81,9 @@ void	 Son::Update(float elapsedTime)
 				{
 					direction = 0;
 				}
-
 				m_Timestamp.SetCurrAnim("SonRunning");
 				m_Timestamp.SetCurrFrame(direction);
 				m_Timestamp.SetElapsedTime(elapsedTime);
-
 			}
 			else
 			{
@@ -109,7 +99,7 @@ void	 Son::Update(float elapsedTime)
 				m_vtVelocity.y += 4.9f;
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1))
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
 			{
 				SGD::AudioManager::GetInstance()->PlayAudio(m_SonJump);
 				if (GetStamina() >= 10)
@@ -216,15 +206,14 @@ void	 Son::Update(float elapsedTime)
 		m_Timestamp.SetCurrFrame(direction);
 		m_Timestamp.SetElapsedTime(elapsedTime);
 	}
-
 	if (GetStamina() < 0)
 	{
 		SetStamina(0);
 		SGD::AudioManager::GetInstance()->PlayAudio(SonOutOfstamina);
 	}
-	if (GetStamina() >= 50)
+	if (GetStamina() >= 100)
 	{
-		SetStamina(50);
+		SetStamina(100);
 	}
 	if (GetStamina() <= 33)
 	{
@@ -314,20 +303,29 @@ void	 Son::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x + GetRect().ComputeWidth() / 2;
 	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() - 14.0f;
-	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
-	if (GetStamina() > 0)
-		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
-	if (GetFacing())
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
+	if (!GetCurrCharacter())
+	{
+		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 + 37.5f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() + 37.5f / 4, 77.5 };
+		if (GetStamina() > 0 && !r.IsEmpty())
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
+	}
 	else
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
+	{
+		SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 4, p.y - 42.5f };
+		if (GetStamina() > 0 && !r.IsEmpty())
+			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
+	}
+
+	if (GetFacing())
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -0.5f, 0.5f });
+	else
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
 }
 
 SGD::Rectangle  Son::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
 	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
-
 }
 void Son::HandleCollision(IEntity* pOther)
 {
@@ -481,8 +479,7 @@ void Son::HandleEvent(const SGD::Event* pEvent)
 		//m_Timestamp.SetCurrFrame(direction);
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		//this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
-		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 380, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
 	}
 
 }

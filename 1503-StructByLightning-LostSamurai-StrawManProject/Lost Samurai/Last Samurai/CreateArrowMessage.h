@@ -1,14 +1,14 @@
 #pragma once
 #include "../SGD Wrappers/SGD_Message.h"
-class DartCannon;
-class CreateArrowMessage:public SGD::Message
+#include "Actor.h"
+class CreateArrowMessage :public SGD::Message
 {
 public:
-	CreateArrowMessage(DartCannon*);
+	CreateArrowMessage(Actor*);
 	~CreateArrowMessage();
-	DartCannon* GetDartCannonOwner() const { return m_DartCannon; }
+	Actor* GetDartCannonOwner() const { return m_DartCannon; }
 
 private:
-	DartCannon* m_DartCannon;
+	Actor* m_DartCannon = nullptr;
 };
 

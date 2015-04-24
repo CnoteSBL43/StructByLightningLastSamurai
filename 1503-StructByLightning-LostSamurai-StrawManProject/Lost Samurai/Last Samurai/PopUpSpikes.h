@@ -1,5 +1,6 @@
 #pragma once
 #include "Spike.h"
+#include "AnimationSystem.h"
 class PopUpSpikes : public Spike
 {
 private:
@@ -8,9 +9,7 @@ private:
 	float m_ActiveTimer = 0.0f;
 	float m_DeactivateTime = 5.0f;
 	bool isActive = true;
-	SGD::Point m_currentpos = { m_ptPosition.x, m_ptPosition.y };
-	SGD::Point bottom = { m_ptPosition.x, m_ptPosition.y + (150.0f) };
-
+	AnimationTimestamp m_Timestamp;
 public:
 	PopUpSpikes();
 	~PopUpSpikes();
@@ -19,6 +18,8 @@ public:
 	void	HandleCollision(IEntity* pOther);
 	int GetType() const { return ENT_POPUPSPIKES; }
 	SGD::Rectangle GetRect() const;
+	unsigned int currframe = 0;
+	float frametimer = 0.0f;
 protected:
 	//SGD::Rectangle rect;
 	bool Debug = false;

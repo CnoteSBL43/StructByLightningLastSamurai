@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="lever.png" MF="Filter">
+  <Animation Name="Lever">
+    <Frame>
+      <Draw RectX="-21" RectY="-18" RectWidth="45" RectHeight="33" />
+      <Collision RectX="-21" RectY="-18" RectWidth="45" RectHeight="33" />
+      <AnchorPT X="30" Y="24" />
+      <Particles>
+        <ParticlePT X="4" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-21" RectWidth="28" RectHeight="36" />
+      <Collision RectX="-19" RectY="-21" RectWidth="28" RectHeight="36" />
+      <AnchorPT X="33" Y="93" />
+      <Particles>
+        <ParticlePT X="-3" Y="10" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-32" RectY="-16" RectWidth="40" RectHeight="31" />
+      <Collision RectX="-32" RectY="-16" RectWidth="40" RectHeight="31" />
+      <AnchorPT X="90" Y="24" />
+      <Particles>
+        <ParticlePT X="0" Y="10" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

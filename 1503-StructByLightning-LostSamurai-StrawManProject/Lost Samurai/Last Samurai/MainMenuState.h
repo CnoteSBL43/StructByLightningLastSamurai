@@ -17,6 +17,8 @@ private:
 	SGD::HAudio m_GameMusic = SGD::INVALID_HANDLE;
 	SGD::HAudio m_Movement = SGD::INVALID_HANDLE;
 	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
+	SGD::HTexture m_BkgndImg = SGD::INVALID_HANDLE;
+
 	int m_CursorPos = 0;
 	bool isLoading = false;
 	SGD::HAudio Select;

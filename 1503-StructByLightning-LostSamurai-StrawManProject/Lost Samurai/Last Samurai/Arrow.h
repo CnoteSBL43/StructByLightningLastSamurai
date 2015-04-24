@@ -8,7 +8,7 @@ class Arrow : public Bullet
 public:
 	Arrow();
 	~Arrow();
-	void SetDartCannon(DartCannon* _Cannon);
+	void SetDartCannon(Actor* _Cannon);
 	void Render();
 	void Update(float elapsedTime);
 	int	GetType(void) const;
@@ -17,7 +17,7 @@ public:
 	SGD::Rectangle GetRect() const;
 private:
 	AnimationTimestamp m_Timestamp;
-	DartCannon* m_DartCannon;
+	Actor* m_DartCannon;
 	SGD::Rectangle rect;
 	bool Debug = false;
 	float m_timer = 30.0;

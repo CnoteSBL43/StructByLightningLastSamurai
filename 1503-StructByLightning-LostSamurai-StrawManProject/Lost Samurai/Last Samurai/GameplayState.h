@@ -49,6 +49,7 @@ private:
 	SGD::HTexture m_LedgeImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_SmallLedgeImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_LeverImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_LadderImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
 		// Game Entities
 
@@ -81,7 +82,6 @@ private:
 
 	
 	bool movementTurnOff = false;
-
 public:
 	// this is a Gamplaystate Pointer function used to  make a singleton 
 	static GameplayState* GetInstance();
@@ -109,7 +109,7 @@ public:
 	Actor* CreateRocks(int i) const;
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
-	Actor* CreateArrow(DartCannon*);
+	Actor* CreateArrow(Actor*);
 	Actor* CreateDoor(int i) const;
 	Actor* CreateLadder(int i) const;
 	Actor* CreateRopes(int i) const;

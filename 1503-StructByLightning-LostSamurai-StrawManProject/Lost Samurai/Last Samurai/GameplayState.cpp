@@ -125,7 +125,7 @@ Actor* GameplayState::CreateSwordsman(Actor* _player) const
 	swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
 	swordsman->SetVelocity({ 64.0f, 0.0f });
-	dynamic_cast<Swordsman*>(swordsman)->SetTarget(_player);
+	dynamic_cast<Swordsman*>(swordsman)->SetTarget((Player*)_player);
 	return swordsman;
 }
 
@@ -159,8 +159,9 @@ Actor* GameplayState::CreateCheckPoint(int i) const
 Actor* GameplayState::CreateLadder(int i) const
 {
 	Ladder* ladder = new Ladder;
-	ladder->SetPosition({ Load->Traps["Ladder"][i]->left - 800, Load->Traps["Ladder"][i]->top - 300 });
-	ladder->SetSize({ 64, 224 });
+	ladder->SetPosition({ Load->Traps["Ladder"][i]->left - 832, Load->Traps["Ladder"][i]->top - 300 });
+	ladder->SetSize({ 60, 224 });
+	ladder->SetImage(m_LadderImage);
 	return ladder;
 }
 
@@ -186,7 +187,8 @@ void GameplayState::Enter()
 	m_SonFaceImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/SonHead.png");
 	m_LedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigledge.png");
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
-	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png.png");
+	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png");
+	m_LadderImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Ladder.png");
 	m_SwitchSound = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/switching characters.wav");
 	m_PickingUPSon = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/backpack.wav");
 	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
@@ -200,6 +202,16 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Swordsman.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Doors.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Archer.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/SmashingColumns.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/FallingRocks.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/RollingBoulder.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/popupspikes.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Lever.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/PressurePlate.xml");
+
+
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/tutorial.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
@@ -226,7 +238,7 @@ void GameplayState::Enter()
 	else
 		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level1.xml");
 	
-	p = new Pulley(200, 20, SGD::Vector( 540, 900));//2840 660
+	p = new Pulley(200, 20, SGD::Vector(540, 900));//2840 660
 	
 	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
 		m_pEntities->AddEntity(Load->m_CollisionRect[i], 3);
@@ -326,6 +338,7 @@ void GameplayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_DartTrapImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LedgeImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LadderImage);
 
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
 	m_Pause = false;
@@ -597,16 +610,15 @@ bool GameplayState::Update(float _ElapsedTime)
 		m_pEntities->CheckCollisions(0, 3);
 		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging() && !dynamic_cast<Father*>(father)->GetonLadder())
 		{
-			if (!dynamic_cast<Father*>(father)->GetHanging())
 				father->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
 		}
+		bool k = dynamic_cast<Father*>(father)->upArrow;
 		m_pEntities->CheckCollisions(0, 5);
 
 
 		if (dynamic_cast<Son*>(son)->GetBackPack() == false)
 		{
 			dynamic_cast<Son*>(son)->SetCollisionRect(false);
-
 			m_pEntities->CheckCollisions(1, 3);
 		}
 		if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false)
@@ -865,33 +877,6 @@ void GameplayState::Render(float _ElapsedTime)
 
 
 #pragma region Debug Rects
-	// This is a if check, Checking if the Debug mode is True 
-	//if (Debug)
-	//{
-
-	//	// If the Debug Boolean is True then it will Fall in
-	//	// This is a for loop of all of the Collision Rectangles m_CollisionRect
-	//	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
-	//	{
-	//		// Useing a wide string stream to get the number of rectangles and where they are placed on the screen 
-	//		std::wostringstream wos1;
-	//		// you pass the I into the string stream 
-	//		wos1 << i;
-	//		// Getting a SGD Point to get the Position ofall of the Rectangles on the screen 
-	//		SGD::Point pos = { Load->m_CollisionRect[i]->GetPosition().x - Game::GetInstance()->GetCameraPosition().x, Load->m_CollisionRect[i]->GetPosition().y + Game::GetInstance()->GetCameraPosition().y };
-	//		//  Getting the Size of all the Collision Rectangles 
-	//		SGD::Size size{ Load->m_CollisionRect[i]->GetSize().width - Load->m_CollisionRect[i]->GetPosition().x, Load->m_CollisionRect[i]->GetSize().height - Load->m_CollisionRect[i]->GetPosition().y };
-	//		// Making a Rectangle so that you Can get the acurate positions and size of the Collision rectangles
-	//		SGD::Rectangle rectp{ pos, size };
-	//		// This is Going to Draw the Collision Recttangles On the Screen in the correct places 
-	//		SGD::GraphicsManager::GetInstance()->DrawRectangle(rectp, {}, SGD::Color{ 255, 255, 0, 0 });
-	//		// This is drawing a number inside the The COllision Rectangle
-	//		SGD::GraphicsManager::GetInstance()->DrawString(wos1.str().c_str(), SGD::Point{ rectp.left, rectp.top }, SGD::Color{ 255, 0, 255, 0 });
-	//	}
-
-
-
-	//}
 #pragma endregion	
 
 	m_pEntities->RenderAll();
@@ -903,7 +888,7 @@ void GameplayState::Render(float _ElapsedTime)
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
 	std::wostringstream s;
-	s << son->GetVelocity().y;
+	s << father->GetVelocity().y;
 	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	p->Render(_ElapsedTime);
 	if (m_Pause)
@@ -953,38 +938,38 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-										  GameplayState* self = GameplayState::GetInstance();
-										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-										  self->m_pEntities->AddEntity(swordman, 2);
-										  swordman->Release();
-										  swordman = nullptr;
-										  break;
+		GameplayState* self = GameplayState::GetInstance();
+		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+		self->m_pEntities->AddEntity(swordman, 2);
+		swordman->Release();
+		swordman = nullptr;
+		break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-										 Actor* pActor = DestroyMsg->GetEntityMessage();
-										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-										 break;
+		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+		Actor* pActor = DestroyMsg->GetEntityMessage();
+		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+		break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-									   break;
+		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+		break;
 
 	}
 	case MessageID::MSG_ARROW:
 	{
 
-								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
-								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
-								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
-								 break;
+		const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
+		Actor* m_arrow = GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner());
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
+		break;
 
 	}
 	}
@@ -1075,7 +1060,6 @@ void GameplayState::RenderPause(void)
 	}
 }
 
-
 Actor* GameplayState::CreateSpikes(int i) const
 {
 	Spike* m_Spike = new Spike();
@@ -1085,15 +1069,13 @@ Actor* GameplayState::CreateSpikes(int i) const
 	return m_Spike;
 }
 
-
-
 Actor*  GameplayState::CreatePopUpSpikes(int i) const
 {
 	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
 	m_PUSpikes->SetImage(m_SpikesImage);
 	m_PUSpikes->SetSize({ 0.7f, 0.7f });
 	m_PUSpikes->SetVelocity({ 0, 20 });
-	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
+	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 735, Load->Traps["PopSpikes"][i]->top - 900 });
 	return m_PUSpikes;
 }
 
@@ -1131,7 +1113,7 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 
 }
 
-Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
+Actor*  GameplayState::CreateArrow(Actor* _DartCannon)
 {
 	Arrow* m_DartCannon = new Arrow();
 	m_DartCannon->SetPosition(SGD::Point{ _DartCannon->GetPosition().x - 450, _DartCannon->GetPosition().y + 20 });
@@ -1163,7 +1145,6 @@ SGD::Rectangle Spike::GetRect() const
 	return{ m_ptPosition, m_szSize };
 }
 
-
 Actor* GameplayState::CreateBox(int i) const
 {
 	Box* temp = new Box();
@@ -1178,8 +1159,8 @@ Actor* GameplayState::CreateBox(int i) const
 Actor*  GameplayState::CreatePlates(int i) const
 {
 	PressurePlate* temp = new PressurePlate();
-	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 800, Load->Traps["Plates"][i]->top - 284});
-	temp->SetSize({ 32, 16 });
+	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 780, Load->Traps["Plates"][i]->top - 270 });
+	temp->SetSize({ 32, 32 });
 	temp->SetHeavy(false);
 	return temp;
 
@@ -1197,7 +1178,7 @@ Actor* GameplayState::CreateRopes(int i) const
 Actor* GameplayState::CreateLevers(int i) const
 {
 	Lever* temp = new Lever;
-	temp->SetPosition({ Load->Traps["Levers"][i]->left - 800, Load->Traps["Levers"][i]->top - 300 });
+	temp->SetPosition({ Load->Traps["Levers"][i]->left - 780, Load->Traps["Levers"][i]->top - 279 });
 	temp->SetImage(m_LeverImage);
 	temp->SetSize({ 32, 32 });
 	temp->SetID(leverID);

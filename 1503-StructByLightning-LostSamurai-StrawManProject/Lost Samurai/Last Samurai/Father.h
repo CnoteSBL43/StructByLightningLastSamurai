@@ -34,6 +34,9 @@ public:
 	//bool grounded = true;
 	SGD::Color GetStaminaState() { return m_staminastate; }
 	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
+	bool GetTargeted() { return Targeted; }
+	void SetTargeted(bool _bool) { Targeted = _bool; }
+
 
 private:
 	SGD::HAudio m_FatherJump;
@@ -52,5 +55,8 @@ private:
 	bool isFlashing = false;
 	float FlashTimer = 0.0f;
 	float FlashNow = 0.2f;
+	bool Targeted = false;
+	float timeinair = 0.0f;
+	bool spawn = true;
 };
 

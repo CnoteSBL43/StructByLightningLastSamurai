@@ -1,28 +1,206 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character Image="Bowman.png" MF="Filter">
-  <Animation Name="ArcherShoot">
+  <Animation Name="BowmanAlerted">
     <Frame>
-      <Draw RectX="-30" RectY="-65" RectWidth="56" RectHeight="77" />
-      <Collision RectX="-19" RectY="-63" RectWidth="45" RectHeight="68" />
-      <AnchorPT X="96" Y="65" />
+      <Draw RectX="-19" RectY="-47" RectWidth="52" RectHeight="85" />
+      <Collision RectX="-16" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="20" Y="51" />
       <Particles>
-        <ParticlePT X="7" Y="0" />
-        <ParticlePT X="-10" Y="1" />
-        <ParticlePT X="-4" Y="-24" />
+        <ParticlePT X="-8" Y="22" />
+        <ParticlePT X="9" Y="15" />
+        <ParticlePT X="6" Y="8" />
+        <ParticlePT X="-5" Y="1" />
       </Particles>
-      <Time Time="0.7" />
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-47" RectWidth="52" RectHeight="85" />
+      <Collision RectX="-16" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="83" Y="51" />
+      <Particles>
+        <ParticlePT X="7" Y="20" />
+        <ParticlePT X="-8" Y="20" />
+        <ParticlePT X="-7" Y="3" />
+        <ParticlePT X="3" Y="6" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-47" RectWidth="52" RectHeight="87" />
+      <Collision RectX="-16" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="148" Y="50" />
+      <Particles>
+        <ParticlePT X="-7" Y="15" />
+        <ParticlePT X="4" Y="14" />
+        <ParticlePT X="3" Y="7" />
+        <ParticlePT X="-10" Y="1" />
+      </Particles>
+      <Time Time="0.3" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-46" RectWidth="51" RectHeight="85" />
+      <Collision RectX="-16" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="203" Y="49" />
+      <Particles>
+        <ParticlePT X="-7" Y="14" />
+        <ParticlePT X="7" Y="14" />
+        <ParticlePT X="4" Y="4" />
+        <ParticlePT X="-7" Y="-4" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-45" RectWidth="52" RectHeight="82" />
+      <Collision RectX="-16" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="267" Y="50" />
+      <Particles>
+        <ParticlePT X="-7" Y="13" />
+        <ParticlePT X="4" Y="13" />
+        <ParticlePT X="7" Y="0" />
+        <ParticlePT X="-7" Y="-4" />
+      </Particles>
+      <Time Time="0.1" />
       <Trigger Type="None" Name="None" />
     </Frame>
   </Animation>
-  <Animation Name="ArcherIdle">
+  <Animation Name="BowmanShooting">
     <Frame>
-      <Draw RectX="-23" RectY="-64" RectWidth="68" RectHeight="72" />
-      <Collision RectX="-19" RectY="-52" RectWidth="41" RectHeight="60" />
-      <AnchorPT X="23" Y="143" />
+      <Draw RectX="-32" RectY="-51" RectWidth="57" RectHeight="79" />
+      <Collision RectX="-17" RectY="-40" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="36" Y="142" />
       <Particles>
-        <ParticlePT X="0" Y="0" />
+        <ParticlePT X="-10" Y="17" />
+        <ParticlePT X="7" Y="20" />
       </Particles>
-      <Time Time="0.7" />
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-32" RectY="-49" RectWidth="57" RectHeight="79" />
+      <Collision RectX="-17" RectY="-40" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="166" Y="140" />
+      <Particles>
+        <ParticlePT X="-11" Y="21" />
+        <ParticlePT X="10" Y="18" />
+      </Particles>
+      <Time Time="0.3" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-31" RectY="-50" RectWidth="57" RectHeight="79" />
+      <Collision RectX="-17" RectY="-40" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="102" Y="141" />
+      <Particles>
+        <ParticlePT X="-10" Y="18" />
+        <ParticlePT X="7" Y="18" />
+      </Particles>
+      <Time Time="0.4" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="BowmanIdle">
+    <Frame>
+      <Draw RectX="-24" RectY="-52" RectWidth="69" RectHeight="74" />
+      <Collision RectX="-15" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="31" Y="232" />
+      <Particles>
+        <ParticlePT X="-3" Y="15" />
+        <ParticlePT X="4" Y="-265" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-23" RectY="-51" RectWidth="69" RectHeight="73" />
+      <Collision RectX="-15" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="108" Y="231" />
+      <Particles>
+        <ParticlePT X="-2" Y="20" />
+        <ParticlePT X="5" Y="-260" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-22" RectY="-51" RectWidth="69" RectHeight="73" />
+      <Collision RectX="-15" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="178" Y="232" />
+      <Particles>
+        <ParticlePT X="-4" Y="18" />
+        <ParticlePT X="7" Y="18" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-23" RectY="-51" RectWidth="70" RectHeight="73" />
+      <Collision RectX="-15" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="258" Y="232" />
+      <Particles>
+        <ParticlePT X="-4" Y="21" />
+        <ParticlePT X="6" Y="17" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-23" RectY="-51" RectWidth="68" RectHeight="73" />
+      <Collision RectX="-15" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="333" Y="232" />
+      <Particles>
+        <ParticlePT X="-7" Y="14" />
+        <ParticlePT X="3" Y="11" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="BowmanRunning">
+    <Frame>
+      <Draw RectX="-21" RectY="-52" RectWidth="67" RectHeight="72" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="35" Y="318" />
+      <Particles>
+        <ParticlePT X="-7" Y="13" />
+        <ParticlePT X="11" Y="10" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-22" RectY="-52" RectWidth="68" RectHeight="72" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="108" Y="316" />
+      <Particles>
+        <ParticlePT X="3" Y="17" />
+        <ParticlePT X="10" Y="18" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-27" RectY="-52" RectWidth="66" RectHeight="72" />
+      <Collision RectX="-15" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="187" Y="316" />
+      <Particles>
+        <ParticlePT X="-10" Y="14" />
+        <ParticlePT X="7" Y="-266" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-23" RectY="-53" RectWidth="72" RectHeight="73" />
+      <Collision RectX="-15" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="259" Y="316" />
+      <Particles>
+        <ParticlePT X="8" Y="14" />
+      </Particles>
+      <Time Time="0.1" />
       <Trigger Type="None" Name="None" />
     </Frame>
   </Animation>

@@ -21,10 +21,9 @@ Arrow::~Arrow()
 }
 
 
-void Arrow::SetDartCannon(DartCannon* _Cannon)
+void Arrow::SetDartCannon(Actor* _Cannon)
 {
 	m_DartCannon = _Cannon;
-
 }
 void Arrow::Render()
 {
@@ -34,21 +33,21 @@ void Arrow::Render()
 	SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
 	SGD::Size screen = Game::GetInstance()->GetScreenSize();
 	//the render rect after the offest
-	SGD::Point pt = { (GetPosition().x - PositionOffset.x), (GetPosition().y - PositionOffset.y) };
+	SGD::Point pt = { (GetPosition().x - PositionOffset.x) - 10, (GetPosition().y - PositionOffset.y) };
 
-
-	//draw rect
-	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
-	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ -.3f, -.3f });
-	/*if (Debug)
-	{*/
 	SGD::Rectangle re = GetRect();
 	re.left -= Game::GetInstance()->GetCameraPosition().x;
 	re.right -= Game::GetInstance()->GetCameraPosition().x;
 	re.top -= Game::GetInstance()->GetCameraPosition().y;
 	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
-	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	//draw rect
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
+	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ .3f, .3f });
+	/*if (Debug)
+	{*/
+
 
 }
 void Arrow::Update(float elapsedTime)
