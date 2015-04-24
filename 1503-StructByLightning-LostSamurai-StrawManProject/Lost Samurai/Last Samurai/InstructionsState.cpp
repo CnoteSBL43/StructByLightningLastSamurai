@@ -10,6 +10,8 @@ void InstructionsState::Enter()
 {
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
 	m_infoMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/instructionsmenu.xwm");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
+	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
 	SGD::AudioManager::GetInstance()->PlayAudio(m_infoMusic, true);
 }
 
@@ -27,10 +29,12 @@ bool InstructionsState::Update(float _ElapsedTime)
 
 		if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right) && Switch == false || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == false)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 			Switch = true;
 		}
 		else if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Left) && Switch == true || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == true)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 			Switch = false;
 		}
 	}
@@ -38,30 +42,36 @@ bool InstructionsState::Update(float _ElapsedTime)
 	{
 		if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right) && Switch == false || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == false)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(Select);
 			Switch = true;
 		}
 		else if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Left) && Switch == true || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == true)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(Select);
 			Switch = false;
 		}
 	}
 
 	if (SGD::InputManager::GetInstance()->IsButtonPressed(0, 8) && Arcade == false)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Arcade = true;
 	}
 	else if (SGD::InputManager::GetInstance()->IsButtonPressed(0, 8) && Arcade == true)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Arcade = false;
 	}
 
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == false || SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == false)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 	}
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == true || SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == true)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
 	return true;

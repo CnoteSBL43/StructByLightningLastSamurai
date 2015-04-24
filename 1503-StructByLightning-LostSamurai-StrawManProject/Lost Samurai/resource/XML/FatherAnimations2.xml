@@ -15,11 +15,51 @@
   </Animation>
   <Animation Name="FatherIdle">
     <Frame>
-      <Draw RectX="-23" RectY="-52" RectWidth="51" RectHeight="77" />
-      <Collision RectX="-21" RectY="-39" RectWidth="32" RectHeight="64" />
-      <AnchorPT X="26" Y="314" />
+      <Draw RectX="-20" RectY="-60" RectWidth="51" RectHeight="77" />
+      <Collision RectX="-17" RectY="-47" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="23" Y="322" />
       <Particles>
         <ParticlePT X="4" Y="-3" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-20" RectY="-60" RectWidth="51" RectHeight="77" />
+      <Collision RectX="-17" RectY="-47" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="81" Y="322" />
+      <Particles>
+        <ParticlePT X="2" Y="-5" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-20" RectY="-60" RectWidth="51" RectHeight="77" />
+      <Collision RectX="-17" RectY="-47" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="143" Y="322" />
+      <Particles>
+        <ParticlePT X="-2" Y="-4" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-20" RectY="-60" RectWidth="51" RectHeight="77" />
+      <Collision RectX="-17" RectY="-47" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="205" Y="322" />
+      <Particles>
+        <ParticlePT X="-4" Y="-3" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-20" RectY="-60" RectWidth="51" RectHeight="77" />
+      <Collision RectX="-17" RectY="-47" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="266" Y="322" />
+      <Particles>
+        <ParticlePT X="1" Y="-3" />
       </Particles>
       <Time Time="0.1" />
       <Trigger Type="None" Name="None" />

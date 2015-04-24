@@ -114,12 +114,8 @@ void	 Father::Update(float elapsedTime)
 			}
 			else
 			{
-				if (frameswitch >= 0.25f)
-				{
-					direction++;
-					frameswitch = 0.0f;
-				}
-				if (direction >= 5)
+				
+
 					direction = 0;
 				m_vtVelocity.x = 0.0f;
 				m_Timestamp.SetCurrAnim("FatherIdle");
@@ -144,16 +140,18 @@ void	 Father::Update(float elapsedTime)
 						SetHanging(false);
 						landing = true;
 					}
-					if (GetOnGround() )
+					if (GetOnGround())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -512.0f;
+						m = false;
+						SetHanging(false);
+						m_vtVelocity.y = -800.0f;
 						landing = true;
 					}
-					
+
 					//grounded = true;
 				}
 			}
@@ -163,16 +161,22 @@ void	 Father::Update(float elapsedTime)
 				upArrow = false;
 				
 			}
-			if ((!GetOnGround() && upArrow == true && !GetHanging()) )
+			if ((!GetOnGround() && upArrow == true && !GetHanging()))
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 24.0f;
+				else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
+					m_vtVelocity.y += 36.0f;
+				else
+					m_vtVelocity.y = 512.0f;
 			}
 			if (!GetOnGround() && cannotJump == true)
 			{
-				m_vtVelocity.y = 64.0f;
-
+				m_vtVelocity.y = 512.0f;
 				cannotJump = false;
 			}
+			if (m_vtVelocity.y > 0 && m == true)
+				m = false;
 			//frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
 		}
@@ -186,7 +190,10 @@ void	 Father::Update(float elapsedTime)
 			Actor::Update(elapsedTime);
 			if (!GetOnGround() && upArrow == true)//ground level -100
 			{
-				m_vtVelocity.y += 2.0f;
+				if (m_vtVelocity.y < 0)
+					m_vtVelocity.y += 2.0f;
+				else
+					m_vtVelocity.y = 128.0f;
 			}
 			if (GetOnGround())
 			{
@@ -196,19 +203,10 @@ void	 Father::Update(float elapsedTime)
 	}
 	else
 	{
-		if (frameswitch >= 0.1f)
-		{
-			direction++;
-			frameswitch = 0;
-		}
-		else if (direction >= 7)
-		{
-			frameswitch = 0;
-			direction = 0;
-			m_Timestamp.SetCurrAnim("FatherIdle");
-			m_Timestamp.SetCurrFrame(direction);
-			m_Timestamp.SetElapsedTime(elapsedTime);
-		}
+		direction = 0;
+		m_Timestamp.SetCurrAnim("FatherIdle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
 	}
 	if (GetStamina() < 0)
 	{
@@ -330,7 +328,7 @@ void Father::HandleCollision(IEntity* pOther)
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig )
+	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig && m == false)
 	{
 		if (pOther->GetRect().IsIntersecting(this->GetRect()))
 		{
@@ -442,8 +440,9 @@ void Father::HandleCollision(IEntity* pOther)
 						cannotJump = false;
 						upArrow = false;
 						m_vtVelocity.y = 0.0f;
-						float op = GetRect().bottom - GetPosition().y;
-						m_ptPosition.y = Rect.top - op;
+						int op = (int)GetRect().bottom - (int)GetPosition().y;
+						int s = (int)pOther->GetRect().top - op;
+						m_ptPosition.y = (float)s;
 						if (landing)
 						{
 							SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
@@ -503,9 +502,7 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
-		SGD::Event* event1 = new SGD::Event("Walking", nullptr, this);
-		event1->QueueEvent();
+		SetPosition(GetCheckPoint());
 		//m_Timestamp.SetCurrFrame(direction);
 
 	}
@@ -518,6 +515,7 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
+
 		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().top - 300 });
 		//m_Timestamp.SetCurrFrame(direction);
 

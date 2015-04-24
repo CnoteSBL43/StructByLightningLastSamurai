@@ -26,7 +26,7 @@ public:
 
 	//Accessor
 	std::map<std::string, Animation>& GetLoaded() { return m_Loaded; }
-	SGD::Rectangle GetRect(const AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale = { 1, 1 });
+	SGD::Rectangle GetRect(const AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale = { 1, 1 });
 	SGD::Point GetParticlePt(AnimationTimestamp& info, int _X, int _Y, int _index);
 	//SGD::Rectangle GetSonRect() { return m_SonRect; }
 	//Methods

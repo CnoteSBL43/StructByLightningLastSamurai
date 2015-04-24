@@ -18,6 +18,8 @@ private:
 	bool Switch = false;
 	bool  Arcade = false;
 	SGD::HAudio m_infoMusic;
+	SGD::HAudio Select;
+	SGD::HAudio m_Movement = SGD::INVALID_HANDLE;
 
 public:
 	static InstructionsState* GetInstance();

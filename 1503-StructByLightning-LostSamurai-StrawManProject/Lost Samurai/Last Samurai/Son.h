@@ -38,6 +38,7 @@ private:
 	SGD::HAudio LowStamina;
 	SGD::HAudio SonOutOfstamina;
 	SGD::HAudio SonStaimadrained;
+	SGD::HAudio RegeneratingStamina;
 	bool Landing;
 	bool isHanging = false;
 	AnimationTimestamp m_Timestamp;
