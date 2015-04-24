@@ -6,6 +6,10 @@
 
 PressurePlate::PressurePlate()
 {
+	m_Timestamp.SetCurrAnim("PressurePlate");
+	m_Timestamp.SetCurrFrame(0);
+	m_Timestamp.SetElapsedTime(0);
+	m_Timestamp.SetOwner(this);
 }
 
 
@@ -30,17 +34,21 @@ void PressurePlate::Render(void)
 	rect.left -= Game::GetInstance()->GetCameraPosition().x;
 	rect.bottom -= Game::GetInstance()->GetCameraPosition().y;
 	rect.right -= Game::GetInstance()->GetCameraPosition().x;
+	SGD::Point pt = m_ptPosition;
+	pt.x -= Game::GetInstance()->GetCameraPosition().x;
+	pt.y -= Game::GetInstance()->GetCameraPosition().y;
 
 	SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, SGD::Color{ 255, 255, 0, 255 });
-
-	if (check)
-		Game::GetInstance()->GetFont().Draw("Worked", SGD::Point{ 125.0f, 400.0f }, 0.50f);
+	if (!check)
+		AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y);
+	//if (check)
+	//	Game::GetInstance()->GetFont().Draw("Worked", SGD::Point{ 125.0f, 400.0f }, 0.50f);
 }
 
 SGD::Rectangle PressurePlate::GetRect(void)	const
 {
-	SGD::Rectangle rect = { GetPosition(), GetSize() };
-	return rect;
+
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
 }
 
 void PressurePlate::HandleCollision(IEntity* pOther)
@@ -57,7 +65,7 @@ void PressurePlate::HandleCollision(IEntity* pOther)
 			SGD::Event* event = new SGD::Event("P", nullptr, this);
 			event->QueueEvent();
 		}
-			
+
 	}
 	if (pOther->GetType() == ENT_BOX)
 	{

@@ -41,7 +41,7 @@ void CannonBall::Render()
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
 	//draw rect
 
-	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ 1.0f, 1.0f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
 
 
 
@@ -89,5 +89,5 @@ void CannonBall::HandleCollision(IEntity* pOther)
 
 SGD::Rectangle CannonBall::GetRect() const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, SGD::Size{ 1, 1 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp,m_ptPosition.x,m_ptPosition.y, SGD::Size{ 1, 1 });
 }

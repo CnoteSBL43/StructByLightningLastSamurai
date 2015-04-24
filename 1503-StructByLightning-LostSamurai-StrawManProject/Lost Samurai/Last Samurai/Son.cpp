@@ -257,15 +257,15 @@ void	 Son::Render(void)
 	}
 
 	if (m_FacingtoRight)
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -0.5f, 0.5f });
 	else
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
 }
 
 SGD::Rectangle  Son::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
 }
 void Son::HandleCollision(IEntity* pOther)
 {

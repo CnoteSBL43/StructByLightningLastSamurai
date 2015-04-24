@@ -1,10 +1,11 @@
 #pragma once
 #include "GameObjects.h"
-
+#include "AnimationSystem.h"
 class Lever : public GameObjects
 {
+private:
 	bool playerNear = false;
-
+	AnimationTimestamp m_Timestamp;
 public:
 	Lever();
 	~Lever();

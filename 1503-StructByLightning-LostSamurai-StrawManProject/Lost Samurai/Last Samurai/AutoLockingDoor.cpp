@@ -50,7 +50,7 @@ void AutoLockingDoor::Render()
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ 1.0f, 1.0f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
 	/*if (Debug)
 	{*/
 }
@@ -61,7 +61,7 @@ int	AutoLockingDoor::GetType(void)	const
 }
 SGD::Rectangle AutoLockingDoor::GetRect(void) const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, SGD::Size{ 1.0f, 1.0f });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y, SGD::Size{ 1.0f, 1.0f });
 }
 
 
@@ -79,6 +79,6 @@ void AutoLockingDoor::HandleEvent(const SGD::Event* pEvent)
 	{
 		isOpen = true;
 	}
-	
+
 
 }

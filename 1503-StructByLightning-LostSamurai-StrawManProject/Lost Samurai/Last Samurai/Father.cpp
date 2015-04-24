@@ -289,15 +289,15 @@ void	 Father::Render(void)
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
 	}
 	if (GetFacing())
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -1, 1 });
 	else
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 1, 1 });
 }
 
 SGD::Rectangle  Father::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)p.x, (int)p.y);
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y);
 }
 
 void Father::HandleCollision(IEntity* pOther)

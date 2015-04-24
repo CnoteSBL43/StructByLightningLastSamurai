@@ -58,9 +58,9 @@ void BowMan::Render(void)
 	}
 
 	if (m_facingRight == true)
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, { -1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, { -1, 1 });
 	else
-		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, { 1, 1 });
+		AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, { 1, 1 });
 
 
 }
@@ -149,7 +149,7 @@ void BowMan::Update(float _elapsedtime)
 
 SGD::Rectangle BowMan::GetRect()const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, { 1, 1 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y, { 1, 1 });
 }
 
 int	 BowMan::GetType(void)	const

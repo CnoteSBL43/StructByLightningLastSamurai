@@ -35,7 +35,7 @@ void FallingRockTrap::Render()
 	//draw rect
 	SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 255, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTextureSection(GetImage(), pt, { 11, 71, 218, 200 }, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	AnimationSystem::GetInstance()->Render(m_timestamp, (int)pt.x, (int)pt.y, { 1, 1 });
+	AnimationSystem::GetInstance()->Render(m_timestamp, pt.x, pt.y, { 1, 1 });
 }
 
 void FallingRockTrap::Update(float _elapsedtime)
@@ -59,7 +59,7 @@ void FallingRockTrap::Update(float _elapsedtime)
 SGD::Rectangle FallingRockTrap::GetRect(void) const
 {
 	SGD::Point p = m_ptPosition;
-	return AnimationSystem::GetInstance()->GetRect(m_timestamp, (int)p.x, (int)p.y);
+	return AnimationSystem::GetInstance()->GetRect(m_timestamp, p.x, p.y);
 }
 
 void FallingRockTrap::HandleCollision(IEntity* pOther)

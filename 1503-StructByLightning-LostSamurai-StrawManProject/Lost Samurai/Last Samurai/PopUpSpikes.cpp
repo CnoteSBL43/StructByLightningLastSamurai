@@ -4,6 +4,11 @@
 #include "Game.h"
 PopUpSpikes::PopUpSpikes()
 {
+	m_Timestamp.SetCurrAnim("PopupSpikes");
+	m_Timestamp.SetCurrFrame(currframe);
+	m_Timestamp.SetElapsedTime(0);
+	m_Timestamp.SetOwner(this);
+
 }
 
 
@@ -14,45 +19,51 @@ PopUpSpikes::~PopUpSpikes()
 
 void PopUpSpikes::Render()
 {
-	SGD::Rectangle re = GetRect();
-	re.left -= Game::GetInstance()->GetCameraPosition().x;
-	re.right -= Game::GetInstance()->GetCameraPosition().x;
-	re.top -= Game::GetInstance()->GetCameraPosition().y;
-	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	//SGD::Rectangle re = GetRect();
+	//re.left -= Game::GetInstance()->GetCameraPosition().x;
+	//re.right -= Game::GetInstance()->GetCameraPosition().x;
+	//re.top -= Game::GetInstance()->GetCameraPosition().y;
+	//re.bottom -= Game::GetInstance()->GetCameraPosition().y;
+	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
+	SGD::Point PositionOffset = Game::GetInstance()->GetCameraPosition();
+	SGD::Size screen = Game::GetInstance()->GetScreenSize();
+	SGD::Point pt = { GetPosition().x - PositionOffset.x, GetPosition().y - PositionOffset.y };
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y);
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect())
-	Spike::Render();
+	//Spike::Render();
 }
 
 SGD::Rectangle PopUpSpikes::GetRect() const
 {
-	SGD::Size size = { 175, 128 };
-	SGD::Rectangle rect = { { m_ptPosition.x - 400, m_ptPosition.y + 10 }, size };
-	return rect;
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
 }
 
 void PopUpSpikes::Update(float _elapsedtime)
 {
-	if (isActive == true)
+
+	if (AnimationSystem::GetInstance()->GetLoaded()[m_Timestamp.GetCurrAnim()].GetFrames()[currframe].GetTimer() <= frametimer)
 	{
-		m_vtVelocity.y = 20;
-		if (m_ptPosition.y >= bottom.y)
-			isActive = false;
+		if (currframe < AnimationSystem::GetInstance()->GetLoaded()[m_Timestamp.GetCurrAnim()].GetFrames().size() - 1)
+		{
+			currframe++;
+			m_Timestamp.SetCurrFrame(currframe);
+		}
+		else
+		{
+			currframe = 0;
+			m_Timestamp.SetCurrFrame(currframe);
+		}
+		frametimer = 0.0f;
 	}
-	else
-	{
-		m_vtVelocity.y = -220;
-		if (m_ptPosition.y <= m_currentpos.y)
-			isActive = true;
-	}
-	Actor::Update(_elapsedtime);
+	frametimer += _elapsedtime;
+	//	Actor::Update(_elapsedtime);
 }
 
 void	PopUpSpikes::HandleCollision(IEntity* pOther)
 {
 	if (pOther->GetType() == Actor::ENT_FATHER || pOther->GetType() == Actor::ENT_SON)
 	{
-		SGD::Event* CannonBallHit = new SGD::Event("Death1", nullptr, this);
+		SGD::Event* CannonBallHit = new SGD::Event("Death", nullptr, this);
 		CannonBallHit->QueueEvent(pOther);
 		//delete CannonBallHit;
 	}

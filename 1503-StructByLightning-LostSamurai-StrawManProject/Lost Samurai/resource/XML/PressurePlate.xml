@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="pressureplate.png" MF="Filter">
+  <Animation Name="PressurePlate">
+    <Frame>
+      <Draw RectX="-14" RectY="-3" RectWidth="32" RectHeight="8" />
+      <Collision RectX="-14" RectY="-3" RectWidth="32" RectHeight="8" />
+      <AnchorPT X="14" Y="3" />
+      <Particles>
+        <ParticlePT X="1" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

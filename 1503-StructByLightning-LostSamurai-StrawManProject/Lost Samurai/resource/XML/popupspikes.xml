@@ -8,7 +8,7 @@
       <Particles>
         <ParticlePT X="7" Y="-4" />
       </Particles>
-      <Time Time="0.1" />
+      <Time Time="0.375" />
       <Trigger Type="None" Name="None" />
     </Frame>
     <Frame>
@@ -48,7 +48,7 @@
       <Particles>
         <ParticlePT X="-3" Y="-11" />
       </Particles>
-      <Time Time="0.5" />
+      <Time Time="1.5" />
       <Trigger Type="None" Name="None" />
     </Frame>
     <Frame>
@@ -88,7 +88,7 @@
       <Particles>
         <ParticlePT X="-3" Y="-4" />
       </Particles>
-      <Time Time="0.1" />
+      <Time Time="0.375" />
       <Trigger Type="None" Name="None" />
     </Frame>
   </Animation>
