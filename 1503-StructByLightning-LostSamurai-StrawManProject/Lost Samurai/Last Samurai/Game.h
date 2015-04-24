@@ -27,7 +27,7 @@ private:
 	IGameState* m_CurrentState = nullptr;
 	IGameState* m_PreviousState = nullptr;
 	IGameState* pCurrentState = nullptr; //for pause menu
-	
+
 	// This is a Unsigned long Variable used to get Real time 
 	unsigned long m_GameTime = 0;
 	// This is used for storing the Music Volumes and SFX Volumes 
@@ -45,6 +45,7 @@ private:
 	SGD::Vector		m_CameraDestinationVector;
 
 public:
+	bool cameraPanningOn = false;
 	SGD::HTexture bg = SGD::INVALID_HANDLE;
 	// this is a Static Game Singleton GetInsatance()
 	static Game* GetInstance();
@@ -78,6 +79,7 @@ public:
 	int GetLanguage(){ return m_Language; }
 	void SetLanguage(int _language){ m_Language = _language; }
 
+	
 	//Font
 	BitmapFont GetFont(){ return font; }
 

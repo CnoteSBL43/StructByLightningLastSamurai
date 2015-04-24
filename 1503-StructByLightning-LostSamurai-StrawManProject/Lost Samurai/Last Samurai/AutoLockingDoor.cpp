@@ -61,7 +61,7 @@ int	AutoLockingDoor::GetType(void)	const
 }
 SGD::Rectangle AutoLockingDoor::GetRect(void) const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, SGD::Size{ 1.0f, 1.0f });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y, SGD::Size{ 1.0f, 1.0f });
 }
 
 

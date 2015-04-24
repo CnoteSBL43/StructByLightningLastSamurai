@@ -22,9 +22,7 @@ class AutoLockingDoor;
 class GameplayState :
 	public IGameState
 {
-private:
-
-	
+private:	
 	// this is the default Constructor 
 	GameplayState() = default;
 	// this is a default Deconstructor
@@ -63,7 +61,6 @@ private:
 	
 	Pulley* p;
 	PressurePlate* plate;
-	Lever *l;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
@@ -110,12 +107,12 @@ public:
 	Actor* CreateCannonBall(Cannon*);
 	Actor* CreateArrow(DartCannon*);
 	Actor* CreateDoor(int i) const;
-	//Actor* CreateLadder(int i) const;
+	Actor* CreateLadder(int i) const;
 	Actor* CreateRopes(int i) const;
 	Actor* CreatePlates(int i) const;
 	Actor* CreateBox(int i) const;
 	Actor* CreateLevers(int i) const;
-	Actor* GameplayState::CreateLedge(int i) const;
+	Actor* CreateLedge(int i) const;
 	Actor* CreateCheckPoint(int i) const;
 
 	// This used to go into debug Mode;
@@ -137,4 +134,5 @@ public:
 	bool loosebool = false;
 	bool GetMovementOff(){ return movementTurnOff; }
 	void SetMovementOff(bool _off){ movementTurnOff = _off; }
+	int leverID = 0;
 };

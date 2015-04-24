@@ -164,6 +164,8 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 		tile->Attribute("Border", &m_Tile->Border);
 		
 		Map[m_Tile->PositionX][m_Tile->PositionY] = m_Tile;
+		
+		tile->Attribute("Door", &m_Tile->Door);
 
 
 #pragma region This Will Decide where the 2 Characters will spawn 

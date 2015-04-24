@@ -29,13 +29,12 @@ protected:
 		int CheckPointY;
 		int Border;
 		std::string m_EventString;
-
 		std::string TrapNames;
 		int TriggerPositionX;
 		int TrigerPositionY;
-		int Door;
+		//int Door;
 		int Traps;
-
+		int Door;
 
 	};
 

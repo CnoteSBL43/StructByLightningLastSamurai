@@ -21,6 +21,14 @@ void Ledges::Render(void)
 	pt.x -= Game::GetInstance()->GetCameraPosition().x;
 	pt.y -= Game::GetInstance()->GetCameraPosition().y;
 	SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt);
+
+	/*SGD::Rectangle r = GetRect();
+	r.left -= Game::GetInstance()->GetCameraPosition().x;
+	r.top -= Game::GetInstance()->GetCameraPosition().y;
+	r.right -= Game::GetInstance()->GetCameraPosition().x;
+	r.bottom -= Game::GetInstance()->GetCameraPosition().y;
+
+	SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color{255,0,0});*/
 }
 
 SGD::Rectangle Ledges::GetRect(void)	const
