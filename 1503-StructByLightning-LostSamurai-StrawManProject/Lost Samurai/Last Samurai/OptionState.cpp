@@ -102,7 +102,7 @@ bool OptionState::Update(float _ElapsedTime)
 				MusicVol = 100;
 			}
 			SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
-			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music));
+			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(m_Music))
 				SGD::AudioManager::GetInstance()->PlayAudio(m_Music);
 		}
 		else if (m_CursorPos == 1)

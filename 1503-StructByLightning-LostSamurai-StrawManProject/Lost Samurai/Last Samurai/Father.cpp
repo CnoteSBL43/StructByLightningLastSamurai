@@ -107,7 +107,7 @@ void	 Father::Update(float elapsedTime)
 						upArrow = true;
 						m_vtVelocity.y = -800.0f;
 						SetHanging(false);
-						m = true;
+						SetjumpOffLedge(true);
 					}
 					if (GetOnGround())
 					{
@@ -115,7 +115,7 @@ void	 Father::Update(float elapsedTime)
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m = false;
+						SetjumpOffLedge(false);
 						SetHanging(false);
 						m_vtVelocity.y = -800.0f;
 					}
@@ -123,12 +123,18 @@ void	 Father::Update(float elapsedTime)
 					//grounded = true;
 				}
 			}
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && GetonLadder() && !GameplayState::GetInstance()->GetMovementOff())
+			{
+				previousPosY = m_ptPosition.y;
+				m_vtVelocity.y = 512.0f;
+				upArrow = false;
+			}
 
 			if (GetOnGround())//ground level -100
 			{
 				upArrow = false;
 			}
-			if ((!GetOnGround() && upArrow == true && !GetHanging()))
+			if (!GetOnGround() && upArrow == true && !GetHanging() && !GetonLadder())
 			{
 				if (m_vtVelocity.y < 0)
 					m_vtVelocity.y += 24.0f;
@@ -137,13 +143,21 @@ void	 Father::Update(float elapsedTime)
 				else
 					m_vtVelocity.y = 512.0f;
 			}
+			if (GetOnGround() && GetonLadder())
+			{
+				if (m_ptPosition.y <= previousPosY - 50.0f && upArrow)
+					SetVelocity({ 0.0f, 0.0f });
+				if (m_ptPosition.y >= previousPosY + 50.0f && !upArrow)
+					SetVelocity({ 0.0f, 0.0f });
+			}
+
 			if (!GetOnGround() && cannotJump == true)
 			{
 				m_vtVelocity.y = 512.0f;
 				cannotJump = false;
 			}
-			if (m_vtVelocity.y > 0 && m == true)
-				m = false;
+			if (m_vtVelocity.y > 0 && GetjumpOffLedge())
+				SetjumpOffLedge(false);
 			//frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
 		}
@@ -177,7 +191,7 @@ void	 Father::Update(float elapsedTime)
 	}
 	if (GetStamina() < 0)
 	{
-		isHanging = false;
+		SetHanging(false);
 		SetStamina(0);
 	}
 	if (GetStamina() >= 100)
@@ -187,7 +201,7 @@ void	 Father::Update(float elapsedTime)
 		if (GetOnGround())
 			SetStamina(GetStamina() + 0.6f);
 	}
-	if (isHanging == true && GetOnGround() == false)
+	if (GetHanging() && GetOnGround() == false)
 		SetStamina(GetStamina() - 0.5f);
 	if (GetStamina() <= 75)
 	{
@@ -285,7 +299,7 @@ SGD::Rectangle  Father::GetRect(void)	const
 	SGD::Point p = m_ptPosition;
 	/*p.x -= Game::GetInstance()->GetCameraPosition().x;
 	p.y-= Game::GetInstance()->GetCameraPosition().y;*/
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)p.x, (int)p.y);
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y);
 }
 
 void Father::HandleCollision(IEntity* pOther)
@@ -295,14 +309,17 @@ void Father::HandleCollision(IEntity* pOther)
 		this->SetCurrCharacter(true);
 		dynamic_cast<Son*>(pOther)->SetBackPack(true);
 	}
-	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig && m == false)
+	if (pOther->GetType() == ENT_LEDGE && dynamic_cast<Ledges*>(pOther)->isBig && !GetjumpOffLedge())
 	{
-		if (pOther->GetRect().IsIntersecting(this->GetRect()))
+		SGD::Rectangle Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		letLeft = true;
+		letRight = true;
+		if (Rect.ComputeWidth()>14.0f)
 		{
 			if (GetStamina() > 5)
 			{
 				previousPosY = m_ptPosition.y;
-				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
+				m_ptPosition.y = pOther->GetRect().bottom ;
 				m_vtVelocity.y = 0.0f;
 				SetOnGround(false);
 				SetHanging(true);
@@ -370,7 +387,7 @@ void Father::HandleCollision(IEntity* pOther)
 
 
 	}
-	if (pOther->GetType() == ENT_TILES && isHanging == false)
+	if (pOther->GetType() == ENT_TILES && !GetHanging())
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;
@@ -445,6 +462,19 @@ void Father::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
+	if (pOther->GetType() == ENT_LADDER)
+	{
+		SGD::Rectangle Rect;
+		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		if (Rect.ComputeWidth() > 15.0f)
+		{
+			//bool k = letRight;
+			SetonLadder(true);
+			//m_ptPosition.y = Rect.top;
+			SetOnGround(true);
+		}
+	}
+
 }
 
 void Father::HandleEvent(const SGD::Event* pEvent)

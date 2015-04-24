@@ -25,26 +25,29 @@ public:
 	SGD::Point GetCheckPoint() const{ return checkPoint; }
 	void SetCheckPoint(SGD::Point _checkPoint) { checkPoint = _checkPoint; }
 
-
+	bool GetjumpOffLedge()const{ return jumpOffLedge; }
+	void SetjumpOffLedge(bool _onground){ jumpOffLedge = _onground; }
+	bool GetonLadder()const{ return onLadder; }
+	void SetonLadder(bool _ladder){ onLadder = _ladder; }
 	bool GetOnGround(){ return m_OnGround; }
 	void SetOnGround(bool _onground){ m_OnGround = _onground; }
-
+	bool GetHanging(){ return isHanging; }
+	void SetHanging(bool _hang){ isHanging = _hang; }
 	float GetGravity(){ return gravity; }
-	float GetJumpVelocity(){ return jumpVelocity; }
-	void SetJumpVelocity(float _jumpVelocity){ jumpVelocity = _jumpVelocity; }
-	bool GetFacing(){ return m_FacingtoRight; }
+	bool GetFacing()const{ return m_FacingtoRight; }
 	void SetFacing(bool _facingright){ m_FacingtoRight = _facingright; }
 	float GetStamina() { return m_Stamina; }
 	void SetStamina(float _stamina) { m_Stamina = _stamina; }
 private:
 	float m_Stamina;
-	float jumpVelocity = 256.0f, gravity = 4.9f;
-	bool m_Hanging;
+	float gravity = 4.9f;
 	bool m_BackPack = false;
 	bool m_OnGround = true;
 	unsigned int	m_unRefCount = 1;	// calling new gives the 'prime' reference
 	bool m_FacingtoRight = true;//to change the scale for the father(direction)
 	SGD::Point checkPoint;
-
+	bool isHanging = false;
+	bool jumpOffLedge = false;//bool to let the father jump off the ledge
+	bool onLadder = false;
 };
 

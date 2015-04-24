@@ -22,7 +22,7 @@ protected:	virtual ~Actor(void) = default;		// protected to force reference coun
 public:
 	//*****************************************************************//
 	// Entity Types:
-	enum EntityType { ENT_BASE, ENT_PLAYER, ENT_FATHER, ENT_SON, ENT_TILES, ENT_SWORDSMAN, ENT_TRIGGER, ENT_CANNONBALL,ENT_LEVERS, ENT_ARROW, ENT_BOX, ENT_POPUPSPIKES, ENT_LEDGE, ENT_GAMEOBJECT, ENT_DOOR, ENT_AUTO_LOCK_DOOR };
+	enum EntityType { ENT_BASE, ENT_PLAYER, ENT_FATHER, ENT_SON, ENT_TILES, ENT_SWORDSMAN, ENT_TRIGGER,ENT_LADDER, ENT_CANNONBALL,ENT_LEVERS, ENT_ARROW, ENT_BOX, ENT_POPUPSPIKES, ENT_LEDGE, ENT_GAMEOBJECT, ENT_DOOR, ENT_AUTO_LOCK_DOOR };
 
 	//*****************************************************************//
 	// Facing Direction

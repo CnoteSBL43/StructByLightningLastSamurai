@@ -48,14 +48,14 @@
     <Filter Include="Source\Weapons">
       <UniqueIdentifier>{6d2e8aab-5e0b-47fe-b5d3-c403280eaa8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Physics">
-      <UniqueIdentifier>{34db0d79-d461-4cdd-b20e-b3697c8a823b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game States">
       <UniqueIdentifier>{d2f7eaad-deba-448b-bfd0-a9c02aa92dfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Game States\MessageSystem">
       <UniqueIdentifier>{9a5b34fe-4dc9-4d5f-9501-3f9dcb7b22e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects\Physics">
+      <UniqueIdentifier>{34db0d79-d461-4cdd-b20e-b3697c8a823b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,19 +246,19 @@
       <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Link.cpp">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClCompile>
     <ClCompile Include="ParticleMass.cpp">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Pulley.cpp">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Rope.cpp">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClCompile>
     <ClCompile Include="PressurePlate.cpp">
       <Filter>Source\Objects</Filter>
@@ -276,6 +276,9 @@
       <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="CheckPoint.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Ladder.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -491,19 +494,19 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Link.h">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClInclude>
     <ClInclude Include="ParticleMass.h">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Pulley.h">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Rope.h">
-      <Filter>Source\Physics</Filter>
+      <Filter>Source\Objects\Physics</Filter>
     </ClInclude>
     <ClInclude Include="PressurePlate.h">
       <Filter>Source\Objects</Filter>
@@ -521,6 +524,9 @@
       <Filter>Source\Objects</Filter>
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,13 +32,9 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-		
-
-		
-
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				m_FacingtoRight = true;
+				SetFacing(true);
 				m_vtVelocity.x = 128.0f;
 				if (GetBackPack())
 					lrArrow = true;
@@ -56,11 +52,6 @@ void	 Son::Update(float elapsedTime)
 				if (direction >= 4)
 				{
 					direction = 0;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
 
 				m_Timestamp.SetCurrAnim("SonRunning");
@@ -71,7 +62,7 @@ void	 Son::Update(float elapsedTime)
 
 			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				m_FacingtoRight = false;
+				SetFacing(false);
 				m_vtVelocity.x = -128.0f;
 				if (GetBackPack())
 					lrArrow = true;
@@ -80,20 +71,10 @@ void	 Son::Update(float elapsedTime)
 				{
 					direction++;
 					frameswitch = 0.0f;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
 				if (direction >= 4)
 				{
 					direction = 0;
-					/*if (grounded == false)
-					{
-						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
-						event->QueueEvent();
-					}*/
 				}
 
 				m_Timestamp.SetCurrAnim("SonRunning");
@@ -119,6 +100,16 @@ void	 Son::Update(float elapsedTime)
 			{
 				if (GetStamina() >= 10)
 				{
+					if (GetHanging())
+					{
+						SetStamina(GetStamina() - 10);
+						previousPosY = m_ptPosition.y;
+						SetOnGround(false);
+						upArrow = true;
+						m_vtVelocity.y = -800.0f;
+						SetHanging(false);
+						SetjumpOffLedge(true);
+					}
 					if (GetOnGround())
 					{
 						SetStamina(GetStamina() - 10);
@@ -142,7 +133,7 @@ void	 Son::Update(float elapsedTime)
 			{
 				upArrow = false;
 			}
-			if (!GetOnGround() && upArrow == true)
+			if (!GetOnGround() && upArrow == true && !GetHanging())
 			{
 				if (m_vtVelocity.y < 0)
 					m_vtVelocity.y += 24.0f;
@@ -152,9 +143,13 @@ void	 Son::Update(float elapsedTime)
 					m_vtVelocity.y = 512.0f;
 			}
 
-			if (cannotJump)
+			if (!GetOnGround() && cannotJump == true)
+			{
 				m_vtVelocity.y = 512.0f;
-
+				cannotJump = false;
+			}
+			if (m_vtVelocity.y > 0 && GetjumpOffLedge())
+				SetjumpOffLedge(false);
 			frameswitch += elapsedTime;
 			Actor::Update(elapsedTime);
 		}
@@ -290,7 +285,7 @@ void	 Son::Render(void)
 	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
 	if (GetStamina() > 0)
 		SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(0, 255, 0));
-	if (m_FacingtoRight)
+	if (GetFacing())
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ -0.5f, 0.5f });
 	else
 		AnimationSystem::GetInstance()->Render(m_Timestamp, (int)p.x, (int)p.y, SGD::Size{ 0.5f, 0.5f });
@@ -300,6 +295,7 @@ SGD::Rectangle  Son::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
 	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
+
 }
 void Son::HandleCollision(IEntity* pOther)
 {
@@ -315,7 +311,24 @@ void Son::HandleCollision(IEntity* pOther)
 		SGD::Event *event = new SGD::Event("SON_DIED", nullptr, this);
 		event->QueueEvent();
 	}
-	if (pOther->GetType() == ENT_TILES)
+	if (pOther->GetType() == ENT_LEDGE && !GetjumpOffLedge())
+	{
+		SGD::Rectangle Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		letLeft = true;
+		letRight = true;
+		if (Rect.ComputeWidth() > 7.0f)
+		{
+			if (GetStamina() > 5)
+			{
+				previousPosY = m_ptPosition.y;
+				m_ptPosition.y = pOther->GetRect().bottom + 20.0f;
+				m_vtVelocity.y = 0.0f;
+				SetOnGround(false);
+				SetHanging(true);
+			}
+		}
+	}
+	if (pOther->GetType() == ENT_TILES && !GetHanging())
 	{
 		SetCollisionRect(true);
 		SGD::Rectangle Rect;
@@ -391,20 +404,7 @@ void Son::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
-	if (pOther->GetType() == ENT_LEDGE)
-	{
-		if (pOther->GetRect().IsIntersecting(this->GetRect()))
-		{
-			if (GetStamina() > 5)
-			{
-				previousPosY = m_ptPosition.y;
-				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
-				m_vtVelocity.y = 0.0f;
-				SetOnGround(false);
-				//SetHanging(true);
-			}
-		}
-	}
+	
 }
 void Son::HandleEvent(const SGD::Event* pEvent)
 {

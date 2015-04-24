@@ -95,5 +95,5 @@ void Arrow::HandleCollision(IEntity* pOther)
 SGD::Rectangle Arrow::GetRect() const
 {
 
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, (int)m_ptPosition.x, (int)m_ptPosition.y, SGD::Size{ 1, 1 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y, SGD::Size{ 1, 1 });
 }

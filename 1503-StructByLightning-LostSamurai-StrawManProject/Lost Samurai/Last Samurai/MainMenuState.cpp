@@ -60,7 +60,7 @@ bool MainMenuState::Update(float _ElapsedTime)
 		m_CursorPos = 0;
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos > 0)
 		m_CursorPos--;
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 | SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
 		m_CursorPos = 4;
 
 
