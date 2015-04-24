@@ -4,6 +4,7 @@
 #include "../SGD Wrappers/SGD_InputManager.h"
 #include "AnimationTimestamp.h"
 #include "../SGD Wrappers/SGD_IListener.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
 #include <vector>
 class Father : public Player, public SGD::IListener
 
@@ -17,7 +18,7 @@ public:
 	int		GetType(void)	const				{ return ENT_FATHER; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision(IEntity* pOther);
-
+	SGD::HAudio m_RegenStamina = SGD::INVALID_HANDLE;
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
@@ -33,9 +34,16 @@ public:
 	//bool grounded = true;
 	SGD::Color GetStaminaState() { return m_staminastate; }
 	void SetStaminaState(SGD::Color _color) { m_staminastate = _color; }
+	bool GetTargeted() { return Targeted; }
+	void SetTargeted(bool _bool) { Targeted = _bool; }
+
 
 private:
+	SGD::HAudio m_FatherJump;
+	SGD::HAudio FatherWalking;
+	SGD::HAudio FatherLanding;
 	AnimationTimestamp m_Timestamp;
+	bool landing = false;
 	int direction = 0;
 	float frameswitch = 0.0f;
 	//to change the scale for the father(direction)
@@ -47,5 +55,8 @@ private:
 	bool isFlashing = false;
 	float FlashTimer = 0.0f;
 	float FlashNow = 0.2f;
+	bool Targeted = false;
+	float timeinair = 0.0f;
+	bool spawn = true;
 };
 

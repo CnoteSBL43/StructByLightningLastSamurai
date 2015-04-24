@@ -281,6 +281,21 @@
     <ClCompile Include="Ladder.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="CreateRockMessage.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateRollingBoulerMessage.cpp">
+      <Filter>Source\SGD Wrappers\Events &amp; Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingRock.cpp">
+      <Filter>Source\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingRockTrap.cpp">
+      <Filter>Source\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="RollingBoulder.cpp">
+      <Filter>Source\Traps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

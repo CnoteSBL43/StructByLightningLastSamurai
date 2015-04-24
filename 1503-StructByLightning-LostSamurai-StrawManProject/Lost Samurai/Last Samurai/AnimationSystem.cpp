@@ -14,7 +14,7 @@ AnimationSystem* AnimationSystem::GetInstance()
 	return &m_Instance;
 }
 
-SGD::Point AnimationSystem::GetParticlePt(AnimationTimestamp& _ts, int _X, int _Y, int _index)
+SGD::Point AnimationSystem::GetParticlePt(AnimationTimestamp& _ts, float _X, float _Y, int _index)
 {
 	SGD::Point pt = m_Loaded[_ts.GetCurrAnim()].GetFrames()[_ts.GetCurrFrame()].GetParticlePt()[_index];
 	pt.x += _X;
@@ -22,7 +22,7 @@ SGD::Point AnimationSystem::GetParticlePt(AnimationTimestamp& _ts, int _X, int _
 	return pt;
 }
 
-void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SGD::Size _scale)
+void AnimationSystem::Render(AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale)
 {
 
 	SGD::Point temppt = SGD::Point((float)_PosX, (float)_PosY);
@@ -44,6 +44,20 @@ void AnimationSystem::Render(AnimationTimestamp& _info, int _PosX, int _PosY, SG
 		GM->DrawTextureSection(m_Imgs[4], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_AUTO_LOCK_DOOR)
 		GM->DrawTextureSection(m_Imgs[5], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_BOWMAN)
+		GM->DrawTextureSection(m_Imgs[6], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_SMASHING_COLUMNS)
+		GM->DrawTextureSection(m_Imgs[7], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_FALLING_ROCK)
+		GM->DrawTextureSection(m_Imgs[8], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_ROLLING_BOULDER)
+		GM->DrawTextureSection(m_Imgs[9], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_POPUPSPIKES)
+		GM->DrawTextureSection(m_Imgs[10], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_LEVERS)
+		GM->DrawTextureSection(m_Imgs[11], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
+	else if (_info.GetOwner()->GetType() == Actor::ENT_PRESSURE_PLATE)
+		GM->DrawTextureSection(m_Imgs[12], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 
 void AnimationSystem::Update(int _ElaspedTime, AnimationTimestamp& _info)

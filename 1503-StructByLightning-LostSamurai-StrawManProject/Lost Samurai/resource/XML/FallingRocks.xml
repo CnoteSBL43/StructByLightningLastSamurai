@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="rocks.png" MF="Filter">
+  <Animation Name="FallingRock">
+    <Frame>
+      <Draw RectX="-14" RectY="-13" RectWidth="32" RectHeight="29" />
+      <Collision RectX="-14" RectY="-13" RectWidth="32" RectHeight="29" />
+      <AnchorPT X="179" Y="13" />
+      <Particles>
+        <ParticlePT X="-3" Y="8" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

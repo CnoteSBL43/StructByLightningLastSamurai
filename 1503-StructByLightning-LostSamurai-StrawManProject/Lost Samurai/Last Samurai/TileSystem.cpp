@@ -105,7 +105,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile(_level) == false)
+	if (Doc.LoadFile("../resource/XML/Level3.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
@@ -158,15 +158,25 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 		if (m_Tile->Traps == 1)
 		{
 			m_Tile->TrapNames = tile->Attribute("TrapNames");
+			tile->Attribute("DoorID", &m_Tile->Door);
 		}
 
 		tile->Attribute("Border", &m_Tile->Border);
+		
 		Map[m_Tile->PositionX][m_Tile->PositionY] = m_Tile;
 		
 		tile->Attribute("Door", &m_Tile->Door);
 
 
 #pragma region This Will Decide where the 2 Characters will spawn 
+
+
+
+		if (Map[m_Tile->PositionX][m_Tile->PositionY]->Door > 0)
+		{
+			DoorID[temp] = Map[m_Tile->PositionX][m_Tile->PositionY]->Door;
+				temp++;
+		}
 		if (Map[m_Tile->PositionX][m_Tile->PositionY]->m_Spawn == 1)
 		{
 			SGD::Rectangle* Rect = new SGD::Rectangle();
@@ -182,7 +192,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 
 			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 
-			_father->SetPosition(SGD::Point{ Rect->left, Rect->top- 100 });//2400 500 
+			_father->SetPosition(SGD::Point{ Rect->left, Rect->top });//2400 500 
 			_father->SetCheckPoint({ Rect->left + 75, Rect->top - 100 });
 			
 			//TileClass = nullptr;

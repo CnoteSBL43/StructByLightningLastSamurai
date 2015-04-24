@@ -95,7 +95,7 @@ bool Game::Initialize()
 		SGD::InputManager::GetInstance()->Initialize() == false ||
 		SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
-	bg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/okay.jpg");
+//	bg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/okay.jpg");
 
 	// Initialize the Event & Message Managers
 	SGD::EventManager::GetInstance()->Initialize();
@@ -219,7 +219,7 @@ int Game::Update()
 	}
 	SGD::EventManager::GetInstance()->Update();
 
-	SGD::GraphicsManager::GetInstance()->DrawTexture(bg, { 0, 0 });
+//	SGD::GraphicsManager::GetInstance()->DrawTexture(bg, { 0, 0 });
 	m_CurrentState->Render(ElapsedTime);
 	return 0;
 }

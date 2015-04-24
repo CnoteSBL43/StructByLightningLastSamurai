@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObjects.h"
-
+#include "AnimationSystem.h"
 class Lever : public GameObjects
 {
 	int ID;
-
+	AnimationTimestamp m_Timestamp;
 public:
 	Lever();
 	~Lever();

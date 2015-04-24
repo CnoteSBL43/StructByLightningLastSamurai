@@ -2,28 +2,194 @@
 <Character Image="Swordsman.png" MF="Filter">
   <Animation Name="SwordsmanIdle">
     <Frame>
-      <Draw RectX="-40" RectY="-66" RectWidth="98" RectHeight="69" />
-      <Collision RectX="-19" RectY="-66" RectWidth="44" RectHeight="69" />
-      <AnchorPT X="40" Y="66" />
+      <Draw RectX="-41" RectY="-50" RectWidth="98" RectHeight="72" />
+      <Collision RectX="-14" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="50" Y="54" />
       <Particles>
-        <ParticlePT X="0" Y="-1" />
+        <ParticlePT X="-7" Y="17" />
+        <ParticlePT X="7" Y="17" />
       </Particles>
-      <Time Time="0.7" />
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-40" RectY="-50" RectWidth="98" RectHeight="72" />
+      <Collision RectX="-14" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="155" Y="54" />
+      <Particles>
+        <ParticlePT X="-4" Y="18" />
+        <ParticlePT X="3" Y="17" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-39" RectY="-50" RectWidth="99" RectHeight="72" />
+      <Collision RectX="-14" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="258" Y="55" />
+      <Particles>
+        <ParticlePT X="-6" Y="15" />
+        <ParticlePT X="4" Y="15" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-39" RectY="-50" RectWidth="98" RectHeight="72" />
+      <Collision RectX="-14" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="361" Y="55" />
+      <Particles>
+        <ParticlePT X="-6" Y="17" />
+        <ParticlePT X="4" Y="17" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-41" RectY="-51" RectWidth="99" RectHeight="73" />
+      <Collision RectX="-14" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="470" Y="55" />
+      <Particles>
+        <ParticlePT X="-1" Y="17" />
+        <ParticlePT X="7" Y="17" />
+      </Particles>
+      <Time Time="0.1" />
       <Trigger Type="None" Name="None" />
     </Frame>
   </Animation>
-  <Animation Name="SwordsmanAttack">
+  <Animation Name="SwordsmanRunning">
     <Frame>
-      <Draw RectX="-110" RectY="-59" RectWidth="177" RectHeight="64" />
-      <Collision RectX="-110" RectY="-30" RectWidth="131" RectHeight="35" />
-      <AnchorPT X="111" Y="132" />
+      <Draw RectX="-42" RectY="-50" RectWidth="101" RectHeight="73" />
+      <Collision RectX="-15" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="49" Y="131" />
       <Particles>
-        <ParticlePT X="-111" Y="-133" />
-        <ParticlePT X="-11" Y="0" />
-        <ParticlePT X="14" Y="0" />
-        <ParticlePT X="-106" Y="-24" />
+        <ParticlePT X="7" Y="17" />
       </Particles>
-      <Time Time="0.7" />
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-41" RectY="-50" RectWidth="99" RectHeight="73" />
+      <Collision RectX="-15" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="156" Y="132" />
+      <Particles>
+        <ParticlePT X="-3" Y="18" />
+        <ParticlePT X="11" Y="14" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="100" RectHeight="73" />
+      <Collision RectX="-15" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="261" Y="130" />
+      <Particles>
+        <ParticlePT X="0" Y="18" />
+        <ParticlePT X="7" Y="15" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-41" RectY="-50" RectWidth="98" RectHeight="73" />
+      <Collision RectX="-15" RectY="-41" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="374" Y="131" />
+      <Particles>
+        <ParticlePT X="-3" Y="14" />
+        <ParticlePT X="11" Y="11" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SwordsmanAlerted">
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="99" RectHeight="70" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="48" Y="214" />
+      <Particles>
+        <ParticlePT X="-7" Y="14" />
+        <ParticlePT X="7" Y="17" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="99" RectHeight="70" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="155" Y="213" />
+      <Particles>
+        <ParticlePT X="-7" Y="11" />
+        <ParticlePT X="7" Y="10" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="99" RectHeight="70" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="265" Y="214" />
+      <Particles>
+        <ParticlePT X="-7" Y="18" />
+        <ParticlePT X="11" Y="18" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="99" RectHeight="70" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="370" Y="215" />
+      <Particles>
+        <ParticlePT X="-6" Y="18" />
+        <ParticlePT X="8" Y="18" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-42" RectY="-50" RectWidth="99" RectHeight="70" />
+      <Collision RectX="-16" RectY="-44" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="476" Y="216" />
+      <Particles>
+        <ParticlePT X="-7" Y="18" />
+        <ParticlePT X="8" Y="18" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SwordsmanSlashOne">
+    <Frame>
+      <Draw RectX="-36" RectY="-49" RectWidth="104" RectHeight="70" />
+      <Collision RectX="-29" RectY="-43" RectWidth="64" RectHeight="64" />
+      <AnchorPT X="182" Y="300" />
+      <Particles>
+        <ParticlePT X="3" Y="14" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-38" RectY="-49" RectWidth="123" RectHeight="65" />
+      <Collision RectX="-29" RectY="-48" RectWidth="64" RectHeight="64" />
+      <AnchorPT X="54" Y="305" />
+      <Particles>
+        <ParticlePT X="-5" Y="10" />
+        <ParticlePT X="8" Y="7" />
+      </Particles>
+      <Time Time="0.3" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-36" RectY="-71" RectWidth="122" RectHeight="86" />
+      <Collision RectX="-29" RectY="-49" RectWidth="64" RectHeight="64" />
+      <AnchorPT X="290" Y="311" />
+      <Particles>
+        <ParticlePT X="-7" Y="14" />
+        <ParticlePT X="21" Y="14" />
+      </Particles>
+      <Time Time="0.4" />
       <Trigger Type="None" Name="None" />
     </Frame>
   </Animation>

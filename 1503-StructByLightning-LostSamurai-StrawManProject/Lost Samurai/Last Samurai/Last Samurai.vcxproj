@@ -41,6 +41,8 @@
     <ClCompile Include="CreateArrowMessage.cpp" />
     <ClCompile Include="CreateCannonBallMessage.cpp" />
     <ClCompile Include="CreateDart.cpp" />
+    <ClCompile Include="CreateRockMessage.cpp" />
+    <ClCompile Include="CreateRollingBoulerMessage.cpp" />
     <ClCompile Include="CreateSwordMan.cpp" />
     <ClCompile Include="CreditState.cpp" />
     <ClCompile Include="DartCannon.cpp" />
@@ -48,6 +50,8 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="FallingRock.cpp" />
+    <ClCompile Include="FallingRockTrap.cpp" />
     <ClCompile Include="Father.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -75,6 +79,7 @@
     <ClCompile Include="PressurePlate.cpp" />
     <ClCompile Include="Pulley.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="RollingBoulder.cpp" />
     <ClCompile Include="Rope.cpp" />
     <ClCompile Include="SaveGameState.cpp" />
     <ClCompile Include="SmashingColumns.cpp" />
@@ -122,6 +127,8 @@
     <ClInclude Include="CreateArrowMessage.h" />
     <ClInclude Include="CreateCannonBallMessage.h" />
     <ClInclude Include="CreateDart.h" />
+    <ClInclude Include="CreateRockMessage.h" />
+    <ClInclude Include="CreateRollingBoulerMessage.h" />
     <ClInclude Include="CreateSwordMan.h" />
     <ClInclude Include="CreditState.h" />
     <ClInclude Include="DartCannon.h" />
@@ -129,6 +136,8 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="FallingRock.h" />
+    <ClInclude Include="FallingRockTrap.h" />
     <ClInclude Include="Father.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Game.h" />
@@ -159,6 +168,7 @@
     <ClInclude Include="Pulley.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="RollingBoulder.h" />
     <ClInclude Include="Rope.h" />
     <ClInclude Include="SaveGameState.h" />
     <ClInclude Include="SmashingColumns.h" />
