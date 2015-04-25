@@ -51,10 +51,10 @@ void ParticleManager::LoadEmitter(char* _fileName)
 	SGD::Point pt;
 	emitterElements = emitterElements->NextSiblingElement("PositionX");
 	emitterElements->Attribute("X", &emit);
-	pt.x = 100.0f;
+	pt.x = 0.0f;
 	emitterElements = emitterElements->NextSiblingElement("PositionY");
 	emitterElements->Attribute("Y", &emit);
-	pt.y = 450.0f;
+	pt.y = 0.0f;
 	loadedEmitters[name].SetPosition(pt);
 
 	SGD::Size sz;

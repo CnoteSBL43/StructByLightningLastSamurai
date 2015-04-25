@@ -10,7 +10,8 @@ class Swordsman :
 public:
 	Swordsman();
 	~Swordsman();
-
+	SGD::Point m_LeftMax = {};
+	SGD::Point m_RightMax = {};
 
 	void	Update(float elapsedTime);
 	void	Render(void);

@@ -37,6 +37,8 @@ void	 Son::Update(float elapsedTime)
 {
 	if (m_Timestamp.GetCurrAnim() != "SonDeath")
 	{
+		SGD::Event* event = new SGD::Event("THREAT", nullptr, this);
+		event->QueueEvent();
 		if (GetCurrCharacter())
 		{
 			if (GetBackPack())
@@ -311,7 +313,7 @@ void	 Son::Update(float elapsedTime)
 		m_Timestamp.SetElapsedTime(0);
 		m_Timestamp.SetCurrAnim("SonClimbing");
 	}
-	if (!GetOnGround() && !GetHanging() && !GetonLadder())
+	if (!GetOnGround() && !GetHanging())
 	{
 		direction = 0;
 		m_Timestamp.SetCurrFrame(direction);

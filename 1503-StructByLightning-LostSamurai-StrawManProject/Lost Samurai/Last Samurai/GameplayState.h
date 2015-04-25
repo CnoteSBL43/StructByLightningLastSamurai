@@ -99,7 +99,7 @@ public:
 	Actor*  CreateFather(void);
 	// This is an Actor Pointer that creates the SOn Object
 	Actor* CreateSon(void);
-	Actor* CreateSwordsman(Actor* _player)const;
+	Actor* CreateSwordsman(Actor* _player, int i)const;
 	Actor* CreateSpikes(int i) const;
 	Actor* CreatePopUpSpikes(int i) const;
 	Actor* CreateDarts(int i) const;

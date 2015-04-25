@@ -119,15 +119,18 @@ Actor* GameplayState::CreateSon(void)
 	// this is returning a newly alocated Son object so that it can be sent to the entity manager
 	return m_son;
 }
-Actor* GameplayState::CreateSwordsman(Actor* _player) const
+Actor* GameplayState::CreateSwordsman(Actor* _player, int i) const
 {
-	Actor * swordsman = new Swordsman;
-	swordsman->SetPosition(SGD::Point{ 175.0f, 250.0f });
+	Swordsman * swordsman = new Swordsman;
+	swordsman->SetPosition({ Load->Traps["AI"][i]->left - 800.0f, Load->Traps["AI"][i]->top - 270});
+	swordsman->m_LeftMax = { Load->Traps["WayPoint"][0]->left - 800, Load->Traps["WayPoint"][0]->top - 300 };
+//	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
+
 	swordsman->SetAlive(true);
-	swordsman->SetImage(m_FatherImage);
+	//swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
 	swordsman->SetVelocity({ 64.0f, 0.0f });
-	dynamic_cast<Swordsman*>(swordsman)->SetTarget(_player);
+	swordsman->SetTarget(_player);
 	return swordsman;
 }
 
@@ -326,6 +329,14 @@ void GameplayState::Enter()
 		win = temp->GetRect();
 		temp->Release();
 	}
+	for (unsigned int i = 0; i < Load->Traps["AI"].size(); i++)
+	{
+		Actor* temp = CreateSwordsman(father, i);
+		m_pEntities->AddEntity(temp, 5);
+		//win = temp->GetRect();
+		temp->Release();
+		temp->Release();
+	}
 	unsigned int length = Load->m_CheckPoints.size();
 
 	for (unsigned int i = 0; i < length; i++)
@@ -372,7 +383,7 @@ void GameplayState::Exit()
 	cursorPos = 0;
 	// Father is being released from the Pointer it was associated with so that The Release function
 	// Can take car of all dynamic memory 
-	
+
 	// this is an if Check makeing sure that m_pEntities are not null so that it can properly Erase everytihng that is inside of it 
 	if (m_pEntities != nullptr)
 	{
@@ -628,6 +639,8 @@ bool GameplayState::Update(float _ElapsedTime)
 			m_pEntities->CheckCollisions(3, 16);//tiles and box
 			m_pEntities->CheckCollisions(0, 16);//Father and box
 			m_pEntities->CheckCollisions(1, 16);//son and box
+			m_pEntities->CheckCollisions(5, 5);//son and box
+
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
 			{
 				if (dynamic_cast<Father*>(father)->GetCurrCharacter())
@@ -635,7 +648,7 @@ bool GameplayState::Update(float _ElapsedTime)
 				else
 					m_pEntities->CheckCollisions(1, 15);
 
-			}
+				}
 
 			dynamic_cast<Father*>(father)->SetCollisionRect(false);
 			m_pEntities->CheckCollisions(0, 3);
@@ -664,15 +677,25 @@ bool GameplayState::Update(float _ElapsedTime)
 			SGD::Rectangle b = p->GetLastRect();
 			if (f.IsIntersecting(q))
 			{
-				if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Z))
-				{
-					SetMovementOff(!GetMovementOff());
-					p->Grab(father->GetPosition());
-				}
-				if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::C) && GetMovementOff() == true)
-				{
-					p->Pull();
-				}
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Z))
+			{
+			SetMovementOff(!GetMovementOff());
+			p->Grab(father->GetPosition());
+			}
+			bool i = dynamic_cast<Son*>(son)->GetonLadder();
+			if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false && !dynamic_cast<Son*>(son)->GetonLadder())
+				son->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
+
+			m_pEntities->CheckCollisions(1, 5);
+			//Rope Collision
+			SGD::Rectangle f = dynamic_cast<Father*>(father)->GetRect();
+			SGD::Rectangle s = dynamic_cast<Son*>(son)->GetRect();
+			/*SGD::Rectangle q = p->GetRect();
+			SGD::Rectangle b = p->GetLastRect();
+			if (f.IsIntersecting(q))
+			{
+			p->Pull();
+			}
 			}*/
 			//if (f.IsIntersecting(b))//father and rope box
 			//{
@@ -788,7 +811,7 @@ bool GameplayState::Update(float _ElapsedTime)
 				Game::GetInstance()->SetLevel(Game::GetInstance()->GetLevel() + 1);
 				Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
 				return true;
-				
+
 			}
 			SGD::MessageManager::GetInstance()->Update();
 			//p->Update(_ElapsedTime);
@@ -977,12 +1000,13 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-		GameplayState* self = GameplayState::GetInstance();
-		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-		self->m_pEntities->AddEntity(swordman, 2);
-		swordman->Release();
-		swordman->Release();
-		swordman = nullptr;
+		/*	GameplayState* self = GameplayState::GetInstance();
+			Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+			self->m_pEntities->AddEntity(swordman, 2);
+			swordman->Release();
+			swordman->Release();
+			swordman = nullptr;
+			*/
 		break;
 	}
 
@@ -1160,10 +1184,10 @@ Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 
 Actor* GameplayState::CreateDoor(int i) const
 {
-		AutoLockingDoor* temp = new AutoLockingDoor();
-		temp->SetPosition(SGD::Point{ Load->Traps["Doors"][i]->left - 780, Load->Traps["Doors"][i]->top - 280 });
-		temp->SetID(Load->DoorID[i]);
-		return temp;
+	AutoLockingDoor* temp = new AutoLockingDoor();
+	temp->SetPosition(SGD::Point{ Load->Traps["Doors"][i]->left - 780, Load->Traps["Doors"][i]->top - 280 });
+	temp->SetID(Load->DoorID[i]);
+	return temp;
 
 }
 
@@ -1203,7 +1227,7 @@ Actor*  GameplayState::CreatePlates(int i) const
 	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 800, Load->Traps["Plates"][i]->top - 270 });
 	temp->SetSize({ 32, 16 });
 	temp->SetID(leverID);
-	if (Load->PlateisHeavy[i]==false)
+	if (Load->PlateisHeavy[i] == false)
 		temp->SetHeavy(false);
 	else
 		temp->SetHeavy(true);

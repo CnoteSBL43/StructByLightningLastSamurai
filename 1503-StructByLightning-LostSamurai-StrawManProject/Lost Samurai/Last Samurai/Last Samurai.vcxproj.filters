@@ -282,10 +282,10 @@
       <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="FinalDoor.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="RollingBoulder.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Traps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -535,8 +535,12 @@
     <ClInclude Include="Ladder.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="FinalDoor.h" />
-    <ClInclude Include="RollingBoulder.h" />
+    <ClInclude Include="FinalDoor.h">
+      <Filter>Source\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RollingBoulder.h">
+      <Filter>Source\Traps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">

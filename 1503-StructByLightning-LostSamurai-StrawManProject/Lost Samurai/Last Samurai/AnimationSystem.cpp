@@ -56,7 +56,7 @@ void AnimationSystem::Render(AnimationTimestamp& _info, float _PosX, float _PosY
 		GM->DrawTextureSection(m_Imgs[10], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_LEVERS)
 		GM->DrawTextureSection(m_Imgs[11], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	else if (_info.GetOwner()->GetType() == Actor::ENT_PRESSURE_PLATE)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_PLATES)
 		GM->DrawTextureSection(m_Imgs[12], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 

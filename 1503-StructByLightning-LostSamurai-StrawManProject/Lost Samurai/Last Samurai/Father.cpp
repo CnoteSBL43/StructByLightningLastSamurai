@@ -37,12 +37,15 @@ Father::~Father()
 
 void	 Father::Update(float elapsedTime)
 {
+
 	if (m_Son == nullptr)
 		m_Son = dynamic_cast<Son*>(GameplayState::GetInstance()->GetSon());
 	float x = m_ptPosition.x;
 	float y = m_ptPosition.y;
 	if (m_Timestamp.GetCurrAnim() != "FatherDeath")
 	{
+		SGD::Event* event = new SGD::Event("THREAT", nullptr, this);
+		event->QueueEvent();
 		if (m_ptPosition.x >= 250.0f && !enemy)
 		{
 			enemy = true;
@@ -542,8 +545,7 @@ void Father::HandleCollision(IEntity* pOther)
 	if (pOther->GetType() == ENT_TILES && !GetHanging())
 	{
 		SetCollisionRect(true);
-		SGD::Rectangle Rect;
-		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
+		SGD::Rectangle Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
 		if (Rect.ComputeHeight() < GetRect().ComputeHeight())
 		{
 			if (Rect.left >= this->GetRect().left && Rect.right <= this->GetRect().right)
