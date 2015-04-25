@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="Son.png" MF="Filter">
+  <Animation Name="SonJump">
+    <Frame>
+      <Draw RectX="-25" RectY="-49" RectWidth="43" RectHeight="73" />
+      <Collision RectX="-25" RectY="-47" RectWidth="42" RectHeight="71" />
+      <AnchorPT X="30" Y="50" />
+      <Particles>
+        <ParticlePT X="-10" Y="-1" />
+        <ParticlePT X="11" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonIdle">
+    <Frame>
+      <Draw RectX="-24" RectY="-56" RectWidth="43" RectHeight="81" />
+      <Collision RectX="-21" RectY="-45" RectWidth="32" RectHeight="70" />
+      <AnchorPT X="29" Y="312" />
+      <Particles>
+        <ParticlePT X="4" Y="-3" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonRunning">
+    <Frame>
+      <Draw RectX="-28" RectY="-51" RectWidth="45" RectHeight="80" />
+      <Collision RectX="-22" RectY="-40" RectWidth="32" RectHeight="69" />
+      <AnchorPT X="35" Y="405" />
+      <Particles>
+        <ParticlePT X="-4" Y="0" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-28" RectY="-51" RectWidth="45" RectHeight="80" />
+      <Collision RectX="-22" RectY="-41" RectWidth="32" RectHeight="70" />
+      <AnchorPT X="92" Y="404" />
+      <Particles>
+        <ParticlePT X="3" Y="1" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-28" RectY="-51" RectWidth="46" RectHeight="78" />
+      <Collision RectX="-22" RectY="-39" RectWidth="32" RectHeight="66" />
+      <AnchorPT X="142" Y="407" />
+      <Particles>
+        <ParticlePT X="0" Y="-3" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-28" RectY="-51" RectWidth="45" RectHeight="78" />
+      <Collision RectX="-22" RectY="-39" RectWidth="32" RectHeight="66" />
+      <AnchorPT X="197" Y="406" />
+      <Particles>
+        <ParticlePT X="-7" Y="0" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonDeath">
+    <Frame>
+      <Draw RectX="-13" RectY="-63" RectWidth="43" RectHeight="69" />
+      <Collision RectX="-13" RectY="-60" RectWidth="43" RectHeight="66" />
+      <AnchorPT X="421" Y="513" />
+      <Particles>
+        <ParticlePT X="-241" Y="-87" />
+        <ParticlePT X="1" Y="-11" />
+        <ParticlePT X="-3" Y="0" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-25" RectY="-64" RectWidth="44" RectHeight="70" />
+      <Collision RectX="-25" RectY="-61" RectWidth="44" RectHeight="67" />
+      <AnchorPT X="379" Y="514" />
+      <Particles>
+        <ParticlePT X="-4" Y="-3" />
+        <ParticlePT X="-1" Y="0" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-36" RectY="-58" RectWidth="49" RectHeight="70" />
+      <Collision RectX="-36" RectY="-55" RectWidth="49" RectHeight="67" />
+      <AnchorPT X="334" Y="506" />
+      <Particles>
+        <ParticlePT X="-6" Y="-6" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-46" RectY="-54" RectWidth="59" RectHeight="67" />
+      <Collision RectX="-46" RectY="-51" RectWidth="59" RectHeight="64" />
+      <AnchorPT X="278" Y="504" />
+      <Particles>
+        <ParticlePT X="3" Y="-14" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-50" RectY="-48" RectWidth="60" RectHeight="64" />
+      <Collision RectX="-50" RectY="-45" RectWidth="60" RectHeight="61" />
+      <AnchorPT X="206" Y="503" />
+      <Particles>
+        <ParticlePT X="3" Y="-7" />
+      </Particles>
+      <Time Time="0" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-50" RectY="-31" RectWidth="67" RectHeight="51" />
+      <Collision RectX="-50" RectY="-29" RectWidth="67" RectHeight="49" />
+      <AnchorPT X="130" Y="498" />
+      <Particles>
+        <ParticlePT X="11" Y="-7" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-44" RectY="-43" RectWidth="67" RectHeight="49" />
+      <Collision RectX="-44" RectY="-40" RectWidth="67" RectHeight="46" />
+      <AnchorPT X="53" Y="513" />
+      <Particles>
+        <ParticlePT X="-3" Y="-4" />
+      </Particles>
+      <Time Time="0.1" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonClimbing">
+    <Frame>
+      <Draw RectX="-20" RectY="-52" RectWidth="46" RectHeight="73" />
+      <Collision RectX="-13" RectY="-43" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="36" Y="590" />
+      <Particles>
+        <ParticlePT X="-3" Y="17" />
+        <ParticlePT X="7" Y="14" />
+        <ParticlePT X="11" Y="-7" />
+        <ParticlePT X="-8" Y="-10" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-20" RectY="-51" RectWidth="46" RectHeight="73" />
+      <Collision RectX="-13" RectY="-42" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="94" Y="589" />
+      <Particles>
+        <ParticlePT X="-3" Y="11" />
+        <ParticlePT X="7" Y="14" />
+        <ParticlePT X="11" Y="-7" />
+        <ParticlePT X="-6" Y="-999" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonPullingLever">
+    <Frame>
+      <Draw RectX="-23" RectY="-50" RectWidth="45" RectHeight="74" />
+      <Collision RectX="-21" RectY="-40" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="43" Y="750" />
+      <Particles>
+        <ParticlePT X="-10" Y="17" />
+        <ParticlePT X="7" Y="14" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-21" RectY="-48" RectWidth="45" RectHeight="74" />
+      <Collision RectX="-19" RectY="-38" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="98" Y="749" />
+      <Particles>
+        <ParticlePT X="-7" Y="20" />
+        <ParticlePT X="7" Y="-1180" />
+        <ParticlePT X="-14" Y="-1" />
+        <ParticlePT X="-10" Y="-7" />
+      </Particles>
+      <Time Time="0.2" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SonPushingBox">
+    <Frame>
+      <Draw RectX="-26" RectY="-52" RectWidth="48" RectHeight="77" />
+      <Collision RectX="-26" RectY="-39" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="117" Y="848" />
+      <Particles>
+        <ParticlePT X="-3" Y="18" />
+        <ParticlePT X="11" Y="14" />
+        <ParticlePT X="-14" Y="-1" />
+        <ParticlePT X="-17" Y="-7" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-25" RectY="-53" RectWidth="50" RectHeight="80" />
+      <Collision RectX="-25" RectY="-39" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="187" Y="845" />
+      <Particles>
+        <ParticlePT X="-20" Y="-11" />
+        <ParticlePT X="-10" Y="3" />
+        <ParticlePT X="-7" Y="21" />
+        <ParticlePT X="4" Y="18" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

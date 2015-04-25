@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="stonecolumn.png" MF="Filter">
+  <Animation Name="Smashing">
+    <Frame>
+      <Draw RectX="-36" RectY="-144" RectWidth="72" RectHeight="152" />
+      <Collision RectX="-36" RectY="-144" RectWidth="72" RectHeight="152" />
+      <AnchorPT X="34" Y="144" />
+      <Particles>
+        <ParticlePT X="0" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="boulder2.png" MF="Filter">
+  <Animation Name="Rolling">
+    <Frame>
+      <Draw RectX="-32" RectY="-32" RectWidth="64" RectHeight="64" />
+      <Collision RectX="-32" RectY="-32" RectWidth="64" RectHeight="64" />
+      <AnchorPT X="32" Y="32" />
+      <Particles>
+        <ParticlePT X="1" Y="1" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

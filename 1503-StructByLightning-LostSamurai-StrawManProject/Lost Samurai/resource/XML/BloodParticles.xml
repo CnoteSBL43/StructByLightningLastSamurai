@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Particles ParticleEditorXML="0" Name="BloodParticles">
+  <Emitter>
+    <Sprite Name="Puff.png" />
+    <SpriteWidth Width="32" />
+    <SpriteHeight Height="32" />
+    <PositionX X="291" />
+    <PositionY Y="371" />
+    <SpreadWidth SWidth="10" />
+    <SpreadHeight SHeight="10" />
+    <SpawnRate Rate="50" />
+    <MaximumParticles Max="500" />
+  </Emitter>
+  <Flyweight>
+    <Continuous Bool="0" />
+    <VelXPos XPos="100" />
+    <VelXNeg XNeg="-100" />
+    <VelYPos YPos="100" />
+    <VelYNeg YNeg="-100" />
+    <ScaleStart ScaleS="0.8" />
+    <ScaleEnd ScaleE="0.1" />
+    <RotationStart RotS="0" />
+    <RotationEnd RotE="0" />
+    <LifeMin Min="1.3" />
+    <LifeMax Max="2" />
+    <StartAlpha StartA="255" />
+    <StartRed StartR="150" />
+    <StartGreen StartG="0" />
+    <StartBlue StartB="24" />
+    <EndAlpha EndA="0" />
+    <EndRed EndR="255" />
+    <EndGreen EndG="0" />
+    <EndBlue EndB="0" />
+  </Flyweight>
+</Particles>

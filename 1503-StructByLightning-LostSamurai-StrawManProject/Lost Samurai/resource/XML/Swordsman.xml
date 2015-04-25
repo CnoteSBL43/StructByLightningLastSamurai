@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="Swordsman.png" MF="Filter">
+  <Animation Name="SwordsmanIdle">
+    <Frame>
+      <Draw RectX="-40" RectY="-66" RectWidth="98" RectHeight="69" />
+      <Collision RectX="-19" RectY="-66" RectWidth="44" RectHeight="69" />
+      <AnchorPT X="40" Y="66" />
+      <Particles>
+        <ParticlePT X="0" Y="-1" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+  <Animation Name="SwordsmanAttack">
+    <Frame>
+      <Draw RectX="-110" RectY="-59" RectWidth="177" RectHeight="64" />
+      <Collision RectX="-110" RectY="-30" RectWidth="131" RectHeight="35" />
+      <AnchorPT X="111" Y="132" />
+      <Particles>
+        <ParticlePT X="-111" Y="-133" />
+        <ParticlePT X="-11" Y="0" />
+        <ParticlePT X="14" Y="0" />
+        <ParticlePT X="-106" Y="-24" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

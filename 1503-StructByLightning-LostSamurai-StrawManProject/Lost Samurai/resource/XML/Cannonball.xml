@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="ball.png" MF="Filter">
+  <Animation Name="Cannonball">
+    <Frame>
+      <Draw RectX="-13" RectY="-14" RectWidth="30" RectHeight="30" />
+      <Collision RectX="-13" RectY="-14" RectWidth="30" RectHeight="30" />
+      <AnchorPT X="16" Y="24" />
+      <Particles>
+        <ParticlePT X="0" Y="0" />
+      </Particles>
+      <Time Time="0.7" />
+      <Trigger Type="None" Name="None" />
+    </Frame>
+  </Animation>
+</Character>

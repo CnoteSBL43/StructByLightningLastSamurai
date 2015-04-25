@@ -1,0 +1,148 @@
+
+{
+	
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J))
+	{
+		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
+		{
+			dynamic_cast<Father*>(father)->SetCurrCharacter(false);
+			dynamic_cast<Son*>(son)->SetCurrCharacter(true);
+		}
+		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
+		{
+			dynamic_cast<Father*>(father)->SetCurrCharacter(true);
+			dynamic_cast<Son*>(son)->SetCurrCharacter(false);
+		}
+	}
+
+	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
+	{
+		m_pEntities->CheckCollisions(0, 1);
+	}
+
+
+	if (dynamic_cast<Father*>(father)->GetCurrCharacter())
+	{
+		Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+	}
+	else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
+	{
+		Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+	}
+
+	//replace son after backpacing is activated
+	if (dynamic_cast<Son*>(son)->GetBackPack())
+	{
+		dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
+		dynamic_cast<Son*>(son)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x - 16.0f, dynamic_cast<Father*>(father)->GetPosition().y - 16.0f });
+	}
+#pragma region Commented out Collision
+	//int tiley = Load->Map[9][9]->SpawnX;
+
+	//for (int X = 0; X < Load->m_Grid->m_GridWidth; X++)
+	//{
+	//	for (int Y = 0; Y < Load->m_Grid->m_GridHeight; Y++)
+	//	{
+	//		
+	//		if (Load->Map[X][Y]->PositionX == dynamic_cast<Father*>(father)->GetPosition().x && Load->Map[X][Y]->PositionY > dynamic_cast<Father*>(father)->GetPosition().y )
+	//		{
+	//			float y = Load->Map[X][Y]->PositionY;
+	//			checkx = X;
+	//			checky = Y;
+	//			check = true;
+	//			break;
+	//		}
+	//	}
+	//	if (check)
+	//		break;
+
+	//}
+	//if (check)
+	//{
+	//	if (dynamic_cast<Father*>(father)->GetPosition().y < Load->Map[checkx][checky]->PositionY)
+	//	{
+	//		dynamic_cast<Father*>(father)->SetCollisionRect(true);
+	//	}
+	//	 if (dynamic_cast<Father*>(father)->GetPosition().y >= Load->Map[checkx][checky]->PositionY)
+	//	{
+	//		 dynamic_cast<Father*>(father)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x, (float)Load->Map[checkx][checky]->PositionY });
+	//		dynamic_cast<Father*>(father)->SetCollisionRect(false);
+	//		check = false;
+	//	}
+	//}
+
+	//for (unsigned int X = 0; X < Load->m_CollisionRect.size(); X++)
+	//{
+	//	rect.left = ((float)X * Load->Map[X][Y]->m_TileWidth - Game::GetInstance()->GetScreenSize().width / 2) - Game::GetInstance()->GetCameraPosition().x;
+	//	rect.top = (float)Y * Load->Map[X][Y]->m_TileHeight - Game::GetInstance()->GetCameraPosition().y;
+	//	rect.right = rect.left + Load->Map[X][Y]->m_TileHeight;
+	//	rect.bottom = rect.top + Load->Map[X][Y]->m_TileWidth;
+
+	//	Load->m_CollisionRect[X]->left + Game::GetInstance()->GetCameraPosition().x;
+	//	Load->m_CollisionRect[X]->top + Game::GetInstance()->GetCameraPosition().y;
+	//	
+
+	//}
+#pragma endregion
+	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
+	{
+		SGD::Point pos = { dynamic_cast<Father*>(father)->GetPosition().x - Game::GetInstance()->GetCameraPosition().x, dynamic_cast<Father*>(father)->GetPosition().y - Game::GetInstance()->GetCameraPosition().y };
+		SGD::Rectangle rectp{ pos, dynamic_cast<Father*>(father)->GetSize()};
+
+		// This is a Point for the Collision rectangles 
+		SGD::Point pos2 = { Load->m_CollisionRect[i]->left - Game::GetInstance()->GetCameraPosition().x, Load->m_CollisionRect[i]->top - Game::GetInstance()->GetCameraPosition().y };
+		// 
+		SGD::Size size1{ Load->m_CollisionRect[i]->right - Load->m_CollisionRect[i]->left, Load->m_CollisionRect[i]->bottom - Load->m_CollisionRect[i]->top };
+		SGD::Rectangle rectp1{ pos2, size1 };
+
+		// intersecting check 
+		if (rectp.IsIntersecting(rectp1))
+		{
+			if (Load->m_CollisionRect[i]->left == Load->m_CollisionRect[0]->right)
+			{
+				dynamic_cast<Father*>(father)->SetPosition(SGD::Point{ Load->m_CollisionRect[i]->right, dynamic_cast<Father*>(father)->GetPosition().y });
+
+			}
+			else
+			{
+				dynamic_cast<Father*>(father)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x, Load->m_CollisionRect[i]->top - (dynamic_cast<Father*>(father)->GetSize().height) });
+			}
+			// fix?
+			//dynamic_cast<Father*>(father)->SetJumpVelocity(256.0f);
+			dynamic_cast<Father*>(father)->SetVelocity(SGD::Vector(0, 0));
+			// Fix?
+			dynamic_cast<Father*>(father)->SetOnGround(true);
+			intersect = true;
+			break;
+		}
+		else if (!rectp.IsIntersecting(rectp1))
+		{
+			intersect = false;
+		}
+	}
+
+	if (!intersect && POSOFCOLLISION!=0)
+	{
+		dynamic_cast<Father*>(father)->SetOnGround(false);
+		for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
+		{
+			float posy = dynamic_cast<Father*>(father)->GetPosition().y + dynamic_cast<Father*>(father)->GetSize().height;
+			if (Load->m_CollisionRect[i]->top>posy )
+			{
+				POSOFCOLLISION = Load->m_CollisionRect[i]->top;
+				dynamic_cast<Father*>(father)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x, dynamic_cast<Father*>(father)->GetPosition().y + 4.9f });
+				break;
+			}
+		}
+
+	}
+	else if (!intersect)
+	{
+		dynamic_cast<Father*>(father)->SetPosition(SGD::Point{ dynamic_cast<Father*>(father)->GetPosition().x, dynamic_cast<Father*>(father)->GetPosition().y + 4.9f });
+	}
+
+	m_pEntities->UpdateAll(_ElapsedTime);
+	return true;
+}

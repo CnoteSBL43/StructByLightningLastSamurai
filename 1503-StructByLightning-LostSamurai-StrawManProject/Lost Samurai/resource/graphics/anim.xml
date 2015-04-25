@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character Image="father.png">
+  <Animation Name="Running">
+    <Frame>
+      <Draw RectX="-21" RectY="-65" RectWidth="41" RectHeight="70" />
+      <Collision RectX="-17" RectY="-59" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="22" Y="88" />
+      <ParticlePT X="-3" Y="-45" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-16" RectY="-64" RectWidth="27" RectHeight="69" />
+      <Collision RectX="-19" RectY="-59" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="65" Y="88" />
+      <ParticlePT X="-4" Y="-46" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-13" RectY="-67" RectWidth="25" RectHeight="72" />
+      <Collision RectX="-17" RectY="-59" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="100" Y="88" />
+      <ParticlePT X="-3" Y="-43" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-19" RectY="-64" RectWidth="39" RectHeight="68" />
+      <Collision RectX="-15" RectY="-60" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="139" Y="88" />
+      <ParticlePT X="-1" Y="-39" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+    <Frame>
+      <Draw RectX="-23" RectY="-65" RectWidth="44" RectHeight="70" />
+      <Collision RectX="-17" RectY="-58" RectWidth="32" RectHeight="63" />
+      <AnchorPT X="191" Y="88" />
+      <ParticlePT X="-1" Y="-39" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+  </Animation>
+  <Animation Name="Idle">
+    <Frame>
+      <Draw RectX="-31" RectY="-63" RectWidth="58" RectHeight="68" />
+      <Collision RectX="-18" RectY="-59" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="111" Y="168" />
+      <ParticlePT X="-7" Y="-42" />
+      <Time Time="0.7" />
+      <Trigger Type="Event" Name="Steps" />
+    </Frame>
+  </Animation>
+</Character>
