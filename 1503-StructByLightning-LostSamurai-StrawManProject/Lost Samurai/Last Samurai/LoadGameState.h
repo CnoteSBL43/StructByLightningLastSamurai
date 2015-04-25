@@ -13,6 +13,7 @@ private:
 	float m_LoadTimer = 6.0f;
 	float m_LoadingTime =  0.0f;
 	SGD::HAudio LoadMusic;
+	SGD::HAudio LoadMusic;
 public:
 	static LoadGameState* GetInstance();
 	void	Enter(void);

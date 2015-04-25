@@ -16,6 +16,8 @@ void SplashState::Enter()
 void SplashState::Exit()
 {
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_TeamLogo);
+	SGD::AudioManager::GetInstance()->StopAudio(SplashMusic);
+	//SGD::AudioManager::GetInstance()->StopAudio(Select);
 }
 
 bool SplashState::Update(float _ElapsedTime)
@@ -23,6 +25,7 @@ bool SplashState::Update(float _ElapsedTime)
 	time += _ElapsedTime;
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) || time >= 8.0f ||  (SGD::InputManager::GetInstance()->IsButtonPressed(0, 9)))
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 		return true;
 	}

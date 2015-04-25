@@ -6,7 +6,6 @@
 #include "AnimationSystem.h"
 #include "../SGD Wrappers/SGD_EventManager.h"
 #include "../SGD Wrappers/SGD_Event.h"
-#include "Father.h"
 CannonBall::CannonBall()
 {
 	m_Timestamp.SetCurrAnim("Cannonball");
@@ -34,20 +33,16 @@ void CannonBall::Render()
 	//the render rect after the offest
 	SGD::Point pt = { (GetPosition().x - PositionOffset.x), (GetPosition().y - PositionOffset.y) };
 
-
-	//draw rect
-	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
-	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
-	/*if (Debug)
-	{*/
-	SGD::Rectangle re = GetRect();
-	re.left -= Game::GetInstance()->GetCameraPosition().x;
-	re.right -= Game::GetInstance()->GetCameraPosition().x;
-	re.top -= Game::GetInstance()->GetCameraPosition().y;
-	re.bottom -= Game::GetInstance()->GetCameraPosition().y;
+	//SGD::Rectangle re = GetRect();
+	//re.left -= Game::GetInstance()->GetCameraPosition().x;
+	//re.right -= Game::GetInstance()->GetCameraPosition().x;
+	//re.top -= Game::GetInstance()->GetCameraPosition().y;
+	//re.bottom -= Game::GetInstance()->GetCameraPosition().y;
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
-	//SGD::GraphicsManager::GetInstance()->DrawRectangle(GetRect(), SGD::Color{ 255, 255, 0, 0 });
+	//draw rect
+
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
+
 
 
 }
@@ -79,10 +74,8 @@ void CannonBall::HandleCollision(IEntity* pOther)
 
 	}
 
-	if (pOther->GetType() == ENT_FATHER)
+	if (pOther->GetType() == ENT_FATHER || pOther->GetType() == ENT_SON)
 	{
-		dynamic_cast<Father*>(pOther)->SetAlive(false);
-
 		SGD::Event* CannonBallHit = new SGD::Event("Death", nullptr, this);
 		CannonBallHit->QueueEvent(pOther);
 		DestroyActorMessage* destroy = new DestroyActorMessage{ this };
@@ -96,5 +89,5 @@ void CannonBall::HandleCollision(IEntity* pOther)
 
 SGD::Rectangle CannonBall::GetRect() const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y, SGD::Size{ 1, 1 });
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp,m_ptPosition.x,m_ptPosition.y, SGD::Size{ 1, 1 });
 }

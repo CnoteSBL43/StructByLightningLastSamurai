@@ -23,23 +23,23 @@ public:
 	bool toRight = true;
 	bool toLeft = false;
 
-	void SetTarget(Actor * _target){ m_Target = _target; }
-	Actor * GetEnemyTarget(){ return m_Target; }
+	void SetTarget(Player * _target){ m_Target = _target; }
+	Player * GetEnemyTarget(){ return m_Target; }
 	void HandleEvent(const SGD::Event* pEvent);
 
 private:
 	int direction = 0;
 	float frameswitch = 0.0f;
-	float destination = 0.0f;
+	float destination;
 	bool m_facingRight = true;
-	Actor* m_Target = nullptr;
+	Player* m_Target = nullptr;
 	AnimationTimestamp m_Timestamp;
 	bool Debug = false;
 	//SGD::Point m_Original = m_ptPosition;
 	bool isAlerted = false;
 	float AlertTimer = 0.0f;
 	float ChangeFaceTimer = 0.0f;
-	//::Vector EnemyDistance = {};
+	SGD::Vector EnemyDistance = {};
 	SGD::HTexture m_AlertedImage = SGD::INVALID_HANDLE;
 };
 

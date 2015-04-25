@@ -11,7 +11,7 @@ void MainMenuState::Enter()
 {
 	m_GameMusic = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/Game_Music.xwm");
 	m_Pointer = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Finger.png");
-	//m_BkgndImg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/mainmenuimg.png");
+	m_BkgndImg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/mainmenuimg.png");
 	int MusicVol = Game::GetInstance()->GetMusicVolume();
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, MusicVol);
 	SGD::AudioManager::GetInstance()->PlayAudio(m_GameMusic);
@@ -23,7 +23,7 @@ void MainMenuState::Exit()
 {
 	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_Pointer);
-	//SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BkgndImg);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BkgndImg);
 	SGD::AudioManager::GetInstance()->StopAudio(m_GameMusic);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_GameMusic);
 	SGD::AudioManager::GetInstance()->UnloadAudio(Select);
@@ -33,7 +33,6 @@ void MainMenuState::Exit()
 
 bool MainMenuState::Update(float _ElapsedTime)
 {
-
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape))//leaves game
 	{
@@ -74,18 +73,20 @@ bool MainMenuState::Update(float _ElapsedTime)
 		m_CursorPos++;
 		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 	}
+
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && m_CursorPos == 4 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down) && m_CursorPos == 4)
 	{
 		m_CursorPos = 0;
 		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 	}
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos > 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos > 0)
 	{
 		m_CursorPos--;
 		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 	}
 
-	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
+	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && m_CursorPos == 0 | SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Up) && m_CursorPos == 0)
 	{
 		m_CursorPos = 4;
 		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
@@ -99,7 +100,7 @@ bool MainMenuState::Update(float _ElapsedTime)
 
 void MainMenuState::Render(float _ElapsedTime)
 {
-	//SGD::GraphicsManager::GetInstance()->DrawTexture(m_BkgndImg, {});
+	SGD::GraphicsManager::GetInstance()->DrawTexture(m_BkgndImg, {});
 
 	if (Game::GetInstance()->GetLanguage() == 0)
 	{

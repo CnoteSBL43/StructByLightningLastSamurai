@@ -139,7 +139,7 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son, const char* _level)
 	// 
 	TiXmlDocument Doc;
 	// Did this work?
-	if (Doc.LoadFile(_level) == false)
+	if (Doc.LoadFile("../resource/XML/Level3.xml") == false)
 		return;
 	// Root Element 
 	TiXmlElement* Root = Doc.RootElement();
@@ -192,7 +192,6 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son, const char* _level)
 		if (m_Tile->Traps == 1)
 		{
 			m_Tile->TrapNames = tile->Attribute("TrapNames");
-
 			tile->Attribute("DoorID", &m_Tile->Door);
 		}
 

@@ -22,13 +22,14 @@ Swordsman::~Swordsman()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_AlertedImage);
 }
 
-
 void	 Swordsman::Update(float elapsedTime)
 {
 
 	if (m_Target != nullptr)
 	{
 		SGD::Vector EnemyDistance = m_ptPosition - GetEnemyTarget()->GetPosition();
+
+
 		if (m_Target->GetPosition().x < m_ptPosition.x)
 		{
 			m_facingRight = false;
@@ -39,16 +40,8 @@ void	 Swordsman::Update(float elapsedTime)
 			m_facingRight = true;
 			m_vtVelocity.x = 128.0f;
 		}
-		if (EnemyDistance.ComputeLength() <= 50)
-		{
-			m_vtVelocity.x -= 2.0f;
-			if (EnemyDistance.x <= 0)
-			{
-				m_vtVelocity.x = 0.0f;
-				m_Timestamp.SetCurrAnim("SwordsmanSlashOne");
-			}
-		}
-		if (EnemyDistance.ComputeLength() > 300 || m_ptPosition.x <= m_LeftMax.x || m_ptPosition.x >= m_RightMax.x)
+
+		if (EnemyDistance.ComputeLength() > 300)
 		{
 			SetTarget(nullptr);
 			SGD::Event* event = new SGD::Event("UntargetedByBowman", nullptr, this);
@@ -57,11 +50,22 @@ void	 Swordsman::Update(float elapsedTime)
 			ChangeFaceTimer = 1.0f;
 			isAlerted = true;
 			//m_ptPosition = m_Original;
+
+			if (EnemyDistance.ComputeLength() <= 20)
+			{
+				m_vtVelocity.x -= 2.0f;
+				if (EnemyDistance.x <= 0)
+				{
+					m_vtVelocity.x = 0.0f;
+					m_Timestamp.SetCurrAnim("SwordsmanAttack");
+				}
+			}
 		}
 	}
-	else if (isAlerted == true)
+
+	if (isAlerted == true)
 	{
-		m_Timestamp.SetCurrAnim("SwordsmanAlerted");
+		m_Timestamp.SetCurrAnim("SwordsmanIdle");
 		AlertTimer -= elapsedTime;
 		ChangeFaceTimer -= elapsedTime;
 		if (AlertTimer <= 0.0f)
@@ -78,6 +82,7 @@ void	 Swordsman::Update(float elapsedTime)
 				toRight = false;
 				toLeft = true;
 			}
+
 		}
 		if (ChangeFaceTimer <= 0.0f)
 		{
@@ -88,14 +93,11 @@ void	 Swordsman::Update(float elapsedTime)
 	}
 	else
 	{
-		m_Timestamp.SetCurrAnim("SwordsmanRunning");
 		if (m_Target == nullptr)
 		{
 			if (toRight)
 			{
-				m_facingRight = true;
-				//GameplayState::GetInstance()->GetTileSystem()
-				SetDestination(m_RightMax.x);
+				SetDestination(m_ptPosition.x + 256.0f);
 				m_vtVelocity.x = 64.0f;
 				toRight = false;
 			}
@@ -103,7 +105,7 @@ void	 Swordsman::Update(float elapsedTime)
 			{
 				m_facingRight = false;
 				m_vtVelocity.x = -64.0f;
-				SetDestination(m_LeftMax.x);
+				SetDestination(GetDestination() - 256.0f);
 				toLeft = true;
 			}
 			if (toRight == false && toLeft && m_ptPosition.x <= destination)
@@ -230,6 +232,26 @@ void Swordsman::HandleCollision(IEntity* pOther)
 	}
 }
 
+
+void Swordsman::HandleEvent(const SGD::Event* pEvent)
+{
+	if (pEvent->GetEventID() == "THREAT")
+	{
+		if (m_Target == nullptr)
+		{
+			SGD::Vector NewThreat = reinterpret_cast<Player*>(pEvent->GetSender())->GetPosition() - this->GetPosition();
+			if (NewThreat.ComputeLength() < 150)
+			{
+				SetTarget(reinterpret_cast<Player*>(pEvent->GetSender()));
+				SGD::Event* event = new SGD::Event("TargetedByBowman", nullptr, this);
+				event->QueueEvent();
+			}
+		}
+
+
+	}
+
+}
 
 void Swordsman::HandleEvent(const SGD::Event* pEvent)
 {

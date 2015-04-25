@@ -22,7 +22,7 @@ SGD::Point AnimationSystem::GetParticlePt(AnimationTimestamp& _ts, float _X, flo
 	return pt;
 }
 
-void AnimationSystem::Render(AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale, float rotation)
+void AnimationSystem::Render(AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale)
 {
 
 	SGD::Point temppt = SGD::Point((float)_PosX, (float)_PosY);
@@ -51,12 +51,12 @@ void AnimationSystem::Render(AnimationTimestamp& _info, float _PosX, float _PosY
 	else if (_info.GetOwner()->GetType() == Actor::ENT_FALLING_ROCK)
 		GM->DrawTextureSection(m_Imgs[8], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_ROLLING_BOULDER)
-		GM->DrawTextureSection(m_Imgs[9], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, rotation, { 32, 32 }, {}, _scale);
+		GM->DrawTextureSection(m_Imgs[9], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_POPUPSPIKES)
 		GM->DrawTextureSection(m_Imgs[10], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 	else if (_info.GetOwner()->GetType() == Actor::ENT_LEVERS)
 		GM->DrawTextureSection(m_Imgs[11], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
-	else if (_info.GetOwner()->GetType() == Actor::ENT_PLATES)
+	else if (_info.GetOwner()->GetType() == Actor::ENT_PRESSURE_PLATE)
 		GM->DrawTextureSection(m_Imgs[12], temppt, SGD::Rectangle{ rect.left + pt.x, rect.top + pt.y, (rect.left + pt.x) + rect.ComputeWidth(), (rect.top + pt.y) + rect.ComputeHeight() }, 0.0f, {}, {}, _scale);
 }
 

@@ -20,7 +20,6 @@ private:
 	float time = 0.0f;
 	SGD::HAudio SplashMusic;
 	SGD::HAudio Select;
-
 public:
 	static SplashState* GetInstance();
 	void	Enter(void);

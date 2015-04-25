@@ -47,8 +47,8 @@ private:
 	int level = 2;
 
 public:
+	//SGD::HTexture bg = SGD::INVALID_HANDLE;
 	bool cameraPanningOn = false;
-	SGD::HTexture bg = SGD::INVALID_HANDLE;
 	// this is a Static Game Singleton GetInsatance()
 	static Game* GetInstance();
 	// this is a Static Game Singleton DeleteInstance()
@@ -81,9 +81,7 @@ public:
 	int GetLanguage(){ return m_Language; }
 	void SetLanguage(int _language){ m_Language = _language; }
 
-	int GetLevel()const{ return level; }
-	void SetLevel(int _level){ level = _level; }
-	
+
 	//Font
 	BitmapFont GetFont(){ return font; }
 
@@ -97,7 +95,7 @@ public:
 	void Pause(IGameState* n_NextState);
 	bool CheckPrevious();
 
-	
+
 
 	//State Mutator
 	// This is going to change a state when needed 

@@ -22,6 +22,7 @@ class AutoLockingDoor;
 class GameplayState :
 	public IGameState
 {
+private:	
 private:
 	// this is the default Constructor 
 	GameplayState() = default;
@@ -32,6 +33,10 @@ private:
 	// this is a make shift  Assignment Operator 
 	GameplayState& operator= (const GameplayState&) = delete;
 	// This is an Haudio used for the main menu 
+	SGD::HAudio m_SwitchSound = SGD::INVALID_HANDLE;
+	SGD::HAudio m_PickingUPSon = SGD::INVALID_HANDLE;
+	SGD::HAudio m_Movement = SGD::INVALID_HANDLE;
+	SGD::HAudio Select;
 	// this is a Htexture used to Render the fathers image 
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_PointerImage = SGD::INVALID_HANDLE;
@@ -79,7 +84,6 @@ private:
 
 
 	bool movementTurnOff = false;
-
 public:
 	// this is a Gamplaystate Pointer function used to  make a singleton 
 	static GameplayState* GetInstance();
@@ -107,7 +111,7 @@ public:
 	Actor* CreateRocks(int i) const;
 	Actor* CreateSmashingColumns(int i) const;
 	Actor* CreateCannonBall(Cannon*);
-	Actor* CreateArrow(DartCannon*);
+	Actor* CreateArrow(Actor*);
 	Actor* CreateDoor(int i) const;
 	Actor* CreateLadder(int i) const;
 	Actor* CreateRopes(int i) const;

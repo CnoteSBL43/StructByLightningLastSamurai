@@ -32,7 +32,7 @@ public:
 	//Methods
 
 	void Update(int _elapsedtime, AnimationTimestamp& _info);
-	void Render(AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale = { 1, 1 }, float rotation = 0.0f);
+	void Render(AnimationTimestamp& _info, float _PosX, float _PosY, SGD::Size _scale = { 1, 1 });
 	void Load(const char* _filename);
 	void Exit();
 

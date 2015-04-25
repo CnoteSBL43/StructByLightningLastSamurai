@@ -1,12 +1,12 @@
 #pragma once
 #include "GameObjects.h"
-
+#include "AnimationSystem.h"
 
 class PressurePlate : public GameObjects
 {
+private:
 	bool isHeavy;
 	float totalWeights;
-	int ID;
 	AnimationTimestamp m_Timestamp;
 public:
 	PressurePlate();
@@ -23,9 +23,9 @@ public:
 
 	SGD::Rectangle GetRect(void)	const;
 	void HandleCollision(IEntity* pOther);
-	int	GetType(void) const	{ return ENT_PLATES; }
-	void SetID(int _id){ ID = _id; }
-	int GetID() const { return ID; }
-	//bool check = false;
+
+	int GetType() const { return ENT_PRESSURE_PLATE; }
+
+	bool check = false;
 };
 

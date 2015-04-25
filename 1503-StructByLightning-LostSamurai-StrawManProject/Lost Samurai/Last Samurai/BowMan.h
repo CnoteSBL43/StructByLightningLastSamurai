@@ -19,7 +19,7 @@ private:
 	bool isAlerted = false;
 	float AlertTimer = 0.0f;
 	float ChangeFaceTimer = 0.0f;
-//	SGD::Vector EnemyDistance = {};
+	SGD::Vector EnemyDistance = {};
 	float m_Timer = 0.0f;
 	SGD::HTexture m_AlertedImage = SGD::INVALID_HANDLE;
 
@@ -39,11 +39,6 @@ public:
 	void HandleCollision(IEntity* pOther);
 	void SetTarget(Player* _target) { m_Target = _target; }
 	Player* GetEnemyTarget() { return m_Target; }
-	void SetDestination(float _dest){ destination = _dest; }
-	float GetDestination(){ return destination; }
-	bool toRight = true;
-	bool toLeft = false;
-	float destination = 0.0f;
 
 
 

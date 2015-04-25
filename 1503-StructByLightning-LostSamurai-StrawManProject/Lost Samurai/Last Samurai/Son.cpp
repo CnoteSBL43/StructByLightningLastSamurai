@@ -22,9 +22,7 @@ Son::Son()
 	SonStaimadrained = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminabeingdrained.wav");
 	SonOutOfstamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/ranoutofstamina.wav");
 	LowStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/lowstamina.wav");
-	RegeneratingStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/regeneratingstamina.wav");
-	PushBoxSound = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/movecrate.mp3");
-	ClimbLadder = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/movingacrossledgeandclimbingladderandropetension.wav");
+	RegeneratingStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminaregen.wav");
 }
 
 
@@ -43,27 +41,19 @@ void	 Son::Update(float elapsedTime)
 		{
 			if (GetBackPack())
 				m_vtVelocity.y = 0.0f;
-			if ((SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right)) && letRight && !GameplayState::GetInstance()->GetMovementOff())
+
+
+			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(true);
-				m_vtVelocity.x = 128.0f;
+				m_vtVelocity.x = 512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letLeft = true;
-				if (GetHanging() == false && GetonLadder() == false)
+				if (frameswitch >= 0.1f)
 				{
-					if (frameswitch >= 0.07f)
-					{
-						direction++;
-						frameswitch = 0.0f;
-					}
-					if (direction >= 4)
-					{
-						direction = 0;
-					}
-					m_Timestamp.SetCurrAnim("SonRunning");
-					m_Timestamp.SetCurrFrame(direction);
-					m_Timestamp.SetElapsedTime(elapsedTime);
+					direction++;
+					frameswitch = 0.0f;
 				}
 				else
 				{
@@ -75,16 +65,24 @@ void	 Son::Update(float elapsedTime)
 					{
 						direction = 0;
 					}
+					/*if (grounded == false)
+					{
+					SGD::Event* event = new SGD::Event("Walking", nullptr, this);
+					event->QueueEvent();
+					}*/
 				}
+				m_Timestamp.SetCurrAnim("SonRunning");
+				m_Timestamp.SetCurrFrame(direction);
+				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
 				SetFacing(false);
-				m_vtVelocity.x = -128.0f;
+				m_vtVelocity.x = -512.0f;
 				if (GetBackPack())
 					lrArrow = true;
 				letRight = true;
-				if (GetHanging() == false && GetonLadder() == false)
+				if (frameswitch >= 0.1f)
 				{
 					if (frameswitch >= 0.07f)
 					{
@@ -110,6 +108,9 @@ void	 Son::Update(float elapsedTime)
 						direction = 0;
 					}
 				}
+				m_Timestamp.SetCurrAnim("SonRunning");
+				m_Timestamp.SetCurrFrame(direction);
+				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			else
 			{
@@ -125,10 +126,9 @@ void	 Son::Update(float elapsedTime)
 				m_vtVelocity.y += 4.9f;
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump)
 			{
 				SGD::AudioManager::GetInstance()->PlayAudio(m_SonJump);
-				Landing = true;
 				if (GetStamina() >= 10)
 				{
 					if (GetHanging())
@@ -150,6 +150,7 @@ void	 Son::Update(float elapsedTime)
 						SetjumpOffLedge(false);
 						SetHanging(false);
 						m_vtVelocity.y = -800.0f;
+						Landing = true;
 					}
 					if (GetBackPack())
 					{
@@ -164,8 +165,7 @@ void	 Son::Update(float elapsedTime)
 			}
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) && GetonLadder() && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				previousPosY = m_ptPosition.y;
-				m_vtVelocity.y = 512.0f;
+				isHanging = false;
 				upArrow = false;
 			}
 			if (GetOnGround() && GetonLadder())
@@ -189,6 +189,7 @@ void	 Son::Update(float elapsedTime)
 					m_vtVelocity.y += 36.0f;
 				else
 					m_vtVelocity.y = 512.0f;
+
 			}
 
 			if (!GetOnGround() && cannotJump == true)
@@ -198,42 +199,47 @@ void	 Son::Update(float elapsedTime)
 			}
 			if (m_vtVelocity.y > 0 && GetjumpOffLedge())
 				SetjumpOffLedge(false);
+//			SGD::AudioManager::GetInstance()->StopAudio(SonStaimadrained);
+		}
 
-			Actor::Update(elapsedTime);
-		}
-		else if (!GetCurrCharacter() && !GetBackPack())
+		frameswitch += elapsedTime;
+	}
+	else if (!GetCurrCharacter() && !GetBackPack())
+	{
+		m_vtVelocity.x = 0.0f;
+		direction = 0;
+		m_Timestamp.SetCurrAnim("SonIdle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
+		if (!GetOnGround() && upArrow == true)//ground level -100
 		{
-			m_vtVelocity.x = 0.0f;
-			direction = 0;
-			m_Timestamp.SetCurrAnim("SonIdle");
-			m_Timestamp.SetCurrFrame(direction);
-			m_Timestamp.SetElapsedTime(elapsedTime);
-			Actor::Update(elapsedTime);
-			if (!GetOnGround() && upArrow == true)//ground level -100
-			{
-				if (m_vtVelocity.y < 0)
-					m_vtVelocity.y += 24.0f;
-				else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
-					m_vtVelocity.y += 36.0f;
-				else
-					m_vtVelocity.y = 512.0f;
-			}
-			if (GetOnGround())
-			{
-				upArrow = false;
-			}
+			if (m_vtVelocity.y < 0)
+				m_vtVelocity.y += 24.0f;
+			else if (m_vtVelocity.y >= 0 && m_vtVelocity.y < 512.0f)
+				m_vtVelocity.y += 36.0f;
+			else
+				m_vtVelocity.y = 512.0f;
 		}
-		else if (!GetCurrCharacter() && GetBackPack())
+		if (GetOnGround())
 		{
-			m_vtVelocity.x = 0.0f;
-			m_vtVelocity.y = 0.0f;
-			direction = 0;
-			m_Timestamp.SetCurrAnim("SonIdle");
-			m_Timestamp.SetCurrFrame(direction);
-			m_Timestamp.SetElapsedTime(elapsedTime);
-			Actor::Update(elapsedTime);
+			upArrow = false;
 		}
 	}
+	else if (!GetCurrCharacter() && GetBackPack())
+	{
+		m_vtVelocity.x = 0.0f;
+		m_vtVelocity.y = 0.0f;
+		direction = 0;
+		m_Timestamp.SetCurrAnim("SonIdle");
+		m_Timestamp.SetCurrFrame(direction);
+		m_Timestamp.SetElapsedTime(elapsedTime);
+	}
+	/*if (isHanging == false && SGD::AudioManager::GetInstance()->IsAudioPlaying(SonStaimadrained))
+	{
+		SGD::AudioManager::GetInstance()->StopAudio(SonStaimadrained);
+	}*/
+	/*AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
+	Actor::Update(elapsedTime);*/
 	else
 	{
 		frameswitch = 0;
@@ -242,10 +248,10 @@ void	 Son::Update(float elapsedTime)
 		m_Timestamp.SetCurrFrame(direction);
 		m_Timestamp.SetElapsedTime(elapsedTime);
 	}
-
 	if (GetStamina() < 0)
 	{
 		SetStamina(0);
+		SGD::AudioManager::GetInstance()->PlayAudio(SonOutOfstamina);
 	}
 	if (GetStamina() >= 100)
 	{
@@ -266,6 +272,7 @@ void	 Son::Update(float elapsedTime)
 		{
 			SGD::AudioManager::GetInstance()->PlayAudio(LowStamina);
 		}
+
 	}
 	if (GetStamina() == 100)
 	{
@@ -277,13 +284,13 @@ void	 Son::Update(float elapsedTime)
 	{
 		if (GetOnGround())
 		{
+
 			SetStamina((GetStamina() + 0.06f));
 			if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(RegeneratingStamina))
 			{
 				SGD::AudioManager::GetInstance()->PlayAudio(RegeneratingStamina);
 			}
 		}
-
 	}
 	if (isFlashing)
 	{
@@ -322,6 +329,7 @@ void	 Son::Update(float elapsedTime)
 	}
 	frameswitch += elapsedTime;
 	AnimationSystem::GetInstance()->Update((int)elapsedTime, m_Timestamp);
+	Actor::Update(elapsedTime);
 }
 
 void	 Son::Render(void)
@@ -350,10 +358,9 @@ void	 Son::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x + GetRect().ComputeWidth() / 2;
 	p.y -= Game::GetInstance()->GetCameraPosition().y + GetRect().ComputeHeight() - 14.0f;
-	SGD::Rectangle r = { p.x, p.y - 50.0f, p.x + GetStamina() / 2, p.y - 42.5f };
 	if (!GetCurrCharacter())
 	{
-		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 + 37.5f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() / 4 + 37.5f, 77.5 };
+		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 + 37.5f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() + 37.5f / 4, 77.5 };
 		if (GetStamina() > 0 && !r.IsEmpty())
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
@@ -363,20 +370,17 @@ void	 Son::Render(void)
 		if (GetStamina() > 0 && !r.IsEmpty())
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
-	if (GetBackPack() == false)
-	{
-		if (GetFacing())
-			AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -0.5f, 0.5f });
-		else
-			AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
-	}
+
+	if (GetFacing())
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ -0.5f, 0.5f });
+	else
+		AnimationSystem::GetInstance()->Render(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
 }
 
 SGD::Rectangle  Son::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
 	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y, SGD::Size{ 0.5f, 0.5f });
-
 }
 void Son::HandleCollision(IEntity* pOther)
 {
@@ -517,80 +521,32 @@ void Son::HandleCollision(IEntity* pOther)
 			}
 		}
 	}
-	if (pOther->GetType() == ENT_BOX)
+	if (pOther->GetType() == ENT_LEDGE)
 	{
-		SGD::Rectangle Rect;
-		Rect = this->GetRect().ComputeIntersection(pOther->GetRect());
-		if (Rect.ComputeHeight() < GetRect().ComputeHeight())
+		bool temp = pOther->GetRect().IsIntersecting(this->GetRect());
+		if (temp)
 		{
-			if (Rect.left >= this->GetRect().left && Rect.right <= this->GetRect().right)
+			if (GetStamina() > 5)
 			{
-				letLeft = true;
-				letRight = true;
-				if (Rect.top == GetRect().top)
+				previousPosY = m_ptPosition.y;
+				m_ptPosition.y = pOther->GetRect().bottom + 50.0f;
+				m_vtVelocity.y = 0.0f;
+				SetOnGround(false);
+				if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(SonStaimadrained))
 				{
-					cannotJump = true;
-					SetCollisionRect(false);
+					SGD::AudioManager::GetInstance()->PlayAudio(SonStaimadrained);
 				}
-				else if (Rect.bottom == GetRect().bottom)
-				{
-					//set him on the floor and set ground to true
-					if (Rect.ComputeWidth() < 7.0f)
-					{
-						SetOnGround(false);
-						SetCollisionRect(false);
-						cannotJump = false;
-						upArrow = false;
-					}
-					else
-					{
-						cannotJump = false;
-						upArrow = false;
-						m_vtVelocity.y = 0.0f;
-						float op = GetRect().bottom - GetPosition().y;
-						m_ptPosition.y = pOther->GetRect().top - op;
-						SetOnGround(true);
-						if (!SGD::AudioManager::GetInstance()->IsAudioPlaying(PushBoxSound))
-						{
-							SGD::AudioManager::GetInstance()->PlayAudio(PushBoxSound);
-						}
-
-					}
-				}
+				SetHanging(true);
 			}
-		}
-		if (Rect.ComputeWidth() < this->GetRect().ComputeWidth())
-		{
-			if (Rect.top >= this->GetRect().top && Rect.bottom <= this->GetRect().bottom)
-			{
-				m_vtVelocity.x = 0.0f;
 
-				if (GetRect().left == Rect.left)
-				{
-					if (!dynamic_cast<Box*>(pOther)->GetHeavy())
-					{
-						SetVelocity({ -128.0f, 0.0f });
-						dynamic_cast<Box*>(pOther)->CalculateVelocity(GetVelocity());
-						SetVelocity(dynamic_cast<Box*>(pOther)->GetVelocity());
-					}
-					letLeft = false;
-				}
-				else if (GetRect().right == Rect.right)
-				{
-					if (!dynamic_cast<Box*>(pOther)->GetHeavy())
-					{
-						SetVelocity({ 128.0f, 0.0f });
-						dynamic_cast<Box*>(pOther)->CalculateVelocity(GetVelocity());
-						SetVelocity(dynamic_cast<Box*>(pOther)->GetVelocity());
-					}
-					letRight = false;
-				}
-
-			}
 		}
 
 
 	}
+
+
+
+
 
 }
 void Son::HandleEvent(const SGD::Event* pEvent)
@@ -605,8 +561,7 @@ void Son::HandleEvent(const SGD::Event* pEvent)
 		//m_Timestamp.SetCurrFrame(direction);
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
-		//this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
-		//SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left - 380, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top - 300 });
+		this->SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().left, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[0]->GetRect().top });
 	}
 
 }

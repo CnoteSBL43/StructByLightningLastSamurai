@@ -229,7 +229,7 @@ void OptionState::Render(float _ElapsedTime)
 		wos4 << "English";
 	if (Game::GetInstance()->GetLanguage() == 0)
 	{
-		Game::GetInstance()->GetFont().Draw("Options", SGD::Point{ 270.0f, 75.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Options", SGD::Point{ 270.0f, 50.0f }, 0.75f);
 		Game::GetInstance()->GetFont().Draw("Music Volume", SGD::Point{ 125.0f, 200.0f }, 0.375f);
 		Game::GetInstance()->GetFont().Draw("SFX Volume", SGD::Point{ 125.0f, 250.0f }, 0.375f);
 		Game::GetInstance()->GetFont().Draw("FullScreen", SGD::Point{ 125.0f, 300.0f }, 0.375f);
@@ -242,7 +242,7 @@ void OptionState::Render(float _ElapsedTime)
 	}
 	else
 	{
-		Game::GetInstance()->GetFont().Draw("Opciones", SGD::Point{ 270.0f, 75.0f }, 0.75f);
+		Game::GetInstance()->GetFont().Draw("Opciones", SGD::Point{ 270.0f, 50.0f }, 0.75f);
 		Game::GetInstance()->GetFont().Draw("Volumen de la Musica", SGD::Point{ 125.0f, 200.0f }, 0.375f);
 		Game::GetInstance()->GetFont().Draw("SFX volumen", SGD::Point{ 125.0f, 250.0f }, 0.375f);
 		Game::GetInstance()->GetFont().Draw("Pantalla Completa", SGD::Point{ 125.0f, 300.0f }, 0.375f);

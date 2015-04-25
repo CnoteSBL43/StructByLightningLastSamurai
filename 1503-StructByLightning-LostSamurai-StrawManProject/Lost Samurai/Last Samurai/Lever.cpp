@@ -37,7 +37,8 @@ void Lever::Render(void)
 
 SGD::Rectangle Lever::GetRect(void) const
 {
-	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, m_ptPosition.x, m_ptPosition.y);
+	SGD::Point pt = m_ptPosition;
+	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, pt.x, pt.y);
 }
 
 void Lever::HandleCollision(IEntity* pOther)

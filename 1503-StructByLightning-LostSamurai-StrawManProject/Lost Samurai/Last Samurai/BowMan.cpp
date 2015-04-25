@@ -73,6 +73,7 @@ void BowMan::Update(float _elapsedtime)
 	if (m_Target != nullptr)
 	{
 		SGD::Vector EnemyDistance = m_ptPosition - GetEnemyTarget()->GetPosition();
+
 		if (EnemyDistance.ComputeLength() > 300)
 		{
 			SetTarget(nullptr);
@@ -83,6 +84,8 @@ void BowMan::Update(float _elapsedtime)
 			isAlerted = true;
 			m_ptPosition = temp;
 		}
+
+
 		if (EnemyDistance.ComputeLength() <= 100)
 		{
 			m_vtVelocity.x -= 2.0f;
@@ -95,6 +98,7 @@ void BowMan::Update(float _elapsedtime)
 				m_Cannonball = nullptr;
 				m_Timer = 3.0;
 			}
+
 		}
 	}
 	if (isAlerted == true)
@@ -114,30 +118,28 @@ void BowMan::Update(float _elapsedtime)
 	}
 	else
 	{
+		/*if (EnemyDistance.ComputeLength() < 200)
+		{
+
+		}*/
 		if (m_Target == nullptr)
 		{
-			if (toRight)
+			if (m_Wander.x == 0)
 			{
-				SetDestination(m_ptPosition.x + 256.0f);
-				m_vtVelocity.x = 64.0f;
-				toRight = false;
+				m_Wander = { m_ptPosition.x - 220, m_ptPosition.y };
 			}
-			if (m_ptPosition.x >= destination && !toLeft)
+
+			if (m_ptPosition.x >= m_Wander.x)
 			{
 				m_facingRight = false;
-				m_vtVelocity.x = -64.0f;
-				SetDestination(GetDestination() - 256.0f);
-				toLeft = true;
+				m_vtVelocity.x -= 1.0f;
 			}
-			if (toRight == false && toLeft && m_ptPosition.x <= destination)
+			else if (m_ptPosition.x <= m_Wander.x)
 			{
 				m_facingRight = true;
-				toRight = true;
-				toLeft = false;
-				m_vtVelocity.x = 64.0f;
+				m_vtVelocity.x += 1.0f;
 			}
 		}
-
 	}
 	m_Timer -= _elapsedtime;
 	Actor::Update(_elapsedtime);

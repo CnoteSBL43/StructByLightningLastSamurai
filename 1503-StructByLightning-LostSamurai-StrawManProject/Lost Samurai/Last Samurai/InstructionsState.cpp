@@ -9,11 +9,16 @@ InstructionsState* InstructionsState::GetInstance()
 void InstructionsState::Enter()
 {
 	m_BackArrow = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/BackArrow.png");
+	m_infoMusic = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/instructionsmenu.xwm");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
+	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
+	SGD::AudioManager::GetInstance()->PlayAudio(m_infoMusic, true);
 }
 
 void InstructionsState::Exit()
 {
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BackArrow);
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_infoMusic);
 }
 
 bool InstructionsState::Update(float _ElapsedTime)
@@ -24,10 +29,12 @@ bool InstructionsState::Update(float _ElapsedTime)
 
 		if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right) && Switch == false || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == false)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 			Switch = true;
 		}
 		else if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Left) && Switch == true || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == true)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 			Switch = false;
 		}
 	}
@@ -35,30 +42,36 @@ bool InstructionsState::Update(float _ElapsedTime)
 	{
 		if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Right) && Switch == false || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == false)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(Select);
 			Switch = true;
 		}
 		else if (SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Left) && Switch == true || SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q) && Switch == true)
 		{
+			SGD::AudioManager::GetInstance()->PlayAudio(Select);
 			Switch = false;
 		}
 	}
 
 	if (SGD::InputManager::GetInstance()->IsButtonPressed(0, 8) && Arcade == false)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Arcade = true;
 	}
 	else if (SGD::InputManager::GetInstance()->IsButtonPressed(0, 8) && Arcade == true)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Arcade = false;
 	}
 
 
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == false || SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == false)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 	}
 	else if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Escape) && Game::GetInstance()->CheckPrevious() == true || SGD::InputManager::GetInstance()->IsButtonPressed(0, 9) && Game::GetInstance()->CheckPrevious() == true)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(GameplayState::GetInstance());
 	}
 	return true;
@@ -73,7 +86,7 @@ void InstructionsState::Render(float _ElapsedTime)
 		{
 			if (!Switch)
 			{
-				Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 170.0f, 75.0f }, 0.75f);
+				Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 170.0f, 50.0f }, 0.75f);
 				Game::GetInstance()->GetFont().Draw("Left Arrow:     -", SGD::Point{ 75.0f, 200.0f }, 0.375f);
 				Game::GetInstance()->GetFont().Draw("Right Arrow:   -", SGD::Point{ 75.0f, 250.0f }, 0.375f);
 				Game::GetInstance()->GetFont().Draw("Up Arrow :         -", SGD::Point{ 75.0f, 300.0f }, 0.375f);
@@ -90,7 +103,7 @@ void InstructionsState::Render(float _ElapsedTime)
 			}
 			else if (Switch)
 			{
-				Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 170.0f, 75.0f }, 0.75f);
+				Game::GetInstance()->GetFont().Draw("Instructions", SGD::Point{ 170.0f, 50.0f }, 0.75f);
 				Game::GetInstance()->GetFont().Draw("DPad Left:     -", SGD::Point{ 75.0f, 200.0f }, 0.375f);
 				Game::GetInstance()->GetFont().Draw("DPad Right:   -", SGD::Point{ 75.0f, 250.0f }, 0.375f);
 				Game::GetInstance()->GetFont().Draw("Press A:         -", SGD::Point{ 75.0f, 300.0f }, 0.375f);
@@ -110,7 +123,7 @@ void InstructionsState::Render(float _ElapsedTime)
 		else if (!Arcade)
 		{
 
-			Game::GetInstance()->GetFont().Draw(" Arcade Instructions", SGD::Point{ 5.0f, 75.0f }, 0.75f);
+			Game::GetInstance()->GetFont().Draw(" Arcade Instructions", SGD::Point{ 5.0f, 50.0f }, 0.75f);
 			Game::GetInstance()->GetFont().Draw(" Left Stick:     -", SGD::Point{ 25.0f, 200.0f }, 0.375f);
 			Game::GetInstance()->GetFont().Draw("Right Stick:   -", SGD::Point{ 25.0f, 250.0f }, 0.375f);
 			Game::GetInstance()->GetFont().Draw("Press 0:         -", SGD::Point{ 25.0f, 300.0f }, 0.375f);
@@ -131,7 +144,7 @@ void InstructionsState::Render(float _ElapsedTime)
 	{
 		if (!Switch)
 		{
-			Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 170.0f, 75.0f }, 0.75f);
+			Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 170.0f, 50.0f }, 0.75f);
 			Game::GetInstance()->GetFont().Draw("Flecha Izquierda:", SGD::Point{ 25.0f, 200.0f }, 0.3f);
 			Game::GetInstance()->GetFont().Draw("Flecha Correcta   ", SGD::Point{ 25.0f, 250.0f }, 0.3f);
 			Game::GetInstance()->GetFont().Draw("Flecha Hacia Arriba:", SGD::Point{ 25.0f, 300.0f }, 0.3f);
@@ -149,7 +162,7 @@ void InstructionsState::Render(float _ElapsedTime)
 		else if (Switch)
 		{
 
-			Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 170.0f, 75.0f }, 0.75f);
+			Game::GetInstance()->GetFont().Draw("Instrucciones", SGD::Point{ 170.0f, 50.0f }, 0.75f);
 			Game::GetInstance()->GetFont().Draw("DPad izquierda:", SGD::Point{ 25.0f, 200.0f }, 0.3f);
 			Game::GetInstance()->GetFont().Draw("DPad derecho", SGD::Point{ 25.0f, 250.0f }, 0.3f);
 			Game::GetInstance()->GetFont().Draw("Presione A:", SGD::Point{ 25.0f, 300.0f }, 0.3f);

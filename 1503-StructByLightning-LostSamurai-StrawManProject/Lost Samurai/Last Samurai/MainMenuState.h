@@ -15,13 +15,13 @@ private:
 	MainMenuState(const MainMenuState&) = delete;
 	MainMenuState& operator= (const MainMenuState&) = delete;
 	SGD::HAudio m_GameMusic = SGD::INVALID_HANDLE;
-	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
-	//SGD::HTexture m_BkgndImg = SGD::INVALID_HANDLE;
 	SGD::HAudio m_Movement = SGD::INVALID_HANDLE;
+	SGD::HTexture m_Pointer = SGD::INVALID_HANDLE;
+	SGD::HTexture m_BkgndImg = SGD::INVALID_HANDLE;
+
 	int m_CursorPos = 0;
 	bool isLoading = false;
 	SGD::HAudio Select;
-
 public:
 	static MainMenuState* GetInstance();
 	void	Enter(void);

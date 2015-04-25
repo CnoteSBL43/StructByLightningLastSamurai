@@ -130,7 +130,7 @@ Actor* GameplayState::CreateSwordsman(Actor* _player, int i) const
 	//swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
 	swordsman->SetVelocity({ 64.0f, 0.0f });
-	swordsman->SetTarget(_player);
+	dynamic_cast<Swordsman*>(swordsman)->SetTarget((Player*)_player);
 	return swordsman;
 }
 
@@ -194,9 +194,10 @@ void GameplayState::Enter()
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
 	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png");
 	m_LadderImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Ladder.png");
-	m_SmallBoxImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallbox.png");
-	m_BigBoxImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigbox.png");
-	m_FinalDoorImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/finaldoor.png");
+	m_SwitchSound = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/switching characters.wav");
+	m_PickingUPSon = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/backpack.wav");
+	m_Movement = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/cursormove.wav");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -211,9 +212,12 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/FallingRocks.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/RollingBoulder.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/popupspikes.xml");
-	AnimationSystem::GetInstance()->Load("../resource/XML/lever.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Lever.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/PressurePlate.xml");
-	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/level2.xwm");
+
+
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/tutorial.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
 	SGD::AudioManager::GetInstance()->PlayAudio(m_Backround, true);
@@ -238,6 +242,13 @@ void GameplayState::Enter()
 
 	//p = new Pulley(200, 20, SGD::Vector(540, 900));//2840 660
 
+	if (!Game::GetInstance()->changelevel)
+		Load->LoadTileXml((Father*)father, (Son*)son,"../resource/XML/TutorialLevel.xml");
+	else
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level1.xml");
+	
+	p = new Pulley(200, 20, SGD::Vector(540, 900));//2840 660
+	
 	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
 		m_pEntities->AddEntity(Load->m_CollisionRect[i], 3);
 
@@ -492,25 +503,27 @@ bool GameplayState::Update(float _ElapsedTime)
 		}
 		else
 		{
-			if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
+		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
+		{
+			float xIncrement, yIncrement;
+			xIncrement = 5.0f;
+			yIncrement = 3.0f;
+			/*float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
+			fabs(xDistance);
+			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
+			fabs(yDistance);
+			if (xDistance > yDistance)
 			{
-				float xIncrement, yIncrement;
-				float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
-				fabs(xDistance);
-				float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
-				fabs(yDistance);
-				if (xDistance > yDistance)
-				{
-					xIncrement = 8.0f;
-					yIncrement = 3.0f;
-				}
-				else
-				{
-					xIncrement = 3.0f;
-					yIncrement = 6.0f;
-				}
-				if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
-				{
+			xIncrement = 8.0f;
+			yIncrement = 3.0f;
+			}
+			else 
+			{
+			xIncrement = 3.0f;
+			yIncrement = 6.0f;
+			}*/
+			if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
+			{
 
 					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x + xIncrement, Game::GetInstance()->GetCameraPosVector().y });
 					if (Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x <= 1.0f)
@@ -578,7 +591,10 @@ bool GameplayState::Update(float _ElapsedTime)
 			}
 
 
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 0))
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 0))
+		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_SwitchSound);
+			if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 			{
 				if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 				{
@@ -599,19 +615,17 @@ bool GameplayState::Update(float _ElapsedTime)
 				}
 			}
 
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 3) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
-			{
-				m_pEntities->CheckCollisions(0, 1);
-			}
-			//replace son after backpacing is activated
-			if (dynamic_cast<Son*>(son)->GetBackPack())
-			{
-				dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
-				if (dynamic_cast<Father*>(father)->GetFacing())
-					son->SetPosition(SGD::Point{ father->GetPosition().x - 8.0f, father->GetPosition().y - 16.0f });
-				else
-					son->SetPosition(SGD::Point{ father->GetPosition().x + 18.0f, father->GetPosition().y - 16.0f });
-			}
+		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 3) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
+		{
+			SGD::AudioManager::GetInstance()->PlayAudio(m_PickingUPSon);
+			m_pEntities->CheckCollisions(0, 1);
+		}
+		//replace son after backpacing is activated
+		if (dynamic_cast<Son*>(son)->GetBackPack())
+		{
+			dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
+			son->SetPosition(SGD::Point{ father->GetPosition().x - 16.0f, father->GetPosition().y - 16.0f });
+		}
 
 			// Collision 
 			m_pEntities->UpdateAll(_ElapsedTime);
@@ -1001,13 +1015,11 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-		/*	GameplayState* self = GameplayState::GetInstance();
-			Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-			self->m_pEntities->AddEntity(swordman, 2);
-			swordman->Release();
-			swordman->Release();
-			swordman = nullptr;
-			*/
+		GameplayState* self = GameplayState::GetInstance();
+		Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+		self->m_pEntities->AddEntity(swordman, 2);
+		swordman->Release();
+		swordman = nullptr;
 		break;
 	}
 
@@ -1032,7 +1044,7 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 	{
 
 		const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
-		Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+		Actor* m_arrow = GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner());
 		GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
 		break;
 
@@ -1047,7 +1059,9 @@ void GameplayState::Pause(void)
 {
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::DownArrow) || SGD::InputManager::GetInstance()->IsDPadPressed(0, SGD::DPad::Down))
 	{
+
 		cursorPos++;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 		if (cursorPos > 4)
 			cursorPos = 0;
 	}
@@ -1055,27 +1069,33 @@ void GameplayState::Pause(void)
 	{
 
 		cursorPos--;
+		SGD::AudioManager::GetInstance()->PlayAudio(m_Movement);
 		if (cursorPos < 0)
 			cursorPos = 4;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 0 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 0)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		m_Pause = false;
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 1 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 1)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(InstructionsState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 2 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 2)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(OptionState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 3 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 3)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->Pause(SaveGameState::GetInstance());
 	}
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Enter) && cursorPos == 4 || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && cursorPos == 4)
 	{
+		SGD::AudioManager::GetInstance()->PlayAudio(Select);
 		Game::GetInstance()->ChangeState(MainMenuState::GetInstance());
 	}
 }
@@ -1117,7 +1137,6 @@ void GameplayState::RenderPause(void)
 	}
 }
 
-
 Actor* GameplayState::CreateSpikes(int i) const
 {
 	Spike* m_Spike = new Spike();
@@ -1127,14 +1146,12 @@ Actor* GameplayState::CreateSpikes(int i) const
 	return m_Spike;
 }
 
-
-
 Actor*  GameplayState::CreatePopUpSpikes(int i) const
 {
 	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
 	m_PUSpikes->SetImage(m_SpikesImage);
 	m_PUSpikes->SetSize({ 0.7f, 0.7f });
-	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
+	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 735, Load->Traps["PopSpikes"][i]->top - 900 });
 	return m_PUSpikes;
 }
 
@@ -1171,7 +1188,7 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 
 }
 
-Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
+Actor*  GameplayState::CreateArrow(Actor* _DartCannon)
 {
 	Arrow* m_DartCannon = new Arrow();
 	m_DartCannon->SetPosition(SGD::Point{ _DartCannon->GetPosition().x - 450, _DartCannon->GetPosition().y + 20 });
@@ -1196,7 +1213,6 @@ SGD::Rectangle Spike::GetRect() const
 {
 	return{ m_ptPosition, m_szSize };
 }
-
 
 Actor* GameplayState::CreateBox(int i) const
 {
@@ -1225,8 +1241,8 @@ Actor* GameplayState::CreateBox(int i) const
 Actor*  GameplayState::CreatePlates(int i) const
 {
 	PressurePlate* temp = new PressurePlate();
-	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 800, Load->Traps["Plates"][i]->top - 270 });
-	temp->SetSize({ 32, 16 });
+	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 780, Load->Traps["Plates"][i]->top - 270 });
+	temp->SetSize({ 32, 32 });
 	temp->SetID(leverID);
 	if (Load->PlateisHeavy[i] == false)
 		temp->SetHeavy(false);
@@ -1248,7 +1264,7 @@ Actor*  GameplayState::CreatePlates(int i) const
 Actor* GameplayState::CreateLevers(int i) const
 {
 	Lever* temp = new Lever;
-	temp->SetPosition({ Load->Traps["Levers"][i]->left - 800, Load->Traps["Levers"][i]->top - 280 });
+	temp->SetPosition({ Load->Traps["Levers"][i]->left - 780, Load->Traps["Levers"][i]->top - 279 });
 	temp->SetImage(m_LeverImage);
 	temp->SetSize({ 32, 32 });
 	temp->SetID(leverID);

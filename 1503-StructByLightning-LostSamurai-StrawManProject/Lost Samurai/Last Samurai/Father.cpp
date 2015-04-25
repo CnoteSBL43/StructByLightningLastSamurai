@@ -11,7 +11,9 @@
 #include "TileSystem.h"
 #include "Box.h"
 #include "AutoLockingDoor.h"
-
+#include "BowMan.h"
+#include "CreateRollingBoulerMessage.h"
+#include "Swordsman.h"
 Father::Father()
 {
 	m_Timestamp.SetOwner(this);
@@ -20,28 +22,37 @@ Father::Father()
 	m_Timestamp.SetElapsedTime(0);
 	SGD::IListener::RegisterForEvent("Death");
 	SGD::IListener::RegisterForEvent("Death1");
-	ClimbLadder = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/movingacrossledgeandclimbingladderandropetension.wav");
+	SGD::IListener::RegisterForEvent("TargetedByBowman");
+	SGD::IListener::RegisterForEvent("UntargetedByBowman");
 	SetStamina(200);
+	m_RegenStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminaregen.wav");
+	m_Timestamp.SetCurrFrame(0);
+	m_Timestamp.SetElapsedTime(0);
+	SGD::IListener::RegisterForEvent("Death");
+	SGD::IListener::RegisterForEvent("Death1");
+	SetStamina(1000);
 	m_FatherJump = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Jump.wav");
 	FatherLanding = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Land.wav");
-	m_RegenStamina = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/staminaregen.wav");
-
 }
 
 
 Father::~Father()
 {
+	SGD::AudioManager::GetInstance()->UnloadAudio(m_RegenStamina);
 }
 
 
 
 void	 Father::Update(float elapsedTime)
 {
-
-	if (m_Son == nullptr)
-		m_Son = dynamic_cast<Son*>(GameplayState::GetInstance()->GetSon());
+	if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::M))
+		spawn = true;
+	SGD::Event* event1 = new SGD::Event("THREAT", nullptr, this);
+	event1->QueueEvent();
 	float x = m_ptPosition.x;
 	float y = m_ptPosition.y;
+	SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
+	event->QueueEvent();
 	if (m_Timestamp.GetCurrAnim() != "FatherDeath")
 	{
 		SGD::Event* event = new SGD::Event("THREAT", nullptr, this);
@@ -53,14 +64,19 @@ void	 Father::Update(float elapsedTime)
 			pCreateMsg->QueueMessage();
 			pCreateMsg = nullptr;
 		}
+		if (m_ptPosition.x >= 1200.0f && spawn)
+		{
+			spawn = false;
+			CreateRollingBoulerMessage* pMSG = new CreateRollingBoulerMessage(this);
+			pMSG->QueueMessage();
+			pMSG = nullptr;
+		}
 		if (GetCurrCharacter())
 		{
 			if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::RightArrow) && letRight  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Right) && letRight && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				GameplayState::GetInstance()->loosebool = false;
-
 				SetFacing(true);
-				m_vtVelocity.x = 128.0f;
+				m_vtVelocity.x = 512.0f;
 				letLeft = true;
 				if (m_Son->GetBackPack())
 				{
@@ -90,6 +106,13 @@ void	 Father::Update(float elapsedTime)
 							direction = 0;
 						}
 					}
+
+					/*if (grounded == false)
+					{
+						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
+						event->QueueEvent();
+					}*/
+					//delete event;
 				}
 				else
 				{
@@ -119,14 +142,18 @@ void	 Father::Update(float elapsedTime)
 							direction = 0;
 						}
 					}
+					/*if (grounded == false)
+					{
+						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
+						event->QueueEvent();
+					}*/
+					//delete event;
 				}
 			}
 			else if (SGD::InputManager::GetInstance()->IsKeyDown(SGD::Key::LeftArrow) && letLeft  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsDPadDown(0, SGD::DPad::Left) && letLeft && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				GameplayState::GetInstance()->loosebool = false;
-
 				SetFacing(false);
-				m_vtVelocity.x = -128.0f;
+				m_vtVelocity.x = -512.0f;
 				letRight = true;
 				if (m_Son->GetBackPack())
 				{
@@ -156,6 +183,12 @@ void	 Father::Update(float elapsedTime)
 							direction = 0;
 						}
 					}
+					/*if (grounded == false)
+					{
+						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
+						event->QueueEvent();
+					}*/
+					//delete event;
 				}
 				else
 				{
@@ -185,42 +218,42 @@ void	 Father::Update(float elapsedTime)
 							direction = 0;
 						}
 					}
+					/*if (grounded == false)
+					{
+						SGD::Event* event = new SGD::Event("Walking", nullptr, this);
+						event->QueueEvent();
+					}*/
+					//delete event;
 				}
 			}
 			else
 			{
-				if (m_Son->GetBackPack() == false)
-				{
+				
+
 					direction = 0;
-					m_Timestamp.SetCurrAnim("FatherIdle");
-					m_Timestamp.SetCurrFrame(direction);
-					m_Timestamp.SetElapsedTime(elapsedTime);
-				}
-				else
-				{
-					direction = 0;
-					m_Timestamp.SetCurrAnim("FatherIdleWithSon");
-					m_Timestamp.SetCurrFrame(direction);
-					m_Timestamp.SetElapsedTime(elapsedTime);
-				}
+				m_vtVelocity.x = 0.0f;
+				m_Timestamp.SetCurrAnim("FatherIdle");
+				m_Timestamp.SetCurrFrame(direction);
+				m_Timestamp.SetElapsedTime(elapsedTime);
 			}
 			//Jump
-			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::UpArrow) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 1) && !cannotJump  && !GameplayState::GetInstance()->GetMovementOff())
 			{
-				GameplayState::GetInstance()->loosebool = false;
-				Landing = true;
 				SGD::AudioManager::GetInstance()->PlayAudio(m_FatherJump);
+				GameplayState::GetInstance()->loosebool = false;
+				
 				if (GetStamina() >= 10)
 				{
-					if (GetHanging())
+					if (GetOnGround() || GetHanging())
 					{
 						SetStamina(GetStamina() - 10);
 						previousPosY = m_ptPosition.y;
 						SetOnGround(false);
 						upArrow = true;
-						m_vtVelocity.y = -800.0f;
+						m_vtVelocity.y = -512.0f;
 						SetHanging(false);
 						SetjumpOffLedge(true);
+						landing = true;
 					}
 					if (GetOnGround())
 					{
@@ -231,6 +264,7 @@ void	 Father::Update(float elapsedTime)
 						SetjumpOffLedge(false);
 						SetHanging(false);
 						m_vtVelocity.y = -800.0f;
+						landing = true;
 					}
 				}
 			}
@@ -251,8 +285,12 @@ void	 Father::Update(float elapsedTime)
 				if (m_ptPosition.y >= previousPosY + 32.0f && !upArrow)
 				{
 					m_vtVelocity.y = 0.0f;
-					upArrow = false;
+				if (timeinair >= 3.5f)
+				{
+					SGD::Event* CannonBallHit = new SGD::Event("Death1", nullptr, this);
+					CannonBallHit->QueueEvent();
 				}
+				timeinair = 0.0f;
 			}
 			if (!GetOnGround() && upArrow == true && !GetHanging() && !GetonLadder())
 			{
@@ -272,7 +310,6 @@ void	 Father::Update(float elapsedTime)
 				SetjumpOffLedge(false);
 
 			//frameswitch += elapsedTime;
-			Actor::Update(elapsedTime);
 		}
 		else if (!GetCurrCharacter())
 		{
@@ -281,7 +318,6 @@ void	 Father::Update(float elapsedTime)
 			m_Timestamp.SetCurrAnim("FatherIdle");
 			m_Timestamp.SetCurrFrame(direction);
 			m_Timestamp.SetElapsedTime(elapsedTime);
-			Actor::Update(elapsedTime);
 			if (!GetOnGround() && upArrow == true)//ground level -100
 			{
 				if (m_vtVelocity.y < 0)
@@ -322,7 +358,18 @@ void	 Father::Update(float elapsedTime)
 	else
 	{
 		if (GetOnGround())
+		{
 			SetStamina(GetStamina() + 0.6f);
+			if (GetStamina() < 100 && !SGD::AudioManager::GetInstance()->IsAudioPlaying(m_RegenStamina))
+			{
+				SGD::AudioManager::GetInstance()->PlayAudio(m_RegenStamina);
+			}
+
+		}
+		else
+		{
+			SGD::AudioManager::GetInstance()->StopAudio(m_RegenStamina);
+		}
 	}
 	if (GetHanging() && GetOnGround() == false)
 		SetStamina(GetStamina() - 0.5f);
@@ -365,12 +412,13 @@ void	 Father::Update(float elapsedTime)
 	else if (GetCurrCharacter() == true && !isFlashing)
 		m_staminastate.alpha = 255;
 	frameswitch += elapsedTime;
-	if (GetOnGround() == false)
+	if (GetOnGround() == false && GetHanging() == false)
 	{
 		direction = 0;
 		m_Timestamp.SetCurrAnim("FatherJump");
 		m_Timestamp.SetCurrFrame(direction);
 		m_Timestamp.SetElapsedTime(elapsedTime);
+		timeinair += elapsedTime;
 	}
 	if (GetOnGround() == false)
 	{
@@ -431,15 +479,19 @@ void	 Father::Render(void)
 	SGD::Point p = m_ptPosition;
 	p.x -= Game::GetInstance()->GetCameraPosition().x;
 	p.y -= Game::GetInstance()->GetCameraPosition().y;
+	//int x = Game::GetInstance()->GetScreenSize().width / 2;
+	//int x2 = p.x;
+	//int ri = Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() - 25.0f;
+	//int ri2 = p.x + GetStamina();
 	if (!GetCurrCharacter())
 	{
-		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 - 25.0f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina() / 4 - 25.0f, 77.5 };
+		SGD::Rectangle r = { Game::GetInstance()->GetScreenSize().width / 2 - 25.0f, 70, Game::GetInstance()->GetScreenSize().width / 2 + GetStamina()/4 - 25.0f, 77.5 };
 		if (GetStamina() > 0 && !r.IsEmpty())
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
 	else
 	{
-		SGD::Rectangle r = { p.x, p.y - 80.0f, p.x + GetStamina() / 4, p.y - 72.5f };
+		SGD::Rectangle r = { p.x, p.y - 80.0f, p.x + GetStamina()/4, p.y - 72.5f };
 		if (GetStamina() > 0 && !r.IsEmpty())
 			SGD::GraphicsManager::GetInstance()->DrawRectangle(r, SGD::Color(255, 255, 0));
 	}
@@ -452,8 +504,6 @@ void	 Father::Render(void)
 SGD::Rectangle  Father::GetRect(void)	const
 {
 	SGD::Point p = m_ptPosition;
-	/*p.x -= Game::GetInstance()->GetCameraPosition().x;
-	p.y-= Game::GetInstance()->GetCameraPosition().y;*/
 	return AnimationSystem::GetInstance()->GetRect(m_Timestamp, p.x, p.y);
 }
 
@@ -489,6 +539,7 @@ void Father::HandleCollision(IEntity* pOther)
 		{
 			if (Rect.left >= this->GetRect().left && Rect.right <= this->GetRect().right)
 			{
+				//SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
 				letLeft = true;
 				letRight = true;
 				if (Rect.top == GetRect().top)
@@ -505,6 +556,7 @@ void Father::HandleCollision(IEntity* pOther)
 						SetCollisionRect(false);
 						cannotJump = false;
 						upArrow = false;
+						
 					}
 					else
 					{
@@ -514,6 +566,8 @@ void Father::HandleCollision(IEntity* pOther)
 						float op = GetRect().bottom - GetPosition().y;
 						m_ptPosition.y = pOther->GetRect().top - op;
 						SetOnGround(true);
+					
+						
 					}
 				}
 			}
@@ -559,6 +613,7 @@ void Father::HandleCollision(IEntity* pOther)
 				}
 				else if (Rect.bottom == GetRect().bottom)
 				{
+					
 					//set him on the floor and set ground to true
 					if (Rect.ComputeWidth() < 2.0f)
 					{
@@ -576,11 +631,12 @@ void Father::HandleCollision(IEntity* pOther)
 						int op = (int)GetRect().bottom - (int)GetPosition().y;
 						int s = (int)pOther->GetRect().top - op;
 						m_ptPosition.y = (float)s;
-						if (Landing)
+						if (landing)
 						{
-						SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
-						Landing = false;
+							SGD::AudioManager::GetInstance()->PlayAudio(FatherLanding);
+							landing = false;
 						}
+						
 						/*if (grounded)
 						{
 						SGD::Event* event = new SGD::Event("Grounded", nullptr, this);
@@ -648,8 +704,6 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 {
 	if (pEvent->GetEventID() == "Death")
 	{
-		SetAlive(true);
-		GameplayState::GetInstance()->loosebool = true;
 		direction = 0;
 		SetStamina(100);
 		m_Timestamp.SetCurrAnim("FatherDeath");
@@ -661,16 +715,37 @@ void Father::HandleEvent(const SGD::Event* pEvent)
 	}
 	if (pEvent->GetEventID() == "Death1")
 	{
-		GameplayState::GetInstance()->loosebool = true;
-		SetAlive(true);
 		direction = 0;
 		SetStamina(100);
 		m_Timestamp.SetCurrAnim("FatherDeath");
 		SGD::Event* event = new SGD::Event("DEATH", nullptr, this);
 		event->QueueEvent();
+
 		SetPosition(SGD::Point{ (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().left - 400, (float)GameplayState::GetInstance()->GetTileSystem()->m_CheckPoints[1]->GetRect().top - 300 });
 		//m_Timestamp.SetCurrFrame(direction);
 
+	}
+
+	if (pEvent->GetEventID() == "TargetedByBowman")
+	{
+		if (reinterpret_cast<Actor*>(pEvent->GetSender())->GetType() == ENT_BOWMAN)
+		{
+			if (reinterpret_cast<BowMan*>(pEvent->GetSender())->GetEnemyTarget()->GetType() == ENT_FATHER)
+			{
+				Targeted = true;
+			}
+		}
+		if (reinterpret_cast<Actor*>(pEvent->GetSender())->GetType() == ENT_SWORDSMAN)
+		{
+			if (reinterpret_cast<Swordsman*>(pEvent->GetSender())->GetEnemyTarget()->GetType() == ENT_FATHER)
+			{
+				Targeted = true;
+			}
+		}
+	}
+	if (pEvent->GetEventID() == "UntargetedByBowman")
+	{
+		Targeted = false;
 	}
 
 }

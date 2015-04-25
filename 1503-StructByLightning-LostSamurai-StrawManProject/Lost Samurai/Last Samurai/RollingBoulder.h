@@ -14,6 +14,5 @@ public:
 	void Update(float _elapsedtime);
 	void HandleCollision(IEntity* pOther);
 	int GetType() const { return ENT_ROLLING_BOULDER; }
-	SGD::Rectangle GetRect() const;
 };
 

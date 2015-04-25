@@ -41,6 +41,8 @@
     <ClCompile Include="CreateArrowMessage.cpp" />
     <ClCompile Include="CreateCannonBallMessage.cpp" />
     <ClCompile Include="CreateDart.cpp" />
+    <ClCompile Include="CreateRockMessage.cpp" />
+    <ClCompile Include="CreateRollingBoulerMessage.cpp" />
     <ClCompile Include="CreateSwordMan.cpp" />
     <ClCompile Include="CreditState.cpp" />
     <ClCompile Include="DartCannon.cpp" />
@@ -48,6 +50,8 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="FallingRock.cpp" />
+    <ClCompile Include="FallingRockTrap.cpp" />
     <ClCompile Include="Father.cpp" />
     <ClCompile Include="FinalDoor.cpp" />
     <ClCompile Include="Frame.cpp" />
@@ -124,6 +128,8 @@
     <ClInclude Include="CreateArrowMessage.h" />
     <ClInclude Include="CreateCannonBallMessage.h" />
     <ClInclude Include="CreateDart.h" />
+    <ClInclude Include="CreateRockMessage.h" />
+    <ClInclude Include="CreateRollingBoulerMessage.h" />
     <ClInclude Include="CreateSwordMan.h" />
     <ClInclude Include="CreditState.h" />
     <ClInclude Include="DartCannon.h" />
@@ -131,6 +137,8 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="FallingRock.h" />
+    <ClInclude Include="FallingRockTrap.h" />
     <ClInclude Include="Father.h" />
     <ClInclude Include="FinalDoor.h" />
     <ClInclude Include="Frame.h" />
@@ -182,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Options.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3FEFFC2A-5E13-4EE7-82C7-ED91D33BB0C7}</ProjectGuid>
