@@ -42,5 +42,15 @@ private:
 	bool isFlashing = false;
 	float FlashTimer = 0.0f;
 	float FlashNow = 0.2f;
+	SGD::HAudio m_SonJump;
+	SGD::HAudio SonLanding;
+	SGD::HAudio LowStamina;
+	SGD::HAudio SonOutOfstamina;
+	SGD::HAudio SonStaimadrained;
+	SGD::HAudio RegeneratingStamina;
+	SGD::HAudio PushBoxSound;
+	SGD::HAudio ClimbLadder;
+	bool Landing;
+	bool isHanging = false;
 };
 

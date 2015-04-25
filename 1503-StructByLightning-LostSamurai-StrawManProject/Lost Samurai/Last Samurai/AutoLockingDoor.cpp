@@ -9,6 +9,8 @@
 #include "Actor.h"
 #include "AutoLockingDoor.h"
 #include "AnimationTimestamp.h"
+#include "PressurePlate.h"
+#include "Lever.h"
 
 AutoLockingDoor::AutoLockingDoor()
 {
@@ -16,7 +18,9 @@ AutoLockingDoor::AutoLockingDoor()
 	m_Timestamp.SetCurrFrame(0);
 	m_Timestamp.SetElapsedTime(0);
 	m_Timestamp.SetOwner(this);
-	SGD::IListener::RegisterForEvent("P");
+	SGD::IListener::RegisterForEvent("Levers");
+	SGD::IListener::RegisterForEvent("Plates");
+	DoorOpen = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Door_open.wav");
 }
 
 
@@ -50,7 +54,7 @@ void AutoLockingDoor::Render()
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(re, SGD::Color{ 255, 255, 0, 0 });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ 1.0f, 1.0f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
 	/*if (Debug)
 	{*/
 }
@@ -75,10 +79,26 @@ void AutoLockingDoor::HandleCollision(IEntity* pOther)
 
 void AutoLockingDoor::HandleEvent(const SGD::Event* pEvent)
 {
-	if (pEvent->GetEventID() == "P" && GetID() == 1)
+
+
+	if (pEvent->GetEventID() == "Levers")
 	{
-		isOpen = true;
+		Lever* entity = reinterpret_cast<Lever*>(pEvent->GetSender());
+		if (GetID() == entity->GetID())
+			isOpen = true;
+		SGD::AudioManager::GetInstance()->PlayAudio(DoorOpen);
 	}
-	
+
+
+
+	if (pEvent->GetEventID() == "Plates")
+	{
+		PressurePlate* entity = reinterpret_cast<PressurePlate*>(pEvent->GetSender());
+		if (GetID() == entity->GetID())
+			isOpen = true;
+
+		//SGD::AudioManager::GetInstance()->PlayAudio(DoorOpen);
+	}
+
 
 }

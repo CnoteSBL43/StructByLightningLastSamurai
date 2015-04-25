@@ -1,5 +1,6 @@
 #pragma once
 #include "IGameState.h"
+#include "../SGD Wrappers/SGD_AudioManager.h"
 class LoadGameState :
 	public IGameState
 {
@@ -10,7 +11,8 @@ private:
 	LoadGameState& operator= (const LoadGameState&) = delete;
 	bool isLoading;
 	float m_LoadTimer = 6.0f;
-	float m_LoadingTime = 0.0f;
+	float m_LoadingTime =  0.0f;
+	SGD::HAudio LoadMusic;
 public:
 	static LoadGameState* GetInstance();
 	void	Enter(void);

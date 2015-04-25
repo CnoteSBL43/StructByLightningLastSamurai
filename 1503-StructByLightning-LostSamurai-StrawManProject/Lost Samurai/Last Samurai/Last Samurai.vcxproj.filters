@@ -281,6 +281,12 @@
     <ClCompile Include="Ladder.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="FinalDoor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RollingBoulder.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -529,6 +535,8 @@
     <ClInclude Include="Ladder.h">
       <Filter>Source\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="FinalDoor.h" />
+    <ClInclude Include="RollingBoulder.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Last Samurai.rc">

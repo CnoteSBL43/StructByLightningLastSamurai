@@ -13,16 +13,16 @@ Box::~Box()
 void Box::CalculateVelocity(SGD::Vector v)
 {
 	if (isHeavy)
-		SetVelocity({ v.x *0.25f ,v.y}) ;
+		SetVelocity({ v.x *2 ,v.y}) ;
 	else
-		SetVelocity({ v.x*0.75f, v.y });
+		SetVelocity({ v.x*2, v.y });
 
 }
 
 void Box::Update(float elapsedTime)
 {
 	if (!GetIsTriggered())
-		m_vtVelocity.y = 512.0f;
+		m_vtVelocity.y = 500.0f;
 	else
 		m_vtVelocity.y = 0.0f;
 
@@ -39,13 +39,17 @@ void Box::Update(float elapsedTime)
 
 void Box::Render(void)
 {
-	SGD::Rectangle rect = GetRect();
+	/*SGD::Rectangle rect = GetRect();
 	rect.top -= Game::GetInstance()->GetCameraPosition().y;
 	rect.left -= Game::GetInstance()->GetCameraPosition().x;
 	rect.bottom -= Game::GetInstance()->GetCameraPosition().y;
 	rect.right -= Game::GetInstance()->GetCameraPosition().x;
 
-	SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, SGD::Color{ 255, 0, 255, 0 });
+	SGD::GraphicsManager::GetInstance()->DrawRectangle(rect, SGD::Color{ 255, 0, 255, 0 });*/
+	SGD::Point pt = GetPosition();
+	pt.x -= Game::GetInstance()->GetCameraPosition().x;
+	pt.y -= Game::GetInstance()->GetCameraPosition().y;
+	SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt);
 }
 SGD::Rectangle Box::GetRect(void)	const
 {

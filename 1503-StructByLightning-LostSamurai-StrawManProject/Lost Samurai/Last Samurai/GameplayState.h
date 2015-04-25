@@ -22,7 +22,7 @@ class AutoLockingDoor;
 class GameplayState :
 	public IGameState
 {
-private:	
+private:
 	// this is the default Constructor 
 	GameplayState() = default;
 	// this is a default Deconstructor
@@ -32,7 +32,6 @@ private:
 	// this is a make shift  Assignment Operator 
 	GameplayState& operator= (const GameplayState&) = delete;
 	// This is an Haudio used for the main menu 
-	SGD::HAudio m_SFX = SGD::INVALID_HANDLE;
 	// this is a Htexture used to Render the fathers image 
 	SGD::HTexture m_FatherImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_PointerImage = SGD::INVALID_HANDLE;
@@ -46,11 +45,14 @@ private:
 	SGD::HTexture m_SmallLedgeImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_LeverImage = SGD::INVALID_HANDLE;
 	SGD::HTexture m_LadderImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_BigBoxImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_SmallBoxImage = SGD::INVALID_HANDLE;
+	SGD::HTexture m_FinalDoorImage = SGD::INVALID_HANDLE;
 	//*****************************************************************//
-		// Game Entities
+	// Game Entities
 
-		// This is a Entity Manager that Pointer variable used to send things to the entity manager
-		EntityManager* m_pEntities = nullptr;
+	// This is a Entity Manager that Pointer variable used to send things to the entity manager
+	EntityManager* m_pEntities = nullptr;
 	ParticleManager* m_ParticleManager = nullptr;
 	// This is an Actor Pointer variable named Father used to create the Father 
 	Actor* father = nullptr;
@@ -59,9 +61,8 @@ private:
 	Actor* m_Spikes = nullptr;
 	Actor* m_Cannon = nullptr;
 	Actor* m_Door;
-	
-	Pulley* p;
-	PressurePlate* plate;
+
+	//Pulley* p;
 	//************************************
 	// This is a Tle System Pointer Called load what this will do is 
 	// get all of the nessecary variables and functions to render the Level on the screen 
@@ -76,7 +77,7 @@ private:
 	// This is a function for the message proc so that you can send messages 
 	static void MessageProc(const SGD::Message* pMsg);
 
-	
+
 	bool movementTurnOff = false;
 
 public:
@@ -115,9 +116,10 @@ public:
 	Actor* CreateLevers(int i) const;
 	Actor* CreateLedge(int i) const;
 	Actor* CreateCheckPoint(int i) const;
-
-	// This used to go into debug Mode;
-	bool Debug = false;
+	Actor* CreateFinalDoor(int i) const;
+	Actor* CreateRollingBoulder(int i) const;
+		// This used to go into debug Mode;
+		bool Debug = false;
 
 	Actor*  GetFather(){ return father; }
 	Actor* GetSon(){ return son; }
@@ -135,5 +137,5 @@ public:
 	bool loosebool = false;
 	bool GetMovementOff(){ return movementTurnOff; }
 	void SetMovementOff(bool _off){ movementTurnOff = _off; }
-	int leverID = 0;
+	int leverID = 0, plateID = 0;
 };

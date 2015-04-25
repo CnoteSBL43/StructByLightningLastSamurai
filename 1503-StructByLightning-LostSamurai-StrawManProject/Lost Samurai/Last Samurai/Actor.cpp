@@ -16,7 +16,7 @@
 // Update
 //	- move the entity by its velocity
 //	  (given that velocity is the rate of change in pixels-per-second)
-/*virtual*/ void Actor::Update( float elapsedTime )	/*override*/
+/*virtual*/ void Actor::Update(float elapsedTime)	/*override*/
 {
 	m_ptPosition += m_vtVelocity * elapsedTime;
 }
@@ -27,16 +27,16 @@
 /*virtual*/ void Actor::Render(void)		/*override*/
 {
 	// Validate the image
-	SGD_ASSERT( m_hImage != SGD::INVALID_HANDLE, 
-		"Actor::Render - image was not set!" );
-	
+	SGD_ASSERT(m_hImage != SGD::INVALID_HANDLE,
+		"Actor::Render - image was not set!");
+
 	// HACK: rotate
 	//m_fRotation += 0.001f;
-	
+
 	// Draw the image
-	SGD::GraphicsManager::GetInstance()->DrawTexture( 
+	SGD::GraphicsManager::GetInstance()->DrawTexture(
 		m_hImage, m_ptPosition,
-		m_fRotation, m_szSize / 2 );
+		m_fRotation, m_szSize / 2);
 
 }
 
@@ -53,7 +53,7 @@
 //*********************************************************************//
 // HandleCollision
 //	- respond to collision between entities
-/*virtual*/ void Actor::HandleCollision( IEntity* pOther)	/*override*/
+/*virtual*/ void Actor::HandleCollision(IEntity* pOther)	/*override*/
 {
 	/* DO NOTHING */
 	(void)pOther;		// unused parameter
@@ -65,8 +65,8 @@
 //	- increase the reference count
 /*virtual*/ void Actor::AddRef(void)		/*final*/
 {
-	SGD_ASSERT( m_unRefCount != 0xFFFFFFFF, 
-		"Actor::AddRef - maximum reference count has been exceeded" );
+	SGD_ASSERT(m_unRefCount != 0xFFFFFFFF,
+		"Actor::AddRef - maximum reference count has been exceeded");
 
 	++m_unRefCount;
 }
@@ -79,6 +79,11 @@
 {
 	--m_unRefCount;
 
-	if( m_unRefCount == 0 )
+	if (m_unRefCount == 0)
 		delete this;
+}
+
+void	Actor::UltimateRelease()
+{
+	delete this;
 }

@@ -8,7 +8,12 @@ Rope::Rope()
 
 Rope::~Rope()
 {
-	
+	for (unsigned int i = 0; i < links.size()/2; i++)
+	{
+		delete links[i].GetParticle1();
+		if (i<19)
+			delete links[i].GetParticle2();
+	}
 }
 
 Rope::Rope(int length, int _numberOfParticles, SGD::Vector location)

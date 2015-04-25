@@ -13,10 +13,14 @@ public:
 	ParticleMass* particle1;
 	ParticleMass* particle2;
 
+	
+
 	//Accessors
-	float GetStiffness(){ return stiffness; }
-	float GetDamping(){ return damping; }
+	float GetStiffness()const{ return stiffness; }
+	float GetDamping()const{ return damping; }
 	float GetLinkLengthAtRest(){ return LinkLengthAtRest; }
+	ParticleMass* GetParticle1()const{ return particle1; }
+	ParticleMass* GetParticle2()const{ return particle2; }
 	//Mutators
 	void SetStiffness(float _stiff){  stiffness = _stiff; }
 	void SetDamping(float _damping){  damping = _damping; }

@@ -95,7 +95,7 @@ bool Game::Initialize()
 		SGD::InputManager::GetInstance()->Initialize() == false ||
 		SGD::AudioManager::GetInstance()->Initialize() == false)
 		return false;
-	bg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/okay.jpg");
+	bg = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/mainmenuimg.png");
 
 	// Initialize the Event & Message Managers
 	SGD::EventManager::GetInstance()->Initialize();
@@ -236,8 +236,9 @@ int Game::Update()
 void Game::Terminate()
 {
 	font.Terminate();
-
+	SetLevel(0);
 	AnimationSystem::GetInstance()->Exit();
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(bg);
 	ChangeState(nullptr);
 	SGD::AudioManager::GetInstance()->Terminate();
 	SGD::AudioManager::GetInstance()->DeleteInstance();

@@ -157,9 +157,9 @@
       <Trigger Type="None" Name="None" />
     </Frame>
     <Frame>
-      <Draw RectX="-20" RectY="-51" RectWidth="46" RectHeight="73" />
-      <Collision RectX="-13" RectY="-42" RectWidth="32" RectHeight="64" />
-      <AnchorPT X="94" Y="589" />
+      <Draw RectX="-20" RectY="-52" RectWidth="46" RectHeight="73" />
+      <Collision RectX="-13" RectY="-43" RectWidth="32" RectHeight="64" />
+      <AnchorPT X="94" Y="590" />
       <Particles>
         <ParticlePT X="-3" Y="11" />
         <ParticlePT X="7" Y="14" />

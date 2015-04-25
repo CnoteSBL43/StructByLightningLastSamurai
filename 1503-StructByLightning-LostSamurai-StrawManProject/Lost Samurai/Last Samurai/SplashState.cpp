@@ -9,6 +9,9 @@ SplashState* SplashState::GetInstance()
 void SplashState::Enter()
 {
 	m_TeamLogo = SGD::GraphicsManager::GetInstance()->LoadTexture(L"../resource/graphics/TeamLogo.png");
+	SplashMusic = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/splashscreenmusic.xwm");
+	Select = SGD::AudioManager::GetInstance()->LoadAudio(L"../resource/audio/confirm.wav");
+	SGD::AudioManager::GetInstance()->PlayAudio(SplashMusic);
 }
 void SplashState::Exit()
 {

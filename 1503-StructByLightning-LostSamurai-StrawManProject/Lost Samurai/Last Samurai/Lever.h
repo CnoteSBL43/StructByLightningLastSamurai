@@ -4,7 +4,7 @@
 class Lever : public GameObjects
 {
 	int ID;
-
+	AnimationTimestamp m_Timestamp;
 public:
 	Lever();
 	~Lever();

@@ -17,6 +17,7 @@ Link::Link(ParticleMass* _particle1, ParticleMass* _particle2)
 
 Link::~Link()
 {
+
 }
 
 void Link::SolveDistanceConstraint(int _numOfIterations)

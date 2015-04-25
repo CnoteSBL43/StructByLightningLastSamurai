@@ -18,6 +18,8 @@ private:
 	SplashState& operator= (const SplashState&) = delete;
 	SGD::HTexture m_TeamLogo = SGD::INVALID_HANDLE;
 	float time = 0.0f;
+	SGD::HAudio SplashMusic;
+	SGD::HAudio Select;
 
 public:
 	static SplashState* GetInstance();

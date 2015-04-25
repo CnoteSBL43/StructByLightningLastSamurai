@@ -5,9 +5,11 @@
 #include "AnimationTimestamp.h"
 #include "../SGD Wrappers/SGD_IListener.h"
 #include <vector>
+#include "Son.h"
 class Father : public Player, public SGD::IListener
 
 {
+	Son* m_Son = nullptr;
 public:
 	Father();
 	~Father();
@@ -17,7 +19,6 @@ public:
 	int		GetType(void)	const				{ return ENT_FATHER; }
 	SGD::Rectangle GetRect(void)	const;
 	void	HandleCollision(IEntity* pOther);
-
 
 	AnimationTimestamp GetTimeStamp() { return m_Timestamp; }
 	bool GetCurrCharacter(){ return isCurrentCharacter; }
@@ -45,7 +46,13 @@ private:
 	float previousPosY;
 	SGD::Color m_staminastate = { 255, 255, 255, 255 };
 	bool isFlashing = false;
+	bool  Landing = false;
 	float FlashTimer = 0.0f;
 	float FlashNow = 0.2f;
+	SGD::HAudio ClimbLadder;
+	SGD::HAudio m_FatherJump;
+	SGD::HAudio FatherWalking;
+	SGD::HAudio FatherLanding;
+	SGD::HAudio m_RegenStamina;
 };
 

@@ -49,6 +49,7 @@
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Father.cpp" />
+    <ClCompile Include="FinalDoor.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameModeSelectState.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="PressurePlate.cpp" />
     <ClCompile Include="Pulley.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="RollingBoulder.cpp" />
     <ClCompile Include="Rope.cpp" />
     <ClCompile Include="SaveGameState.cpp" />
     <ClCompile Include="SmashingColumns.cpp" />
@@ -130,6 +132,7 @@
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Father.h" />
+    <ClInclude Include="FinalDoor.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameModeSelectState.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="Pulley.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="RollingBoulder.h" />
     <ClInclude Include="Rope.h" />
     <ClInclude Include="SaveGameState.h" />
     <ClInclude Include="SmashingColumns.h" />

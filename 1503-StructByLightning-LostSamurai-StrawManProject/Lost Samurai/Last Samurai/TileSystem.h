@@ -32,9 +32,14 @@ protected:
 		std::string TrapNames;
 		int TriggerPositionX;
 		int TrigerPositionY;
+		//int Door;
 		int Traps;
 		int Door;
+		int Weight;
+		int PlateWeight;
+
 	};
+
 
 	struct Grid
 	{
@@ -46,7 +51,7 @@ protected:
 public:
 	TileSystem();
 	~TileSystem();
-	void LoadTileXml(Father* _father, Son* _Son,const char* _level);
+	void LoadTileXml(Father* _father, Son* _Son, const char* _level);
 	tile1* m_Tile;
 	Grid* m_Grid;
 	//Tile* Map[][];
@@ -62,7 +67,10 @@ public:
 
 	std::map<std::string, std::vector<SGD::Rectangle*>> Traps;
 
-	int doorID[10];
-
+	int DoorID[10];
+	bool BoxWeight[10];
+	bool PlateisHeavy[10];
+	int temp = 0;
+	int temp2 = 0, temp3 = 0;
 };
 
