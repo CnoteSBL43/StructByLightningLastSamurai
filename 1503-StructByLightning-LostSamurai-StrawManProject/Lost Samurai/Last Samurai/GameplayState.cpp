@@ -124,7 +124,7 @@ Actor* GameplayState::CreateSwordsman(Actor* _player, int i) const
 	Swordsman * swordsman = new Swordsman;
 	swordsman->SetPosition({ Load->Traps["AI"][i]->left - 800.0f, Load->Traps["AI"][i]->top - 270});
 	swordsman->m_LeftMax = { Load->Traps["WayPoint"][0]->left - 800, Load->Traps["WayPoint"][0]->top - 300 };
-//	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
+	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
 
 	swordsman->SetAlive(true);
 	//swordsman->SetImage(m_FatherImage);
@@ -213,7 +213,7 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/popupspikes.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/lever.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/PressurePlate.xml");
-	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
+	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/level2.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
 	SGD::AudioManager::GetInstance()->PlayAudio(m_Backround, true);
@@ -379,6 +379,7 @@ void GameplayState::Exit()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BigBoxImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FinalDoorImage);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
+	
 	m_Pause = false;
 	cursorPos = 0;
 	// Father is being released from the Pointer it was associated with so that The Release function

@@ -54,5 +54,6 @@ private:
 	SGD::HAudio FatherWalking;
 	SGD::HAudio FatherLanding;
 	SGD::HAudio m_RegenStamina;
+	SGD::HAudio PushBoxSound;
 };
 

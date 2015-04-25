@@ -22,13 +22,6 @@ Swordsman::~Swordsman()
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_AlertedImage);
 }
 
-void	 Swordsman::Update(float elapsedTime)
-{
-
-	if (m_Target != nullptr)
-	{
-		SGD::Vector EnemyDistance = m_ptPosition - GetEnemyTarget()->GetPosition();
-
 
 void	 Swordsman::Update(float elapsedTime)
 {
@@ -237,23 +230,6 @@ void Swordsman::HandleCollision(IEntity* pOther)
 	}
 }
 
-void Swordsman::HandleEvent(const SGD::Event* pEvent)
-{
-	if (pEvent->GetEventID() == "THREAT")
-	{
-		if (m_Target == nullptr)
-		{
-			SGD::Vector NewThreat = reinterpret_cast<Player*>(pEvent->GetSender())->GetPosition() - this->GetPosition();
-			if (NewThreat.ComputeLength() < 150)
-			{
-				SetTarget(reinterpret_cast<Player*>(pEvent->GetSender()));
-				SGD::Event* event = new SGD::Event("TargetedByBowman", nullptr, this);
-				event->QueueEvent();
-			}
-		}
-	}
-
-}
 
 void Swordsman::HandleEvent(const SGD::Event* pEvent)
 {
