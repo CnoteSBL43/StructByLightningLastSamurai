@@ -44,6 +44,8 @@ private:
 	SGD::Vector		m_CameraPosVector;
 	SGD::Vector		m_CameraDestinationVector;
 
+	int level = 2;
+
 public:
 	bool cameraPanningOn = false;
 	SGD::HTexture bg = SGD::INVALID_HANDLE;
@@ -79,6 +81,8 @@ public:
 	int GetLanguage(){ return m_Language; }
 	void SetLanguage(int _language){ m_Language = _language; }
 
+	int GetLevel()const{ return level; }
+	void SetLevel(int _level){ level = _level; }
 	
 	//Font
 	BitmapFont GetFont(){ return font; }

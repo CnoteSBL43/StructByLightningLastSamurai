@@ -26,6 +26,8 @@ Pulley::Pulley(int length, int numberOfPartciles, SGD::Vector location)
 
 Pulley::~Pulley()
 {
+	delete r;
+	r = nullptr;
 }
 
 void Pulley::Grab(SGD::Point _p)

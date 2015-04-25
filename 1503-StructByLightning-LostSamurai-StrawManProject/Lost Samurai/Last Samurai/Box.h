@@ -1,4 +1,3 @@
-#pragma once
 #include "GameplayState.h"
 #include "GameObjects.h"
 class Box : public GameObjects

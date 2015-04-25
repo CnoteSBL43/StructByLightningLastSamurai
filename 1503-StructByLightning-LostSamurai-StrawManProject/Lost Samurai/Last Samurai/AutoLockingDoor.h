@@ -3,11 +3,11 @@
 #include "AnimationTimestamp.h"
 #include "Door.h"
 #include "../SGD Wrappers/SGD_IListener.h"
-class AutoLockingDoor :public Door, public SGD::IListener
+class AutoLockingDoor :public Actor, public SGD::IListener
 {
 	AnimationTimestamp m_Timestamp;
 	bool playerNear = false;
-	int m_ID = 0;
+	int m_ID;
 public:
 	AutoLockingDoor();
 	~AutoLockingDoor();

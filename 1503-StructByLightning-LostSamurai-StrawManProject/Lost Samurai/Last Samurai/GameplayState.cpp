@@ -39,6 +39,8 @@
 #include "AutoLockingDoor.h"
 #include "CheckPoint.h"
 #include"LoadGameState.h"
+#include "FinalDoor.h"
+#include "RollingBoulder.h"
 //*********************************************************************//
 //	File: GamePlayState.cpp
 //	Function: GetInstance
@@ -70,22 +72,22 @@ GameplayState* GameplayState::GetInstance()
 Actor* GameplayState::CreateFather(void)
 {
 	// This is Makeing a Father Player Pointer to Create a Father Object
-	Player* father = new Father;
+	Player* m_father = new Father;
 	// Underneath is The Father set Position It is Currently commented out so that XML can make the Spawn point
 	//father->SetPosition(SGD::Point{ 100.0f, 480.0f });
 	// this is Setting the Fathers State to alive so that we can determine wether or not He is dead or Alive
-	father->SetAlive(true);
+	m_father->SetAlive(true);
 	// This is setting the image to the the father Object so that he can aPpear on the scrren with a Png
-	father->SetImage(m_FatherImage);
+	m_father->SetImage(m_FatherImage);
 	// This is Used to set the Father objects size So that we can use Calculations to get Certain things to work 
 	//father->SetSize(SGD::Size{ 64.0f, 64.0f });
 	// This is Setting the Fathers Object Velocity so that when pressed a certain movement button his velocity will increase 
-	father->SetVelocity({ 0.0f, 0.0f });
+	m_father->SetVelocity({ 0.0f, 0.0f });
 	// This is setting wether or not the father is stating on the ground so then if he is he can jump or perform other actions
-	father->SetOnGround(false);
-	father->SetWeight(100.0f);
+	m_father->SetOnGround(false);
+	m_father->SetWeight(100.0f);
 	// this is returning the newly alocated Father object so that it can be sent into the entity manager
-	return father;
+	return m_father;
 }
 
 //*********************************************************************//
@@ -100,32 +102,35 @@ Actor* GameplayState::CreateFather(void)
 Actor* GameplayState::CreateSon(void)
 {
 	// This is a Player Pointer that is being new alocated to make a Son Object
-	Player* son = new Son;
+	Player* m_son = new Son;
 	// Underneath is The Son set Position It is Currently commented out so that XML can make the Spawn point
 	//son->SetPosition(SGD::Point{ 700.0f, 540.0f });
 	// this is setting the son to Alive so that we can determine wether or not he is dead later on 
-	son->SetAlive(true);
+	m_son->SetAlive(true);
 	// This is setting the Sons image so that He can render with a texture on the screen 
-	son->SetImage(m_FatherImage);
+	m_son->SetImage(m_FatherImage);
 	// This setting the sons size so that we can do calculations later on to do things 
 	//son->SetSize(SGD::Size{ -0.75f, 0.75f });
 	// This is setting the Sons velocity so that we can use the Velocity later when the Son moves 
-	son->SetVelocity({ 0.0f, 0.0f });
+	m_son->SetVelocity({ 0.0f, 0.0f });
 	// This is used to know if the son is on the ground or not so that we can use other functions such as jump 
-	son->SetOnGround(false);
-	son->SetWeight(50.0f);
+	m_son->SetOnGround(false);
+	m_son->SetWeight(50.0f);
 	// this is returning a newly alocated Son object so that it can be sent to the entity manager
-	return son;
+	return m_son;
 }
-Actor* GameplayState::CreateSwordsman(Actor* _player) const
+Actor* GameplayState::CreateSwordsman(Actor* _player, int i) const
 {
-	Actor * swordsman = new Swordsman;
-	swordsman->SetPosition(SGD::Point{ 175.0f, 250.0f });
+	Swordsman * swordsman = new Swordsman;
+	swordsman->SetPosition({ Load->Traps["AI"][i]->left - 800.0f, Load->Traps["AI"][i]->top - 270});
+	swordsman->m_LeftMax = { Load->Traps["WayPoint"][0]->left - 800, Load->Traps["WayPoint"][0]->top - 300 };
+	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
+
 	swordsman->SetAlive(true);
-	swordsman->SetImage(m_FatherImage);
+	//swordsman->SetImage(m_FatherImage);
 	swordsman->SetSize(SGD::Size{ -1.5f, 1.5f });
 	swordsman->SetVelocity({ 64.0f, 0.0f });
-	dynamic_cast<Swordsman*>(swordsman)->SetTarget(_player);
+	swordsman->SetTarget(_player);
 	return swordsman;
 }
 
@@ -144,7 +149,8 @@ Actor* GameplayState::CreateLedge(int i) const
 	{
 		ledge->isBig = false;
 		ledge->SetImage(m_SmallLedgeImage);
-	}return ledge;
+	}
+	return ledge;
 }
 
 
@@ -176,7 +182,6 @@ Actor* GameplayState::CreateLadder(int i) const
 //*********************************************************************//
 void GameplayState::Enter()
 {
-	win = SGD::Rectangle(SGD::Point{ 4050, 92 }, SGD::Size{ 32.0f, 100.0f });
 	SGD::MessageManager::GetInstance()->Initialize(&MessageProc);
 	m_FatherImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Father.png");
 	m_PointerImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Finger.png");
@@ -189,6 +194,9 @@ void GameplayState::Enter()
 	m_SmallLedgeImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallledge.png");
 	m_LeverImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Lever.png");
 	m_LadderImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/Ladder.png");
+	m_SmallBoxImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/smallbox.png");
+	m_BigBoxImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/bigbox.png");
+	m_FinalDoorImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/finaldoor.png");
 	//m_CannonBallImage = SGD::GraphicsManager::GetInstance()->LoadTexture("../resource/graphics/ball.png");
 	// You are making a newly alocated entity manager so it can hold all differnt sort of things such as the Father and son and Enemies
 	m_pEntities = new EntityManager;
@@ -198,6 +206,13 @@ void GameplayState::Enter()
 	AnimationSystem::GetInstance()->Load("../resource/XML/Arrow.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Swordsman.xml");
 	AnimationSystem::GetInstance()->Load("../resource/XML/Doors.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/Archer.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/SmashingColumns.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/FallingRocks.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/RollingBoulder.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/popupspikes.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/lever.xml");
+	AnimationSystem::GetInstance()->Load("../resource/XML/PressurePlate.xml");
 	m_Backround = SGD::AudioManager::GetInstance()->LoadAudio("../resource/audio/Game_Music.xwm");
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::Music, Game::GetInstance()->GetMusicVolume());
 	SGD::AudioManager::GetInstance()->SetMasterVolume(SGD::AudioGroup::SoundEffects, Game::GetInstance()->GetSFXVolume());
@@ -212,20 +227,17 @@ void GameplayState::Enter()
 	//m_ParticleManager->LoadEmitter("../resource/XML/BackParticles.xml");
 	//m_ParticleManager->LoadEmitter("../resource/XML/BloodParticles.xml");
 
+	if (Game::GetInstance()->GetLevel() == 1)
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level1.xml");
+	else if (Game::GetInstance()->GetLevel() == 2)
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level 2.xml");
+	else if (Game::GetInstance()->GetLevel() == 3)
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level 3.xml");
+	else if (Game::GetInstance()->GetLevel() == 4)
+		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/Level 4.xml");
 
-	plate = new PressurePlate;
-	plate->SetPosition({ 3185, 825 });
-	plate->SetSize({ 64, 8 });
-	plate->SetHeavy(false);
-	m_pEntities->AddEntity(plate, 2);
+	//p = new Pulley(200, 20, SGD::Vector(540, 900));//2840 660
 
-	if (!Game::GetInstance()->changelevel)
-		Load->LoadTileXml((Father*)father, (Son*)son,"../resource/XML/Level1.xml");
-	else
-		Load->LoadTileXml((Father*)father, (Son*)son, "../resource/XML/TutorialLevel.xml");
-	
-	p = new Pulley(200, 20, SGD::Vector( 540, 900));//2840 660
-	
 	for (unsigned int i = 0; i < Load->m_CollisionRect.size(); i++)
 		m_pEntities->AddEntity(Load->m_CollisionRect[i], 3);
 
@@ -240,10 +252,17 @@ void GameplayState::Enter()
 	}
 	for (unsigned int i = 0; i < Load->Traps["Ledges"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateLedge(i), 5);
+		Actor* temp = CreateLedge(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
 
 	}
-
+	for (unsigned int i = 0; i < Load->Traps["Boulder"].size(); i++)
+	{
+		Actor* temp = CreateRollingBoulder(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
+	}
 	for (unsigned int i = 0; i < Load->Traps["Cannon"].size(); i++)
 	{
 		Actor* temp = CreateCannon(i);
@@ -262,33 +281,61 @@ void GameplayState::Enter()
 		Actor* temp = CreatePopUpSpikes(i);
 		m_pEntities->AddEntity(temp, 5);
 		temp->Release();
+		temp->Release();
 	}
 
 	for (unsigned int i = 0; i < Load->Traps["Doors"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateDoor(i), 5);
-
+		Actor* temp = CreateDoor(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
+		temp->Release();
 	}
 	for (unsigned int i = 0; i < Load->Traps["Box"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateBox(i), 5);
+		Actor* temp = CreateBox(i);
+		m_pEntities->AddEntity(temp, 16);
+		temp->Release();
 
 	}
-
-	for (unsigned int i = 0; i < Load->Traps["Plates"].size(); i++)
-	{
-		m_pEntities->AddEntity(CreatePlates(i), 5);
-
-	}
-
 	for (unsigned int i = 0; i < Load->Traps["Levers"].size(); i++)
 	{
 		leverID++;
-		m_pEntities->AddEntity(CreateLevers(i), 15);
+		Actor* temp = CreateLevers(i);
+		m_pEntities->AddEntity(temp, 15);
+		temp->Release();
+		temp->Release();
+
+	}
+	for (unsigned int i = 0; i < Load->Traps["Plates"].size(); i++)
+	{
+		leverID++;
+		Actor* temp = CreatePlates(i);
+		m_pEntities->AddEntity(temp, 5);
+		temp->Release();
+		temp->Release();
+
 	}
 	for (unsigned int i = 0; i < Load->Traps["Ladder"].size(); i++)
 	{
-		m_pEntities->AddEntity(CreateLadder(i), 14);
+		Actor* temp = CreateLadder(i);
+		m_pEntities->AddEntity(temp, 14);
+		temp->Release();
+	}
+	for (unsigned int i = 0; i < Load->Traps["FinalDoor"].size(); i++)
+	{
+		Actor* temp = CreateFinalDoor(i);
+		m_pEntities->AddEntity(temp, 18);
+		win = temp->GetRect();
+		temp->Release();
+	}
+	for (unsigned int i = 0; i < Load->Traps["AI"].size(); i++)
+	{
+		Actor* temp = CreateSwordsman(father, i);
+		m_pEntities->AddEntity(temp, 5);
+		//win = temp->GetRect();
+		temp->Release();
+		temp->Release();
 	}
 	unsigned int length = Load->m_CheckPoints.size();
 
@@ -314,31 +361,29 @@ void GameplayState::Enter()
 //*********************************************************************//
 void GameplayState::Exit()
 {
-	leverID = 0;
+	leverID = plateID = 0;
 	// This is terminating the Father image so that you will not have any memory leaks 
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_PointerImage);
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherFaceImage);
-	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SonFaceImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SpikesImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_DartTrapImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_CannonBallImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FatherFaceImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SonFaceImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LedgeImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SmallLedgeImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LeverImage);
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_LadderImage);
-
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_SmallBoxImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_BigBoxImage);
+	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_FinalDoorImage);
 	SGD::AudioManager::GetInstance()->UnloadAudio(m_Backround);
 	m_Pause = false;
 	cursorPos = 0;
 	// Father is being released from the Pointer it was associated with so that The Release function
 	// Can take car of all dynamic memory 
-	father->Release();
-	// after you release the father you are going to set him to a nullptr just in case so that you can make sure he is reslly null (Safe Check)
-	father = nullptr;
-	// Son is being released from the Pointer it was associated with so that The Release function
-	// Can take car of all dynamic memory 
-	son->Release();
-	// after you release the father you are going to set him to a nullptr just in case so that you can make sure he is reslly null (Safe Check)
-	son = nullptr;
+
 	// this is an if Check makeing sure that m_pEntities are not null so that it can properly Erase everytihng that is inside of it 
 	if (m_pEntities != nullptr)
 	{
@@ -351,9 +396,19 @@ void GameplayState::Exit()
 		// this will delete load and everything inside the Alocated Tile system Pointer
 		delete Load;
 	}
-
+	father->UltimateRelease();
+	// after you release the father you are going to set him to a nullptr just in case so that you can make sure he is reslly null (Safe Check)
+	father = nullptr;
+	// Son is being released from the Pointer it was associated with so that The Release function
+	// Can take car of all dynamic memory 
+	son->UltimateRelease();
+	// after you release the father you are going to set him to a nullptr just in case so that you can make sure he is reslly null (Safe Check)
+	son = nullptr;
 	Game::GetInstance()->SetCameraPosition(SGD::Point{ 0.0f, 0.0f });
 	SGD::MessageManager::GetInstance()->Terminate();
+
+	//delete p;
+	//p = nullptr;
 	SGD::MessageManager::DeleteInstance();
 	//m_ParticleManager->FreeEmitter(0);
 	//m_ParticleManager->FreeEmitter(1);
@@ -397,15 +452,7 @@ bool GameplayState::Update(float _ElapsedTime)
 		else
 			m_Pause = false;
 	}
-	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Y))
-	{
-		if (!Game::GetInstance()->changelevel)
-		{
-			Game::GetInstance()->changelevel = true;
-			Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
-			return true;
-		}
-	}
+
 	if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Q))
 	{
 		Game::GetInstance()->cameraPanningOn = !Game::GetInstance()->cameraPanningOn;
@@ -444,301 +491,324 @@ bool GameplayState::Update(float _ElapsedTime)
 		}
 		else
 		{
-		if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
-		{
-			float xIncrement, yIncrement;
-			float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
-			fabs(xDistance);
-			float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
-			fabs(yDistance);
-			if (xDistance > yDistance)
+			if (Game::GetInstance()->GetCameraPosVector() != Game::GetInstance()->GetCameraDestinationVector())
 			{
-			xIncrement = 8.0f;
-			yIncrement = 3.0f;
-			}
-			else 
-			{
-			xIncrement = 3.0f;
-			yIncrement = 6.0f;
-			}
-			if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
-			{
-
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x + xIncrement, Game::GetInstance()->GetCameraPosVector().y });
-				if (Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x <= 1.0f)
+				float xIncrement, yIncrement;
+				float xDistance = Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x;
+				fabs(xDistance);
+				float yDistance = Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y;
+				fabs(yDistance);
+				if (xDistance > yDistance)
 				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
+					xIncrement = 8.0f;
+					yIncrement = 3.0f;
+				}
+				else
+				{
+					xIncrement = 3.0f;
+					yIncrement = 6.0f;
+				}
+				if (Game::GetInstance()->GetCameraPosVector().x < Game::GetInstance()->GetCameraDestinationVector().x)
+				{
+
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x + xIncrement, Game::GetInstance()->GetCameraPosVector().y });
+					if (Game::GetInstance()->GetCameraDestinationVector().x - Game::GetInstance()->GetCameraPosVector().x <= 1.0f)
+					{
+						Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
+					}
+				}
+				else if (Game::GetInstance()->GetCameraPosVector().x > Game::GetInstance()->GetCameraDestinationVector().x)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x - xIncrement, Game::GetInstance()->GetCameraPosVector().y });
+					if (Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetCameraDestinationVector().x <= 1.0f)
+					{
+						Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
+					}
+				}
+				if (Game::GetInstance()->GetCameraPosVector().y < Game::GetInstance()->GetCameraDestinationVector().y)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y + yIncrement });
+					if (Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y <= 1.0f)
+					{
+						Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
+					}
+				}
+				else if (Game::GetInstance()->GetCameraPosVector().y > Game::GetInstance()->GetCameraDestinationVector().y)
+				{
+					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y - yIncrement });
+					if (Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetCameraDestinationVector().y <= 1.0f)
+					{
+						Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
+						Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
+
+					}
 				}
 			}
-			else if (Game::GetInstance()->GetCameraPosVector().x > Game::GetInstance()->GetCameraDestinationVector().x)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x - xIncrement, Game::GetInstance()->GetCameraPosVector().y });
-				if (Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetCameraDestinationVector().x <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraDestinationVector().x, Game::GetInstance()->GetCameraPosVector().y });
-				}
-			}
-			if (Game::GetInstance()->GetCameraPosVector().y < Game::GetInstance()->GetCameraDestinationVector().y)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y + yIncrement });
-				if (Game::GetInstance()->GetCameraDestinationVector().y - Game::GetInstance()->GetCameraPosVector().y <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
-				}
-			}
-			else if (Game::GetInstance()->GetCameraPosVector().y > Game::GetInstance()->GetCameraDestinationVector().y)
-			{
-				Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraPosVector().y - yIncrement });
-				if (Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetCameraDestinationVector().y <= 1.0f)
-				{
-					Game::GetInstance()->SetCameraPosVector({ Game::GetInstance()->GetCameraPosVector().x, Game::GetInstance()->GetCameraDestinationVector().y });
-					Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
-
-				}
-			}
-		}
-		if (dynamic_cast<Father*>(father)->GetCurrCharacter())
-		{
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
-
-			if (dynamic_cast<Son*>(son)->GetAlive())
-				//	Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
-				Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
-			else
-			{
-				Game::GetInstance()->SetCameraPosition({ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
-
-			}
-
-
-			//SGD::GraphicsManager::GetInstance()->DrawRectangle(SGD::Rectangle{ Game::GetInstance()->GetCameraPosition().x, Game::GetInstance()->GetCameraPosition().y, 800, 600 }, SGD::Color(255, 0, 0));
-		}
-		else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
-		{
-
-			//Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
-
-
-			Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
-			if (dynamic_cast<Father*>(father)->GetAlive())
-				Game::GetInstance()->SetCameraDestinationVector({ son->GetPosition().x, son->GetPosition().y });
-			else
-			{
-				Game::GetInstance()->SetCameraPosition({ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
-
-			}
-		}
-
-
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 0))
-		{
 			if (dynamic_cast<Father*>(father)->GetCurrCharacter())
 			{
-				dynamic_cast<Father*>(father)->SetCurrCharacter(false);
-				dynamic_cast<Son*>(son)->SetCurrCharacter(true);
+				Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
 
+				if (dynamic_cast<Son*>(son)->GetAlive())
+					//	Game::GetInstance()->SetCameraPosition(SGD::Point{ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+					Game::GetInstance()->SetCameraDestinationVector({ father->GetPosition().x, father->GetPosition().y });
+				else
+				{
+					Game::GetInstance()->SetCameraPosition({ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+				}
+
+
+				//SGD::GraphicsManager::GetInstance()->DrawRectangle(SGD::Rectangle{ Game::GetInstance()->GetCameraPosition().x, Game::GetInstance()->GetCameraPosition().y, 800, 600 }, SGD::Color(255, 0, 0));
 			}
-
 			else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
 			{
-				if (dynamic_cast<Son*>(son)->GetBackPack())
+
+				//Game::GetInstance()->SetCameraPosition(SGD::Point{ son->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, son->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
+
+				Game::GetInstance()->SetCameraPosition(SGD::Point{ Game::GetInstance()->GetCameraPosVector().x - Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetCameraPosVector().y - Game::GetInstance()->GetScreenSize().height / 2 });
+				if (dynamic_cast<Father*>(father)->GetAlive())
+					Game::GetInstance()->SetCameraDestinationVector({ son->GetPosition().x, son->GetPosition().y });
+				else
 				{
-					dynamic_cast<Son*>(son)->SetOnGround(false);
-					dynamic_cast<Son*>(son)->SetBackPack(false);
+					Game::GetInstance()->SetCameraPosition({ father->GetPosition().x - Game::GetInstance()->GetScreenSize().width / 2, father->GetPosition().y - Game::GetInstance()->GetScreenSize().height / 2 });
+
 				}
-				dynamic_cast<Father*>(father)->SetCurrCharacter(true);
-				dynamic_cast<Son*>(son)->SetCurrCharacter(false);
 			}
-		}
 
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 3) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
-		{
-			m_pEntities->CheckCollisions(0, 1);
-		}
-		//replace son after backpacing is activated
-		if (dynamic_cast<Son*>(son)->GetBackPack())
-		{
-			dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
-			son->SetPosition(SGD::Point{ father->GetPosition().x - 16.0f, father->GetPosition().y - 16.0f });
-		}
 
-		// Collision 
-		m_pEntities->UpdateAll(_ElapsedTime);
-		CullingRect.left = Game::GetInstance()->GetCameraPosition().x;
-		CullingRect.top = Game::GetInstance()->GetCameraPosition().y;
-		CullingRect.right = CullingRect.left + Game::GetInstance()->GetScreenSize().width;
-		CullingRect.bottom = CullingRect.top + Game::GetInstance()->GetScreenSize().height;
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::J) || SGD::InputManager::GetInstance()->IsButtonPressed(0, 0))
+			{
+				if (dynamic_cast<Father*>(father)->GetCurrCharacter())
+				{
+					dynamic_cast<Father*>(father)->SetCurrCharacter(false);
+					dynamic_cast<Son*>(son)->SetCurrCharacter(true);
 
-		dynamic_cast<Father*>(father)->SetHanging(false);
-		dynamic_cast<Son*>(son)->SetHanging(false);
-		dynamic_cast<Father*>(father)->SetonLadder(false);
-		m_pEntities->CheckCollisions(0, 4);
-		m_pEntities->CheckCollisions(1, 4);
-		m_pEntities->CheckCollisions(6, 3);
-		m_pEntities->CheckCollisions(6, 0);
-		m_pEntities->CheckCollisions(6, 1);
-		m_pEntities->CheckCollisions(7, 0);
-		m_pEntities->CheckCollisions(7, 1);
-		m_pEntities->CheckCollisions(0, 2);//father and pressure
-		m_pEntities->CheckCollisions(1, 2);//son and pressure
-		m_pEntities->CheckCollisions(3, 5);//tiles and box
-		m_pEntities->CheckCollisions(0, 14);//father and ladder
+				}
 
-		if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
-		{
-			m_pEntities->CheckCollisions(1, 15);
-		}
-		dynamic_cast<Father*>(father)->SetCollisionRect(false);
-		m_pEntities->CheckCollisions(0, 3);
-		if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging() && !dynamic_cast<Father*>(father)->GetonLadder())
-		{
+				else if (dynamic_cast<Son*>(son)->GetCurrCharacter())
+				{
+					if (dynamic_cast<Son*>(son)->GetBackPack())
+					{
+						dynamic_cast<Son*>(son)->SetOnGround(false);
+						dynamic_cast<Son*>(son)->SetBackPack(false);
+					}
+					dynamic_cast<Father*>(father)->SetCurrCharacter(true);
+					dynamic_cast<Son*>(son)->SetCurrCharacter(false);
+				}
+			}
+
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::K) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack() || SGD::InputManager::GetInstance()->IsButtonPressed(0, 3) && dynamic_cast<Father*>(father)->GetCurrCharacter() && !dynamic_cast<Father*>(father)->GetBackPack())
+			{
+				m_pEntities->CheckCollisions(0, 1);
+			}
+			//replace son after backpacing is activated
+			if (dynamic_cast<Son*>(son)->GetBackPack())
+			{
+				dynamic_cast<Son*>(son)->SetFacing(dynamic_cast<Father*>(father)->GetFacing());
+				if (dynamic_cast<Father*>(father)->GetFacing())
+					son->SetPosition(SGD::Point{ father->GetPosition().x - 8.0f, father->GetPosition().y - 16.0f });
+				else
+					son->SetPosition(SGD::Point{ father->GetPosition().x + 18.0f, father->GetPosition().y - 16.0f });
+			}
+
+			// Collision 
+			m_pEntities->UpdateAll(_ElapsedTime);
+			CullingRect.left = Game::GetInstance()->GetCameraPosition().x;
+			CullingRect.top = Game::GetInstance()->GetCameraPosition().y;
+			CullingRect.right = CullingRect.left + Game::GetInstance()->GetScreenSize().width;
+			CullingRect.bottom = CullingRect.top + Game::GetInstance()->GetScreenSize().height;
+
+			dynamic_cast<Father*>(father)->SetHanging(false);
+			dynamic_cast<Son*>(son)->SetHanging(false);
+			dynamic_cast<Father*>(father)->SetonLadder(false);
+			dynamic_cast<Son*>(son)->SetonLadder(false);
+			m_pEntities->CheckCollisions(3, 5);//tiles and box
+			m_pEntities->CheckCollisions(0, 4);
+			m_pEntities->CheckCollisions(1, 4);
+			m_pEntities->CheckCollisions(6, 3);
+			m_pEntities->CheckCollisions(6, 0);
+			m_pEntities->CheckCollisions(6, 1);
+			m_pEntities->CheckCollisions(7, 0);
+			m_pEntities->CheckCollisions(7, 1);
+			m_pEntities->CheckCollisions(0, 2);//father and pressure
+			m_pEntities->CheckCollisions(1, 2);//son and pressure
+			m_pEntities->CheckCollisions(0, 14);//father and ladder
+			m_pEntities->CheckCollisions(1, 14);//son and ladder
+			m_pEntities->CheckCollisions(5, 16);//plate and box
+			m_pEntities->CheckCollisions(3, 16);//tiles and box
+			m_pEntities->CheckCollisions(0, 16);//Father and box
+			m_pEntities->CheckCollisions(1, 16);//son and box
+			m_pEntities->CheckCollisions(5, 5);//son and box
+
+			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::E))
+			{
+				if (dynamic_cast<Father*>(father)->GetCurrCharacter())
+					m_pEntities->CheckCollisions(0, 15);
+				else
+					m_pEntities->CheckCollisions(1, 15);
+
+			}
+
+			dynamic_cast<Father*>(father)->SetCollisionRect(false);
+			m_pEntities->CheckCollisions(0, 3);
+			if (!dynamic_cast<Father*>(father)->GetCollisionRect() && dynamic_cast<Father*>(father)->upArrow == false && !dynamic_cast<Father*>(father)->GetHanging() && !dynamic_cast<Father*>(father)->GetonLadder())
+			{
 				father->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
-		}
-		bool k = dynamic_cast<Father*>(father)->upArrow;
-		m_pEntities->CheckCollisions(0, 5);
+			}
+
+			m_pEntities->CheckCollisions(0, 5);
 
 
-		if (dynamic_cast<Son*>(son)->GetBackPack() == false)
-		{
-			dynamic_cast<Son*>(son)->SetCollisionRect(false);
-			m_pEntities->CheckCollisions(1, 3);
-		}
-		if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false)
-			//if (!dynamic_cast<Son*>(son)->GetOnGround())
-			son->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
-		m_pEntities->CheckCollisions(1, 5);
-		//Rope Collision
-		SGD::Rectangle f = dynamic_cast<Father*>(father)->GetRect();
-		SGD::Rectangle s = dynamic_cast<Son*>(son)->GetRect();
-		SGD::Rectangle q = p->GetRect();
-		SGD::Rectangle b = p->GetLastRect();
-		if (f.IsIntersecting(q))
-		{
+			if (dynamic_cast<Son*>(son)->GetBackPack() == false)
+			{
+				dynamic_cast<Son*>(son)->SetCollisionRect(false);
+				m_pEntities->CheckCollisions(1, 3);
+			}
+			bool i = dynamic_cast<Son*>(son)->GetonLadder();
+			if (!dynamic_cast<Son*>(son)->GetCollisionRect() && dynamic_cast<Son*>(son)->upArrow == false && !dynamic_cast<Son*>(son)->GetBackPack() && dynamic_cast<Son*>(son)->lrArrow == false && !dynamic_cast<Son*>(son)->GetonLadder())
+				son->SetVelocity(SGD::Vector{ 0.0f, 512.0f });
+
+			m_pEntities->CheckCollisions(1, 5);
+			//Rope Collision
+			SGD::Rectangle f = dynamic_cast<Father*>(father)->GetRect();
+			SGD::Rectangle s = dynamic_cast<Son*>(son)->GetRect();
+			/*SGD::Rectangle q = p->GetRect();
+			SGD::Rectangle b = p->GetLastRect();
+			if (f.IsIntersecting(q))
+			{
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::Z))
 			{
-				SetMovementOff(!GetMovementOff());
-				p->Grab(father->GetPosition());
+			SetMovementOff(!GetMovementOff());
+			p->Grab(father->GetPosition());
 			}
 			if (SGD::InputManager::GetInstance()->IsKeyPressed(SGD::Key::C) && GetMovementOff() == true)
 			{
-				p->Pull();
+			p->Pull();
 			}
-		}
-		if (f.IsIntersecting(b))//father and rope box
-		{
-			SGD::Rectangle Rect;
-			Rect = father->GetRect().ComputeIntersection(b);
-			if (Rect.ComputeHeight() < father->GetRect().ComputeHeight())
+			}*/
+			//if (f.IsIntersecting(b))//father and rope box
+			//{
+			//	SGD::Rectangle Rect;
+			//	Rect = father->GetRect().ComputeIntersection(b);
+			//	if (Rect.ComputeHeight() < father->GetRect().ComputeHeight())
+			//	{
+			//		if (Rect.left >= father->GetRect().left && Rect.right <= father->GetRect().right)
+			//		{
+			//			dynamic_cast<Father*>(father)->letLeft = true;
+			//			dynamic_cast<Father*>(father)->letRight = true;
+
+			//			if (Rect.top == father->GetRect().top)
+			//			{
+			//				dynamic_cast<Father*>(father)->cannotJump = true;
+			//				dynamic_cast<Father*>(father)->SetCollisionRect(false);
+			//			}
+			//			else if (Rect.bottom == father->GetRect().bottom)
+			//			{
+			//				//set him on the floor and set ground to true
+			//				if (Rect.ComputeWidth() < 7.0f)
+			//				{
+			//					dynamic_cast<Father*>(father)->SetOnGround(false);
+			//					dynamic_cast<Father*>(father)->SetCollisionRect(false);
+			//					dynamic_cast<Father*>(father)->cannotJump = false;
+			//					dynamic_cast<Father*>(father)->upArrow = false;
+			//				}
+			//				else
+			//				{
+			//					dynamic_cast<Father*>(father)->cannotJump = false;
+			//					dynamic_cast<Father*>(father)->upArrow = false;
+			//					father->SetVelocity({ father->GetVelocity().x, 0.0f });
+			//					float op = father->GetRect().bottom - father->GetPosition().y;
+			//					father->SetPosition({ father->GetPosition().x, b.top - op });
+			//					dynamic_cast<Father*>(father)->SetOnGround(true);
+
+			//				}
+			//			}
+			//		}
+			//	}
+			//	if (Rect.ComputeWidth() < father->GetRect().ComputeWidth())
+			//	{
+			//		if (Rect.top >= father->GetRect().top && Rect.bottom <= father->GetRect().bottom)
+			//		{
+			//			father->SetVelocity({ 0.0, father->GetVelocity().y });
+			//			if (father->GetRect().left == Rect.left)
+			//				dynamic_cast<Father*>(father)->letLeft = false;
+			//			else if (father->GetRect().right == Rect.right)
+			//				dynamic_cast<Father*>(father)->letRight = false;
+
+			//		}
+			//	}
+			//}
+			//if (s.IsIntersecting(b))//son and rope box
+			//{
+			//	SGD::Rectangle Rect;
+			//	Rect = son->GetRect().ComputeIntersection(b);
+			//	if (Rect.ComputeHeight() < son->GetRect().ComputeHeight())
+			//	{
+			//		if (Rect.left >= son->GetRect().left && Rect.right <= son->GetRect().right)
+			//		{
+			//			dynamic_cast<Son*>(son)->letLeft = true;
+			//			dynamic_cast<Son*>(son)->letRight = true;
+
+			//			if (Rect.top == son->GetRect().top)
+			//			{
+			//				dynamic_cast<Son*>(son)->cannotJump = true;
+			//				dynamic_cast<Son*>(son)->SetCollisionRect(false);
+			//			}
+			//			else if (Rect.bottom == son->GetRect().bottom)
+			//			{
+			//				//set him on the floor and set ground to true
+			//				if (Rect.ComputeWidth() < 7.0f)
+			//				{
+			//					dynamic_cast<Son*>(son)->SetOnGround(false);
+			//					dynamic_cast<Son*>(son)->SetCollisionRect(false);
+			//					dynamic_cast<Son*>(son)->cannotJump = false;
+			//					dynamic_cast<Son*>(son)->upArrow = false;
+			//				}
+			//				else
+			//				{
+			//					dynamic_cast<Son*>(son)->cannotJump = false;
+			//					dynamic_cast<Son*>(son)->upArrow = false;
+			//					son->SetVelocity({ son->GetVelocity().x, 0.0f });
+			//					float op = son->GetRect().bottom - son->GetPosition().y;
+			//					son->SetPosition({ son->GetPosition().x, b.top - op });
+			//					dynamic_cast<Son*>(son)->SetOnGround(true);
+
+			//				}
+			//			}
+			//		}
+			//	}
+			//	if (Rect.ComputeWidth() < son->GetRect().ComputeWidth())
+			//	{
+			//		if (Rect.top >= son->GetRect().top && Rect.bottom <= son->GetRect().bottom)
+			//		{
+			//			son->SetVelocity({ 0.0, son->GetVelocity().y });
+			//			if (son->GetRect().left == Rect.left)
+			//				dynamic_cast<Son*>(son)->letLeft = false;
+			//			else if (son->GetRect().right == Rect.right)
+			//				dynamic_cast<Son*>(son)->letRight = false;
+
+			//		}
+			//	}
+			//}
+			if (f.IsIntersecting(win) && s.IsIntersecting(win))
 			{
-				if (Rect.left >= father->GetRect().left && Rect.right <= father->GetRect().right)
-				{
-					dynamic_cast<Father*>(father)->letLeft = true;
-					dynamic_cast<Father*>(father)->letRight = true;
-
-					if (Rect.top == father->GetRect().top)
-					{
-						dynamic_cast<Father*>(father)->cannotJump = true;
-						dynamic_cast<Father*>(father)->SetCollisionRect(false);
-					}
-					else if (Rect.bottom == father->GetRect().bottom)
-					{
-						//set him on the floor and set ground to true
-						if (Rect.ComputeWidth() < 7.0f)
-						{
-							dynamic_cast<Father*>(father)->SetOnGround(false);
-							dynamic_cast<Father*>(father)->SetCollisionRect(false);
-							dynamic_cast<Father*>(father)->cannotJump = false;
-							dynamic_cast<Father*>(father)->upArrow = false;
-						}
-						else
-						{
-							dynamic_cast<Father*>(father)->cannotJump = false;
-							dynamic_cast<Father*>(father)->upArrow = false;
-							father->SetVelocity({ father->GetVelocity().x, 0.0f });
-							float op = father->GetRect().bottom - father->GetPosition().y;
-							father->SetPosition({ father->GetPosition().x, b.top - op });
-							dynamic_cast<Father*>(father)->SetOnGround(true);
-
-						}
-					}
-				}
+				winbool = true;
+				SetMovementOff(true);
 			}
-			if (Rect.ComputeWidth() < father->GetRect().ComputeWidth())
+			if (winbool)
 			{
-				if (Rect.top >= father->GetRect().top && Rect.bottom <= father->GetRect().bottom)
-				{
-					father->SetVelocity({ 0.0, father->GetVelocity().y });
-					if (father->GetRect().left == Rect.left)
-						dynamic_cast<Father*>(father)->letLeft = false;
-					else if (father->GetRect().right == Rect.right)
-						dynamic_cast<Father*>(father)->letRight = false;
+				Game::GetInstance()->SetLevel(Game::GetInstance()->GetLevel() + 1);
+				Game::GetInstance()->ChangeState(LoadGameState::GetInstance());
+				return true;
 
-				}
 			}
+			SGD::MessageManager::GetInstance()->Update();
+			//p->Update(_ElapsedTime);
+
 		}
-		if (s.IsIntersecting(b))//son and rope box
-		{
-			SGD::Rectangle Rect;
-			Rect = son->GetRect().ComputeIntersection(b);
-			if (Rect.ComputeHeight() < son->GetRect().ComputeHeight())
-			{
-				if (Rect.left >= son->GetRect().left && Rect.right <= son->GetRect().right)
-				{
-					dynamic_cast<Son*>(son)->letLeft = true;
-					dynamic_cast<Son*>(son)->letRight = true;
-
-					if (Rect.top == son->GetRect().top)
-					{
-						dynamic_cast<Son*>(son)->cannotJump = true;
-						dynamic_cast<Son*>(son)->SetCollisionRect(false);
-					}
-					else if (Rect.bottom == son->GetRect().bottom)
-					{
-						//set him on the floor and set ground to true
-						if (Rect.ComputeWidth() < 7.0f)
-						{
-							dynamic_cast<Son*>(son)->SetOnGround(false);
-							dynamic_cast<Son*>(son)->SetCollisionRect(false);
-							dynamic_cast<Son*>(son)->cannotJump = false;
-							dynamic_cast<Son*>(son)->upArrow = false;
-						}
-						else
-						{
-							dynamic_cast<Son*>(son)->cannotJump = false;
-							dynamic_cast<Son*>(son)->upArrow = false;
-							son->SetVelocity({ son->GetVelocity().x, 0.0f });
-							float op = son->GetRect().bottom - son->GetPosition().y;
-							son->SetPosition({ son->GetPosition().x, b.top - op });
-							dynamic_cast<Son*>(son)->SetOnGround(true);
-
-						}
-					}
-				}
-			}
-			if (Rect.ComputeWidth() < son->GetRect().ComputeWidth())
-			{
-				if (Rect.top >= son->GetRect().top && Rect.bottom <= son->GetRect().bottom)
-				{
-					son->SetVelocity({ 0.0, son->GetVelocity().y });
-					if (son->GetRect().left == Rect.left)
-						dynamic_cast<Son*>(son)->letLeft = false;
-					else if (son->GetRect().right == Rect.right)
-						dynamic_cast<Son*>(son)->letRight = false;
-
-				}
-			}
-		}
-		if (f.IsIntersecting(win))
-		{
-			winbool = true;
-			SetMovementOff(true);
-		}
-		SGD::MessageManager::GetInstance()->Update();
-
 	}
-}
 	//m_ParticleManager->UpdateEmitter(_ElapsedTime);
-	p->Update(_ElapsedTime);
 	return true;
 }
 
@@ -870,9 +940,9 @@ void GameplayState::Render(float _ElapsedTime)
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_FatherFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 - 32, 10 }, 0, {}, dynamic_cast<Father*>(father)->GetStaminaState());
 	SGD::GraphicsManager::GetInstance()->DrawTexture(m_SonFaceImage, { Game::GetInstance()->GetScreenSize().width / 2 + 32, 30 }, 0, {}, dynamic_cast<Son*>(son)->GetStaminaState(), { 0.5f, 0.5f });
 	std::wostringstream s;
-	s << father->GetVelocity().y;
+	s << son->GetVelocity().y;
 	Game::GetInstance()->GetFont().Draw(s.str().c_str(), SGD::Point{ 345.0f, 50.0f }, 0.75f);
-	p->Render(_ElapsedTime);
+	//p->Render(_ElapsedTime);
 	if (m_Pause)
 		RenderPause();
 	SGD::Rectangle e = win;
@@ -882,14 +952,14 @@ void GameplayState::Render(float _ElapsedTime)
 	e.bottom -= Game::GetInstance()->GetCameraPosition().y;
 
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(e, SGD::Color{ 255, 125, 35 });
-	if (winbool)
-		Game::GetInstance()->GetFont().Draw("Success", SGD::Point{ 345.0f, 50.0f }, 0.75f);
+	//if (winbool)
+	//	Game::GetInstance()->GetFont().Draw("Success", SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	//if (lever)
 	//	Game::GetInstance()->GetFont().Draw("Ok!", SGD::Point{ 345.0f, 50.0f }, 0.75f);
 	//else
 	//Game::GetInstance()->GetFont().Draw("Nokay!", SGD::Point{ 345.0f, 50.0f }, 0.75f);
-	if (loosebool)
-		Game::GetInstance()->GetFont().Draw("You Died", SGD::Point{ 345.0f, 50.0f }, 0.75f);
+	//if (loosebool)
+	//	Game::GetInstance()->GetFont().Draw("You Died", SGD::Point{ 345.0f, 50.0f }, 0.75f);
 
 
 }
@@ -920,38 +990,40 @@ void GameplayState::MessageProc(const SGD::Message* pMsg)
 		break;
 	case MessageID::MSG_CREATESWORDMAN:
 	{
-										  GameplayState* self = GameplayState::GetInstance();
-										  Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
-										  self->m_pEntities->AddEntity(swordman, 2);
-										  swordman->Release();
-										  swordman = nullptr;
-										  break;
+		/*	GameplayState* self = GameplayState::GetInstance();
+			Actor* swordman = self->CreateSwordsman(dynamic_cast<const CreateSwordMan*>(pMsg)->GetPlayer());
+			self->m_pEntities->AddEntity(swordman, 2);
+			swordman->Release();
+			swordman->Release();
+			swordman = nullptr;
+			*/
+		break;
 	}
 
 	case MessageID::MSG_DESTORY_ACTOR:
 	{
-										 const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
-										 Actor* pActor = DestroyMsg->GetEntityMessage();
-										 GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
-										 break;
+		const DestroyActorMessage* DestroyMsg = dynamic_cast<const DestroyActorMessage*>(pMsg);
+		Actor* pActor = DestroyMsg->GetEntityMessage();
+		GameplayState::GetInstance()->m_pEntities->RemoveEntity(pActor);
+		break;
 
 	}
 	case MessageID::MSG_CANNON_BALL:
 	{
 
-									   const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
-									   Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
-									   GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
-									   break;
+		const CreateCannonBallMessage* m_cannon = dynamic_cast<const CreateCannonBallMessage*>(pMsg);
+		Actor* m_Cannonball = (GameplayState::GetInstance()->CreateCannonBall(m_cannon->GetCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_Cannonball, 6);
+		break;
 
 	}
 	case MessageID::MSG_ARROW:
 	{
 
-								 const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
-								 Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
-								 GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
-								 break;
+		const CreateArrowMessage* m_Arrow = dynamic_cast<const CreateArrowMessage*>(pMsg);
+		Actor* m_arrow = (GameplayState::GetInstance()->CreateArrow(m_Arrow->GetDartCannonOwner()));
+		GameplayState::GetInstance()->m_pEntities->AddEntity(m_arrow, 6);
+		break;
 
 	}
 	}
@@ -1051,7 +1123,6 @@ Actor*  GameplayState::CreatePopUpSpikes(int i) const
 	PopUpSpikes* m_PUSpikes = new PopUpSpikes();
 	m_PUSpikes->SetImage(m_SpikesImage);
 	m_PUSpikes->SetSize({ 0.7f, 0.7f });
-	m_PUSpikes->SetVelocity({ 0, 20 });
 	m_PUSpikes->SetPosition(SGD::Point{ Load->Traps["PopSpikes"][i]->left - 370, Load->Traps["PopSpikes"][i]->top - 380 });
 	return m_PUSpikes;
 }
@@ -1085,7 +1156,6 @@ Actor* GameplayState::CreateCannonBall(Cannon*_Cannon)
 	SGD::Vector newVelocity = { -200, 0 };
 	temp->SetVelocity(newVelocity);
 	temp->SetCannon(_Cannon);
-
 	return temp;
 
 }
@@ -1104,16 +1174,10 @@ Actor*  GameplayState::CreateArrow(DartCannon* _DartCannon)
 
 Actor* GameplayState::CreateDoor(int i) const
 {
-	if (Load->Traps["Doors"].size() == 0)
-	{
-		return 0;
-	}
-
 	AutoLockingDoor* temp = new AutoLockingDoor();
 	temp->SetPosition(SGD::Point{ Load->Traps["Doors"][i]->left - 780, Load->Traps["Doors"][i]->top - 280 });
-	temp->SetID(i);
+	temp->SetID(Load->DoorID[i]);
 	return temp;
-
 
 }
 
@@ -1126,40 +1190,74 @@ SGD::Rectangle Spike::GetRect() const
 Actor* GameplayState::CreateBox(int i) const
 {
 	Box* temp = new Box();
-	temp->SetImage(m_CannonImage);
-	temp->SetTriggered(true);
-	temp->SetPosition(SGD::Point{ Load->Traps["Box"][i]->left-800, Load->Traps["Box"][i]->top -324});
-	temp->SetSize({ 32, 32 });
+	temp->SetImage(m_SmallBoxImage);
 
+	if (Load->BoxWeight[i] == true)
+	{
+		temp->SetTriggered(true);
+		temp->SetPosition(SGD::Point{ Load->Traps["Box"][i]->left - 800, Load->Traps["Box"][i]->top - 324 });
+		temp->SetHeavy(false);
+		temp->SetImage(m_SmallBoxImage);
+		temp->SetSize({ 32, 32 });
+	}
+	else if (Load->BoxWeight[i] == false)
+	{
+		temp->SetTriggered(true);
+		temp->SetPosition(SGD::Point{ Load->Traps["Box"][i]->left - 800, Load->Traps["Box"][i]->top - 340 });
+		temp->SetHeavy(true);
+		temp->SetImage(m_BigBoxImage);
+		temp->SetSize({ 64, 64 });
+	}
 	return temp;
 }
 
 Actor*  GameplayState::CreatePlates(int i) const
 {
 	PressurePlate* temp = new PressurePlate();
-	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 800, Load->Traps["Plates"][i]->top - 284});
+	temp->SetPosition(SGD::Point{ Load->Traps["Plates"][i]->left - 800, Load->Traps["Plates"][i]->top - 270 });
 	temp->SetSize({ 32, 16 });
-	temp->SetHeavy(false);
+	temp->SetID(leverID);
+	if (Load->PlateisHeavy[i] == false)
+		temp->SetHeavy(false);
+	else
+		temp->SetHeavy(true);
 	return temp;
 
 }
 
-Actor* GameplayState::CreateRopes(int i) const
-{
-	Pulley* temp = new Pulley(200, 20, SGD::Vector{ Load->Traps["Rope"][i]->left, Load->Traps["Rope"][i]->top });
-
-
-	return temp;
-
-}
+//Actor* GameplayState::CreateRopes(int i) const
+//{
+//	Pulley* temp = new Pulley(200, 20, SGD::Vector{ Load->Traps["Rope"][i]->left, Load->Traps["Rope"][i]->top });
+//
+//
+//	return temp;
+//
+//}
 
 Actor* GameplayState::CreateLevers(int i) const
 {
 	Lever* temp = new Lever;
-	temp->SetPosition({ Load->Traps["Levers"][i]->left - 800, Load->Traps["Levers"][i]->top - 300 });
+	temp->SetPosition({ Load->Traps["Levers"][i]->left - 800, Load->Traps["Levers"][i]->top - 280 });
 	temp->SetImage(m_LeverImage);
 	temp->SetSize({ 32, 32 });
 	temp->SetID(leverID);
 	return temp;
 }
 
+Actor* GameplayState::CreateFinalDoor(int i) const
+{
+	FinalDoor* temp = new FinalDoor;
+	temp->SetPosition({ Load->Traps["FinalDoor"][i]->left - 800, Load->Traps["FinalDoor"][i]->top - 300 });
+	temp->SetImage(m_FinalDoorImage);
+	temp->SetSize({ 128, 128 });
+	return temp;
+}
+Actor* GameplayState::CreateRollingBoulder(int i) const
+{
+	RollingBoulder* temp = new RollingBoulder;
+	temp->SetPosition({ Load->Traps["Boulder"][i]->left - 780, Load->Traps["Boulder"][i]->top - 300 });
+	temp->SetVelocity({ -128.0f, 0.0f });
+	//temp->SetVelocity({ 0.0f, 0.0f });
+
+	return temp;
+}

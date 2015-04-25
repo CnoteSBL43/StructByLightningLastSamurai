@@ -8,11 +8,11 @@ private:
 	std::string m_CurrentAnimation;
 	int			m_CurrentFrame;
 	float		m_TimeElapsedOnFrame;
-	IEntity*	m_Owner;
+	IEntity*	m_Owner = nullptr;
 public:
 	//Ctor and Dtor
-	AnimationTimestamp() = default;
-	~AnimationTimestamp() = default;
+	AnimationTimestamp();
+	~AnimationTimestamp();
 
 	//Accessors
 	std::string		GetCurrAnim() const			{ return m_CurrentAnimation; }
@@ -24,6 +24,6 @@ public:
 	void			SetCurrAnim(std::string _string)		{ m_CurrentAnimation = _string; }
 	void			SetCurrFrame(int _FrameID)				{ m_CurrentFrame = _FrameID; }
 	void			SetElapsedTime(float _Time)				{ m_TimeElapsedOnFrame = _Time; }
-	void			SetOwner(IEntity* _owner)				{ m_Owner = _owner; }
+	void			SetOwner(IEntity* _owner);
 };
 

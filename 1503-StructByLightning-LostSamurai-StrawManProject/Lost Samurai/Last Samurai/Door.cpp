@@ -38,7 +38,7 @@ void Door::Render()
 	//draw rect
 	//SGD::GraphicsManager::GetInstance()->DrawRectangle(draw, SGD::Color{ 255, 0, 0, 0 }, {}, 3);
 	//SGD::GraphicsManager::GetInstance()->DrawTexture(GetImage(), pt, {}, {}, {}, SGD::Size{ 0.7f, 0.7f });
-	AnimationSystem::GetInstance()->Render(m_Timestamp, (int)pt.x, (int)pt.y, SGD::Size{ 1.0f, 1.0f });
+	AnimationSystem::GetInstance()->Render(m_Timestamp, pt.x, pt.y, SGD::Size{ 1.0f, 1.0f });
 	/*if (Debug)
 	{*/
 	SGD::Rectangle re = GetRect();

@@ -6,7 +6,8 @@ class PressurePlate : public GameObjects
 {
 	bool isHeavy;
 	float totalWeights;
-
+	int ID;
+	AnimationTimestamp m_Timestamp;
 public:
 	PressurePlate();
 	~PressurePlate();
@@ -22,7 +23,9 @@ public:
 
 	SGD::Rectangle GetRect(void)	const;
 	void HandleCollision(IEntity* pOther);
-
-	bool check = false;
+	int	GetType(void) const	{ return ENT_PLATES; }
+	void SetID(int _id){ ID = _id; }
+	int GetID() const { return ID; }
+	//bool check = false;
 };
 

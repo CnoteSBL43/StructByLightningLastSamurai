@@ -85,15 +85,49 @@ TileSystem::~TileSystem()
 	{
 		delete Traps["Doors"][i];
 	}
+	for (unsigned int i = 0; i < Traps["Ledges"].size(); i++)
+	{
+		delete Traps["Ledges"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Ladder"].size(); i++)
+	{
+		delete Traps["Ladder"][i];
+	}
+	for (unsigned int i = 0; i < Traps["Plates"].size(); i++)
+	{
+		delete Traps["Plates"][i];
+	}
 
+	for (unsigned int i = 0; i < Traps["Box"].size(); i++)
+	{
+		delete Traps["Box"][i];
+	}
 
+	for (unsigned int i = 0; i < Traps["Levers"].size(); i++)
+	{
+		delete Traps["Levers"][i];
+	}
+
+	for (unsigned int i = 0; i < Traps["WayPoint"].size(); i++)
+	{
+		delete Traps["WayPoint"][i];
+	}
+
+	for (unsigned int i = 0; i < Traps["AI"].size(); i++)
+	{
+		delete Traps["AI"][i];
+	}
+	for (unsigned int i = 0; i < Traps["FinalDoor"].size(); i++)
+	{
+		delete Traps["FinalDoor"][i];
+	}
 #pragma endregion
 	SGD::GraphicsManager::GetInstance()->UnloadTexture(m_TileImage);
 	delete m_Grid;
 	m_Grid = NULL;
 }
 
-void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
+void TileSystem::LoadTileXml(Father* _father, Son* _Son, const char* _level)
 
 {
 	//Game::GetInstance()->GetFont().Draw("Loading", { Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetScreenSize().height / 2 }, 1, { 255, 255, 255, 255 });
@@ -158,15 +192,48 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 		if (m_Tile->Traps == 1)
 		{
 			m_Tile->TrapNames = tile->Attribute("TrapNames");
+
+			tile->Attribute("DoorID", &m_Tile->Door);
 		}
 
 		tile->Attribute("Border", &m_Tile->Border);
+		if (m_Tile->TrapNames == "Box")
+		{
+			tile->Attribute("Weight", &m_Tile->Weight);
+		}
+		if (m_Tile->TrapNames == "Plates")
+		{
+			tile->Attribute("PlateWeight", &m_Tile->PlateWeight);
+		}
+
 		Map[m_Tile->PositionX][m_Tile->PositionY] = m_Tile;
-		
-		tile->Attribute("Door", &m_Tile->Door);
+
+		//tile->Attribute("Door", &m_Tile->Door);
 
 
 #pragma region This Will Decide where the 2 Characters will spawn 
+
+		if (Map[m_Tile->PositionX][m_Tile->PositionY]->Weight > 0)
+		{
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->Weight == 1)
+				BoxWeight[temp2] = false;
+			else
+				BoxWeight[temp2] = true;
+			temp2++;
+		}
+		if (Map[m_Tile->PositionX][m_Tile->PositionY]->PlateWeight > 0)
+		{
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->PlateWeight == 1)
+				PlateisHeavy[temp3] = false;
+			else
+				PlateisHeavy[temp3] = true;
+			temp3++;
+		}
+		if (Map[m_Tile->PositionX][m_Tile->PositionY]->Door > 0)
+		{
+			DoorID[temp] = Map[m_Tile->PositionX][m_Tile->PositionY]->Door;
+			temp++;
+		}
 		if (Map[m_Tile->PositionX][m_Tile->PositionY]->m_Spawn == 1)
 		{
 			SGD::Rectangle* Rect = new SGD::Rectangle();
@@ -182,21 +249,21 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 
 			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 
-			_father->SetPosition(SGD::Point{ Rect->left, Rect->top- 100 });//2400 500 
+			_father->SetPosition(SGD::Point{ Rect->left, Rect->top });//2400 500 
 			_father->SetCheckPoint({ Rect->left + 75, Rect->top - 100 });
-			
+
 			//TileClass = nullptr;
-			_Son->SetPosition(SGD::Point{ Rect->left +25, Rect->top  });
+			_Son->SetPosition(SGD::Point{ Rect->left + 25, Rect->top });
 			_Son->SetCheckPoint({ Rect->left + 25, Rect->top });
 			//_father->SetPosition(SGD::Point{ 3800,200});
-		//	_Son->SetPosition(SGD::Point{ 2350,500 });
+			//	_Son->SetPosition(SGD::Point{ 2350,500 });
 			delete Rect;
 			Rect = nullptr;
 		}
 #pragma endregion
 
 
-		
+
 
 
 #pragma region This Will check if there are collision rectangles
@@ -414,7 +481,6 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
 				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
 				Traps["Ladder"].push_back(Rect);
-
 			}
 
 			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "Plates")
@@ -477,14 +543,65 @@ void TileSystem::LoadTileXml(Father* _father, Son* _Son,const char* _level)
 
 			}
 
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "FinalDoor")
+			{
+				SGD::Rectangle* Rect = new SGD::Rectangle();
+				Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+					Game::GetInstance()->GetScreenSize().width / 2;
 
 
+				Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+					Game::GetInstance()->GetScreenSize().height / 2;
+				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+				Traps["FinalDoor"].push_back(Rect);
 
+			}
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "Boulder")
+			{
+				SGD::Rectangle* Rect = new SGD::Rectangle();
+				Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+					Game::GetInstance()->GetScreenSize().width / 2;
+
+
+				Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+					Game::GetInstance()->GetScreenSize().height / 2;
+				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+				Traps["Boulder"].push_back(Rect);
+			}
+
+			if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "AI")
+			{
+				SGD::Rectangle* Rect = new SGD::Rectangle();
+				Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+					Game::GetInstance()->GetScreenSize().width / 2;
+
+
+				Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+					Game::GetInstance()->GetScreenSize().height / 2;
+				Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+				Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+				Traps["AI"].push_back(Rect);
+
+			}
 
 
 
 		}
 
+		if (Map[m_Tile->PositionX][m_Tile->PositionY]->TrapNames == "WayPoint")
+		{
+			SGD::Rectangle* Rect = new SGD::Rectangle();
+			Rect->left = (float)m_Tile->PositionX * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth +
+				Game::GetInstance()->GetScreenSize().width / 2;
+			Rect->top = (float)m_Tile->PositionY * Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight +
+				Game::GetInstance()->GetScreenSize().height / 2;
+			Rect->right = Rect->left + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileWidth;
+			Rect->bottom = Rect->top + Map[m_Tile->PositionX][m_Tile->PositionY]->m_TileHeight;
+			Traps["WayPoint"].push_back(Rect);
+
+		}
 
 		if (tile->NextSiblingElement() == nullptr)
 			break;

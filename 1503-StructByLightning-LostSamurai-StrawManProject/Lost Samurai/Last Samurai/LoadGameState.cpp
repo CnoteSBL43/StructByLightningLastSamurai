@@ -31,9 +31,9 @@ bool LoadGameState::Update(float _ElapsedTime)
 
 void LoadGameState::Render(float _ElapsedTime)
 {
-	SGD::Point pt = { Game::GetInstance()->GetScreenSize().width / 2, Game::GetInstance()->GetScreenSize().height / 2 };
+	SGD::Point pt = { Game::GetInstance()->GetScreenSize().width / 2 - 256, Game::GetInstance()->GetScreenSize().height / 2 };
 	SGD::Size sz = { (100 * m_LoadingTime) / 3, 25 };
 	if (sz.width != 0)
-		SGD::GraphicsManager::GetInstance()->DrawRectangle({ { pt.x, pt.y + 100 }, sz }, SGD::Color{ 255, 255, 255, 0 });
+		SGD::GraphicsManager::GetInstance()->DrawRectangle({ { pt.x, pt.y + 100 }, sz }, SGD::Color{ 255, 0, 0, 255 });
 	Game::GetInstance()->GetFont().Draw("Loading", pt, 1, { 255, 255, 255, 255 });
 }
