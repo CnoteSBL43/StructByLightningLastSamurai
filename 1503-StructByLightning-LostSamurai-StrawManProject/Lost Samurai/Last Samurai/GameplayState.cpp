@@ -124,7 +124,7 @@ Actor* GameplayState::CreateSwordsman(Actor* _player, int i) const
 	Swordsman * swordsman = new Swordsman;
 	swordsman->SetPosition({ Load->Traps["AI"][i]->left - 800.0f, Load->Traps["AI"][i]->top - 270});
 	swordsman->m_LeftMax = { Load->Traps["WayPoint"][0]->left - 800, Load->Traps["WayPoint"][0]->top - 300 };
-	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
+//	swordsman->m_RightMax = { Load->Traps["WayPoint"][1]->left, Load->Traps["WayPoint"][1]->top - 300 };
 
 	swordsman->SetAlive(true);
 	//swordsman->SetImage(m_FatherImage);
